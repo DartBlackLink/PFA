@@ -302,79 +302,114 @@ Una Historia de Usuario o Enabler puede pasar a `Done` cuando, según correspond
 
 ---
 
-## 12. Fase 01 — Inicio
+## 12. Navegación completa — Fase 01: Inicio
 
-Documentación de análisis y línea base del proyecto:
+La carpeta `docs/01 Inicio/` contiene la línea base documental del proyecto.  
+Los siguientes enlaces permiten navegar directamente desde este README hacia cada archivo.
 
-1. `01. Selección del enfoque del proyecto V_1_0_0.md`
-2. `02. Acta de constitución V_1_0_0.md`
-3. `03. Declaración de la visión V_1_0_0.md`
-4. `04. Registro de supuestos y restricciones V_1_0_0.md`
-5. `05. Registro de interesados V_1_0_0.md`
-6. `06. Requisitos funcionales V_1_0_0.md`
-7. `07. Requisitos no funcionales V_1_0_0.md`
-8. `08. Usuarios V_1_0_0.md`
-9. `09. Reglas de negocio V_1_0_0.md`
-10. `10. Stack tecnológico V_1_0_0.md`
-11. `11. Base de datos V_1_0_0.md`
-12. `12. Modelo C4 V_1_0_0.md`
-13. `13. Restricciones V_1_0_0.md`
+| N.° | Documento | Contenido principal | Navegación |
+|---:|---|---|---|
+| 01 | [Selección del enfoque del proyecto](docs/01%20Inicio/01.%20Selecci%C3%B3n%20del%20enfoque%20del%20proyecto%20V_1_0_0.md) | Evaluación predictivo/ágil/híbrido y justificación del enfoque. | [Abrir archivo](docs/01%20Inicio/01.%20Selecci%C3%B3n%20del%20enfoque%20del%20proyecto%20V_1_0_0.md) |
+| 02 | [Acta de constitución](docs/01%20Inicio/02.%20Acta%20de%20constituci%C3%B3n%20V_1_0_0.md) | Propósito, objetivos, alcance, criterios de éxito y dirección del proyecto. | [Abrir archivo](docs/01%20Inicio/02.%20Acta%20de%20constituci%C3%B3n%20V_1_0_0.md) |
+| 03 | [Declaración de la visión](docs/01%20Inicio/03.%20Declaraci%C3%B3n%20de%20la%20visi%C3%B3n%20V_1_0_0.md) | Visión del producto, usuarios, necesidades y propuesta de valor. | [Abrir archivo](docs/01%20Inicio/03.%20Declaraci%C3%B3n%20de%20la%20visi%C3%B3n%20V_1_0_0.md) |
+| 04 | [Registro de supuestos y restricciones](docs/01%20Inicio/04.%20Registro%20de%20supuestos%20y%20restricciones%20V_1_0_0.md) | Supuestos, restricciones, impacto y control del alcance. | [Abrir archivo](docs/01%20Inicio/04.%20Registro%20de%20supuestos%20y%20restricciones%20V_1_0_0.md) |
+| 05 | [Registro de interesados](docs/01%20Inicio/05.%20Registro%20de%20interesados%20V_1_0_0.md) | Identificación, interés, poder y estrategia de participación. | [Abrir archivo](docs/01%20Inicio/05.%20Registro%20de%20interesados%20V_1_0_0.md) |
+| 06 | [Requisitos funcionales](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_0_0.md) | RF atómicos, criterios de aceptación y trazabilidad funcional. | [Abrir archivo](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_0_0.md) |
+| 07 | [Requisitos no funcionales](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_0_0.md) | Rendimiento, seguridad, accesibilidad, disponibilidad y calidad. | [Abrir archivo](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_0_0.md) |
+| 08 | [Usuarios](docs/01%20Inicio/08.%20Usuarios%20V_1_0_0.md) | Actores, perfiles, permisos y matriz RBAC/ABAC. | [Abrir archivo](docs/01%20Inicio/08.%20Usuarios%20V_1_0_0.md) |
+| 09 | [Reglas de negocio](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_0_0.md) | Políticas, validaciones, restricciones y trazabilidad RN. | [Abrir archivo](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_0_0.md) |
+| 10 | [Stack tecnológico](docs/01%20Inicio/10.%20Stack%20tecnol%C3%B3gico%20V_1_0_0.md) | Evaluación y selección de React, FastAPI, PostgreSQL y Leaflet/OSM. | [Abrir archivo](docs/01%20Inicio/10.%20Stack%20tecnol%C3%B3gico%20V_1_0_0.md) |
+| 11 | [Base de datos](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_0_0.md) | Modelo conceptual, lógico, físico, ER y diccionario de datos. | [Abrir archivo](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_0_0.md) |
+| 12 | [Modelo C4](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md) | Contexto, contenedores, componentes y arquitectura del MVP. | [Abrir archivo](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md) |
+| 13 | [Restricciones](docs/01%20Inicio/13.%20Restricciones%20V_1_0_0.md) | Análisis multidimensional de restricciones técnicas, económicas, ambientales y normativas. | [Abrir archivo](docs/01%20Inicio/13.%20Restricciones%20V_1_0_0.md) |
+
+### Secuencia de lectura recomendada
+
+```text
+README.md
+   │
+   ▼
+01 Selección del enfoque
+   │
+   ▼
+02 Acta de constitución
+   │
+   ▼
+03 Declaración de la visión
+   │
+   ▼
+04 Supuestos y restricciones
+   │
+   ▼
+05 Interesados
+   │
+   ▼
+06 Requisitos funcionales
+   │
+   ▼
+07 Requisitos no funcionales
+   │
+   ▼
+08 Usuarios
+   │
+   ▼
+09 Reglas de negocio
+   │
+   ▼
+10 Stack tecnológico
+   │
+   ▼
+11 Base de datos
+   │
+   ▼
+12 Modelo C4
+   │
+   ▼
+13 Restricciones
+   │
+   ▼
+02 Planificación
+```
+
+### Navegación anterior / siguiente de la Fase 01
+
+| Documento actual | Anterior | Siguiente |
+|---|---|---|
+| 01 Selección del enfoque | [README principal](README.md) | [02 Acta de constitución](docs/01%20Inicio/02.%20Acta%20de%20constituci%C3%B3n%20V_1_0_0.md) |
+| 02 Acta de constitución | [01 Selección del enfoque](docs/01%20Inicio/01.%20Selecci%C3%B3n%20del%20enfoque%20del%20proyecto%20V_1_0_0.md) | [03 Declaración de la visión](docs/01%20Inicio/03.%20Declaraci%C3%B3n%20de%20la%20visi%C3%B3n%20V_1_0_0.md) |
+| 03 Declaración de la visión | [02 Acta de constitución](docs/01%20Inicio/02.%20Acta%20de%20constituci%C3%B3n%20V_1_0_0.md) | [04 Supuestos y restricciones](docs/01%20Inicio/04.%20Registro%20de%20supuestos%20y%20restricciones%20V_1_0_0.md) |
+| 04 Supuestos y restricciones | [03 Declaración de la visión](docs/01%20Inicio/03.%20Declaraci%C3%B3n%20de%20la%20visi%C3%B3n%20V_1_0_0.md) | [05 Registro de interesados](docs/01%20Inicio/05.%20Registro%20de%20interesados%20V_1_0_0.md) |
+| 05 Registro de interesados | [04 Supuestos y restricciones](docs/01%20Inicio/04.%20Registro%20de%20supuestos%20y%20restricciones%20V_1_0_0.md) | [06 Requisitos funcionales](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_0_0.md) |
+| 06 Requisitos funcionales | [05 Registro de interesados](docs/01%20Inicio/05.%20Registro%20de%20interesados%20V_1_0_0.md) | [07 Requisitos no funcionales](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_0_0.md) |
+| 07 Requisitos no funcionales | [06 Requisitos funcionales](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_0_0.md) | [08 Usuarios](docs/01%20Inicio/08.%20Usuarios%20V_1_0_0.md) |
+| 08 Usuarios | [07 Requisitos no funcionales](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_0_0.md) | [09 Reglas de negocio](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_0_0.md) |
+| 09 Reglas de negocio | [08 Usuarios](docs/01%20Inicio/08.%20Usuarios%20V_1_0_0.md) | [10 Stack tecnológico](docs/01%20Inicio/10.%20Stack%20tecnol%C3%B3gico%20V_1_0_0.md) |
+| 10 Stack tecnológico | [09 Reglas de negocio](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_0_0.md) | [11 Base de datos](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_0_0.md) |
+| 11 Base de datos | [10 Stack tecnológico](docs/01%20Inicio/10.%20Stack%20tecnol%C3%B3gico%20V_1_0_0.md) | [12 Modelo C4](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md) |
+| 12 Modelo C4 | [11 Base de datos](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_0_0.md) | [13 Restricciones](docs/01%20Inicio/13.%20Restricciones%20V_1_0_0.md) |
+| 13 Restricciones | [12 Modelo C4](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md) | [Fase 02 - Transformando a ágil](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md) |
+
+> Para que la navegación sea completamente bidireccional, cada archivo de `docs/01 Inicio/` debe incluir al inicio o al final un enlace `← Volver al README principal` y, de ser posible, enlaces `Anterior` y `Siguiente`.
 
 ---
 
-## 13. Fase 02 — Planificación del Proyecto
+## 13. Navegación completa — Fase 02: Planificación del Proyecto
 
-### Artefacto 1
-[01 Transformando a ágil V_1_0_0.md](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md)
+| N.° | Documento | Contenido principal | Navegación |
+|---:|---|---|---|
+| 01 | [Transformando a ágil](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md) | Épicas, historias, Enablers, BDD, Story Points y DoD. | [Abrir archivo](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md) |
+| 02 | [Artefactos Jira](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md) | Roadmap, backlog, Sprint 1, Sprint Goal, tablero y Release. | [Abrir archivo](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md) |
+| 03 | [Registro de riesgos](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md) | Matriz P × I, mitigación, contingencia y responsables. | [Abrir archivo](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md) |
+| 04 | [Presupuesto del proyecto](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md) | CAPEX, OPEX, herramientas, contingencia y consolidación. | [Abrir archivo](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md) |
 
-Incluye:
+### Navegación anterior / siguiente de la Fase 02
 
-- Épicas;
-- Historias de Usuario;
-- Historias Técnicas / Enablers;
-- Story Points;
-- criterios BDD/Gherkin;
-- trazabilidad RF/RNF;
-- Definition of Done;
-- control del alcance.
-
-### Artefacto 2
-[02 Artefactos Jira V_1_0_0.md](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md)
-
-Incluye:
-
-- configuración Jira;
-- roadmap;
-- backlog;
-- Sprint 1;
-- Sprint Goal;
-- tablero Scrum;
-- Release;
-- espacios para las cinco evidencias requeridas.
-
-### Artefacto 3
-[03 Registro de riesgos V_1_0_0.md](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md)
-
-Incluye:
-
-- Probabilidad;
-- Impacto;
-- Severidad;
-- mitigación;
-- contingencia;
-- responsable.
-
-### Artefacto 4
-[04 Presupuesto del proyecto V_1_0_0.md](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md)
-
-Incluye:
-
-- RRHH;
-- licencias;
-- herramientas;
-- infraestructura;
-- contingencia;
-- consolidación financiera.
+| Documento actual | Anterior | Siguiente |
+|---|---|---|
+| 01 Transformando a ágil | [13 Restricciones](docs/01%20Inicio/13.%20Restricciones%20V_1_0_0.md) | [02 Artefactos Jira](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md) |
+| 02 Artefactos Jira | [01 Transformando a ágil](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md) | [03 Registro de riesgos](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md) |
+| 03 Registro de riesgos | [02 Artefactos Jira](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md) | [04 Presupuesto del proyecto](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md) |
+| 04 Presupuesto del proyecto | [03 Registro de riesgos](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md) | [README principal](README.md) |
 
 ---
 
