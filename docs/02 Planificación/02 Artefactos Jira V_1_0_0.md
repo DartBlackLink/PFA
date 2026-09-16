@@ -152,27 +152,27 @@ Mostrar **únicamente el panel de Jira** a demostrar. No incluir escritorio comp
 ### Evidencia 1 — Roadmap
 Debe mostrar las cinco Épicas en la línea de tiempo.
 
-![Evidencia 1 - Roadmap](evidencias/evidencia-01-roadmap.png)
+![Evidencia 1 - Roadmap](./evidencias/evidencia-01-roadmap.png)
 
 ### Evidencia 2 — Backlog priorizado
 Debe mostrar orden, Story Points y asociación con Épicas.
 
-![Evidencia 2 - Backlog](evidencias/evidencia-02-backlog.png)
+![Evidencia 2 - Backlog](./evidencias/evidencia-02-backlog.png)
 
 ### Evidencia 3 — Sprint Planning y Sprint Goal
 Debe mostrar Sprint 1, EN-001, US-001 y Sprint Goal visible.
 
-![Evidencia 3 - Sprint 1](evidencias/evidencia-03-sprint1.png)
+![Evidencia 3 - Sprint 1](./evidencias/evidencia-03-sprint1.png)
 
 ### Evidencia 4 — Tablero Scrum activo
 Debe mostrar `To Do`, `In Progress`, `In Review / QA` y `Done` con tarjetas distribuidas.
 
-![Evidencia 4 - Tablero](evidencias/evidencia-04-tablero.png)
+![Evidencia 4 - Tablero](./evidencias/evidencia-04-tablero.png)
 
 ### Evidencia 5 — Releases
 Debe mostrar `v1.0.0-MVP` y su asociación con historias.
 
-![Evidencia 5 - Release](evidencias/evidencia-05-release.png)
+![Evidencia 5 - Release](./evidencias/evidencia-05-release.png)
 
 ## 12. Pasos exactos para Jira
 
