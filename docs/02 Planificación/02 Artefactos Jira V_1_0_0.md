@@ -1,196 +1,176 @@
-[← Volver al README principal](../../README.md)
+[← Volver al README Principal](../../README.md)
 
-# Artefactos Jira
+# 02 Artefactos Jira
 
 ## 1. Metadatos
 
-| Campo | Información |
+| Campo | Valor |
 |---|---|
-| Proyecto | EcoLogística Lima |
-| Integrante | Jordy Steve Chancasanampa Torres |
-| Versión | 1.0.0 |
-| Estado | Guía de configuración y evidencia Jira |
-| Versión Jira objetivo | `v1.0.0-MVP` |
+| Proyecto | **EcoLogística Huancayo - Optimizador de Rutas Sostenibles para DistriRápido S.A.C.** |
+| Integrante | **Jordy Steve Chancasanampa Torres** |
+| Fecha | **27/09/2026** |
+| Versión | **1.0.0** |
+| Herramienta | Atlassian Jira Software |
 
-## 2. Objetivo
-
-Documentar cómo debe quedar configurado Jira Software y qué evidencias deben incorporarse para demostrar Roadmap, Backlog, Sprint 1, tablero Scrum y Release.
-
-> **Importante:** este documento define la configuración objetivo. Las capturas deben obtenerse del Jira realmente configurado y recortarse únicamente al panel o elemento que se desea evidenciar.
-
-## 3. Configuración recomendada de Jira
-
-- Plantilla: **Scrum**.
-- Nombre: `EcoLogística Lima`.
-- Clave sugerida: `ECO`.
-- Responsable: Jordy Steve Chancasanampa Torres.
+## 2. Configuración objetivo de Jira
 
 ### Jerarquía
+- **Epic:** módulos/grandes bloques.
+- **Story:** funcionalidad orientada al usuario.
+- **Task/Enabler:** arquitectura, seguridad, rendimiento, BD o DevOps.
+- **Sub-task:** unidad técnica de trabajo de hasta 8 horas.
+- **Bug:** incidencia detectada.
 
-```text
-Épica
-├── Historia de Usuario (Story)
-│   └── Subtareas <= 8 h
-└── Historia Técnica / Enabler (Task/Story)
-    └── Subtareas <= 8 h
-```
+### Workflow
+`To Do → In Progress → In Review / QA → Done`
 
-### Flujo del tablero
+### Estimación
+Fibonacci: `1, 2, 3, 5, 8, 13`.
 
-```text
-To Do → In Progress → In Review / QA → Done
-```
+### Release
+**v1.0.0-MVP**
 
-Si Jira no permite el nombre combinado `In Review / QA`, usar `In Review` y considerar QA como criterio de salida.
-
-## 4. Épicas
-
-| ID | Nombre en Jira | Objetivo | Ventana sugerida |
-|---|---|---|---|
-| EP-01 | Acceso seguro | Autenticación y permisos básicos | Semanas 1-2 |
-| EP-02 | Operación logística | Flota, conductores y pedidos | Semanas 2-5 |
-| EP-03 | Optimización y respuesta a cambios | Algoritmo, incidencias y reoptimización | Semanas 5-10 |
-| EP-04 | Visualización e indicadores | Mapa, dashboard y reporte | Semanas 8-11 |
-| EP-05 | Calidad técnica y entrega | Rendimiento, seguridad, pruebas y documentación | Semanas 1-14 |
-
-## 5. Roadmap objetivo
+## 3. Roadmap del proyecto
 
 ```mermaid
 gantt
-    title Roadmap resumido - EcoLogística Lima
-    dateFormat  YYYY-MM-DD
-    axisFormat  %d/%m
-    section EP-01
-    Acceso seguro                 :a1, 2026-09-14, 14d
-    section EP-02
-    Operación logística           :a2, 2026-09-21, 28d
-    section EP-03
-    Optimización y cambios        :a3, 2026-10-12, 42d
-    section EP-04
-    Visualización e indicadores   :a4, 2026-11-02, 28d
-    section EP-05
-    Calidad técnica y entrega     :a5, 2026-09-14, 98d
+    title Roadmap académico del PFA
+    dateFormat  X
+    axisFormat  Semana %s
+    section Iteración 1
+    Requisitos, BD y mockups           :a1, 1, 3
+    section Iteración 2
+    Flota, pedidos y optimizador base  :a2, 4, 4
+    section Iteración 3
+    Mapa, dashboard y reportes         :a3, 8, 4
+    section Iteración 4
+    Reoptimización, pruebas y cierre   :a4, 12, 3
 ```
 
-Las fechas son referenciales. Si el calendario académico oficial difiere, ajustar Jira sin cambiar la secuencia lógica.
+> En Jira, las épicas deben alinearse a esta línea temporal de referencia sin alterar las cuatro iteraciones de la consigna.
 
-## 6. Backlog priorizado
+## 4. Backlog priorizado
 
-| Orden | ID | Tipo | Resumen | Épica | SP | Prioridad | Versión |
-|---:|---|---|---|---|---:|---|---|
-| 1 | EN-001 | Enabler | Base técnica reproducible | EP-05 | 3 | Highest | v1.0.0-MVP |
-| 2 | US-001 | Story | Acceso y autorización básica | EP-01 | 3 | Highest | v1.0.0-MVP |
-| 3 | US-002 | Story | Gestión de flota | EP-02 | 5 | Highest | v1.0.0-MVP |
-| 4 | US-003 | Story | Gestión básica de conductores | EP-02 | 3 | High | v1.0.0-MVP |
-| 5 | US-004 | Story | Gestión de pedidos | EP-02 | 5 | Highest | v1.0.0-MVP |
-| 6 | US-005 | Story | Generar rutas optimizadas | EP-03 | 13 | Highest | v1.0.0-MVP |
-| 7 | EN-002 | Enabler | Rendimiento del motor | EP-05 | 5 | High | v1.0.0-MVP |
-| 8 | US-006 | Story | Visualizar rutas en mapa | EP-04 | 5 | High | v1.0.0-MVP |
-| 9 | US-007 | Story | Consultar dashboard esencial | EP-04 | 5 | High | v1.0.0-MVP |
-| 10 | EN-003 | Enabler | Seguridad y privacidad | EP-05 | 5 | High | v1.0.0-MVP |
-| 11 | EN-004 | Enabler | Accesibilidad y experiencia mínima | EP-05 | 5 | Medium | v1.0.0-MVP |
-| 12 | US-008 | Story | Generar reporte PDF básico | EP-04 | 5 | Medium | v1.0.0-MVP |
-| 13 | US-010 | Story | Registrar incidencia operativa | EP-03 | 3 | Medium | v1.0.0-MVP |
-| 14 | US-009 | Story | Reoptimizar una planificación | EP-03 | 8 | Medium | v1.0.0-MVP |
-| 15 | EN-005 | Enabler | Pruebas, documentación y entrega | EP-05 | 3 | High | v1.0.0-MVP |
-| 16 | US-011 | Story | Preferencias de cliente | EP-02 | 3 | Low | Post-MVP |
-| 17 | US-012 | Story | Compensación de carbono simplificada | EP-04 | 5 | Low | Post-MVP |
+| ID | Resumen | Épica | Prioridad | Story Points | Estado de planificación |
+|---|---|---|---|---:|---|
+| EN-002 | Seguridad web y datos | EP-06 | Alta | 5 | Sprint 1 |
+| US-001 | Registrar y administrar flota | EP-01 | Alta | 5 | Sprint 1 |
+| US-008 | Administrar conductores | EP-01 | Alta | 5 | Sprint 1 |
+| US-002 | Registrar pedidos | EP-02 | Alta | 8 | Sprint 1 |
+| US-003 | Optimizar rutas | EP-03 | Alta | 13 | Backlog |
+| EN-001 | Rendimiento del optimizador | EP-06 | Alta | 8 | Backlog |
+| US-004 | Visualizar rutas | EP-04 | Alta | 8 | Backlog |
+| US-007 | Reoptimizar por eventos | EP-03 | Alta | 8 | Backlog |
+| US-005 | Consultar dashboard | EP-05 | Media | 5 | Backlog |
+| US-006 | Descargar reporte | EP-05 | Media | 5 | Backlog |
+| US-009 | Preferencias del cliente | EP-02 | Media | 5 | Backlog |
+| US-010 | Compensación de carbono | EP-05 | Media | 5 | Backlog |
+| EN-003 | Accesibilidad WCAG | EP-06 | Media | 5 | Backlog |
+| EN-004 | Escalabilidad | EP-06 | Media | 5 | Backlog |
+| EN-005 | Modo conductor usable | EP-06 | Media | 3 | Backlog |
+| EN-006 | Disponibilidad | EP-06 | Media | 5 | Backlog |
+| EN-007 | Documentación técnica | EP-06 | Alta | 3 | Transversal |
 
-## 7. Plan de Sprints
+## 5. Sprint Planning - Sprint 1
 
-Se recomienda una cadencia de **2 semanas** para las 14 semanas.
+- **Duración:** 2 semanas.
+- **Sprint Goal:** **Construir la base operativa segura para registrar vehículos, conductores y pedidos que alimentarán el posterior motor de optimización.**
+- **Capacidad planificada:** 23 Story Points.
 
-| Sprint | Objetivo | Ítems principales |
-|---|---|---|
-| Sprint 1 | Tener una base ejecutable y acceso controlado | EN-001, US-001 |
-| Sprint 2 | Disponer de datos operativos | US-002, US-003, US-004 |
-| Sprint 3 | Obtener la primera optimización válida | US-005 |
-| Sprint 4 | Mostrar el resultado al usuario | US-006, US-007 |
-| Sprint 5 | Incorporar evidencia y cambios operativos | US-008, US-010 |
-| Sprint 6 | Reoptimizar y validar calidad | US-009, EN-002, EN-003 |
-| Sprint 7 | Corregir, documentar y preparar entrega | EN-004, EN-005, defectos críticos |
+### Ítems del Sprint 1
 
-## 8. Sprint 1
+| ID | SP | Entregable verificable |
+|---|---:|---|
+| EN-002 | 5 | Autenticación/autorización base, validación y controles de seguridad aplicables. |
+| US-001 | 5 | CRUD de flota en Flutter Web + API con validaciones. |
+| US-008 | 5 | Gestión de conductores en Flutter Web y base para perfil/ruta en Flutter móvil. |
+| US-002 | 8 | CRUD de pedidos en Flutter Web con coordenadas, ventanas y validaciones. |
 
-**Duración:** 2 semanas  
-**Sprint Goal:** `Dejar EcoLogística Lima ejecutable de extremo a extremo en ambiente de desarrollo, con autenticación básica y una base técnica reproducible para iniciar el MVP.`
+### Subtareas técnicas sugeridas
 
-| ID | Ítem | SP | Subtareas sugeridas |
-|---|---|---:|---|
-| EN-001 | Base técnica reproducible | 3 | Estructura React/FastAPI; conexión PostgreSQL; variables; README de arranque. |
-| US-001 | Acceso y autorización básica | 3 | modelo usuario/rol; login API; formulario login; protección de endpoint; pruebas. |
+Cada subtarea debe mantenerse en **≤ 8 horas**:
 
-**Compromiso Sprint 1: 6 SP.** Se mantiene bajo intencionalmente por tratarse del primer Sprint de un desarrollador individual.
+- modelar tablas y migraciones;
+- crear esquemas de validación;
+- implementar repositorio/servicio;
+- implementar endpoints;
+- implementar pantalla/formulario;
+- pruebas unitarias;
+- pruebas de integración;
+- revisión de accesibilidad básica;
+- documentación OpenAPI;
+- revisión de seguridad.
 
-## 9. Subtareas de máximo 8 horas
+## 6. Componentes de Jira
 
-| Historia | Subtarea | Estimación |
-|---|---|---:|
-| EN-001 | Inicializar backend FastAPI | 3 h |
-| EN-001 | Inicializar frontend React | 3 h |
-| EN-001 | Configurar PostgreSQL y variables | 4 h |
-| US-001 | Crear modelo usuario/rol | 5 h |
-| US-001 | Implementar endpoint login | 6 h |
-| US-001 | Implementar formulario login | 5 h |
-| US-001 | Probar acceso permitido/denegado | 4 h |
+- `flutter-web`
+- `flutter-mobile`
+- `backend-api`
+- `database`
+- `optimization`
+- `maps`
+- `security`
+- `qa`
+- `documentation`
 
-## 10. Versiones / Releases
+## 7. Criterios para mover tarjetas
 
-Crear en Jira:
+### To Do
+Elemento refinado, estimado, con aceptación y dependencias identificadas.
 
-- **Nombre:** `v1.0.0-MVP`
-- **Descripción:** `Primera versión académica funcional de EcoLogística Lima.`
-- Asociar todos los ítems del MVP a esta versión.
-- `US-011` y `US-012` pueden quedar en `Post-MVP`.
+### In Progress
+Trabajo iniciado y responsable asignado.
 
-## 11. Evidencias fotográficas obligatorias
+### In Review / QA
+Implementación concluida; pruebas y revisión en curso.
 
-### Política estricta de captura
+### Done
+Cumple Definition of Done global y criterios de aceptación.
 
-Mostrar **únicamente el panel de Jira** a demostrar. No incluir escritorio completo, barra de tareas, pestañas del navegador ni espacio sobrante.
+## 8. Evidencias obligatorias
 
-### Evidencia 1 — Roadmap
-Debe mostrar las cinco Épicas en la línea de tiempo.
+> **No se incluyen capturas ficticias.** Esta sección debe completarse únicamente con capturas reales de Jira. La consigna prohíbe capturas de pantalla completa; debe recortarse solo el panel correspondiente.
 
-![Evidencia 1 - Roadmap](./evidencias/evidencia-01-roadmap.png)
+### Evidencia 1 - Roadmap del Proyecto
+**Archivo sugerido:** `evidencias/jira/01-roadmap.png`  
+**Debe mostrar:** épicas y su ubicación en la línea de tiempo.
 
-### Evidencia 2 — Backlog priorizado
-Debe mostrar orden, Story Points y asociación con Épicas.
+`[PENDIENTE: insertar captura real recortada del Roadmap de Jira]`
 
-![Evidencia 2 - Backlog](./evidencias/evidencia-02-backlog.png)
+### Evidencia 2 - Backlog Priorizado
+**Archivo sugerido:** `evidencias/jira/02-backlog.png`  
+**Debe mostrar:** Story Points, prioridad y componentes.
 
-### Evidencia 3 — Sprint Planning y Sprint Goal
-Debe mostrar Sprint 1, EN-001, US-001 y Sprint Goal visible.
+`[PENDIENTE: insertar captura real recortada del Backlog]`
 
-![Evidencia 3 - Sprint 1](./evidencias/evidencia-03-sprint1.png)
+### Evidencia 3 - Sprint Planning & Sprint Goal
+**Archivo sugerido:** `evidencias/jira/03-sprint-planning.png`  
+**Debe mostrar:** Sprint 1, objetivo e ítems seleccionados.
 
-### Evidencia 4 — Tablero Scrum activo
-Debe mostrar `To Do`, `In Progress`, `In Review / QA` y `Done` con tarjetas distribuidas.
+`[PENDIENTE: insertar captura real recortada de Sprint Planning]`
 
-![Evidencia 4 - Tablero](./evidencias/evidencia-04-tablero.png)
+### Evidencia 4 - Tablero Scrum Activo
+**Archivo sugerido:** `evidencias/jira/04-board.png`  
+**Debe mostrar:** To Do, In Progress, In Review / QA y Done.
 
-### Evidencia 5 — Releases
-Debe mostrar `v1.0.0-MVP` y su asociación con historias.
+`[PENDIENTE: insertar captura real recortada del tablero]`
 
-![Evidencia 5 - Release](./evidencias/evidencia-05-release.png)
+### Evidencia 5 - Versiones / Release
+**Archivo sugerido:** `evidencias/jira/05-release.png`  
+**Debe mostrar:** versión `v1.0.0-MVP` y asociación de issues.
 
-## 12. Pasos exactos para Jira
+`[PENDIENTE: insertar captura real recortada de Releases]`
 
-1. Crear proyecto Scrum `EcoLogística Lima`, clave sugerida `ECO`.
-2. Crear versión `v1.0.0-MVP`.
-3. Crear las cinco Épicas.
-4. Crear o importar los ítems del backlog.
-5. Asignar Story Points y prioridades.
-6. Ordenar el backlog como en la sección 6.
-7. Crear Sprint 1 y mover `EN-001` y `US-001`.
-8. Configurar el Sprint Goal de la sección 8.
-9. Configurar columnas del tablero.
-10. Iniciar Sprint 1.
-11. Mover tarjetas solo según el estado real del trabajo.
-12. Tomar las cinco capturas recortadas.
+## 9. Checklist antes de entregar
 
-## 13. Criterio de aceptación
-
-Este artefacto queda completo cuando las cinco capturas reales reemplazan los placeholders y demuestran la configuración descrita.
-
-[← Volver al README principal](../../README.md)
+- [ ] Épicas creadas.
+- [ ] Historias y Enablers creados.
+- [ ] Story Points asignados.
+- [ ] Backlog ordenado.
+- [ ] Componentes asignados.
+- [ ] Roadmap configurado.
+- [ ] Release `v1.0.0-MVP` creada.
+- [ ] Sprint 1 activo con Sprint Goal.
+- [ ] Workflow correcto.
+- [ ] Cinco evidencias reales insertadas.
+- [ ] Capturas recortadas al panel de Jira.

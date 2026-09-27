@@ -1,59 +1,60 @@
-[← Volver al README principal](../../README.md)
+[← Volver al README Principal](../../README.md)
 
-# Registro de Riesgos
+# 03 Registro de riesgos
 
 ## 1. Metadatos
 
-| Campo | Información |
+| Campo | Valor |
 |---|---|
-| Proyecto | EcoLogística Lima |
-| Integrante | Jordy Steve Chancasanampa Torres |
-| Versión | 1.0.0 |
-| Método | Probabilidad × Impacto |
+| Proyecto | **EcoLogística Huancayo - Optimizador de Rutas Sostenibles para DistriRápido S.A.C.** |
+| Integrante | **Jordy Steve Chancasanampa Torres** |
+| Fecha | **27/09/2026** |
+| Versión | **1.0.0** |
 
-## 2. Objetivo
+## 2. Método
 
-Consolidar los riesgos principales del MVP sin convertir el registro en una lista excesiva. Se priorizan los riesgos capaces de comprometer plazo, funcionalidad, calidad o demostración académica.
+**Severidad = Probabilidad (1-5) × Impacto (1-5)**
 
-## 3. Escala
+- Probabilidad: 1 muy baja → 5 muy alta.
+- Impacto: 1 insignificante → 5 catastrófico.
+- Clasificación usada por la consigna: Low 1-6; Medium 8-12; High 15-25.
 
-**Severidad = Probabilidad (1 a 5) × Impacto (1 a 5)**
+## 3. Matriz de riesgos
 
-| Severidad | Nivel |
-|---:|---|
-| 1-6 | Low |
-| 8-12 | Medium |
-| 15-25 | High |
+| ID | Descripción | Categoría | Prob. | Imp. | Severidad | Mitigación preventiva | Contingencia reactiva | Responsable |
+|---|---|---|---:|---:|---|---|---|---|
+| RSK-01 | El optimizador supera 45 s con 150 pedidos/15 vehículos. | Técnica | 4 | 5 | 20 (Alta) | Benchmark temprano, perfilado y optimización incremental. | Reducir complejidad del escenario, ajustar metaheurística o usar estrategia alternativa manteniendo criterios de aceptación. | Responsable del proyecto |
+| RSK-02 | Servicio de mapas/tráfico no disponible o limitado. | Integración | 3 | 4 | 12 (Media) | Adaptador desacoplado, control de timeouts y pruebas con mocks. | Operar con datos disponibles y carga manual prevista por la consigna. | Responsable del proyecto |
+| RSK-03 | Direcciones o coordenadas insuficientes. | Datos | 4 | 4 | 16 (Alta) | Validación de coordenadas y puntos de referencia. | Solicitar corrección del pedido o usar punto de referencia válido. | Responsable del proyecto |
+| RSK-04 | Aumento de alcance durante el curso. | Gestión | 4 | 4 | 16 (Alta) | Backlog priorizado y control de cambios. | Replanificar, diferir elementos no obligatorios y preservar RF-01 a RF-07. | Responsable del proyecto |
+| RSK-05 | Vulnerabilidad crítica antes de release. | Seguridad | 3 | 5 | 15 (Alta) | Análisis estático, dependencias actualizadas y pruebas OWASP. | Bloquear release, corregir y ejecutar regresión. | Responsable del proyecto |
+| RSK-06 | Pérdida/corrupción de datos de desarrollo. | Datos | 2 | 5 | 10 (Media) | Migraciones, backups y repositorio de scripts. | Restaurar backup y reconstruir desde migraciones. | Responsable del proyecto |
+| RSK-07 | Sobrecarga por equipo unipersonal. | Recursos | 5 | 4 | 20 (Alta) | Limitar WIP y priorizar por valor/riesgo. | Reducir alcance no obligatorio y renegociar secuencia con evidencia. | Responsable del proyecto |
+| RSK-08 | Errores de integración frontend-backend. | Técnica | 3 | 3 | 9 (Media) | Contratos OpenAPI y pruebas de integración. | Congelar contrato afectado y corregir mediante prueba de regresión. | Responsable del proyecto |
+| RSK-09 | Incumplimiento de accesibilidad. | Calidad | 3 | 3 | 9 (Media) | Checklist WCAG desde componentes base. | Corregir componentes y repetir auditoría. | Responsable del proyecto |
+| RSK-10 | Estimación de costos se desvía del marco del MVP. | Financiera | 2 | 4 | 8 (Media) | Control de presupuesto y preferencia por tecnologías abiertas. | Reasignar partidas y usar reserva de contingencia. | Responsable del proyecto |
+| RSK-11 | Modelo de datos requiere cambios tardíos. | Arquitectura | 3 | 4 | 12 (Media) | Revisión de requisitos y migraciones versionadas. | Aplicar migración compatible y actualizar trazabilidad. | Responsable del proyecto |
+| RSK-12 | La solución optimizada es válida pero no mejora la línea base. | Algoritmo | 3 | 5 | 15 (Alta) | Definir baseline secuencial y métricas desde pruebas iniciales. | Ajustar función objetivo/parámetros o evaluar otra metaheurística permitida. | Responsable del proyecto |
 
-## 4. Matriz de riesgos
+## 4. Priorización
 
-| ID | Descripción del riesgo | Categoría | P | I | Severidad | Nivel | Plan de Mitigación (Preventivo) | Plan de Contingencia (Reactivo) | Responsable |
-|---|---|---|---:|---:|---:|---|---|---|---|
-| RSK-01 | Crecimiento del alcance por intentar implementar todas las capacidades documentadas. | Gestión / Alcance | 5 | 5 | 25 | High | Aplicar MoSCoW; bloquear nuevas funciones mientras exista un Must incompleto; revisión semanal. | Mover Should/Could a Post-MVP y proteger el flujo mínimo de demostración. | Project Manager / Developer |
-| RSK-02 | El motor de optimización no alcanza tiempo o calidad de solución aceptable. | Técnica / Algoritmo | 4 | 5 | 20 | High | Implementar primero un Algoritmo Genético simple; medir con datasets crecientes. | Simplificar parámetros, limitar escenario de demo y documentar limitaciones sin cambiar de metaheurística a último momento. | Developer |
-| RSK-03 | La capacidad de un único integrante resulta insuficiente para desarrollo, pruebas y documentación. | Recursos / Tiempo | 4 | 5 | 20 | High | Mantener baja carga inicial; reservar tiempo semanal para pruebas/documentación; WIP 1-2 historias. | Recortar historias Should y concentrarse en el camino crítico. | Project Manager |
-| RSK-04 | Datos geográficos o direcciones no estandarizadas impiden ubicar pedidos. | Datos | 4 | 4 | 16 | High | Validar coordenadas y usar puntos de referencia; preparar dataset limpio. | Permitir corrección/carga manual de coordenadas para demo. | Developer |
-| RSK-05 | API de tráfico no disponible, cambia condiciones o requiere pago. | Integración / Costos | 4 | 3 | 12 | Medium | Adaptador desacoplado; no hacer del tráfico en vivo una dependencia del núcleo. | Usar tráfico simulado o carga manual con el mismo contrato interno. | Developer |
-| RSK-06 | Vulnerabilidad o error de autorización expone información u operaciones. | Seguridad | 3 | 5 | 15 | High | Autorizar en backend, validar entradas, secretos fuera del repo y pruebas negativas. | Bloquear función afectada, corregir acceso y repetir pruebas antes de demo. | Developer / QA |
-| RSK-07 | Integración frontend-backend-base de datos produce defectos tardíos. | Técnica / Integración | 3 | 4 | 12 | Medium | Integrar desde Sprint 1 y usar contratos OpenAPI. | Congelar funciones nuevas y corregir primero el flujo principal. | Developer |
-| RSK-08 | Mapas o tiles externos no disponibles durante la demostración. | Dependencia externa | 2 | 3 | 6 | Low | Verificar disponibilidad antes de la demo y evitar dependencias cartográficas innecesarias. | Mostrar resultados tabulares/rutas persistidas y reintentar proveedor. | Developer |
-| RSK-09 | Pruebas y documentación quedan relegadas al final. | Calidad / Académico | 4 | 4 | 16 | High | Aplicar DoD desde Sprint 1; actualizar pruebas, Swagger y documentos con cada historia. | Detener Should/Could y dedicar el cierre a evidencia, correcciones y documentación obligatoria. | Project Manager / QA |
-| RSK-10 | Costos de nube, dominio o servicios superan lo previsto. | Económico | 2 | 3 | 6 | Low | Priorizar herramientas gratuitas/open source y revisar consumo. | Migrar a plan gratuito/local o eliminar dependencia no esencial. | Project Manager |
+### Riesgos altos
+RSK-01, RSK-03, RSK-04, RSK-05, RSK-07 y RSK-12.
 
-## 5. Priorización
+### Riesgos medios
+RSK-02, RSK-06, RSK-08, RSK-09, RSK-10 y RSK-11.
 
-Los riesgos `RSK-01`, `RSK-02`, `RSK-03`, `RSK-04`, `RSK-06` y `RSK-09` son High y reciben atención prioritaria. `RSK-05` y `RSK-07` se revisan al cierre de cada Sprint. `RSK-08` y `RSK-10` se monitorean sin consumir capacidad innecesaria.
+## 5. Disparadores de seguimiento
+
+- Benchmark > 80% del límite de 45 s.
+- Error de API externa repetido.
+- Más de una historia bloqueada por dependencia.
+- Vulnerabilidad alta/crítica.
+- Cambio de requisito obligatorio.
+- Desviación de presupuesto > 10%.
+- Sprint con más del 30% de SP no terminados.
+- Métrica de accesibilidad o disponibilidad por debajo del objetivo.
 
 ## 6. Revisión
 
-- revisar riesgos al cierre de cada Sprint;
-- recalcular P e I cuando cambien las condiciones;
-- registrar nuevos riesgos solo si requieren respuesta concreta;
-- cerrar un riesgo cuando desaparezca su causa;
-- cualquier riesgo que amenace un Must puede provocar repriorización inmediata.
-
-## 7. Criterio de control
-
-El registro se considera saludable cuando todos los riesgos High poseen responsable y acción preventiva en curso.
-
-[← Volver al README principal](../../README.md)
+El registro se revisará durante Sprint Planning, semanalmente durante ejecución y obligatoriamente en Sprint Review/Retrospective cuando un riesgo se materialice o cambie de exposición.

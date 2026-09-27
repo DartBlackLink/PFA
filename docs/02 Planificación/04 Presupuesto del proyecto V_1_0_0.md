@@ -1,102 +1,146 @@
-[← Volver al README principal](../../README.md)
+[← Volver al README Principal](../../README.md)
 
-# Presupuesto del Proyecto
+# 04 Presupuesto del proyecto
 
 ## 1. Metadatos
 
-| Campo | Información |
+| Campo | Valor |
 |---|---|
-| Proyecto | EcoLogística Lima |
-| Integrante | Jordy Steve Chancasanampa Torres |
-| Versión | 1.0.0 |
-| Horizonte | 14 semanas |
-| Modalidad | Proyecto académico individual |
+| Proyecto | **EcoLogística Huancayo - Optimizador de Rutas Sostenibles para DistriRápido S.A.C.** |
+| Integrante | **Jordy Steve Chancasanampa Torres** |
+| Fecha | **27/09/2026** |
+| Versión | **1.0.0** |
 
-## 2. Objetivo
+## 2. Criterio de presentación del presupuesto
 
-Modelar el costo del MVP de forma coherente con su alcance real. El presupuesto de **S/ 500,000** de la consigna se interpreta como techo del caso empresarial, no como un monto que el proyecto académico deba consumir.
+Este documento separa deliberadamente:
 
-Las horas se valorizan por **rol equivalente**, aunque una sola persona desempeñe varios roles. Los montos representan costo imputado de planificación y no necesariamente desembolsos reales.
+1. **Presupuesto estimado académico:** modelado profesional solicitado por la consigna para representar CAPEX, licencias, OPEX y contingencia.
+2. **Gasto real del estudiante:** dinero efectivamente desembolsado durante el desarrollo individual.
 
-## 3. Supuestos financieros
+Los dos valores **no son equivalentes** y no deben sumarse entre sí.
 
-- Horizonte: 14 semanas.
-- Capacidad planificada: aproximadamente **280 horas** (20 h/semana promedio).
-- Herramientas open source o planes gratuitos siempre que sea posible.
-- Conversión de referencia del caso: **USD 1 ≈ S/ 3.70**, derivada de la equivalencia aproximada indicada en la consigna.
-- Reserva de contingencia: **12 %**.
+---
 
-## 4. Recursos Humanos (CAPEX)
+# PARTE A - PRESUPUESTO ESTIMADO SEGÚN LA CONSIGNA
 
-**Fórmula:** `Costo = Horas asignadas × Tarifa por hora (USD)`
+## 3. Línea base presupuestaria de la consigna
 
-| Rol equivalente | Horas | Tarifa USD/h | Subtotal USD | Actividades principales |
-|---|---:|---:|---:|---|
-| Project Manager | 30 | 12.00 | 360.00 | backlog, riesgos, Jira, alcance |
-| Software Architect | 25 | 14.00 | 350.00 | C4, decisiones técnicas, estructura modular |
-| Full-Stack Developer | 170 | 12.00 | 2,040.00 | React, FastAPI, PostgreSQL, algoritmo, integración |
-| QA Engineer | 30 | 10.00 | 300.00 | pruebas, rendimiento y evidencias |
-| UI/UX Designer | 25 | 10.00 | 250.00 | mockups, responsive y accesibilidad |
-| **Total RRHH** | **280** |  | **3,300.00** |  |
+La consigna establece como referencia:
 
-> Una sola persona desempeña los cinco roles. La separación se usa para modelar el esfuerzo.
+- **Presupuesto inicial del MVP:** S/ 500,000.
+- **Equivalente aproximado consignado:** USD 135,000.
+- **Costo operativo anual:** S/ 120,000.
 
-## 5. Licenciamiento y herramientas
+Estos valores son una **estimación de proyecto profesional del caso académico**, no dinero que el estudiante deba gastar.
 
-| Herramienta / concepto | Modelo | Costo USD |
+## 4. Estimación de Recursos Humanos (CAPEX)
+
+> Los roles representan capacidades profesionales necesarias para estimar el costo de un proyecto de esta magnitud. En la ejecución académica, todas las funciones son asumidas por **Jordy Steve Chancasanampa Torres** como único integrante.
+
+| Rol de referencia | Horas estimadas | Tarifa/h referencial (USD) | Costo estimado |
+|---|---:|---:|---:|
+| Project Manager / Analista | 400 | $35.00 | $14,000.00 |
+| Software Architect | 360 | $45.00 | $16,200.00 |
+| Senior Developer | 800 | $45.00 | $36,000.00 |
+| Junior Developer | 592 | $25.00 | $14,800.00 |
+| QA Engineer | 480 | $30.00 | $14,400.00 |
+| UI/UX Designer | 320 | $30.00 | $9,600.00 |
+| **Total RRHH estimado** |  |  | **$105,000.00** |
+
+## 5. Licenciamiento y herramientas - estimación profesional
+
+| Concepto | Estimado (USD) |
+|---|---:|
+| Gestión ALM / Jira u opciones equivalentes | $900.00 |
+| Diseño / prototipado | $600.00 |
+| Seguridad / análisis estático | $500.00 |
+| Herramientas de pruebas / utilidades | $400.00 |
+| Dominio, certificados y complementos | $600.00 |
+| **Total estimado** | **$3,000.00** |
+
+## 6. Infraestructura Cloud - estimación profesional
+
+| Concepto | Estimado (USD) |
+|---|---:|
+| Backend / staging | $4,200.00 |
+| Base de datos / almacenamiento | $3,000.00 |
+| Monitoreo, logs y backups | $1,300.00 |
+| Mapas / tráfico / cuotas de API | $2,000.00 |
+| CI/CD y transferencia | $1,000.00 |
+| Reserva técnica de infraestructura | $1,000.00 |
+| **Total estimado** | **$12,500.00** |
+
+## 7. Resumen estimado
+
+| Categoría | Subtotal (USD) |
+|---|---:|
+| Recursos Humanos (CAPEX) | $105,000.00 |
+| Licenciamiento y herramientas | $3,000.00 |
+| Infraestructura Cloud (OPEX MVP) | $12,500.00 |
+| **Subtotal estimado** | **$120,500.00** |
+| Reserva de contingencia 12% | $14,460.00 |
+| **PRESUPUESTO TOTAL ESTIMADO** | **$134,960.00** |
+
+El valor se mantiene cercano al marco aproximado de **USD 135,000** de la consigna.
+
+---
+
+# PARTE B - GASTOS REALES DEL DESARROLLO ACADÉMICO
+
+## 8. Contexto real de ejecución
+
+El proyecto es desarrollado de forma individual por:
+
+**Jordy Steve Chancasanampa Torres**
+
+Tecnología elegida:
+
+- Flutter Web: aplicación web independiente.
+- Flutter móvil: aplicación móvil independiente.
+- FastAPI/Python: backend común.
+- PostgreSQL: base de datos.
+
+## 9. Gastos reales registrados
+
+No se deben inventar gastos. A la fecha de esta versión **no se han proporcionado comprobantes ni montos de desembolso** para internet, electricidad, dominio, hosting, APIs pagadas, licencias o hardware.
+
+Por ello, el registro real queda preparado de la siguiente manera:
+
+| Concepto | Herramienta / condición | Gasto real confirmado |
 |---|---|---:|
-| Git + GitHub/GitLab | Gratuito | 0.00 |
-| Jira Software | Plan gratuito sujeto a disponibilidad | 0.00 |
-| Figma | Gratuito | 0.00 |
-| VS Code / IDE equivalente | Gratuito | 0.00 |
-| SonarQube Community / equivalente | Gratuito | 0.00 |
-| OpenStreetMap + Leaflet | Open source | 0.00 |
-| Dominio opcional para demo | Reserva | 20.00 |
-| Certificado SSL | Let's Encrypt / equivalente | 0.00 |
-| Otros consumibles menores | Reserva | 40.00 |
-| **Total herramientas** |  | **60.00** |
+| Flutter SDK / Dart | Software libre | S/ 0.00 en licencia |
+| PostgreSQL | Software libre | S/ 0.00 en licencia |
+| Git | Software libre | S/ 0.00 en licencia |
+| Editor/IDE | Dependerá de la herramienta usada | S/ 0.00 en licencia si se usa una opción gratuita |
+| GitHub/GitLab | Depende del plan utilizado | **Por confirmar** |
+| Jira | Depende del plan utilizado | **Por confirmar** |
+| Figma | Depende del plan utilizado | **Por confirmar** |
+| Hosting backend | No informado | **Por confirmar** |
+| Base de datos cloud | No informado | **Por confirmar** |
+| Dominio | No informado | **Por confirmar** |
+| API de mapas/tráfico | Depende del proveedor/cuota | **Por confirmar** |
+| Internet | Servicio personal no informado | **Por confirmar** |
+| Electricidad | Consumo personal no informado | **Por confirmar** |
+| Hardware | Equipo ya disponible o compra no informada | **Por confirmar** |
 
-## 6. Infraestructura Cloud y Servicios (OPEX)
+### Total real confirmado actualmente
 
-| Concepto | Periodo | Costo USD |
-|---|---|---:|
-| Hosting frontend/API de bajo costo | hasta 4 meses | 80.00 |
-| PostgreSQL administrado o VPS pequeño | hasta 4 meses | 50.00 |
-| Backups / almacenamiento | reserva | 20.00 |
-| Tráfico/API externa | preferentemente simulada/gratuita | 0.00 |
-| **Total infraestructura** |  | **150.00** |
+Solo se puede afirmar de manera sustentable un **costo de licencia de S/ 0.00** para Flutter/Dart, PostgreSQL y Git.  
+El **total general real** debe completarse únicamente con montos efectivamente pagados y sustentados.
 
-## 7. Consolidación presupuestaria
+## 10. Plantilla de control de gastos reales
 
-| Categoría | Costo Subtotal (USD) | Porcentaje del subtotal |
-|---|---:|---:|
-| 1. Recursos Humanos (CAPEX) | 3,300.00 | 94.02 % |
-| 2. Licenciamiento y Herramientas | 60.00 | 1.71 % |
-| 3. Infraestructura Cloud (OPEX) | 150.00 | 4.27 % |
-| **SUBTOTAL DEL PROYECTO** | **3,510.00** | **100.00 %** |
-| 4. Reserva de Contingencia (12 %) | **421.20** | N/A |
-| **PRESUPUESTO TOTAL ESTIMADO** | **3,931.20** | **100.00 % del total final** |
+Cada gasto real nuevo debe registrarse así:
 
-### Equivalencia referencial
+| Fecha | Concepto | Proveedor | Comprobante / evidencia | Monto (S/) | Observación |
+|---|---|---|---|---:|---|
+| YYYY-MM-DD | Ejemplo: dominio | Proveedor | Factura/boleta/captura | 0.00 | Solo registrar gasto efectivamente pagado |
 
-- Total: **USD 3,931.20**.
-- Equivalente de planificación: **S/ 14,545.44** usando USD 1 ≈ S/ 3.70.
-- Proporción respecto al techo de S/ 500,000: aproximadamente **2.91 %**.
+## 11. Regla de actualización
 
-## 8. Justificación
-
-El presupuesto es conservador porque el proyecto es individual, usa un monolito modular, una sola metaheurística principal, herramientas gratuitas y pocas dependencias externas. No incluye compra de flota, hardware empresarial ni alta disponibilidad real.
-
-## 9. Uso de contingencia
-
-La reserva del 12 % puede utilizarse para un servicio cloud temporal, consumo imprescindible de API, reemplazo urgente de un servicio o esfuerzo extraordinario por un riesgo High materializado. No debe financiar nuevas funciones fuera de alcance.
-
-## 10. Control financiero
-
-Al cierre de cada Sprint se registran horas, servicios activados, costo acumulado, uso de contingencia y variación. Si una categoría se desvía más de 10 %, se revisa primero el alcance antes de comprar recursos adicionales.
-
-## 11. Conclusión
-
-El MVP académico puede desarrollarse con un costo imputado muy inferior al límite empresarial del caso, reforzando la decisión de mantener arquitectura simple y alcance controlado.
-
-[← Volver al README principal](../../README.md)
+- No reemplazar el presupuesto estimado por los gastos reales.
+- El presupuesto estimado responde a la **consigna**.
+- Los gastos reales responden a la **ejecución personal** del estudiante.
+- Todo gasto real deberá tener fecha, concepto y monto verificable.
+- Si se utiliza un plan gratuito, debe registrarse como **S/ 0.00 en licencia**, no como costo estimado.
