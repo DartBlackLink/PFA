@@ -14,7 +14,7 @@
 | Herramienta | Atlassian Jira Software |
 | Proyecto sugerido | Scrum |
 
-> **Cómo leer esta tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
+> **Resumen de la tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
 
 ## 2. Estructura del proyecto en Jira
 
@@ -26,7 +26,7 @@
 | 3 | Sub-task | Unidad técnica pequeña (idealmente ≤8 horas). |
 | Incidencia | Bug | Defecto descubierto durante QA/Sprint. |
 
-> **Cómo leer esta tabla:** define la jerarquía que debe verse en Jira. No convertir todos los trabajos técnicos en User Stories si no entregan valor directo al actor.
+> **Resumen de la tabla:** define la jerarquía que debe verse en Jira. No convertir todos los trabajos técnicos en User Stories si no entregan valor directo al actor.
 
 ## 3. Campos que debe tener cada issue
 
@@ -43,7 +43,7 @@
 | Fix Version | `v1.0.0-MVP`. |
 | Labels | RF/RNF, por ejemplo `RF-03`, `RNF-01`. |
 
-> **Cómo leer esta tabla:** estos campos permiten que Roadmap, filtros, reportes y evidencias tengan información suficiente para ser útiles y no solo decorativos.
+> **Resumen de la tabla:** estos campos permiten que Roadmap, filtros, reportes y evidencias tengan información suficiente para ser útiles y no solo decorativos.
 
 ## 4. Workflow
 
@@ -55,7 +55,7 @@ flowchart LR
     QA -->|Falla prueba| IP
 ```
 
-> **Interpretación del gráfico:** una tarjeta solo llega a Done después de revisión/QA. Si falla una prueba, regresa a trabajo activo.
+> **Resumen del diagrama:** una tarjeta solo llega a Done después de revisión/QA. Si falla una prueba, regresa a trabajo activo.
 
 ## 5. Product Backlog priorizado
 
@@ -76,7 +76,7 @@ flowchart LR
 | US-013 | Generar reporte PDF | EP-06 | 5 | RF-06 |
 | US-014 | Plan de compensación | EP-06 | 5 | RF-10 |
 
-> **Cómo leer esta tabla:** es la versión resumida del Product Backlog funcional. Los Enablers de calidad se agregan en paralelo dentro de los Sprints.
+> **Resumen de la tabla:** es la versión resumida del Product Backlog funcional. Los Enablers de calidad se agregan en paralelo dentro de los Sprints.
 
 ## 6. Roadmap por Sprints
 
@@ -101,7 +101,7 @@ gantt
     Calidad y release : 2026-11-09, 14d
 ```
 
-> **Interpretación del gráfico:** muestra la secuencia de valor del MVP. Las fechas son una planificación de referencia de 14 semanas y deben ajustarse en Jira al calendario real del curso si fuera necesario.
+> **Resumen del gráfico:** muestra la secuencia de valor del MVP. Las fechas son una planificación de referencia de 14 semanas y deben ajustarse en Jira al calendario real del curso si fuera necesario.
 
 ## 7. Plan detallado de Sprints
 
@@ -120,7 +120,7 @@ gantt
 | EN-003 | RBAC base | 3 |
 | **Total planificado** |  | **22** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 1 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 1 y vinculados a su épica/componente.
 
 **Product Increment:** Dos clientes Flutter ejecutables, API base, esquema inicial, login por rol y prototipos Figma.
 
@@ -143,7 +143,7 @@ gantt
 | EN-009 | OpenAPI/documentación | 3 |
 | **Total planificado** |  | **19** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 2 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 2 y vinculados a su épica/componente.
 
 **Product Increment:** Administrador puede gestionar vehículos/repartidores y repartidor puede consultar su perfil básico.
 
@@ -165,7 +165,7 @@ gantt
 | EN-009 | OpenAPI/documentación | 3 |
 | **Total planificado** |  | **19** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 3 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 3 y vinculados a su épica/componente.
 
 **Product Increment:** Pedidos válidos, clientes y preferencias persistidos con coordenadas/referencias.
 
@@ -186,7 +186,7 @@ gantt
 | EN-003 | Validación backend | 3 |
 | **Total planificado** |  | **21** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 4 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 4 y vinculados a su épica/componente.
 
 **Product Increment:** Motor devuelve rutas factibles con métricas y persiste resultado.
 
@@ -208,7 +208,7 @@ gantt
 | EN-008 | Contingencia móvil inicial | 3 |
 | **Total planificado** |  | **24** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 5 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 5 y vinculados a su épica/componente.
 
 **Product Increment:** Administrador ve mapa global; repartidor ve solo su ruta y puede actualizar estado/reportar incidente.
 
@@ -231,7 +231,7 @@ gantt
 | EN-004 | Benchmark reoptimización | 3 |
 | **Total planificado** |  | **24** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 6 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 6 y vinculados a su épica/componente.
 
 **Product Increment:** Cambio operativo produce nueva planificación; administrador dispone de KPIs y PDF.
 
@@ -255,7 +255,7 @@ gantt
 | EN-009 | Documentación final | 3 |
 | **Total planificado** |  | **20** |
 
-> **Cómo leer esta tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 7 y vinculados a su épica/componente.
+> **Resumen de la tabla:** estos issues forman el Sprint Backlog inicial. En Jira deben estar dentro de Sprint 7 y vinculados a su épica/componente.
 
 **Product Increment:** Release v1.0.0-MVP probado, documentado y preparado para presentación.
 
@@ -280,7 +280,7 @@ gantt
 | QA/seguridad/accesibilidad | Según RNF. |
 | Documentación | Si cambia contrato, flujo o arquitectura. |
 
-> **Cómo leer esta tabla:** sirve como checklist para descomponer una Story sin convertir subtareas en historias independientes.
+> **Resumen de la tabla:** sirve como checklist para descomponer una Story sin convertir subtareas en historias independientes.
 
 ## 9. Gráficos y vistas que debes obtener de Jira
 
@@ -296,7 +296,7 @@ gantt
 | Velocity | Desde ≥2 Sprints | Capacidad histórica. | Complementaria útil. |
 | Cumulative Flow | Con historial | WIP y cuellos de botella. | Complementaria útil. |
 
-> **Cómo leer esta tabla:** separa lo que la consigna pide expresamente de gráficos que ayudan a demostrar Scrum, evitando presentar extras como requisitos obligatorios.
+> **Resumen de la tabla:** separa lo que la consigna pide expresamente de gráficos que ayudan a demostrar Scrum, evitando presentar extras como requisitos obligatorios.
 
 ## 10. Capturas obligatorias
 
@@ -316,7 +316,7 @@ gantt
 | Sprint Review | Qué se terminó, qué se demostró, feedback y cambios de backlog. |
 | Sprint Retrospective | Qué funcionó, qué no, acción de mejora con responsable y Sprint objetivo. |
 
-> **Cómo leer esta tabla:** estas tres evidencias demuestran que Scrum no se limita a mover tarjetas. Deben generar decisiones y aprendizaje para el siguiente Sprint.
+> **Resumen de la tabla:** estas tres evidencias demuestran que Scrum no se limita a mover tarjetas. Deben generar decisiones y aprendizaje para el siguiente Sprint.
 
 ---
 

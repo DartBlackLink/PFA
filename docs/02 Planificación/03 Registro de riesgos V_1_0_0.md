@@ -12,7 +12,7 @@
 | Fecha | **27/09/2026** |
 | Versión | **1.0.0** |
 
-> **Cómo leer esta tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
+> **Resumen de la tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
 
 ## 2. Método
 
@@ -33,7 +33,7 @@
 | RSK-09 | Móvil expone datos fuera de la ruta asignada. | Seguridad | 3 | 5 | 15 (Alta) | Autorización server-side por recurso. | Revocar acceso, corregir y auditar. | Jordy Steve Chancasanampa Torres |
 | RSK-10 | Sprint con >30% no terminado. | Planificación | 3 | 4 | 12 (Media) | Refinement y capacidad basada en velocidad. | Replanificar y reducir WIP. | Jordy Steve Chancasanampa Torres |
 
-> **Cómo leer esta tabla:** P e I cuantifican exposición. Los riesgos altos deben influir en prioridad de backlog y en el Sprint donde se ejecuta la mitigación.
+> **Resumen de la tabla:** P e I cuantifican exposición. Los riesgos altos deben influir en prioridad de backlog y en el Sprint donde se ejecuta la mitigación.
 
 ## 4. Mapa de severidad
 
@@ -51,7 +51,7 @@ flowchart TB
     M --> M4[RSK-10 Desviación del Sprint]
 ```
 
-> **Interpretación del gráfico:** los riesgos de rendimiento, seguridad, tecnología y capacidad del equipo requieren atención temprana porque podrían impedir la entrega del MVP.
+> **Resumen del diagrama:** los riesgos de rendimiento, seguridad, tecnología y capacidad del equipo requieren atención temprana porque podrían impedir la entrega del MVP.
 
 ## 5. Revisión de riesgos en Scrum
 

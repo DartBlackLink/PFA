@@ -17,7 +17,7 @@
 | Gestión | Scrum + Jira |
 | Versión documental | 1.0.0 |
 
-> **Cómo leer esta tabla:** resume la propuesta real. Web y móvil son aplicaciones independientes y atienden roles diferentes.
+> **Resumen de la tabla:** resume la propuesta real. Web y móvil son aplicaciones independientes y atienden roles diferentes.
 
 ## 2. Contexto
 
@@ -42,7 +42,7 @@ flowchart TD
     API --> MAP[Mapas/tráfico]
 ```
 
-> **Interpretación del gráfico:** el administrador y el repartidor no comparten la misma interfaz. Ambos clientes dependen de una API común, que concentra reglas y seguridad.
+> **Resumen del diagrama:** el administrador y el repartidor no comparten la misma interfaz. Ambos clientes dependen de una API común, que concentra reglas y seguridad.
 
 ## 5. Navegación documental - Fase 01 Inicio
 
@@ -62,7 +62,7 @@ flowchart TD
 | 12 | 12. Modelo C4 | [Abrir](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md) |
 | 13 | 13. Restricciones | [Abrir](docs/01%20Inicio/13.%20Restricciones%20V_1_0_0.md) |
 
-> **Cómo leer esta tabla:** todos los artefactos de Inicio son navegables desde aquí. Cada archivo también incluye enlaces de regreso, anterior y siguiente.
+> **Resumen de la tabla:** todos los artefactos de Inicio son navegables desde aquí. Cada archivo también incluye enlaces de regreso, anterior y siguiente.
 
 ## 6. Navegación documental - Fase 02 Planificación
 
@@ -73,7 +73,7 @@ flowchart TD
 | 03 | 03 Registro de riesgos | [Abrir](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md) |
 | 04 | 04 Presupuesto del proyecto | [Abrir](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md) |
 
-> **Cómo leer esta tabla:** reúne los cuatro artefactos exigidos para Planificación y mantiene navegación bidireccional con el README.
+> **Resumen de la tabla:** reúne los cuatro artefactos exigidos para Planificación y mantiene navegación bidireccional con el README.
 
 ## 7. Roles de aplicación
 
@@ -82,7 +82,7 @@ flowchart TD
 | Administrador | Flutter Web | Flota, repartidores, clientes, pedidos, optimización, mapa global, dashboard, reportes. |
 | Repartidor | Flutter móvil | Mi ruta, pendientes, estado de entrega, alertas, incidentes. |
 
-> **Cómo leer esta tabla:** es la regla principal de UX y autorización del proyecto.
+> **Resumen de la tabla:** es la regla principal de UX y autorización del proyecto.
 
 ## 8. Requisitos
 
@@ -116,7 +116,7 @@ La ejecución usa **7 Sprints de 2 semanas**. La definición completa de Product
 | S6 | 11-12 | Reoptimización, dashboard y reportes. |
 | S7 | 13-14 | Compensación, QA, seguridad, accesibilidad y release. |
 
-> **Cómo leer esta tabla:** esta es la hoja de ruta Scrum que debe reflejarse en Jira. Cada Sprint tiene detalle completo en el artefacto Jira.
+> **Resumen de la tabla:** esta es la hoja de ruta Scrum que debe reflejarse en Jira. Cada Sprint tiene detalle completo en el artefacto Jira.
 
 ## 12. Base de datos
 
@@ -156,7 +156,7 @@ sequenceDiagram
     W-->>A: Muestra mapa, rutas e indicadores
 ```
 
-> **Interpretación del gráfico:** este bloque reemplaza el diagrama con conflicto Git que producía `Unable to render rich display`. No contiene marcadores `<<<<<<<`, `=======` o `>>>>>>>`.
+> **Resumen del diagrama:** este bloque reemplaza el diagrama con conflicto Git que producía `Unable to render rich display`. No contiene marcadores `<<<<<<<`, `=======` o `>>>>>>>`.
 
 ## 16. Workflow Jira
 
@@ -168,7 +168,7 @@ flowchart LR
     C -->|Falla QA| B
 ```
 
-> **Interpretación del gráfico:** una historia no llega a Done solo porque “funciona”; primero debe pasar revisión y QA y cumplir Definition of Done.
+> **Resumen del diagrama:** una historia no llega a Done solo porque “funciona”; primero debe pasar revisión y QA y cumplir Definition of Done.
 
 ## 17. Definition of Done
 
@@ -204,7 +204,7 @@ backend/
 database/
 ```
 
-> **Interpretación:** la primera parte es la estructura documental actual; la segunda es propuesta de desarrollo y se crea cuando empiece la implementación.
+> **Resumen:** la primera parte es la estructura documental actual; la segunda es propuesta de desarrollo y se crea cuando empiece la implementación.
 
 ## 19. Estado actual
 
@@ -220,7 +220,7 @@ database/
 | Flutter móvil | Pendiente de implementación |
 | Backend | Pendiente de implementación |
 
-> **Cómo leer esta tabla:** distingue documentación terminada de evidencia o software que todavía debe construirse. No se presentan capturas ficticias como si Jira/Figma ya estuvieran configurados.
+> **Resumen de la tabla:** distingue documentación terminada de evidencia o software que todavía debe construirse. No se presentan capturas ficticias como si Jira/Figma ya estuvieran configurados.
 
 ## 20. Autor
 

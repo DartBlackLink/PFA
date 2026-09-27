@@ -13,7 +13,7 @@
 | Versión | **1.0.0** |
 | Moneda de estimación profesional | USD y referencia S/ |
 
-> **Cómo leer esta tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
+> **Resumen de la tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
 
 ## 2. Separación obligatoria
 
@@ -27,7 +27,7 @@ Este documento diferencia **presupuesto estimado del caso académico** y **gasto
 | Equivalente aproximado citado | USD 135,000 |
 | Operación/mantenimiento anual | S/ 120,000 |
 
-> **Cómo leer esta tabla:** son cifras del caso académico. No representan desembolsos personales de Jordy Steve Chancasanampa Torres.
+> **Resumen de la tabla:** son cifras del caso académico. No representan desembolsos personales de Jordy Steve Chancasanampa Torres.
 
 ## 4. Estimación profesional desagregada
 
@@ -40,7 +40,7 @@ Este documento diferencia **presupuesto estimado del caso académico** y **gasto
 | Contingencia 12% | 14,460.00 |
 | **Total estimado** | **134,960.00** |
 
-> **Cómo leer esta tabla:** modela un proyecto profesional cercano al marco de USD 135,000. Es una estimación para la consigna, no una factura real.
+> **Resumen de la tabla:** modela un proyecto profesional cercano al marco de USD 135,000. Es una estimación para la consigna, no una factura real.
 
 ## 5. Distribución referencial de RRHH
 
@@ -54,7 +54,7 @@ Este documento diferencia **presupuesto estimado del caso académico** y **gasto
 | UI/UX | 320 | 30 | 9,600 |
 | **Total** |  |  | **105,000** |
 
-> **Cómo leer esta tabla:** los roles representan capacidades profesionales para estimación. El proyecto académico real es ejecutado por una sola persona.
+> **Resumen de la tabla:** los roles representan capacidades profesionales para estimación. El proyecto académico real es ejecutado por una sola persona.
 
 ## 6. Gastos reales del estudiante
 
@@ -72,7 +72,7 @@ Este documento diferencia **presupuesto estimado del caso académico** y **gasto
 | Internet/electricidad | Gasto personal no informado | Por confirmar |
 | Hardware | Compra no informada | Por confirmar |
 
-> **Cómo leer esta tabla:** solo se registra S/0 cuando el costo de licencia es efectivamente cero. No se inventan montos para servicios o recursos que el estudiante no ha declarado.
+> **Resumen de la tabla:** solo se registra S/0 cuando el costo de licencia es efectivamente cero. No se inventan montos para servicios o recursos que el estudiante no ha declarado.
 
 ## 7. Registro para gastos futuros
 
@@ -80,7 +80,7 @@ Este documento diferencia **presupuesto estimado del caso académico** y **gasto
 |---|---|---|---|---:|---|
 | YYYY-MM-DD | Completar al pagar | Completar | Boleta/factura/captura | 0.00 | No registrar estimaciones aquí |
 
-> **Cómo leer esta tabla:** esta es la bitácora de gasto real. Cada fila futura debe corresponder a un desembolso verificable.
+> **Resumen de la tabla:** esta es la bitácora de gasto real. Cada fila futura debe corresponder a un desembolso verificable.
 
 ---
 

@@ -14,7 +14,7 @@
 | Marco | Scrum |
 | Sprint | 2 semanas |
 
-> **Cómo leer esta tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
+> **Resumen de la tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
 
 ## 2. Adaptación Scrum para proyecto individual
 
@@ -24,7 +24,7 @@
 | Scrum Master | Jordy Steve Chancasanampa Torres | Mantiene cadencia, impedimentos y retrospectiva. |
 | Developer | Jordy Steve Chancasanampa Torres | Diseña, programa, prueba y documenta. |
 
-> **Cómo leer esta tabla:** es una adaptación por equipo unipersonal, no la estructura ideal de un Scrum Team real. Las responsabilidades se separan conceptualmente aunque recaigan en la misma persona.
+> **Resumen de la tabla:** es una adaptación por equipo unipersonal, no la estructura ideal de un Scrum Team real. Las responsabilidades se separan conceptualmente aunque recaigan en la misma persona.
 
 ## 3. Épicas
 
@@ -38,7 +38,7 @@
 | EP-06 | Sostenibilidad | Dashboard, reportes y compensación. |
 | EP-07 | UX/Calidad | Figma, accesibilidad, documentación y QA. |
 
-> **Cómo leer esta tabla:** las épicas son grandes bloques para Roadmap. Las historias se cuelgan de estas épicas en Jira.
+> **Resumen de la tabla:** las épicas son grandes bloques para Roadmap. Las historias se cuelgan de estas épicas en Jira.
 
 ## 4. Product Backlog - Historias de Usuario
 
@@ -59,7 +59,7 @@
 | US-013 | Generar reporte PDF | EP-06 | Administrador | descargar reporte de sostenibilidad | RF-06 | S6 |
 | US-014 | Plan de compensación | EP-06 | Administrador | calcular compensación de CO₂ | RF-10 | S7 |
 
-> **Cómo leer esta tabla:** convierte RF en trabajo ágil. “Sprint” es planificación inicial y puede cambiar mediante refinamiento sin perder trazabilidad.
+> **Resumen de la tabla:** convierte RF en trabajo ágil. “Sprint” es planificación inicial y puede cambiar mediante refinamiento sin perder trazabilidad.
 
 ## 5. Historias Técnicas / Enablers
 
@@ -75,7 +75,7 @@
 | EN-008 | Disponibilidad/contingencia móvil | 5 | S5-S7 |
 | EN-009 | OpenAPI y documentación | 3 | S1-S7 |
 
-> **Cómo leer esta tabla:** los RNF y decisiones de arquitectura no se esconden dentro de historias funcionales; se gestionan como trabajo técnico explícito y/o criterios transversales.
+> **Resumen de la tabla:** los RNF y decisiones de arquitectura no se esconden dentro de historias funcionales; se gestionan como trabajo técnico explícito y/o criterios transversales.
 
 ## 6. Plantilla canónica de historia
 
@@ -98,7 +98,7 @@ Cuando ...
 Entonces ...
 ```
 
-> **Interpretación:** esta plantilla debe copiarse a Jira. Cada historia debe tener al menos dos criterios BDD verificables.
+> **Resumen:** esta plantilla debe copiarse a Jira. Cada historia debe tener al menos dos criterios BDD verificables.
 
 ## 7. Definition of Done global
 
