@@ -1,4 +1,4 @@
-[← Volver al README Principal](../../README.md)
+[⌂ README principal](../../README.md) | [← Anterior: 13. Restricciones](../01%20Inicio/13.%20Restricciones%20V_1_0_0.md) | [Siguiente: 02 Artefactos Jira →](02%20Artefactos%20Jira%20V_1_0_0.md)
 
 # 01 Transformando a ágil
 
@@ -8,371 +8,115 @@
 |---|---|
 | Proyecto | **EcoLogística Huancayo - Optimizador de Rutas Sostenibles para DistriRápido S.A.C.** |
 | Integrante | **Jordy Steve Chancasanampa Torres** |
+| Modalidad | Proyecto individual |
 | Fecha | **27/09/2026** |
 | Versión | **1.0.0** |
-| Marco | Scrum / enfoque adaptativo |
+| Marco | Scrum |
+| Sprint | 2 semanas |
 
-## 2. Metodología de transformación
+> **Cómo leer esta tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
 
-- Los **RF** se mapean a **Épicas** y se materializan como **Historias de Usuario**.
-- Los **RNF** se transforman en **Historias Técnicas (Enablers)** o criterios transversales.
-- Cada historia posee valor, trazabilidad, Story Points y aceptación BDD.
-- El backlog se prioriza por dependencia, valor y riesgo técnico.
+## 2. Adaptación Scrum para proyecto individual
+
+| Responsabilidad Scrum | Responsable académico | Aplicación práctica |
+|---|---|---|
+| Product Owner | Jordy Steve Chancasanampa Torres | Ordena Product Backlog por valor/riesgo. |
+| Scrum Master | Jordy Steve Chancasanampa Torres | Mantiene cadencia, impedimentos y retrospectiva. |
+| Developer | Jordy Steve Chancasanampa Torres | Diseña, programa, prueba y documenta. |
+
+> **Cómo leer esta tabla:** es una adaptación por equipo unipersonal, no la estructura ideal de un Scrum Team real. Las responsabilidades se separan conceptualmente aunque recaigan en la misma persona.
 
 ## 3. Épicas
 
-| ID | Épica | RF/RNF |
+| ID | Épica | Alcance |
 |---|---|---|
-| EP-01 | Gestión de recursos logísticos | RF-01, RF-08 |
-| EP-02 | Pedidos y clientes | RF-02, RF-09 |
-| EP-03 | Optimización y reoptimización | RF-03, RF-07 |
-| EP-04 | Operación geográfica | RF-04 |
-| EP-05 | Analítica y sostenibilidad | RF-05, RF-06, RF-10 |
-| EP-06 | Calidad técnica transversal | RNF-01 a RNF-07 |
-| EP-07 | Canales Flutter Web y Flutter móvil | Soporte transversal de interfaz por rol |
+| EP-01 | Acceso y seguridad | Login, RBAC y sesión por canal. |
+| EP-02 | Recursos logísticos | Flota y repartidores. |
+| EP-03 | Pedidos y clientes | Pedidos, georreferenciación y preferencias. |
+| EP-04 | Optimización | VRPTW/Green VRP y reoptimización. |
+| EP-05 | Operación de rutas | Mapa Web y ejecución móvil. |
+| EP-06 | Sostenibilidad | Dashboard, reportes y compensación. |
+| EP-07 | UX/Calidad | Figma, accesibilidad, documentación y QA. |
 
-## 4. Historias de Usuario
+> **Cómo leer esta tabla:** las épicas son grandes bloques para Roadmap. Las historias se cuelgan de estas épicas en Jira.
 
+## 4. Product Backlog - Historias de Usuario
 
-### US-001 - Registrar y administrar flota
+| ID | Historia | Épica | Actor | Acción | RF | Sprint |
+|---|---|---|---|---|---|---|
+| US-001 | Autenticación administrador | EP-01 | Administrador | iniciar sesión en Flutter Web | RF transversal | S1 |
+| US-002 | Autenticación repartidor | EP-01 | Repartidor | iniciar sesión en Flutter móvil | RF transversal | S1 |
+| US-003 | Gestionar flota | EP-02 | Administrador | registrar y actualizar vehículos | RF-01 | S2 |
+| US-004 | Gestionar repartidores | EP-02 | Administrador | registrar repartidores y disponibilidad | RF-08 | S2 |
+| US-005 | Gestionar pedidos | EP-03 | Administrador | registrar pedidos con ubicación y ventana | RF-02 | S3 |
+| US-006 | Gestionar clientes/preferencias | EP-03 | Administrador | registrar preferencias comunicadas por clientes | RF-09 | S3 |
+| US-007 | Generar rutas optimizadas | EP-04 | Administrador | generar rutas sostenibles | RF-03 | S4 |
+| US-008 | Visualizar mapa global | EP-05 | Administrador | visualizar rutas y puntos de entrega | RF-04 | S5 |
+| US-009 | Consultar mi ruta | EP-05 | Repartidor | ver la ruta asignada y pendientes | RF-04 | S5 |
+| US-010 | Actualizar entrega/reportar incidente | EP-05 | Repartidor | actualizar estado y reportar eventos | RF-07 | S5 |
+| US-011 | Reoptimizar rutas | EP-04 | Administrador | recalcular ante cambios | RF-07 | S6 |
+| US-012 | Consultar dashboard | EP-06 | Administrador | consultar KPIs | RF-05 | S6 |
+| US-013 | Generar reporte PDF | EP-06 | Administrador | descargar reporte de sostenibilidad | RF-06 | S6 |
+| US-014 | Plan de compensación | EP-06 | Administrador | calcular compensación de CO₂ | RF-10 | S7 |
 
-- **Épica relacionada:** EP-01 Gestión de recursos
-- **RF origen:** RF-01
-- **Story Points:** 5
-- **Historia:** Como **Operador logístico**, quiero **registrar y actualizar vehículos**, para **disponer de capacidades, consumos y emisiones correctas para planificar rutas**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-001,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-002 - Registrar pedidos
-
-- **Épica relacionada:** EP-02 Pedidos y clientes
-- **RF origen:** RF-02
-- **Story Points:** 8
-- **Historia:** Como **Operador logístico**, quiero **registrar pedidos georreferenciados con ventana y prioridad**, para **incluirlos en la planificación de reparto**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-002,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-003 - Optimizar rutas
-
-- **Épica relacionada:** EP-03 Optimización
-- **RF origen:** RF-03
-- **Story Points:** 13
-- **Historia:** Como **Operador logístico**, quiero **generar rutas optimizadas**, para **reducir distancia, consumo, CO₂ y tardanzas**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-003,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-004 - Visualizar rutas
-
-- **Épica relacionada:** EP-04 Operación geográfica
-- **RF origen:** RF-04
-- **Story Points:** 8
-- **Historia:** Como **Operador / Conductor**, quiero **ver las rutas y puntos de entrega en un mapa**, para **comprender el recorrido y condiciones por tramo**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-004,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-005 - Consultar dashboard
-
-- **Épica relacionada:** EP-05 Sostenibilidad
-- **RF origen:** RF-05
-- **Story Points:** 5
-- **Historia:** Como **Gerencia / Operador**, quiero **consultar indicadores de operación y sostenibilidad**, para **evaluar desempeño y ahorro**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-005,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-006 - Descargar reporte de sostenibilidad
-
-- **Épica relacionada:** EP-05 Sostenibilidad
-- **RF origen:** RF-06
-- **Story Points:** 5
-- **Historia:** Como **Gerencia**, quiero **generar un reporte PDF**, para **documentar impacto ambiental y económico**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-006,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-007 - Reoptimizar por eventos
-
-- **Épica relacionada:** EP-03 Optimización
-- **RF origen:** RF-07
-- **Story Points:** 8
-- **Historia:** Como **Operador**, quiero **recalcular rutas cuando cambien las condiciones**, para **mantener un plan vigente y factible**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-007,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-008 - Administrar conductores
-
-- **Épica relacionada:** EP-01 Gestión de recursos
-- **RF origen:** RF-08
-- **Story Points:** 5
-- **Historia:** Como **Operador logístico**, quiero **registrar disponibilidad y datos del conductor**, para **asignar rutas compatibles con su disponibilidad**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-008,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-009 - Gestionar preferencias del cliente
-
-- **Épica relacionada:** EP-02 Pedidos y clientes
-- **RF origen:** RF-09
-- **Story Points:** 5
-- **Historia:** Como **Cliente / Operador**, quiero **registrar horarios y referencias de entrega**, para **mejorar la factibilidad de la entrega**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-009,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
-### US-010 - Planificar compensación de carbono
-
-- **Épica relacionada:** EP-05 Sostenibilidad
-- **RF origen:** RF-10
-- **Story Points:** 5
-- **Historia:** Como **Gerencia**, quiero **obtener un plan de compensación basado en CO₂ calculado**, para **conocer la magnitud de compensación requerida**.
-
-**Escenario 1 - Operación válida**  
-**Dado** que el usuario tiene permisos y los datos requeridos son válidos,  
-**Cuando** ejecuta la función descrita en US-010,  
-**Entonces** el sistema completa la operación, conserva trazabilidad y muestra un resultado verificable.
-
-**Escenario 2 - Validación o fallo**  
-**Dado** que existe un dato inválido, una restricción incumplida o una dependencia no disponible,  
-**Cuando** el usuario intenta completar la función,  
-**Entonces** el sistema impide un estado inconsistente y comunica el motivo sin exponer información sensible.
-
+> **Cómo leer esta tabla:** convierte RF en trabajo ágil. “Sprint” es planificación inicial y puede cambiar mediante refinamiento sin perder trazabilidad.
 
 ## 5. Historias Técnicas / Enablers
 
+| ID | Enabler | SP | Ventana |
+|---|---|---:|---|
+| EN-001 | Estructura repositorio y dos proyectos Flutter | 3 | S1 |
+| EN-002 | Modelo BD y migraciones | 5 | S1 |
+| EN-003 | RBAC y controles OWASP | 5 | S1-S7 |
+| EN-004 | Benchmark optimizador | 5 | S4-S7 |
+| EN-005 | Accesibilidad WCAG | 3 | S1-S7 |
+| EN-006 | Escalabilidad y rendimiento API/BD | 5 | S6-S7 |
+| EN-007 | Mockups Figma Web/Móvil | 5 | S1-S2 |
+| EN-008 | Disponibilidad/contingencia móvil | 5 | S5-S7 |
+| EN-009 | OpenAPI y documentación | 3 | S1-S7 |
 
-### EN-001 - Rendimiento del optimizador
+> **Cómo leer esta tabla:** los RNF y decisiones de arquitectura no se esconden dentro de historias funcionales; se gestionan como trabajo técnico explícito y/o criterios transversales.
 
-- **RNF origen:** RNF-01
-- **Story Points:** 8
-- **Objetivo técnico:** Optimización ≤ 45 s; reoptimización < 30 s.
+## 6. Plantilla canónica de historia
 
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-01,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
+```text
+ID: US-XXX
+Título: ...
+Épica: EP-XX
+Como [rol]
+quiero [acción]
+para [valor].
 
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
+Criterio 1
+Dado ...
+Cuando ...
+Entonces ...
 
-### EN-002 - Seguridad web y datos
-
-- **RNF origen:** RNF-02
-- **Story Points:** 5
-- **Objetivo técnico:** Controles OWASP, autenticación/autorización y 0 vulnerabilidades críticas ejecutables.
-
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-02,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
-
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
-
-### EN-003 - Accesibilidad WCAG
-
-- **RNF origen:** RNF-03
-- **Story Points:** 5
-- **Objetivo técnico:** Conformidad WCAG 2.1 AA en criterios auditados.
-
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-03,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
-
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
-
-### EN-004 - Escalabilidad
-
-- **RNF origen:** RNF-04
-- **Story Points:** 5
-- **Objetivo técnico:** Soportar objetivo de 1,000 pedidos/día y 50 vehículos.
-
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-04,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
-
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
-
-### EN-005 - Modo conductor usable
-
-- **RNF origen:** RNF-05
-- **Story Points:** 3
-- **Objetivo técnico:** Interfaz simplificada y prueba de tareas críticas.
-
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-05,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
-
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
-
-### EN-006 - Disponibilidad y contingencia
-
-- **RNF origen:** RNF-06
-- **Story Points:** 5
-- **Objetivo técnico:** Disponibilidad 99.5% en horario operativo y degradación controlada.
-
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-06,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
-
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
-
-### EN-007 - Documentación técnica
-
-- **RNF origen:** RNF-07
-- **Story Points:** 3
-- **Objetivo técnico:** Documentación y OpenAPI actualizados por release.
-
-**Escenario 1**  
-**Dado** el entorno de prueba definido para RNF-07,  
-**Cuando** se ejecuta la validación correspondiente,  
-**Entonces** la métrica objetivo debe quedar registrada con evidencia reproducible.
-
-**Escenario 2**  
-**Dado** que la métrica no se cumple,  
-**Cuando** se evalúa el incremento,  
-**Entonces** el elemento no puede considerarse Done hasta corregirse o existir una excepción aprobada y documentada.
-
-
-## 6. Definition of Done global
-
-Un elemento solo puede pasar a **Done** cuando cumple todo lo aplicable:
-
-- [ ] criterios de aceptación BDD aprobados;
-- [ ] pruebas unitarias con cobertura del módulo **≥ 80%**;
-- [ ] pruebas de integración aplicables ejecutadas;
-- [ ] análisis estático sin vulnerabilidades críticas;
-- [ ] revisión de código aprobada mediante Pull Request; en equipo unipersonal, se realiza auto-revisión documentada y revisión docente cuando corresponda;
-- [ ] despliegue reproducible en ambiente de staging/pruebas;
-- [ ] OpenAPI/Swagger actualizado cuando cambie la API;
-- [ ] migraciones y documentación actualizadas cuando cambien datos;
-- [ ] trazabilidad RF/RNF → historia → prueba conservada;
-- [ ] no existen secretos reales en el repositorio.
-
-## 7. Priorización inicial
-
-| Orden | Elemento | Motivo |
-|---:|---|---|
-| 1 | EN-002 | Seguridad transversal desde el inicio. |
-| 2 | US-001 | Datos de vehículos requeridos por optimización. |
-| 3 | US-008 | Disponibilidad de conductores requerida por asignación. |
-| 4 | US-002 | Pedidos son entrada central del optimizador. |
-| 5 | US-003 | Núcleo de valor del proyecto. |
-| 6 | EN-001 | Valida el límite de rendimiento del núcleo. |
-| 7 | US-004 | Hace observable la solución. |
-| 8 | US-007 | Permite adaptación operativa. |
-| 9 | US-005 | Mide el resultado. |
-| 10 | US-006 | Formaliza reporte. |
-| 11 | US-009 | Completa preferencias. |
-| 12 | US-010 | Completa compensación. |
-
-## 8. Dependencias principales
-
-```mermaid
-flowchart LR
-    F[US-001 Flota] --> O[US-003 Optimización]
-    D[US-008 Conductores] --> O
-    P[US-002 Pedidos] --> O
-    O --> M[US-004 Mapa]
-    O --> R[US-007 Reoptimización]
-    O --> K[US-005 KPIs]
-    K --> REP[US-006 Reporte]
-    K --> C[US-010 Compensación]
-    CL[US-009 Preferencias] --> P
+Criterio 2
+Dado ...
+Cuando ...
+Entonces ...
 ```
 
+> **Interpretación:** esta plantilla debe copiarse a Jira. Cada historia debe tener al menos dos criterios BDD verificables.
 
-## 9. Decisión de canales de implementación
+## 7. Definition of Done global
 
-- **Flutter Web** y **Flutter móvil** serán proyectos independientes.
-- Las Historias de Usuario administrativas se implementarán principalmente en Flutter Web.
-- Las historias del conductor se implementarán principalmente en Flutter móvil.
-- Ambos clientes consumirán el mismo contrato OpenAPI del backend.
-- Una historia que afecte a ambos canales deberá contener subtareas separadas por cliente para mantener trazabilidad.
+- Criterios BDD cumplidos.
+- Cobertura unitaria del módulo ≥80% cuando aplique.
+- Integración probada.
+- Sin vulnerabilidades críticas conocidas.
+- Revisión de código documentada; por ser proyecto individual, se realiza auto-revisión estructurada y revisión docente cuando corresponda.
+- OpenAPI/documentación actualizada.
+- Migraciones versionadas si cambió BD.
+- Mockup Figma respetado si la historia modifica UI.
+- RNF aplicables verificados.
+- Issue Jira vinculado a evidencia/commit/PR.
+
+## 8. Definition of Ready
+
+Una historia puede entrar a Sprint cuando tiene: actor, valor, criterios BDD, dependencias identificadas, estimación, diseño/mockup suficiente y datos de prueba definidos.
+
+---
+
+[⌂ README principal](../../README.md) | [← Anterior: 13. Restricciones](../01%20Inicio/13.%20Restricciones%20V_1_0_0.md) | [Siguiente: 02 Artefactos Jira →](02%20Artefactos%20Jira%20V_1_0_0.md)

@@ -1,4 +1,4 @@
-[← Volver al README Principal](../../README.md)
+[⌂ README principal](../../README.md) | [← Anterior: 02 Artefactos Jira](02%20Artefactos%20Jira%20V_1_0_0.md) | [Siguiente: 04 Presupuesto del proyecto →](04%20Presupuesto%20del%20proyecto%20V_1_0_0.md)
 
 # 03 Registro de riesgos
 
@@ -8,53 +8,59 @@
 |---|---|
 | Proyecto | **EcoLogística Huancayo - Optimizador de Rutas Sostenibles para DistriRápido S.A.C.** |
 | Integrante | **Jordy Steve Chancasanampa Torres** |
+| Modalidad | Proyecto individual |
 | Fecha | **27/09/2026** |
 | Versión | **1.0.0** |
 
+> **Cómo leer esta tabla:** resume la identificación y las decisiones base del documento. Permite comprobar que todos los artefactos pertenecen al mismo proyecto, versión e integrante.
+
 ## 2. Método
 
-**Severidad = Probabilidad (1-5) × Impacto (1-5)**
-
-- Probabilidad: 1 muy baja → 5 muy alta.
-- Impacto: 1 insignificante → 5 catastrófico.
-- Clasificación usada por la consigna: Low 1-6; Medium 8-12; High 15-25.
+**Severidad = Probabilidad (1-5) × Impacto (1-5)**. Clasificación: Baja 1-6, Media 8-12, Alta 15-25.
 
 ## 3. Matriz de riesgos
 
-| ID | Descripción | Categoría | Prob. | Imp. | Severidad | Mitigación preventiva | Contingencia reactiva | Responsable |
+| ID | Riesgo | Categoría | P | I | Severidad | Mitigación | Contingencia | Responsable |
 |---|---|---|---:|---:|---|---|---|---|
-| RSK-01 | El optimizador supera 45 s con 150 pedidos/15 vehículos. | Técnica | 4 | 5 | 20 (Alta) | Benchmark temprano, perfilado y optimización incremental. | Reducir complejidad del escenario, ajustar metaheurística o usar estrategia alternativa manteniendo criterios de aceptación. | Responsable del proyecto |
-| RSK-02 | Servicio de mapas/tráfico no disponible o limitado. | Integración | 3 | 4 | 12 (Media) | Adaptador desacoplado, control de timeouts y pruebas con mocks. | Operar con datos disponibles y carga manual prevista por la consigna. | Responsable del proyecto |
-| RSK-03 | Direcciones o coordenadas insuficientes. | Datos | 4 | 4 | 16 (Alta) | Validación de coordenadas y puntos de referencia. | Solicitar corrección del pedido o usar punto de referencia válido. | Responsable del proyecto |
-| RSK-04 | Aumento de alcance durante el curso. | Gestión | 4 | 4 | 16 (Alta) | Backlog priorizado y control de cambios. | Replanificar, diferir elementos no obligatorios y preservar RF-01 a RF-07. | Responsable del proyecto |
-| RSK-05 | Vulnerabilidad crítica antes de release. | Seguridad | 3 | 5 | 15 (Alta) | Análisis estático, dependencias actualizadas y pruebas OWASP. | Bloquear release, corregir y ejecutar regresión. | Responsable del proyecto |
-| RSK-06 | Pérdida/corrupción de datos de desarrollo. | Datos | 2 | 5 | 10 (Media) | Migraciones, backups y repositorio de scripts. | Restaurar backup y reconstruir desde migraciones. | Responsable del proyecto |
-| RSK-07 | Sobrecarga por equipo unipersonal. | Recursos | 5 | 4 | 20 (Alta) | Limitar WIP y priorizar por valor/riesgo. | Reducir alcance no obligatorio y renegociar secuencia con evidencia. | Responsable del proyecto |
-| RSK-08 | Errores de integración frontend-backend. | Técnica | 3 | 3 | 9 (Media) | Contratos OpenAPI y pruebas de integración. | Congelar contrato afectado y corregir mediante prueba de regresión. | Responsable del proyecto |
-| RSK-09 | Incumplimiento de accesibilidad. | Calidad | 3 | 3 | 9 (Media) | Checklist WCAG desde componentes base. | Corregir componentes y repetir auditoría. | Responsable del proyecto |
-| RSK-10 | Estimación de costos se desvía del marco del MVP. | Financiera | 2 | 4 | 8 (Media) | Control de presupuesto y preferencia por tecnologías abiertas. | Reasignar partidas y usar reserva de contingencia. | Responsable del proyecto |
-| RSK-11 | Modelo de datos requiere cambios tardíos. | Arquitectura | 3 | 4 | 12 (Media) | Revisión de requisitos y migraciones versionadas. | Aplicar migración compatible y actualizar trazabilidad. | Responsable del proyecto |
-| RSK-12 | La solución optimizada es válida pero no mejora la línea base. | Algoritmo | 3 | 5 | 15 (Alta) | Definir baseline secuencial y métricas desde pruebas iniciales. | Ajustar función objetivo/parámetros o evaluar otra metaheurística permitida. | Responsable del proyecto |
+| RSK-01 | Optimizador supera 45 s. | Técnica | 4 | 5 | 20 (Alta) | Benchmark temprano, profiling y dataset incremental. | Ajustar metaheurística/parámetros o estrategia permitida. | Jordy Steve Chancasanampa Torres |
+| RSK-02 | API de mapas/tráfico indisponible. | Integración | 3 | 4 | 12 (Media) | Adaptador, timeout, mock y fallback. | Operar con datos disponibles/carga alternativa. | Jordy Steve Chancasanampa Torres |
+| RSK-03 | Coordenadas/direcciones insuficientes. | Datos | 4 | 4 | 16 (Alta) | Validación y puntos de referencia. | Solicitar corrección o excluir pedido de planificación. | Jordy Steve Chancasanampa Torres |
+| RSK-04 | Sobrecarga por proyecto individual. | Gestión | 5 | 4 | 20 (Alta) | Limitar WIP y capacidad por Sprint. | Diferir alcance no obligatorio conservando RF-01..07. | Jordy Steve Chancasanampa Torres |
+| RSK-05 | Vulnerabilidad crítica. | Seguridad | 3 | 5 | 15 (Alta) | SAST, OWASP y dependencias controladas. | Bloquear release, corregir y regresión. | Jordy Steve Chancasanampa Torres |
+| RSK-06 | Flutter no aceptado frente a RES-06. | Académica/Técnica | 3 | 5 | 15 (Alta) | Justificación documentada y validación docente. | Ajustar cliente tecnológico si fuera requisito obligatorio. | Jordy Steve Chancasanampa Torres |
+| RSK-07 | Mockups Figma no cubren ambos canales. | UX | 3 | 3 | 9 (Media) | Checklist de pantallas Web/móvil. | Refinar prototipos antes de continuar UI. | Jordy Steve Chancasanampa Torres |
+| RSK-08 | Datos o migraciones inconsistentes. | BD | 2 | 5 | 10 (Media) | Migraciones versionadas y backups. | Restaurar y corregir migración. | Jordy Steve Chancasanampa Torres |
+| RSK-09 | Móvil expone datos fuera de la ruta asignada. | Seguridad | 3 | 5 | 15 (Alta) | Autorización server-side por recurso. | Revocar acceso, corregir y auditar. | Jordy Steve Chancasanampa Torres |
+| RSK-10 | Sprint con >30% no terminado. | Planificación | 3 | 4 | 12 (Media) | Refinement y capacidad basada en velocidad. | Replanificar y reducir WIP. | Jordy Steve Chancasanampa Torres |
 
-## 4. Priorización
+> **Cómo leer esta tabla:** P e I cuantifican exposición. Los riesgos altos deben influir en prioridad de backlog y en el Sprint donde se ejecuta la mitigación.
 
-### Riesgos altos
-RSK-01, RSK-03, RSK-04, RSK-05, RSK-07 y RSK-12.
+## 4. Mapa de severidad
 
-### Riesgos medios
-RSK-02, RSK-06, RSK-08, RSK-09, RSK-10 y RSK-11.
+```mermaid
+flowchart TB
+    H[Severidad Alta 15-25] --> H1[RSK-01 Rendimiento]
+    H --> H2[RSK-03 Datos]
+    H --> H3[RSK-04 Capacidad individual]
+    H --> H4[RSK-05 Seguridad]
+    H --> H5[RSK-06 Aceptación de Flutter]
+    H --> H6[RSK-09 Autorización móvil]
+    M[Severidad Media 8-12] --> M1[RSK-02 API externa]
+    M --> M2[RSK-07 Figma]
+    M --> M3[RSK-08 Migraciones]
+    M --> M4[RSK-10 Desviación del Sprint]
+```
 
-## 5. Disparadores de seguimiento
+> **Interpretación del gráfico:** los riesgos de rendimiento, seguridad, tecnología y capacidad del equipo requieren atención temprana porque podrían impedir la entrega del MVP.
 
-- Benchmark > 80% del límite de 45 s.
-- Error de API externa repetido.
-- Más de una historia bloqueada por dependencia.
-- Vulnerabilidad alta/crítica.
-- Cambio de requisito obligatorio.
-- Desviación de presupuesto > 10%.
-- Sprint con más del 30% de SP no terminados.
-- Métrica de accesibilidad o disponibilidad por debajo del objetivo.
+## 5. Revisión de riesgos en Scrum
 
-## 6. Revisión
+- Refinement: revisar riesgos de historias candidatas.
+- Sprint Planning: seleccionar mitigaciones necesarias.
+- Daily/seguimiento personal: registrar impedimentos.
+- Sprint Review: verificar si algún riesgo afectó el incremento.
+- Retrospective: definir una acción de mejora.
 
-El registro se revisará durante Sprint Planning, semanalmente durante ejecución y obligatoriamente en Sprint Review/Retrospective cuando un riesgo se materialice o cambie de exposición.
+---
+
+[⌂ README principal](../../README.md) | [← Anterior: 02 Artefactos Jira](02%20Artefactos%20Jira%20V_1_0_0.md) | [Siguiente: 04 Presupuesto del proyecto →](04%20Presupuesto%20del%20proyecto%20V_1_0_0.md)
