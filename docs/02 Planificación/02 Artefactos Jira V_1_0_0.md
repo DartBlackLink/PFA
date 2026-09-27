@@ -298,15 +298,53 @@ gantt
 
 > **Resumen de la tabla:** separa lo que la consigna pide expresamente de gráficos que ayudan a demostrar Scrum, evitando presentar extras como requisitos obligatorios.
 
-## 10. Capturas obligatorias
+## 10. Evidencias visuales de Jira
 
-1. Roadmap del Proyecto.
-2. Backlog priorizado con Story Points y componentes.
-3. Sprint Planning & Sprint Goal del Sprint 1.
-4. Tablero Scrum con To Do, In Progress, In Review / QA y Done.
-5. Releases con `v1.0.0-MVP` y issues asociados.
+Las siguientes imágenes corresponden a las cinco evidencias solicitadas para demostrar la configuración y uso de Jira Software. Las capturas se encuentran en la carpeta `docs/02 Planificación/evidencias/` y se insertan mediante rutas relativas para que se visualicen directamente en GitHub.
 
-**Regla:** usar únicamente capturas reales, recortadas al panel de Jira. No colocar escritorio, barra de tareas, pestañas u otro contenido ajeno.
+> **Importante:** las capturas deben mantenerse recortadas únicamente al panel de Jira que se desea demostrar, sin escritorio, barra de tareas, pestañas del navegador ni espacios sobrantes.
+
+### Evidencia 1 — Roadmap del proyecto
+
+![Evidencia 1 - Roadmap del proyecto](evidencias/evidencia-01-roadmap.png)
+
+> **Descripción de la imagen:** La captura muestra el Roadmap o Timeline del proyecto en Jira, donde se observa la distribución temporal de las épicas y su relación con la planificación general del proyecto. Esta evidencia permite comprobar que los grandes bloques funcionales fueron organizados en una línea de tiempo coherente con los Sprints definidos.
+
+### Evidencia 2 — Backlog priorizado
+
+![Evidencia 2 - Backlog priorizado](evidencias/evidencia-02-backlog.png)
+
+> **Descripción de la imagen:** La captura presenta el Product Backlog priorizado en Jira. Se utiliza para evidenciar que las Historias de Usuario y tareas técnicas se encuentran ordenadas, estimadas con Story Points y preparadas para ser asignadas a los diferentes Sprints según su valor, dependencia y prioridad.
+
+### Evidencia 3 — Sprint Planning y Sprint Goal del Sprint 1
+
+![Evidencia 3 - Sprint 1](evidencias/evidencia-03-sprint1.png)
+
+> **Descripción de la imagen:** La captura muestra la planificación del Sprint 1, incluyendo los elementos seleccionados para el Sprint y su objetivo o Sprint Goal. Esta evidencia permite verificar qué trabajo fue comprometido para iniciar el desarrollo de la base técnica del proyecto y cuál es el resultado esperado al finalizar el Sprint.
+
+### Evidencia 4 — Tablero Scrum activo
+
+![Evidencia 4 - Tablero Scrum](evidencias/evidencia-04-tablero.png)
+
+> **Descripción de la imagen:** La captura muestra el tablero Scrum utilizado para controlar el avance del Sprint. Las tarjetas se distribuyen entre las columnas `To Do`, `In Progress`, `In Review / QA` y `Done`, permitiendo visualizar el estado real del trabajo y detectar actividades pendientes, en desarrollo, en validación o terminadas.
+
+### Evidencia 5 — Release del MVP
+
+![Evidencia 5 - Release](evidencias/evidencia-05-release.png)
+
+> **Descripción de la imagen:** La captura evidencia la gestión de la versión o Release del proyecto en Jira. Debe permitir identificar la versión `v1.0.0-MVP` y los issues asociados a ella, demostrando que las funcionalidades planificadas se agrupan dentro de una versión formal del producto.
+
+### Resumen de evidencias
+
+| N.° | Archivo | Evidencia | Qué demuestra |
+|---:|---|---|---|
+| 1 | `evidencia-01-roadmap.png` | Roadmap | Organización temporal de las épicas. |
+| 2 | `evidencia-02-backlog.png` | Backlog | Priorización, estimación y preparación de los issues. |
+| 3 | `evidencia-03-sprint1.png` | Sprint Planning | Alcance y objetivo del Sprint 1. |
+| 4 | `evidencia-04-tablero.png` | Scrum Board | Seguimiento del flujo de trabajo durante el Sprint. |
+| 5 | `evidencia-05-release.png` | Release | Asociación de issues con la versión `v1.0.0-MVP`. |
+
+> **Resumen de la tabla:** concentra las cinco evidencias visuales exigidas para el documento y facilita verificar rápidamente qué archivo corresponde a cada aspecto de la configuración de Jira.
 
 ## 11. Product Increment, Review y Retrospective
 
