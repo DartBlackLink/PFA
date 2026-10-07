@@ -1,0 +1,53 @@
+# Secrets and machine configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.p12
+*.pfx
+local.properties
+
+# Flutter and Dart
+**/.dart_tool/
+**/.pub-cache/
+**/.pub/
+**/.flutter-plugins*
+**/build/
+**/coverage/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/flutter/ephemeral/
+*.iml
+
+# Python and common dependencies
+**/.venv/
+**/venv/
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/node_modules/
+**/vendor/
+
+# Local and generated data
+tmp/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.idea/
+*.sqlite
+*.sqlite3
+
+# Android, firmas y respaldos locales
+**/.gradle/
+**/key.properties
+*.jks
+*.keystore
+*.dump
+*.backup
+**/.idea/

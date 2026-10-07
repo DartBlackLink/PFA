@@ -1,228 +1,108 @@
 # EcoLogística Huancayo
 
-## Optimizador de Rutas Sostenibles para DistriRápido S.A.C.
-
-## 1. Información general
+Optimizador de rutas sostenibles para el caso académico DistriRápido S.A.C.
 
 | Campo | Valor |
-|---|---|
-| Integrante | **Jordy Steve Chancasanampa Torres** |
-| Modalidad | Proyecto individual |
+| --- | --- |
+| Responsable | Jordy Steve Chancasanampa Torres |
 | Curso | Taller de Proyectos 2 - Ingeniería de Sistemas e Informática |
-| Aplicación Web | **Flutter Web - Administrador** |
-| Aplicación móvil | **Flutter - Repartidor** |
-| Backend | FastAPI/Python |
-| Base de datos | PostgreSQL |
-| Mockups | Figma |
-| Gestión | Scrum + Jira |
-| Versión documental | 1.0.0 |
+| Modalidad | Individual, con adaptación Scrum documentada |
+| Versión documental | 1.1.0 - revisión 07/10/2026 |
+| Versión objetivo del producto | v1.0.0-MVP; no publicada ni certificada |
+| Stack elegido | Flutter Web/móvil, FastAPI/Python y PostgreSQL |
+| Estado | Diseño y plan S1/S2 detallados; ajustes y cierre coordinados en la guía |
 
-> **Resumen de la tabla:** resume la propuesta real. Web y móvil son aplicaciones independientes y atienden roles diferentes.
+## Alcance y fuentes de evidencia
 
-## 2. Contexto
+EcoLogística Huancayo es la propuesta del estudiante para el caso DistriRápido; evaluación en Lima (SJL, El Agustino, Santa Anita y Ate). Flutter Web ADMIN/CLIENTE, móvil REPARTIDOR, FastAPI y PostgreSQL. La documentación describe arquitectura, alcance y criterios de implementación; la [guía de ajustes y cierre](GUIA_DE_AJUSTES_Y_CIERRE.md) concentra tareas Jira, Figma, software y evidencias. No se presenta el plan como ejecución histórica.
 
-El proyecto toma como línea base la consigna **EcoLogística Lima** y conserva sus datos, RF, RNF, restricciones y metas. Por decisión del estudiante, la propuesta se denomina **EcoLogística Huancayo**. No se inventan datos locales de Huancayo para sustituir cifras del caso base.
+## Navegación documental
 
-La línea base describe más de 250 entregas diarias, 15 camionetas, 35% de costos asociados a combustible/mantenimiento, aproximadamente 3.5 t de CO₂ mensuales y 22% de entregas fuera de ventana.
+### Fase 01 - Inicio
 
-## 3. Objetivo
+| Documento | Versión |
+| --- | --- |
+| [01. Selección del enfoque del proyecto](docs/01%20Inicio/01.%20Selecci%C3%B3n%20del%20enfoque%20del%20proyecto%20V_1_1_0.md) | 1.1.0 |
+| [02. Acta de constitución](docs/01%20Inicio/02.%20Acta%20de%20constituci%C3%B3n%20V_1_1_0.md) | 1.1.0 |
+| [03. Declaración de la visión](docs/01%20Inicio/03.%20Declaraci%C3%B3n%20de%20la%20visi%C3%B3n%20V_1_1_0.md) | 1.1.0 |
+| [04. Registro de supuestos y restricciones](docs/01%20Inicio/04.%20Registro%20de%20supuestos%20y%20restricciones%20V_1_1_0.md) | 1.1.0 |
+| [05. Registro de interesados](docs/01%20Inicio/05.%20Registro%20de%20interesados%20V_1_1_0.md) | 1.1.0 |
+| [06. Requisitos funcionales](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_1_0.md) | 1.1.0 |
+| [07. Requisitos no funcionales](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_1_0.md) | 1.1.0 |
+| [08. Usuarios](docs/01%20Inicio/08.%20Usuarios%20V_1_1_0.md) | 1.1.0 |
+| [09. Reglas de negocio](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_1_0.md) | 1.1.0 |
+| [10. Stack tecnológico](docs/01%20Inicio/10.%20Stack%20tecnol%C3%B3gico%20V_1_1_0.md) | 1.1.0 |
+| [11. Base de datos](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_1_0.md) | 1.1.0 |
+| [12. Modelo C4](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_1_0.md) | 1.1.0 |
+| [13. Restricciones](docs/01%20Inicio/13.%20Restricciones%20V_1_1_0.md) | 1.1.0 |
 
-Gestionar la operación logística y optimizar rutas de última milla mediante metaheurísticas para VRPTW/Green VRP, reduciendo distancia, consumo, emisiones y penalizaciones, con visualización, operación móvil y reportes de sostenibilidad.
+### Fase 02 - Planificación
 
-## 4. Arquitectura de canales
+| Documento | Versión |
+| --- | --- |
+| [01 Transformando a ágil](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | 1.1.0 |
+| [02 Artefactos Jira](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_1_0.md) | 1.1.0 |
+| [03 Registro de riesgos](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_1_0.md) | 1.1.0 |
+| [04 Presupuesto del proyecto](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_1_0.md) | 1.1.0 |
+
+### Fase 03 - Implementación: Sprint 1 y Sprint 2
+
+Cuatro archivos independientes, versión 1.0.0, con apartados S1/S2: fechas propuestas, alcance 22/19 SP, cambios, mejoras y casos de aceptación. Se conservan los nombres exactos de ambas consignas.
+
+- [01 Informe de estado del proyecto](docs/03%20Implementaci%C3%B3n/01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md)
+- [02 Registro de Impedimentos](docs/03%20Implementaci%C3%B3n/02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+- [03 Revisión del Sprint](docs/03%20Implementaci%C3%B3n/03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
+- [04 Retrospectiva del Sprint](docs/03%20Implementaci%C3%B3n/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+
+### Registro de revisión y siguientes actividades
+
+- [Revisión documental, alcance y pendientes](REVISION_DOCUMENTAL.md).
+- [Guía: cambios en Jira, imágenes, login y cierre](GUIA_DE_AJUSTES_Y_CIERRE.md).
+
+## Diseño y gestión
+
+Figma: [archivo de diseño](https://www.figma.com/design/gRNmDQ2ZkvYdIMnVBenjwp/EcoLog%C3%ADstica-Huancayo---Mockups-PFA). Declaración de la visión conserva las imágenes locales y define campos/estados. Jira: EHAPP, IDs canónicos, flujo To Do/In Progress/In Review/Done y Fix Version v1.0.0-MVP. La guía especifica las capturas a actualizar y conserva el material histórico.
+
+## Estado observado del software
+
+La organización objetivo separa clientes Web/móvil y API. Implementación S1 define base, login y RN-023 (5 s → 10 s → 5 min); S2 define flota/repartidores válidos, UX y contrato. [La guía](GUIA_DE_AJUSTES_Y_CIERRE.md) detalla las correcciones del prototipo externo y el orden para integrar las fuentes, probar y documentar el resultado.
+
+## Arquitectura objetivo
 
 ```mermaid
 flowchart TD
-    ADMIN[Administrador] --> WEB[Flutter Web]
-    REP[Repartidor] --> MOB[Flutter móvil]
-    WEB -->|REST/JSON| API[FastAPI]
-    MOB -->|REST/JSON| API
+    A[Administrador] --> W[Cliente Web]
+    C[Cliente: RF-09] --> W
+    R[Repartidor] --> M[Cliente móvil]
+    W -->|HTTPS REST| API[FastAPI]
+    M -->|HTTPS REST| API
     API --> DB[(PostgreSQL)]
-    API --> OPT[Motor de optimización]
-    API --> MAP[Mapas/tráfico]
+    API --> OP[Worker genético]
+    OP --> DB
+    OP --> AD[Adaptador rutas y tráfico]
 ```
 
-> **Resumen del diagrama:** el administrador y el repartidor no comparten la misma interfaz. Ambos clientes dependen de una API común, que concentra reglas y seguridad.
+Dos clientes desplegables, API común, autorización por rol/propiedad y cálculo centralizado. La separación de clientes es objetivo y se verificará durante Implementación.
 
-## 5. Navegación documental - Fase 01 Inicio
+## Hoja de ruta objetivo
 
-| N.° | Documento | Enlace |
-|---:|---|---|
-| 01 | 01. Selección del enfoque del proyecto | [Abrir](docs/01%20Inicio/01.%20Selecci%C3%B3n%20del%20enfoque%20del%20proyecto%20V_1_0_0.md) |
-| 02 | 02. Acta de constitución | [Abrir](docs/01%20Inicio/02.%20Acta%20de%20constituci%C3%B3n%20V_1_0_0.md) |
-| 03 | 03. Declaración de la visión | [Abrir](docs/01%20Inicio/03.%20Declaraci%C3%B3n%20de%20la%20visi%C3%B3n%20V_1_0_0.md) |
-| 04 | 04. Registro de supuestos y restricciones | [Abrir](docs/01%20Inicio/04.%20Registro%20de%20supuestos%20y%20restricciones%20V_1_0_0.md) |
-| 05 | 05. Registro de interesados | [Abrir](docs/01%20Inicio/05.%20Registro%20de%20interesados%20V_1_0_0.md) |
-| 06 | 06. Requisitos funcionales | [Abrir](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_0_0.md) |
-| 07 | 07. Requisitos no funcionales | [Abrir](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_0_0.md) |
-| 08 | 08. Usuarios | [Abrir](docs/01%20Inicio/08.%20Usuarios%20V_1_0_0.md) |
-| 09 | 09. Reglas de negocio | [Abrir](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_0_0.md) |
-| 10 | 10. Stack tecnológico | [Abrir](docs/01%20Inicio/10.%20Stack%20tecnol%C3%B3gico%20V_1_0_0.md) |
-| 11 | 11. Base de datos | [Abrir](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_0_0.md) |
-| 12 | 12. Modelo C4 | [Abrir](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md) |
-| 13 | 13. Restricciones | [Abrir](docs/01%20Inicio/13.%20Restricciones%20V_1_0_0.md) |
+Calendario propuesto: 12/10/2026-18/01/2027, siete sprints consecutivos de dos semanas. S1: 12-26/10, 22 SP; S2: 26/10-09/11, 19 SP. Ver Artefactos Jira para el calendario completo.
 
-> **Resumen de la tabla:** todos los artefactos de Inicio son navegables desde aquí. Cada archivo también incluye enlaces de regreso, anterior y siguiente.
+Login RN-023: 3 fallos → 5 s; siguiente fallo → 10 s; siguiente y posteriores → 300 s. Bloqueo en API, contador Web/móvil, persistencia ante recarga y reinicio tras login correcto.
 
-## 6. Navegación documental - Fase 02 Planificación
+## Criterios de entrega
 
-| N.° | Documento | Enlace |
-|---:|---|---|
-| 01 | 01 Transformando a ágil | [Abrir](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md) |
-| 02 | 02 Artefactos Jira | [Abrir](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md) |
-| 03 | 03 Registro de riesgos | [Abrir](docs/02%20Planificaci%C3%B3n/03%20Registro%20de%20riesgos%20V_1_0_0.md) |
-| 04 | 04 Presupuesto del proyecto | [Abrir](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md) |
+Núcleo RF-01..RF-07 con aceptación verificable; RNF aplicables; DoD de Transformando a ágil; migraciones, OpenAPI, manuales y evidencias. Arquitectura/diseño no acreditan funcionamiento. La release del producto y las versiones documentales son independientes.
 
-> **Resumen de la tabla:** reúne los cuatro artefactos exigidos para Planificación y mantiene navegación bidireccional con el README.
+## Control de cambios
 
-## 7. Roles de aplicación
-
-| Actor | Canal | Funciones principales |
+| Versión documental | Fecha | Cambio |
 |---|---|---|
-| Administrador | Flutter Web | Flota, repartidores, clientes, pedidos, optimización, mapa global, dashboard, reportes. |
-| Repartidor | Flutter móvil | Mi ruta, pendientes, estado de entrega, alertas, incidentes. |
+| 1.0.0 | 27/09/2026 | Documentación previa en Git. |
+| 1.1.0 | 07/10/2026 | Revisión de 17 artefactos y README; requisitos/historias verificables y estado de evidencias corregido. Navegación ampliada a Implementación 1.0.0 y guía de ajustes; calendario y política RN-023 alineados. |
 
-> **Resumen de la tabla:** es la regla principal de UX y autorización del proyecto.
+No se ejecutaron commits, push, publicación ni cambios en Jira/Figma/API/BD en esta revisión. Inicio y Planificación apuntan a 1.1.0; los cuatro nuevos documentos de Implementación comienzan en 1.0.0. Son versiones documentales independientes de la release del producto.
 
-## 8. Requisitos
+## Código preparado para el repositorio
 
-- [Requisitos funcionales](docs/01%20Inicio/06.%20Requisitos%20funcionales%20V_1_0_0.md)
-- [Requisitos no funcionales](docs/01%20Inicio/07.%20Requisitos%20no%20funcionales%20V_1_0_0.md)
-- [Reglas de negocio](docs/01%20Inicio/09.%20Reglas%20de%20negocio%20V_1_0_0.md)
-- [Usuarios y RBAC](docs/01%20Inicio/08.%20Usuarios%20V_1_0_0.md)
-
-## 9. Figma
-
-Los mockups se diseñarán en **Figma**. Se deben preparar, como mínimo, pantallas de login, dashboard, flota, repartidores, pedidos, optimización/mapa, reportes, login móvil, mi ruta, detalle de entrega e incidentes.
-
-**Enlace Figma:** `PENDIENTE - insertar URL real del archivo Figma`.
-
-## 10. Scrum y Jira
-
-La ejecución usa **7 Sprints de 2 semanas**. La definición completa de Product Backlog, Sprint Goals, Story Points, Product Increment, Sprint Review, Retrospective y evidencias Jira está en:
-
-- [Transformando a ágil](docs/02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_0_0.md)
-- [Artefactos Jira](docs/02%20Planificaci%C3%B3n/02%20Artefactos%20Jira%20V_1_0_0.md)
-
-## 11. Sprints
-
-| Sprint | Semanas | Objetivo |
-|---|---:|---|
-| S1 | 1-2 | Base técnica, seguridad, BD y Figma. |
-| S2 | 3-4 | Flota y repartidores. |
-| S3 | 5-6 | Pedidos y clientes. |
-| S4 | 7-8 | Optimización base. |
-| S5 | 9-10 | Mapa Web y operación móvil. |
-| S6 | 11-12 | Reoptimización, dashboard y reportes. |
-| S7 | 13-14 | Compensación, QA, seguridad, accesibilidad y release. |
-
-> **Resumen de la tabla:** esta es la hoja de ruta Scrum que debe reflejarse en Jira. Cada Sprint tiene detalle completo en el artefacto Jira.
-
-## 12. Base de datos
-
-El modelo conceptual, lógico, físico, índices y DDL están en [11. Base de datos](docs/01%20Inicio/11.%20Base%20de%20datos%20V_1_0_0.md).
-
-## 13. Arquitectura C4
-
-Los diagramas de contexto, contenedores, componentes y flujos están en [12. Modelo C4](docs/01%20Inicio/12.%20Modelo%20C4%20V_1_0_0.md).
-
-## 14. Presupuesto
-
-El proyecto mantiene dos conceptos separados:
-
-- **Estimación profesional según la consigna.**
-- **Gasto real del estudiante**, registrado solo cuando existe desembolso verificable.
-
-Ver [04 Presupuesto del proyecto](docs/02%20Planificaci%C3%B3n/04%20Presupuesto%20del%20proyecto%20V_1_0_0.md).
-
-## 15. Flujo Arquitectónico de Optimización
-
-```mermaid
-sequenceDiagram
-    participant A as Administrador
-    participant W as Flutter Web
-    participant API as FastAPI
-    participant DB as PostgreSQL
-    participant OP as Motor de Optimización
-
-    A->>W: Solicita optimización
-    W->>API: POST /rutas/optimizar
-    API->>DB: Consulta pedidos, vehículos y repartidores
-    DB-->>API: Datos operativos válidos
-    API->>OP: Construye problema VRPTW / Green VRP
-    OP-->>API: Rutas optimizadas y métricas
-    API->>DB: Guarda rutas y resultados
-    API-->>W: Retorna planificación optimizada
-    W-->>A: Muestra mapa, rutas e indicadores
-```
-
-> **Resumen del diagrama:** este bloque reemplaza el diagrama con conflicto Git que producía `Unable to render rich display`. No contiene marcadores `<<<<<<<`, `=======` o `>>>>>>>`.
-
-## 16. Workflow Jira
-
-```mermaid
-flowchart LR
-    A[To Do] --> B[In Progress]
-    B --> C[In Review / QA]
-    C --> D[Done]
-    C -->|Falla QA| B
-```
-
-> **Resumen del diagrama:** una historia no llega a Done solo porque “funciona”; primero debe pasar revisión y QA y cumplir Definition of Done.
-
-## 17. Definition of Done
-
-- Aceptación BDD aprobada.
-- Pruebas ejecutadas.
-- Cobertura objetivo ≥80% cuando aplica.
-- Sin vulnerabilidades críticas conocidas.
-- Figma respetado si cambia interfaz.
-- RNF aplicables verificados.
-- Documentación/OpenAPI actualizada.
-- Commit/PR/evidencia vinculados a Jira.
-
-## 18. Estructura del repositorio
-
-```text
-README.md
-docs/
-  01 Inicio/
-    01. Selección del enfoque del proyecto V_1_0_0.md
-    ...
-    13. Restricciones V_1_0_0.md
-  02 Planificación/
-    01 Transformando a ágil V_1_0_0.md
-    02 Artefactos Jira V_1_0_0.md
-    03 Registro de riesgos V_1_0_0.md
-    04 Presupuesto del proyecto V_1_0_0.md
-
-# Estructura propuesta al iniciar código
-apps/
-  ecologistica_web/
-  ecologistica_mobile/
-backend/
-database/
-```
-
-> **Resumen:** la primera parte es la estructura documental actual; la segunda es propuesta de desarrollo y se crea cuando empiece la implementación.
-
-## 19. Estado actual
-
-| Elemento | Estado |
-|---|---|
-| Inicio documental | Preparado |
-| Planificación Scrum/Jira | Preparada |
-| Arquitectura | Preparada |
-| BD | Preparada |
-| Figma | Pendiente de URL y mockups reales |
-| Jira | Pendiente de parametrización/capturas reales |
-| Flutter Web | Pendiente de implementación |
-| Flutter móvil | Pendiente de implementación |
-| Backend | Pendiente de implementación |
-
-> **Resumen de la tabla:** distingue documentación terminada de evidencia o software que todavía debe construirse. No se presentan capturas ficticias como si Jira/Figma ya estuvieran configurados.
-
-## 20. Autor
-
-**Jordy Steve Chancasanampa Torres**  
-Proyecto individual — Taller de Proyectos 2 — Ingeniería de Sistemas e Informática.
+Las fuentes se encuentran en [backend](backend/README.md), [base de datos](database/README.md), [Web](apps/web/README.md) y [base móvil](apps/mobile/README.md). Consulta [Preparación para GitHub](PREPARACION_GITHUB.md) para ejecutar la copia y revisar los pendientes. El código se copió del proyecto activo sin moverlo; la APK independiente sigue pendiente.
