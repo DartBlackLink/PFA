@@ -2,7 +2,7 @@
 
 ## Arranque sin Compose
 
-Instala PostgreSQL 16 y crea una base vacía y un usuario con permisos para crear sus tablas. Desde `backend`, copia `.env.example` a `.env`, completa DATABASE_URL, SECRET_KEY y las credenciales de las cuentas. Ajusta el puerto al de tu PostgreSQL.
+Instala PostgreSQL 16 y crea una base vacía y un usuario con permisos para crear sus tablas. Desde `backend`, crea un archivo local `.env` y configura DATABASE_URL, SECRET_KEY, ADMIN_EMAIL, ADMIN_PASSWORD, DRIVER_EMAIL, DRIVER_PASSWORD y CORS_ORIGINS. DATABASE_URL debe usar el formato `postgresql+psycopg://USUARIO:CLAVE@localhost:PUERTO/BASE`; CORS_ORIGINS debe incluir `http://localhost:8081,http://127.0.0.1:8081`. Ajusta el puerto al de tu PostgreSQL.
 
 ```powershell
 python -m venv .venv
@@ -59,5 +59,6 @@ La migración 0002 añade controles sin eliminar datos históricos. Algunos CHEC
 ## Asignaciones y mapa
 
 POST /api/v1/routes/ (ADMIN): vehiculo_id, repartidor_id y pedidos (lista ordenada de 1 a 20 IDs). GET /api/v1/routes/{id} devuelve geometría vial, origen y detalles, con control de propietario. POST /orders/ admite latitud, longitud y punto_referencia. Los pedidos asignados pasan a ASIGNADO. Configuración: ROUTING_BASE_URL, por defecto proveedor OSRM de demostración. Se agregó la migración 0003_route_geometry. La suite de integración ahora contiene ocho casos; el último inicia un proveedor HTTP de prueba local en 8090, por lo que el contenedor QA debe configurarse con ROUTING_BASE_URL=http://127.0.0.1:8090/route/v1/driving para ejecutar ese caso.
+
 
 
