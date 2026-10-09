@@ -6,7 +6,7 @@ La fuente de verdad son las migraciones en `../backend/migrations/versions`. No 
 
 ## Instalación recomendada
 
-Desde la raíz del repositorio, configura `.env` y ejecuta `docker compose up -d --build`. El backend aplica `alembic upgrade head` automáticamente y crea las cuentas configuradas si no existen. La base nueva no contiene vehículos, perfiles de repartidor, pedidos ni rutas: registrarlos desde la web.
+Instala PostgreSQL 16, crea una base vacía y configura `backend/.env` con DATABASE_URL. Sigue los comandos del [backend](../backend/README.md) para instalar dependencias, ejecutar `alembic upgrade head` e iniciar la API. Al arrancar, el backend crea las cuentas configuradas si no existen. La base nueva no contiene vehículos, perfiles de repartidor, pedidos ni rutas: registrarlos desde la web.
 
 ## Alternativa con SQL
 

@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_1_0.md)
 
 # Artefactos Jira
 
@@ -171,7 +171,7 @@ Calendario propuesto para configurar Jira: inicio 12/10/2026, fin 18/01/2027, si
 
 ## Auditoría de las cinco capturas conservadas
 
-Las imágenes se actualizan conforme a la [guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md). Allí se conserva el contenido histórico y se especifica nombre, pantalla y criterio de cada captura final. Mantener los PNG actuales hasta disponer del reemplazo real; no usarlos como prueba del nuevo calendario o de tareas terminadas.
+Las imágenes se actualizan conforme a la guía de seguimiento local (fuera del repositorio). Allí se conserva el contenido histórico y se especifica nombre, pantalla y criterio de cada captura final. Mantener los PNG actuales hasta disponer del reemplazo real; no usarlos como prueba del nuevo calendario o de tareas terminadas.
 
 ## Evidencias necesarias para cerrar Planificación y seguir con Implementación
 
@@ -193,4 +193,4 @@ Campos de login en US-001/US-002 y EN-003-S1: RN-023, BDD 5/10/300 s, backend-ap
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Referencia actualizada a registros iniciales S1/S2. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
 
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_1_0.md)

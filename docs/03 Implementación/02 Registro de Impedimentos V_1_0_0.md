@@ -1,4 +1,4 @@
-[README principal](../../README.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Anterior](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) | [Siguiente](03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
+[README principal](../../README.md) | [Anterior](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) | [Siguiente](03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
 
 # Registro de Impedimentos
 
@@ -45,4 +45,4 @@ Flujo: Abierto → En curso → En verificación → Resuelto; reabrir ante fall
 | --- | --- | --- | --- |
 | 1.0.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Elaboración y refinamiento de la línea base S1/S2: fechas propuestas, entregables, criterios, mejoras y RN-023. |
 
-[README principal](../../README.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Anterior](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) | [Siguiente](03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
+[README principal](../../README.md) | [Anterior](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) | [Siguiente](03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)

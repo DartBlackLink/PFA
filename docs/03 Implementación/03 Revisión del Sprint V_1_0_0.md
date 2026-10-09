@@ -1,4 +1,4 @@
-[README principal](../../README.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Anterior](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) | [Siguiente](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+[README principal](../../README.md) | [Anterior](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) | [Siguiente](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
 # Revisión del Sprint
 
@@ -87,4 +87,4 @@ Al ejecutar cada Review: registrar fecha/hora, versión de código, entorno, asi
 | --- | --- | --- | --- |
 | 1.0.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Elaboración y refinamiento de la línea base S1/S2: fechas propuestas, entregables, criterios, mejoras y RN-023. |
 
-[README principal](../../README.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Anterior](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) | [Siguiente](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+[README principal](../../README.md) | [Anterior](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) | [Siguiente](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)

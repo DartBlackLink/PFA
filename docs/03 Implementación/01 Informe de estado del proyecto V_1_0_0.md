@@ -1,4 +1,4 @@
-[README principal](../../README.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Siguiente](02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+[README principal](../../README.md) | [Siguiente](02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
 
 # Informe de estado del proyecto
 
@@ -95,4 +95,4 @@ No mostrar métricas de demostración como resultados de operación. El registro
 | --- | --- | --- | --- |
 | 1.0.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Elaboración y refinamiento de la línea base S1/S2: fechas propuestas, entregables, criterios, mejoras y RN-023. |
 
-[README principal](../../README.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Siguiente](02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+[README principal](../../README.md) | [Siguiente](02%20Registro%20de%20Impedimentos%20V_1_0_0.md)

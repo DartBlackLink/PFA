@@ -14,7 +14,7 @@ Optimizador de rutas sostenibles para el caso académico DistriRápido S.A.C.
 
 ## Alcance y fuentes de evidencia
 
-EcoLogística Huancayo es la propuesta del estudiante para el caso DistriRápido; evaluación en Lima (SJL, El Agustino, Santa Anita y Ate). Flutter Web ADMIN/CLIENTE, móvil REPARTIDOR, FastAPI y PostgreSQL. La documentación describe arquitectura, alcance y criterios de implementación; la [guía de ajustes y cierre](GUIA_DE_AJUSTES_Y_CIERRE.md) concentra tareas Jira, Figma, software y evidencias. No se presenta el plan como ejecución histórica.
+EcoLogística Huancayo es la propuesta del estudiante para el caso DistriRápido; evaluación en Lima (SJL, El Agustino, Santa Anita y Ate). Flutter Web ADMIN/CLIENTE, móvil REPARTIDOR, FastAPI y PostgreSQL. La documentación describe arquitectura, alcance y criterios de implementación; la guía de seguimiento local (fuera del repositorio) concentra tareas Jira, Figma, software y evidencias. No se presenta el plan como ejecución histórica.
 
 ## Navegación documental
 
@@ -54,10 +54,6 @@ Cuatro archivos independientes, versión 1.0.0, con apartados S1/S2: fechas prop
 - [03 Revisión del Sprint](docs/03%20Implementaci%C3%B3n/03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
 - [04 Retrospectiva del Sprint](docs/03%20Implementaci%C3%B3n/04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
-### Registro de revisión y siguientes actividades
-
-- [Revisión documental, alcance y pendientes](REVISION_DOCUMENTAL.md).
-- [Guía: cambios en Jira, imágenes, login y cierre](GUIA_DE_AJUSTES_Y_CIERRE.md).
 
 ## Diseño y gestión
 
@@ -65,7 +61,7 @@ Figma: [archivo de diseño](https://www.figma.com/design/gRNmDQ2ZkvYdIMnVBenjwp/
 
 ## Estado observado del software
 
-La organización objetivo separa clientes Web/móvil y API. Implementación S1 define base, login y RN-023 (5 s → 10 s → 5 min); S2 define flota/repartidores válidos, UX y contrato. [La guía](GUIA_DE_AJUSTES_Y_CIERRE.md) detalla las correcciones del prototipo externo y el orden para integrar las fuentes, probar y documentar el resultado.
+La organización objetivo separa clientes Web/móvil y API. Implementación S1 define base, login y RN-023 (5 s → 10 s → 5 min); S2 define flota/repartidores válidos, UX y contrato. guía de seguimiento local (fuera del repositorio) detalla las correcciones del prototipo externo y el orden para integrar las fuentes, probar y documentar el resultado.
 
 ## Arquitectura objetivo
 
@@ -105,4 +101,4 @@ No se ejecutaron commits, push, publicación ni cambios en Jira/Figma/API/BD en 
 
 ## Código preparado para el repositorio
 
-Las fuentes se encuentran en [backend](backend/README.md), [base de datos](database/README.md), [Web](apps/web/README.md) y [base móvil](apps/mobile/README.md). Consulta [Preparación para GitHub](PREPARACION_GITHUB.md) para ejecutar la copia y revisar los pendientes. El código se copió del proyecto activo sin moverlo; la APK independiente sigue pendiente.
+Las fuentes se encuentran en [backend](backend/README.md), [base de datos](database/README.md), [Web](apps/web/README.md) y [base móvil](apps/mobile/README.md). El código se copió del proyecto activo sin moverlo; la APK independiente sigue pendiente.

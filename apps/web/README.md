@@ -14,4 +14,4 @@ flutter run -d chrome --web-port 8081
 flutter build web
 ```
 
-Primero iniciar el backend desde la raíz del repositorio. Las credenciales son las configuradas en su `.env`. La API se configura en este `.env` del cliente; solo contiene la URL pública, nunca claves del servidor. No subir compilaciones ni archivos `.env`.
+Primero iniciar el backend siguiendo `../../backend/README.md`. Las credenciales son las configuradas en `backend/.env`. La API se configura en este `.env` del cliente; solo contiene la URL pública, nunca claves del servidor. No subir compilaciones ni archivos `.env`.

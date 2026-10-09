@@ -1,6 +1,17 @@
 # API EcoLogística
 
-Arranque desde la raíz: `docker compose up -d --build`. Swagger: http://localhost:8001/docs. PostgreSQL se administra con Alembic; `migrations/env.py` obtiene la conexión de la configuración del servicio.
+## Arranque sin Compose
+
+Instala PostgreSQL 16 y crea una base vacía y un usuario con permisos para crear sus tablas. Desde `backend`, copia `.env.example` a `.env`, completa DATABASE_URL, SECRET_KEY y las credenciales de las cuentas. Ajusta el puerto al de tu PostgreSQL.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\alembic.exe upgrade head
+.\.venv\Scripts\uvicorn.exe app.main:app --host 127.0.0.1 --port 8001
+```
+
+Swagger: http://localhost:8001/docs. Alembic obtiene la conexión desde `.env`. El archivo Compose se conserva únicamente como herramienta local y no se distribuye en el repositorio.
 
 ## Contrato disponible
 
@@ -23,7 +34,7 @@ El control de acceso guarda una clave HMAC por correo normalizado, intentos y ve
 
 ## Pruebas aisladas
 
-Con PostgreSQL principal encendido, crea exclusivamente esta base temporal y un contenedor de pruebas:
+El siguiente procedimiento de pruebas usa el entorno Docker local existente (contenedor PostgreSQL `pfa-postgres-1` y red `pfa_default`); esos recursos no se crean al clonar el repositorio. Con ese entorno encendido, crea exclusivamente esta base temporal y un contenedor de pruebas:
 
 ```powershell
 docker exec pfa-postgres-1 createdb -U ecologistica ecologistica_revision_20261007

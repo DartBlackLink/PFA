@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_1_0.md)
 
 # Transformando a ágil
 
@@ -552,4 +552,4 @@ Review: mostrar incremento integrado, separar completado y pendiente y registrar
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
 
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_1_0.md)

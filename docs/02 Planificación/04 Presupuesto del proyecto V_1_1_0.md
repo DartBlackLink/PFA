@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_1_0.md)
 
 # Presupuesto del proyecto
 
@@ -75,4 +75,4 @@ Uso ligado a riesgo identificado, importe solicitado, decisión y saldo. No tran
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
 
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_1_0.md)

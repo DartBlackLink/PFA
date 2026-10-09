@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [← Anterior](02%20Artefactos%20Jira%20V_1_1_0.md) | [Siguiente →](04%20Presupuesto%20del%20proyecto%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](02%20Artefactos%20Jira%20V_1_1_0.md) | [Siguiente →](04%20Presupuesto%20del%20proyecto%20V_1_1_0.md)
 
 # Registro de riesgos
 
@@ -47,4 +47,4 @@ Bloqueo solo visual o contador perdido al recargar permitiría evadir RN-023. Mi
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
 
-[⌂ README principal](../../README.md) | [Registro de revisión](../../REVISION_DOCUMENTAL.md) | [Guía de ajustes](../../GUIA_DE_AJUSTES_Y_CIERRE.md) | [← Anterior](02%20Artefactos%20Jira%20V_1_1_0.md) | [Siguiente →](04%20Presupuesto%20del%20proyecto%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](02%20Artefactos%20Jira%20V_1_1_0.md) | [Siguiente →](04%20Presupuesto%20del%20proyecto%20V_1_1_0.md)
