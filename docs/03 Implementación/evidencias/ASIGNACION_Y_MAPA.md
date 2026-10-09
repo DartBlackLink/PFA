@@ -14,7 +14,7 @@ El punto azul identifica la partida; los marcadores numerados identifican las en
 
 Se añadió un ejemplo persistente etiquetado como demostración, sin reemplazar los registros anteriores: cuenta repartidor@ecologistica.com vinculada a Repartidor de demostración; vehículo DEMO-001; pedido Entrega de demostración. DNI 00000001, licencia DEMO-001 y teléfono 000000000 son valores ficticios de prueba y deben sustituirse por información real al operar. El origen/destino son coordenadas de ejemplo en Huancayo. No es una entrega real.
 
-Ruta de prueba: 2.709 km, 5.52 minutos estimados y un pedido. El proveedor vial devolvió 57 puntos de geometría. Las dos cuentas existentes conservan sus contraseñas locales. Este ejemplo permite comprobar la vista del repartidor; la APK independiente aún está pendiente.
+Ruta de prueba: 2.709 km, 5.52 minutos estimados y un pedido. El proveedor vial devolvió 57 puntos de geometría. Las dos cuentas existentes conservan sus contraseñas locales. Este ejemplo permite comprobar la vista Web del repartidor.
 
 ## Verificación
 
@@ -22,10 +22,10 @@ Ruta de prueba: 2.709 km, 5.52 minutos estimados y un pedido. El proveedor vial 
 
 La migración 0003 agrega origen y geometría a ruta, más un índice; no elimina registros. Respaldo previo: C:\Users\jordy\OneDrive\Documentos\ChatGPT\Ecologistica\tmp\rutas\respaldo\ecologistica_antes_rutas.dump.
 
-## Límites actuales
+## Condiciones del recorrido verificado
 
-Asignación manual: no ejecuta todavía el algoritmo genético ni optimiza el orden de las entregas. La validación incluye recursos activos, coordenadas, estado y capacidad; aún faltan validación automática del calendario/disponibilidad, conflictos entre rutas, ETA por entrega, edición/reasignación/cancelación y seguimiento de entrega/incidencias. Los pedidos antiguos sin coordenadas no se pueden asignar hasta completarlos; el formulario actual permite crear pedidos completos. No se geocodifica automáticamente la dirección: verifica las coordenadas al ingresar el destino.
+La asignación es manual y el orden de selección determina las paradas. Se validan recursos activos, coordenadas, estado del pedido y capacidad por peso. El mapa muestra el recorrido planificado; actualizar consulta el registro guardado. La dirección y las coordenadas se ingresan explícitamente y deben corresponder al mismo destino.
 
-El recorrido es planificado: no rastrea la ubicación del repartidor en tiempo real. El mapa base requiere internet; si el proveedor vial no responde, se devuelve un error controlado sin guardar una asignación parcial. El servicio público de demostración de OSRM y las teselas OSM son adecuados para probar esta integración local; configura infraestructura/proveedores apropiados antes de una publicación con mayor carga.
+El cálculo de recorrido y el mapa base requieren conexión. Ante un fallo del proveedor, la API devuelve 503 sin confirmar la asignación. Distancia y duración son estimaciones del trazado vial. La prueba real usa un ejemplo sintético; los ensayos de concurrencia/error usan un proveedor HTTP simulado en una base aislada.
 
 Referencia del contrato de recorrido: https://project-osrm.org/docs/v26.4.0/http. Política y atribución del mapa: https://operations.osmfoundation.org/policies/tiles/.

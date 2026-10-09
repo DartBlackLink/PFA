@@ -150,7 +150,19 @@ class PedidoRead(BaseModel):
     estado: str
     model_config = ConfigDict(from_attributes=True)
 
-class RutaCreate(BaseModel):
+class RutaHorario(BaseModel):
+    inicio_planificado: datetime
+    servicio_min_por_entrega: int = Field(default=5, ge=0, le=120)
+
+    @field_validator("inicio_planificado")
+    @classmethod
+    def zona_obligatoria(cls, value):
+        if value.tzinfo is None or value.utcoffset() is None:
+            raise ValueError("Indica fecha y hora con zona horaria")
+        return value
+
+
+class RutaCreate(RutaHorario):
     vehiculo_id: uuid.UUID
     repartidor_id: uuid.UUID
     pedidos: list[uuid.UUID] = Field(min_length=1,max_length=20)
@@ -162,6 +174,9 @@ class RutaCreate(BaseModel):
         return value
 
 class RutaRead(BaseModel):
+    inicio_planificado: datetime | None = None
+    fin_planificado: datetime | None = None
+    servicio_min_por_entrega: int | None = None
     ruta_id: uuid.UUID
     vehiculo_id: uuid.UUID
     repartidor_id: uuid.UUID

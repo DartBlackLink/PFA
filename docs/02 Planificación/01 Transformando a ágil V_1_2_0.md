@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_2_0.md)
 
 # Transformando a ágil
 
@@ -7,15 +7,15 @@
 | Proyecto | EcoLogística Huancayo - DistriRápido S.A.C. |
 | Responsable | Jordy Steve Chancasanampa Torres |
 | Modalidad | Individual; responsabilidades Scrum adaptadas |
-| Fecha de revisión | 07/10/2026 |
-| Versión documental | 1.1.0 |
+| Fecha de revisión | 09/10/2026 |
+| Versión documental | 1.2.0 |
 | Estado | Especificación y plan de trabajo; validación según criterios de aceptación |
 
 ## Alcance y fuentes de evidencia
 
 EcoLogística Huancayo es la propuesta del estudiante; el escenario de evaluación sigue siendo Lima (San Juan de Lurigancho, El Agustino, Santa Anita y Ate), con RF-01 a RF-10, RNF-01 a RNF-07 y RES-01 a RES-12. Los mapas de Huancayo son una demo adicional.
 
-Arquitectura objetivo: Web ADMIN con preferencias CLIENTE (RF-09), móvil REPARTIDOR, FastAPI y PostgreSQL. Este documento define el diseño y sus criterios de validación. Las acciones de implementación, Jira, Figma y evidencias se coordinan en la guía de ajustes.
+Arquitectura objetivo: Web ADMIN con preferencias CLIENTE (RF-09), móvil REPARTIDOR, FastAPI y PostgreSQL. Este documento define el diseño y sus criterios de validación. La trazabilidad del incremento se registra en los cuatro documentos de Implementación y sus evidencias.
 
 ## Responsabilidades y cadencia
 
@@ -36,7 +36,7 @@ Jordy asume planificación de producto, facilitación y desarrollo en una adapta
 | ID | Historia | Épica | RF/RNF | Sprint objetivo | SP |
 | --- | --- | --- | --- | --- | --- |
 | US-001 | Autenticación administrador | EP-01 | Transversal / RNF-02 | S1 | 3 |
-| US-002 | Autenticación repartidor | EP-01 | Transversal / RNF-02 | S1 | 3 |
+| US-002 | Autenticación repartidor móvil | EP-01 | Transversal / RNF-02 | S3 | 3 |
 | US-003 | Gestionar flota | EP-02 | RF-01 | S2 | 5 |
 | US-004 | Gestionar repartidores | EP-02 | RF-08 | S2 | 5 |
 | US-005 | Gestionar pedidos | EP-03 | RF-02 | S3 | 8 |
@@ -86,7 +86,7 @@ Como **Administrador**, quiero **iniciar sesión en Web y cerrar mi sesión**, p
 
 ### US-002 - Autenticación repartidor
 
-**Épica:** EP-01. **Requisito:** Transversal / RNF-02. **Sprint objetivo:** S1. **Estimación:** 3 SP. **Estado de planificación:** To Do; cierre conforme a BDD y DoD.
+**Épica:** EP-01. **Requisito:** Transversal / RNF-02. **Sprint objetivo:** S3. **Estimación:** 3 SP. **Estado de planificación:** To Do; cierre conforme a BDD y DoD.
 
 Como **Repartidor**, quiero **iniciar sesión desde el cliente móvil**, para **acceder a mi operación asignada**.
 
@@ -115,6 +115,8 @@ Como **Repartidor**, quiero **iniciar sesión desde el cliente móvil**, para **
 - **Entonces** no evita ni extiende el bloqueo; el éxito reinicia contador y plazo, y el siguiente fallo cuenta como primero.
 
 **Dependencias y evidencia:** datos del RF, autenticación, modelo/contrato y mockup del canal. Adjuntar caso de prueba, resultado y commit; en historias de cálculo, dataset/semilla. En US-006 incluir además el registro asistido de RF-09.
+
+**Replanificación del 09/10/2026:** por decisión de Jordy, la ejecución y aceptación en APK se realizan en S3. La base API/Web y RN-023 permanecen como avance técnico de S1, dentro de sus enablers; los 3 SP de US-002 se contabilizan únicamente en S3.
 
 ### US-003 - Gestionar flota
 
@@ -551,5 +553,6 @@ Review: mostrar incremento integrado, separar completado y pendiente y registrar
 |---|---|---|---|
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
+| 1.2.0 | 09/10/2026 | Jordy Steve Chancasanampa Torres | Coherencia con el incremento comprobado, navegación y expediente S1/S2. |
 
-[⌂ README principal](../../README.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [Siguiente →](02%20Artefactos%20Jira%20V_1_2_0.md)

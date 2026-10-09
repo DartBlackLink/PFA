@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/api_client.dart';
+import '../../../core/widgets/record_widgets.dart';
 import '../../auth/presentation/providers/auth_provider.dart';
 
 class RouteDetailScreen extends StatefulWidget {
@@ -17,6 +19,16 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
   Map<String, dynamic>? _route;
   String? _error;
   final _map = MapController();
+  bool _tileError = false;
+  int _mapRevision = 0;
+  NetworkTileProvider _tileProvider = NetworkTileProvider(
+    httpClient: _TileHttpClient(),
+  );
+  void _retryMap() => setState(() {
+    _tileError = false;
+    _mapRevision++;
+    _tileProvider = NetworkTileProvider(httpClient: _TileHttpClient());
+  });
   @override
   void initState() {
     super.initState();
@@ -123,14 +135,37 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 8),
-        Text(
-          '${r['estado']} · ${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min estimados',
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            StatusBadge('${r['estado']}'),
+            Chip(
+              avatar: const Icon(Icons.route_outlined),
+              label: Text('${r['distancia_km'] ?? '—'} km'),
+            ),
+            Chip(
+              avatar: const Icon(Icons.schedule_outlined),
+              label: Text('${r['tiempo_min'] ?? '—'} min estimados'),
+            ),
+            Chip(
+              avatar: const Icon(Icons.inventory_2_outlined),
+              label: Text('${stops.length} entregas'),
+            ),
+          ],
         ),
         const SizedBox(height: 8),
         Text(
           origin == null
               ? 'Este registro antiguo no tiene origen guardado.'
               : 'Partida: ${origin.latitude}, ${origin.longitude}',
+        ),
+        const SizedBox(height: 12),
+        Text(
+          r['inicio_planificado'] == null
+              ? 'Horario por registrar por administración.'
+              : 'Salida: ${friendlyDate(r['inicio_planificado'])}\nFin estimado: ${friendlyDate(r['fin_planificado'])}\nAtención: ${r['servicio_min_por_entrega']} min por entrega',
         ),
         const SizedBox(height: 16),
         if (mapPoints.length >= 2)
@@ -142,6 +177,10 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                 key: ValueKey(widget.routeId),
                 mapController: _map,
                 options: MapOptions(
+                  interactionOptions: const InteractionOptions(
+                    flags:
+                        InteractiveFlag.all & ~InteractiveFlag.scrollWheelZoom,
+                  ),
                   initialCameraFit: CameraFit.bounds(
                     bounds: LatLngBounds.fromPoints(mapPoints),
                     padding: const EdgeInsets.all(48),
@@ -155,6 +194,13 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                 ),
                 children: [
                   TileLayer(
+                    key: ValueKey(_mapRevision),
+                    tileProvider: _tileProvider,
+                    errorTileCallback: (tile, error, stack) {
+                      if (mounted && !_tileError) {
+                        setState(() => _tileError = true);
+                      }
+                    },
                     urlTemplate:
                         'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                     userAgentPackageName: 'com.ecologistica.web',
@@ -170,10 +216,74 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                       ],
                     ),
                   MarkerLayer(markers: markers),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              tooltip: 'Acercar mapa',
+                              onPressed: () => _map.move(
+                                _map.camera.center,
+                                (_map.camera.zoom + 1).clamp(2, 19).toDouble(),
+                              ),
+                              icon: const Icon(Icons.add),
+                            ),
+                            IconButton(
+                              tooltip: 'Alejar mapa',
+                              onPressed: () => _map.move(
+                                _map.camera.center,
+                                (_map.camera.zoom - 1).clamp(2, 19).toDouble(),
+                              ),
+                              icon: const Icon(Icons.remove),
+                            ),
+                            IconButton(
+                              tooltip: 'Centrar recorrido',
+                              onPressed: () => _map.fitCamera(
+                                CameraFit.bounds(
+                                  bounds: LatLngBounds.fromPoints(mapPoints),
+                                  padding: const EdgeInsets.all(48),
+                                ),
+                              ),
+                              icon: const Icon(Icons.center_focus_strong),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   const SimpleAttributionWidget(
-                    source: Text('OpenStreetMap contributors'),
+                    source: Text(
+                      'OpenStreetMap contributors',
+                      style: TextStyle(color: Color(0xFF1B2B3B)),
+                    ),
                   ),
                 ],
+              ),
+            ),
+          ),
+        if (_tileError)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'No se pudo cargar el fondo de calles. El recorrido y las entregas siguen disponibles.',
+                    ),
+                    TextButton.icon(
+                      onPressed: _retryMap,
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Reintentar mapa'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -214,7 +324,7 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '${s['direccion']}\nReferencia: ${s['punto_referencia'] ?? 'Sin referencia'}\n${s['peso_kg']} kg · ${s['tipo_producto']} · ${s['prioridad']}\nEstado: ${s['estado_entrega']}\nVentana: ${s['ventana_inicio']} → ${s['ventana_fin']}',
+                      '${s['direccion']}\nReferencia: ${s['punto_referencia'] ?? 'Sin referencia'}\n${s['peso_kg']} kg · ${s['tipo_producto']} · ${s['prioridad']}\nEstado: ${s['estado_entrega']}\nVentana: ${friendlyDate(s['ventana_inicio'])} → ${friendlyDate(s['ventana_fin'])}',
                     ),
                   ],
                 ),
@@ -223,5 +333,18 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
           ),
       ],
     );
+  }
+}
+
+/// Evita dejar solicitudes del mapa pendientes indefinidamente.
+class _TileHttpClient extends http.BaseClient {
+  final http.Client _client = http.Client();
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) =>
+      _client.send(request).timeout(const Duration(seconds: 12));
+  @override
+  void close() {
+    _client.close();
+    super.close();
   }
 }

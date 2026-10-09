@@ -5,11 +5,11 @@ Copia del cliente Flutter actual, con destino Web: login por rol, administració
 Desde esta carpeta:
 
 ```powershell
-Set-Content -Path .env -Value 'API_BASE_URL=http://127.0.0.1:8001/api/v1'
+Set-Content -Path .env -Value 'API_BASE_URL=http://127.0.0.1:8000/api/v1'
 flutter pub get
 flutter analyze
 flutter test
-flutter run -d chrome --web-port 8081
+flutter run -d chrome --web-port 8080
 # Distribución web:
 flutter build web
 ```

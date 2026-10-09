@@ -1,5 +1,8 @@
 // Archivo: lib/features/flota/presentation/widgets/modal_formulario_vehiculo.dart
 import 'package:flutter/material.dart';
+
+import '../../../core/widgets/record_widgets.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../data/models/vehiculo_model.dart';
@@ -68,7 +71,7 @@ class _ModalFormularioVehiculoState extends State<ModalFormularioVehiculo> {
   }
 
   String? _numero(String? value, {required bool positivo}) {
-    final n = double.tryParse(value ?? '');
+    final n = double.tryParse((value ?? '').trim().replaceAll(',', '.'));
     if (n == null || !n.isFinite) return 'Ingresa un número válido';
     return positivo
         ? (n > 0 ? null : 'Debe ser mayor que cero')
@@ -84,9 +87,12 @@ class _ModalFormularioVehiculoState extends State<ModalFormularioVehiculo> {
       vehiculoId: widget.vehiculoExistente?.vehiculoId,
       placa: _placaCtrl.text.trim().toUpperCase(),
       tipo: _tipoCtrl.text.trim(),
-      capacidadKg: double.tryParse(_capacidadCtrl.text) ?? 0,
-      consumoKmL: double.tryParse(_consumoCtrl.text) ?? 0,
-      factorEmisionKgKm: double.tryParse(_emisionCtrl.text) ?? 0,
+      capacidadKg:
+          double.tryParse(_capacidadCtrl.text.trim().replaceAll(',', '.')) ?? 0,
+      consumoKmL:
+          double.tryParse(_consumoCtrl.text.trim().replaceAll(',', '.')) ?? 0,
+      factorEmisionKgKm:
+          double.tryParse(_emisionCtrl.text.trim().replaceAll(',', '.')) ?? 0,
       anioFabricacion: int.tryParse(_anioCtrl.text) ?? 2020,
       estado: _estado,
     );
@@ -112,22 +118,40 @@ class _ModalFormularioVehiculoState extends State<ModalFormularioVehiculo> {
     }
   }
 
+  Widget _responsivePair(BuildContext context, List<Widget> children) {
+    if (MediaQuery.sizeOf(context).width >= 600) return Row(children: children);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        for (final child in children)
+          if (child is Expanded) child.child else const SizedBox(height: 16),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final estaCargando = context.watch<FlotaProvider>().estaCargando;
 
     return AlertDialog(
-      title: Text(
+      title: FormHeading(
         widget.vehiculoExistente == null ? 'Nuevo Vehículo' : 'Editar Vehículo',
+        'Configura su capacidad y disponibilidad para asignar entregas.',
+        Icons.local_shipping_outlined,
       ),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       content: SizedBox(
-        width: 400,
+        width: 520,
         child: Form(
           key: _llaveFormulario,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: FormSection('Identificación del vehículo'),
+                ),
                 TextFormField(
                   controller: _placaCtrl,
                   decoration: const InputDecoration(
@@ -147,71 +171,78 @@ class _ModalFormularioVehiculoState extends State<ModalFormularioVehiculo> {
                     border: OutlineInputBorder(),
                   ),
                   validator: (v) =>
-                      (v?.trim().length ?? 0) >= 2 ? null : 'Indica el tipo',
+                      (v?.trim().length ?? 0) >= 2 &&
+                          (v?.trim().length ?? 0) <= 30
+                      ? null
+                      : 'Usa entre 2 y 30 caracteres',
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _capacidadCtrl,
-                        decoration: const InputDecoration(
-                          labelText: 'Capacidad (kg)',
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                        validator: (v) => _numero(v, positivo: true),
+                _responsivePair(context, [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _capacidadCtrl,
+                      decoration: const InputDecoration(
+                        labelText: 'Capacidad (kg)',
+                        border: OutlineInputBorder(),
                       ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextFormField(
-                        controller: _anioCtrl,
-                        decoration: const InputDecoration(
-                          labelText: 'Año Fabricación',
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                        validator: (v) {
-                          final n = int.tryParse(v ?? '');
-                          return n != null &&
-                                  n >= 1950 &&
-                                  n <= DateTime.now().year + 1
-                              ? null
-                              : 'Año inválido';
-                        },
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
                       ),
+                      validator: (v) => _numero(v, positivo: true),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _anioCtrl,
+                      decoration: const InputDecoration(
+                        labelText: 'Año Fabricación',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      validator: (v) {
+                        final n = int.tryParse(v ?? '');
+                        return n != null &&
+                                n >= 1950 &&
+                                n <= DateTime.now().year + 1
+                            ? null
+                            : 'Año inválido';
+                      },
+                    ),
+                  ),
+                ]),
                 const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _consumoCtrl,
-                        decoration: const InputDecoration(
-                          labelText: 'Consumo (km/L)',
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                        validator: (v) => _numero(v, positivo: true),
+                _responsivePair(context, [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _consumoCtrl,
+                      decoration: const InputDecoration(
+                        labelText: 'Consumo (km/L)',
+                        border: OutlineInputBorder(),
                       ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextFormField(
-                        controller: _emisionCtrl,
-                        decoration: const InputDecoration(
-                          labelText: 'Factor CO2 (kg/km)',
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                        validator: (v) => _numero(v, positivo: false),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
                       ),
+                      validator: (v) => _numero(v, positivo: true),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _emisionCtrl,
+                      decoration: const InputDecoration(
+                        labelText: 'Factor CO2 (kg/km)',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      validator: (v) => _numero(v, positivo: false),
+                    ),
+                  ),
+                ]),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   isExpanded: true,
@@ -251,14 +282,10 @@ class _ModalFormularioVehiculoState extends State<ModalFormularioVehiculo> {
                     ),
                   );
                 },
-          child: const Text('Cancelar', style: TextStyle(color: Colors.grey)),
+          child: const Text('Cancelar'),
         ),
-        ElevatedButton(
+        FilledButton(
           onPressed: estaCargando ? null : () => _guardar(context),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF1E88E5),
-            foregroundColor: Colors.white,
-          ),
           child: estaCargando
               ? const SizedBox(
                   width: 16,

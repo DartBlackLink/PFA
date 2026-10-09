@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/api_client.dart';
+import '../../../core/widgets/record_widgets.dart';
 import '../../auth/presentation/providers/auth_provider.dart';
 
 class RepartidoresScreen extends StatefulWidget {
@@ -106,23 +107,95 @@ class _RepartidoresScreenState extends State<RepartidoresScreen> {
             padding: EdgeInsets.all(24),
             child: Text('No hay repartidores que coincidan con la búsqueda.'),
           ),
-        ...visible.map(
-          (e) => Card(
-            child: ListTile(
-              leading: const CircleAvatar(child: Icon(Icons.person_outline)),
-              title: Text(e['nombre'].toString()),
-              subtitle: Text(
-                'DNI: ${e['dni']} · Licencia: ${e['licencia']} (${e['categoria_licencia']})\nContacto: ${e['contacto'] ?? 'Completar'}\nHorario: ${e['disponible_desde'] ?? 'Completar'} — ${e['disponible_hasta'] ?? 'Completar'}\n${e['correo'] ?? ''} · ${e['estado']}',
-              ),
-              isThreeLine: false,
-              trailing: IconButton(
-                tooltip: 'Editar repartidor',
-                onPressed: () => _edit(e),
-                icon: const Icon(Icons.edit_outlined),
-              ),
-            ),
+        if (visible.isNotEmpty)
+          AdaptiveRecords(
+            columns: const [
+              DataColumn(label: Text('Repartidor')),
+              DataColumn(label: Text('Licencia')),
+              DataColumn(label: Text('Disponibilidad')),
+              DataColumn(label: Text('Estado')),
+              DataColumn(label: Text('Acciones')),
+            ],
+            rows: visible
+                .map(
+                  (e) => DataRow(
+                    cells: [
+                      DataCell(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${e['nombre']}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text('DNI ${e['dni']}'),
+                          ],
+                        ),
+                      ),
+                      DataCell(
+                        Text('${e['licencia']}\n${e['categoria_licencia']}'),
+                      ),
+                      DataCell(
+                        Text(
+                          '${e['disponible_desde'] ?? 'Sin horario'} — ${e['disponible_hasta'] ?? ''}',
+                        ),
+                      ),
+                      DataCell(StatusBadge('${e['estado']}')),
+                      DataCell(
+                        IconButton(
+                          tooltip: 'Editar repartidor',
+                          onPressed: () => _edit(e),
+                          icon: const Icon(Icons.edit_outlined),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+                .toList(),
+            cards: visible
+                .map(
+                  (e) => Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Wrap(
+                            spacing: 12,
+                            runSpacing: 8,
+                            children: [
+                              Text(
+                                '${e['nombre']}',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              StatusBadge('${e['estado']}'),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            'DNI ${e['dni']} · Licencia ${e['licencia']} (${e['categoria_licencia']})',
+                          ),
+                          Text('Contacto: ${e['contacto'] ?? 'Sin teléfono'}'),
+                          Text(
+                            'Horario: ${e['disponible_desde'] ?? 'Sin horario'} — ${e['disponible_hasta'] ?? ''}',
+                          ),
+                          Text('${e['correo'] ?? ''}'),
+                          const SizedBox(height: 8),
+                          TextButton.icon(
+                            onPressed: () => _edit(e),
+                            icon: const Icon(Icons.edit_outlined),
+                            label: const Text('Editar repartidor'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
           ),
-        ),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton.icon(
@@ -210,7 +283,7 @@ class _DriverFormState extends State<_DriverForm> {
       return 'Usa HH:mm, por ejemplo 08:00';
     }
     if (k.startsWith('origen_')) {
-      final n = double.tryParse(v);
+      final n = double.tryParse(v.replaceAll(',', '.'));
       final max = k.endsWith('latitud') ? 90 : 180;
       if (n == null || !n.isFinite || n.abs() > max) {
         return 'Coordenada fuera de rango';
@@ -240,8 +313,12 @@ class _DriverFormState extends State<_DriverForm> {
       'estado': _estado,
     };
     body['anios_experiencia'] = int.parse(_fields['anios_experiencia']!.text);
-    body['origen_latitud'] = double.parse(_fields['origen_latitud']!.text);
-    body['origen_longitud'] = double.parse(_fields['origen_longitud']!.text);
+    body['origen_latitud'] = double.parse(
+      _fields['origen_latitud']!.text.trim().replaceAll(',', '.'),
+    );
+    body['origen_longitud'] = double.parse(
+      _fields['origen_longitud']!.text.trim().replaceAll(',', '.'),
+    );
     if (_fields['password']!.text.isNotEmpty) {
       body['password'] = _fields['password']!.text;
     }
@@ -265,7 +342,12 @@ class _DriverFormState extends State<_DriverForm> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: Text(widget.item == null ? 'Nuevo repartidor' : 'Editar repartidor'),
+    title: FormHeading(
+      widget.item == null ? 'Nuevo repartidor' : 'Editar repartidor',
+      'Identidad, disponibilidad y acceso a sus entregas.',
+      Icons.badge_outlined,
+    ),
+    insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
     content: SizedBox(
       width: 550,
       child: SingleChildScrollView(
@@ -274,6 +356,10 @@ class _DriverFormState extends State<_DriverForm> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: FormSection('Datos del repartidor'),
+              ),
               ...labels.entries.map(
                 (e) => Padding(
                   padding: const EdgeInsets.only(bottom: 14),
@@ -282,7 +368,14 @@ class _DriverFormState extends State<_DriverForm> {
                     enabled: !_saving,
                     obscureText: e.key == 'password',
                     decoration: InputDecoration(
-                      labelText: e.value,
+                      labelText: e.key == 'password' ? 'Contraseña' : e.value,
+                      helperText: e.key == 'password'
+                          ? (widget.item == null
+                                ? 'Mínimo 8 caracteres.'
+                                : 'Déjala vacía para conservar la actual.')
+                          : e.key.startsWith('origen_')
+                          ? 'Punto desde el que comenzarán sus rutas.'
+                          : null,
                       border: const OutlineInputBorder(),
                     ),
                     validator: (v) => _validate(e.key, v),

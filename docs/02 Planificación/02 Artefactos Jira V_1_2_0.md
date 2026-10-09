@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_2_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_2_0.md)
 
 # Artefactos Jira
 
@@ -7,17 +7,17 @@
 | Proyecto | EcoLogística Huancayo - DistriRápido S.A.C. |
 | Responsable | Jordy Steve Chancasanampa Torres |
 | Modalidad | Individual; responsabilidades Scrum adaptadas |
-| Fecha de revisión | 07/10/2026 |
-| Versión documental | 1.1.0 |
+| Fecha de revisión | 09/10/2026 |
+| Versión documental | 1.2.0 |
 | Estado | Especificación y plan de trabajo; validación según criterios de aceptación |
 
 ## Identidad del proyecto y estado de evidencia
 
-Proyecto a configurar: **EcoLogística Huancayo**, clave **EHAPP**. Usar IDs canónicos US-001..US-014, EN-001..EN-009 y EP-01..EP-07 en el resumen/descripción; las claves EHAPP asignadas por Jira se conservan. Una porción EN-XXX-Sn es una tarea ejecutable con SP propios, no una duplicación del total agregado del enabler. La guía conserva la equivalencia de actividades anteriores y el procedimiento de actualización.
+Proyecto a configurar: **EcoLogística Huancayo**, clave **EHAPP**. Usar IDs canónicos US-001..US-014, EN-001..EN-009 y EP-01..EP-07 en el resumen/descripción; las claves EHAPP asignadas por Jira se conservan. Una porción EN-XXX-Sn es una tarea ejecutable con SP propios, no una duplicación del total agregado del enabler. La correspondencia de IDs se mantiene en los campos de trazabilidad de cada actividad.
 
 ## Configuración objetivo
 
-Jerarquía Epic → Story/Task → Sub-task; Bug separado. Cada issue ejecutable incluye título, Como/Quiero/Para o objetivo técnico, dos BDD, prioridad, SP, RF/RNF, componente, sprint, dependencia, responsable y Fix Version v1.0.0-MVP. Componentes: web, mobile, backend-api, database, optimization, security, qa, figma y documentation. El código de versión del producto es independiente de la versión documental 1.1.0.
+Jerarquía Epic → Story/Task → Sub-task; Bug separado. Cada issue ejecutable incluye título, Como/Quiero/Para o objetivo técnico, dos BDD, prioridad, SP, RF/RNF, componente, sprint, dependencia, responsable y Fix Version v1.0.0-MVP. Componentes: web, mobile, backend-api, database, optimization, security, qa, figma y documentation. El código de versión del producto es independiente de la versión documental 1.2.0.
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
 | ID | Historia | Épica | SP | RF/RNF | Sprint objetivo |
 | --- | --- | --- | --- | --- | --- |
 | US-001 | Autenticación administrador | EP-01 | 3 | Transversal / RNF-02 | S1 |
-| US-002 | Autenticación repartidor | EP-01 | 3 | Transversal / RNF-02 | S1 |
+| US-002 | Autenticación repartidor móvil | EP-01 | 3 | Transversal / RNF-02 | S3 |
 | US-003 | Gestionar flota | EP-02 | 5 | RF-01 | S2 |
 | US-004 | Gestionar repartidores | EP-02 | 5 | RF-08 | S2 |
 | US-005 | Gestionar pedidos | EP-03 | 8 | RF-02 | S3 |
@@ -45,6 +45,10 @@ flowchart LR
 | US-012 | Consultar dashboard | EP-06 | 5 | RF-05 | S6 |
 | US-013 | Generar reporte PDF | EP-06 | 5 | RF-06 | S6 |
 | US-014 | Plan de compensación | EP-06 | 5 | RF-10 | S7 |
+
+## Replanificación acordada — 09/10/2026
+
+US-002 pasa de S1 a S3 por decisión del responsable. Alcance vigente: **S1 19 SP, S2 19 SP, S3 22 SP**. El total del proyecto no cambia. La API compartida de identidad y seguridad permanece en S1; la aceptación móvil se demuestra en S3. Actualizar la misma issue en Jira conservando su clave, BDD e historial; no duplicarla ni marcar APK completada con una prueba Web.
 
 ## Roadmap y Sprint Backlog objetivo
 
@@ -59,14 +63,13 @@ Calendario propuesto para configurar Jira: inicio 12/10/2026, fin 18/01/2027, si
 | Issue/porción | SP |
 | --- | --- |
 | US-001 | 3 |
-| US-002 | 3 |
 | EN-001-S1 | 3 |
 | EN-002-S1 | 5 |
 | EN-007-S1 | 5 |
 | EN-003-S1 | 3 |
-| Total | 22 |
+| Total | 19 |
 
-**Incremento esperado:** Clientes Web/móvil ejecutables, API, migración, login por rol y RN-023 con contador persistente y diseño inicial.
+**Incremento esperado:** Cliente Web ejecutable, base de fuentes móviles, API, migración, login por rol y RN-023 con contador persistente y diseño inicial.
 
 **Demo y aceptación:** Arranque limpio, login válido/inválido, permisos y fallos 3/4/5 con esperas 5/10/300 s; recarga y reinicio tras éxito.
 
@@ -89,19 +92,20 @@ Calendario propuesto para configurar Jira: inicio 12/10/2026, fin 18/01/2027, si
 
 ### Sprint 3 - 09/11/2026 a 23/11/2026
 
-**Sprint Goal:** Pedidos, clientes y preferencias. **Estado de configuración:** To Do; criterios de cierre aplicables a cada elemento.
+**Sprint Goal:** Pedidos, clientes, preferencias y aceptación del acceso móvil. **Estado de configuración:** To Do; criterios de cierre aplicables a cada elemento.
 
 | Issue/porción | SP |
 | --- | --- |
+| US-002 | 3 |
 | US-005 | 8 |
 | US-006 | 5 |
 | EN-003-S3 | 3 |
 | EN-009-S3 | 3 |
-| Total | 19 |
+| Total | 22 |
 
-**Incremento esperado:** Pedidos completos, georreferenciación y preferencias propias/asistidas.
+**Incremento esperado:** Pedidos completos, georreferenciación, preferencias propias/asistidas y APK con acceso REPARTIDOR probado.
 
-**Demo y aceptación:** Demostrar ventanas, ubicación confirmada y aislamiento de clientes.
+**Demo y aceptación:** Demostrar ventanas, ubicación confirmada y aislamiento de clientes; en Android comprobar login, logout, sesión, permisos y contador 5/10/300 s.
 
 ### Sprint 4 - 23/11/2026 a 07/12/2026
 
@@ -171,7 +175,7 @@ Calendario propuesto para configurar Jira: inicio 12/10/2026, fin 18/01/2027, si
 
 ## Auditoría de las cinco capturas conservadas
 
-Las imágenes se actualizan conforme a la guía de seguimiento local (fuera del repositorio). Allí se conserva el contenido histórico y se especifica nombre, pantalla y criterio de cada captura final. Mantener los PNG actuales hasta disponer del reemplazo real; no usarlos como prueba del nuevo calendario o de tareas terminadas.
+Las cinco capturas conservan su identidad y se relacionan con roadmap, backlog, planificación, tablero y release. La evidencia de cada corte debe corresponder al periodo y estados reales de Jira; se conserva su fecha y se contrasta con las tablas del backlog.
 
 ## Evidencias necesarias para cerrar Planificación y seguir con Implementación
 
@@ -179,7 +183,7 @@ Las imágenes se actualizan conforme a la guía de seguimiento local (fuera del 
 | --- | --- |
 | Roadmap | EHAPP, siete sprints y calendario propuesto |
 | Backlog | IDs canónicos, SP, epic, componentes y Fix Version |
-| S1 / S2 Planning | Goal, fechas, 22/19 SP y alcance separado |
+| S1 / S2 Planning | Goal, fechas, 19/19 SP y alcance separado |
 | Tablero | Mismo proyecto, sprint y estados según ejecución |
 | Release | v1.0.0-MVP con issues asociados; publicar tras aceptación |
 | Review y retrospectiva | Resultado de casos, demo, feedback y acciones enlazados |
@@ -192,5 +196,6 @@ Campos de login en US-001/US-002 y EN-003-S1: RN-023, BDD 5/10/300 s, backend-ap
 |---|---|---|---|
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Referencia actualizada a registros iniciales S1/S2. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
+| 1.2.0 | 09/10/2026 | Jordy Steve Chancasanampa Torres | Coherencia con el incremento comprobado, navegación y expediente S1/S2. |
 
-[⌂ README principal](../../README.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_1_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](01%20Transformando%20a%20%C3%A1gil%20V_1_2_0.md) | [Siguiente →](03%20Registro%20de%20riesgos%20V_1_2_0.md)

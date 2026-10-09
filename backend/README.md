@@ -2,16 +2,16 @@
 
 ## Arranque sin Compose
 
-Instala PostgreSQL 16 y crea una base vacía y un usuario con permisos para crear sus tablas. Desde `backend`, crea un archivo local `.env` y configura DATABASE_URL, SECRET_KEY, ADMIN_EMAIL, ADMIN_PASSWORD, DRIVER_EMAIL, DRIVER_PASSWORD y CORS_ORIGINS. DATABASE_URL debe usar el formato `postgresql+psycopg://USUARIO:CLAVE@localhost:PUERTO/BASE`; CORS_ORIGINS debe incluir `http://localhost:8081,http://127.0.0.1:8081`. Ajusta el puerto al de tu PostgreSQL.
+Instala PostgreSQL 16 y crea una base vacía y un usuario con permisos para crear sus tablas. Desde `backend`, crea un archivo local `.env` y configura DATABASE_URL, SECRET_KEY, ADMIN_EMAIL, ADMIN_PASSWORD, DRIVER_EMAIL, DRIVER_PASSWORD y CORS_ORIGINS. DATABASE_URL debe usar el formato `postgresql+psycopg://USUARIO:CLAVE@localhost:PUERTO/BASE`; CORS_ORIGINS debe incluir `http://localhost:8080,http://127.0.0.1:8080`. Ajusta el puerto al de tu PostgreSQL.
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\alembic.exe upgrade head
-.\.venv\Scripts\uvicorn.exe app.main:app --host 127.0.0.1 --port 8001
+.\.venv\Scripts\uvicorn.exe app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Swagger: http://localhost:8001/docs. Alembic obtiene la conexión desde `.env`. El archivo Compose se conserva únicamente como herramienta local y no se distribuye en el repositorio.
+Swagger: http://localhost:8000/docs. Alembic obtiene la conexión desde `.env`. El archivo Compose se conserva únicamente como herramienta local y no se distribuye en el repositorio.
 
 ## Contrato disponible
 
@@ -34,23 +34,23 @@ El control de acceso guarda una clave HMAC por correo normalizado, intentos y ve
 
 ## Pruebas aisladas
 
-El siguiente procedimiento de pruebas usa el entorno Docker local existente (contenedor PostgreSQL `pfa-postgres-1` y red `pfa_default`); esos recursos no se crean al clonar el repositorio. Con ese entorno encendido, crea exclusivamente esta base temporal y un contenedor de pruebas:
+El siguiente procedimiento de pruebas usa el entorno Docker local existente (contenedor PostgreSQL `ecologistica-postgres` y red `ecologistica_default`); esos recursos no se crean al clonar el repositorio. Con ese entorno encendido, crea exclusivamente esta base temporal y un contenedor de pruebas:
 
 ```powershell
-docker exec pfa-postgres-1 createdb -U ecologistica ecologistica_revision_20261007
+docker exec ecologistica-postgres createdb -U ecologistica ecologistica_revision_20261007
 docker build -t ecologistica-backend:qa ./backend
-docker run -d --name ecologistica-qa --network pfa_default -e DATABASE_URL=postgresql+psycopg://ecologistica:ecologistica@postgres:5432/ecologistica_revision_20261007 -e ROUTING_BASE_URL=http://127.0.0.1:8090/route/v1/driving ecologistica-backend:qa
+docker run -d --name ecologistica-qa --network ecologistica_default -e DATABASE_URL=postgresql+psycopg://ecologistica:ecologistica@postgres:5432/ecologistica_revision_20261007 -e ROUTING_BASE_URL=http://127.0.0.1:8090/route/v1/driving ecologistica-backend:qa
 # Espera a que los logs indiquen Application startup complete.
 docker logs ecologistica-qa
 docker cp backend/tests/test_integration.py ecologistica-qa:/tmp/test_integration.py
 docker exec -e PYTHONPATH=/app ecologistica-qa python /tmp/test_integration.py
 ```
 
-La suite tiene ocho casos y crea datos ficticios en esa base temporal. Simula el vencimiento del bloqueo modificando exclusivamente el plazo de identidades de prueba; no espera cinco minutos reales. El nombre de red corresponde a la nombre de proyecto pfa definido en Compose. Limpieza exclusivamente de esos recursos:
+La suite tiene nueve casos y crea datos ficticios en esa base temporal. Simula el vencimiento del bloqueo modificando exclusivamente el plazo de identidades de prueba; no espera cinco minutos reales. El nombre de red corresponde a el proyecto local ecologistica. Limpieza exclusivamente de esos recursos:
 
 ```powershell
 docker rm -f ecologistica-qa
-docker exec pfa-postgres-1 dropdb -U ecologistica ecologistica_revision_20261007
+docker exec ecologistica-postgres dropdb -U ecologistica ecologistica_revision_20261007
 docker image rm ecologistica-backend:qa
 ```
 
@@ -58,7 +58,11 @@ La migración 0002 añade controles sin eliminar datos históricos. Algunos CHEC
 
 ## Asignaciones y mapa
 
-POST /api/v1/routes/ (ADMIN): vehiculo_id, repartidor_id y pedidos (lista ordenada de 1 a 20 IDs). GET /api/v1/routes/{id} devuelve geometría vial, origen y detalles, con control de propietario. POST /orders/ admite latitud, longitud y punto_referencia. Los pedidos asignados pasan a ASIGNADO. Configuración: ROUTING_BASE_URL, por defecto proveedor OSRM de demostración. Se agregó la migración 0003_route_geometry. La suite de integración ahora contiene ocho casos; el último inicia un proveedor HTTP de prueba local en 8090, por lo que el contenedor QA debe configurarse con ROUTING_BASE_URL=http://127.0.0.1:8090/route/v1/driving para ejecutar ese caso.
+POST /api/v1/routes/ (ADMIN): vehiculo_id, repartidor_id y pedidos (lista ordenada de 1 a 20 IDs). GET /api/v1/routes/{id} devuelve geometría vial, origen y detalles, con control de propietario. POST /orders/ admite latitud, longitud y punto_referencia. Los pedidos asignados pasan a ASIGNADO. Configuración: ROUTING_BASE_URL, por defecto proveedor OSRM de demostración. Se agregó la migración 0003_route_geometry. La suite de integración ahora contiene nueve casos; el último inicia un proveedor HTTP de prueba local en 8090, por lo que el contenedor QA debe configurarse con ROUTING_BASE_URL=http://127.0.0.1:8090/route/v1/driving para ejecutar ese caso.
 
 
 
+
+## Disponibilidad al asignar (US-004)
+
+POST /api/v1/routes/ exige inicio_planificado (ISO 8601 con zona, por ejemplo 2026-10-10T09:00:00-05:00) y admite servicio_min_por_entrega (0–120; inicial 5). La API calcula fin_planificado = salida + tiempo vial + número de entregas × atención. Rechaza 422 fuera del turno y 409 por cruce del repartidor/vehículo o ruta antigua sin horario; la transacción conserva los pedidos. PUT /api/v1/routes/{id}/horario (ADMIN) regulariza o cambia horarios de rutas PLANIFICADAS con los mismos controles. Los intervalos contiguos se permiten. Aplicar Alembic hasta 0004_route_schedule. Caso 09 verifica disponibilidad, concurrencia y regularización en base aislada.

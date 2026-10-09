@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
 import '../../../../core/network/api_client.dart';
+import '../../../../core/theme/theme_controller.dart';
+import '../../../../core/widgets/record_widgets.dart';
 import '../../../rutas/presentation/route_detail_screen.dart';
 
 class RepartidorScreen extends StatefulWidget {
@@ -57,6 +59,15 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
       title: const Text('Mi operación'),
       actions: [
         IconButton(
+          tooltip: 'Cambiar tema',
+          onPressed: context.read<ThemeController>().toggle,
+          icon: Icon(
+            context.watch<ThemeController>().isDark
+                ? Icons.light_mode_outlined
+                : Icons.dark_mode_outlined,
+          ),
+        ),
+        IconButton(
           tooltip: 'Actualizar',
           onPressed: _load,
           icon: const Icon(Icons.refresh),
@@ -97,6 +108,9 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
                         ),
                       ),
                       const SizedBox(height: 12),
+                      if (_profile != null)
+                        StatusBadge('${_profile!['estado']}'),
+                      const SizedBox(height: 12),
                       Text(
                         _profile == null
                             ? 'Solicita al administrador completar tu perfil.'
@@ -111,25 +125,39 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
                 'Mis rutas asignadas',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
+              Text(
+                countLabel(
+                  _routes.length,
+                  'recorrido disponible',
+                  'recorridos disponibles',
+                ),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               if (_routes.isEmpty)
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: Text('Todavía no tienes rutas asignadas.'),
                 ),
+              const SizedBox(height: 12),
               ..._routes.map(
-                (r) => Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.route),
-                    title: Text('Ruta ${r['ruta_id']}'),
-                    subtitle: Text(
-                      '${r['estado']} · ${(r['entregas'] as List).length} entregas',
-                    ),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            RouteDetailScreen(routeId: r['ruta_id']),
+                (r) => Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.route),
+                      title: Text(
+                        'Recorrido · ${r['vehiculo_placa'] ?? 'Vehículo asignado'}',
+                      ),
+                      subtitle: Text(
+                        '${countLabel((r['entregas'] as List).length, 'entrega', 'entregas')} · ${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min estimados',
+                      ),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              RouteDetailScreen(routeId: r['ruta_id']),
+                        ),
                       ),
                     ),
                   ),

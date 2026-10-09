@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import '../../../core/widgets/record_widgets.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +36,6 @@ class _FlotaScreenState extends State<FlotaScreen> {
     final vehiculos = provider.vehiculos.where(_coincide).toList();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7F6),
       appBar: AppBar(
         leading: IconButton(
           tooltip: 'Volver al centro de control',
@@ -41,9 +43,6 @@ class _FlotaScreenState extends State<FlotaScreen> {
           icon: const Icon(Icons.arrow_back_rounded),
         ),
         title: const Text('Gestión de Flota'),
-        backgroundColor: const Color(0xFF102E29),
-        foregroundColor: Colors.white,
-        surfaceTintColor: const Color(0xFF102E29),
         actions: [
           IconButton(
             tooltip: context.watch<ThemeController>().isDark
@@ -65,8 +64,6 @@ class _FlotaScreenState extends State<FlotaScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => ModalFormularioVehiculo.mostrar(context),
-        backgroundColor: const Color(0xFF167D62),
-        foregroundColor: Colors.white,
         icon: const Icon(Icons.add),
         label: const Text('Nuevo vehículo'),
       ),
@@ -122,7 +119,7 @@ class _FlotaScreenState extends State<FlotaScreen> {
     crossAxisAlignment: WrapCrossAlignment.end,
     alignment: WrapAlignment.spaceBetween,
     children: [
-      const Column(
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -130,24 +127,26 @@ class _FlotaScreenState extends State<FlotaScreen> {
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w800,
-              color: Color(0xFF173D34),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           SizedBox(height: 5),
           Text(
             'Vehículos disponibles para operar en Huancayo',
-            style: TextStyle(color: Color(0xFF66736E)),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
       Chip(
-        avatar: const Icon(
+        avatar: Icon(
           Icons.local_shipping_outlined,
           size: 18,
-          color: Color(0xFF167D62),
+          color: Theme.of(context).colorScheme.primary,
         ),
-        label: Text('$total registrados'),
-        backgroundColor: const Color(0xFFEAF6F0),
+        label: Text(countLabel(total, 'registrado', 'registrados')),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
         side: BorderSide.none,
       ),
     ],
@@ -179,6 +178,7 @@ class _FlotaScreenState extends State<FlotaScreen> {
         SizedBox(
           width: compacto ? double.infinity : 190,
           child: DropdownButtonFormField<String>(
+            isExpanded: true,
             initialValue: _tipoFiltro,
             decoration: InputDecoration(
               labelText: 'Tipo',
@@ -187,7 +187,12 @@ class _FlotaScreenState extends State<FlotaScreen> {
               fillColor: superficie,
             ),
             items: tipos
-                .map((tipo) => DropdownMenuItem(value: tipo, child: Text(tipo)))
+                .map(
+                  (tipo) => DropdownMenuItem(
+                    value: tipo,
+                    child: Text(tipo, overflow: TextOverflow.ellipsis),
+                  ),
+                )
                 .toList(),
             onChanged: (value) =>
                 setState(() => _tipoFiltro = value ?? 'Todos'),
@@ -196,6 +201,7 @@ class _FlotaScreenState extends State<FlotaScreen> {
         SizedBox(
           width: compacto ? double.infinity : 190,
           child: DropdownButtonFormField<String>(
+            isExpanded: true,
             initialValue: _estadoFiltro,
             decoration: InputDecoration(
               labelText: 'Estado',
@@ -218,29 +224,60 @@ class _FlotaScreenState extends State<FlotaScreen> {
   }
 
   Widget _buildVehiculos(List<VehiculoModel> vehiculos, bool compacto) =>
-      GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: vehiculos.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: compacto ? 1 : 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          mainAxisExtent: compacto ? 236 : 220,
-        ),
-        itemBuilder: (context, index) => _vehiculoCard(vehiculos[index]),
+      AdaptiveRecords(
+        columns: const [
+          DataColumn(label: Text('Vehículo')),
+          DataColumn(label: Text('Capacidad')),
+          DataColumn(label: Text('Consumo')),
+          DataColumn(label: Text('Emisiones')),
+          DataColumn(label: Text('Estado')),
+          DataColumn(label: Text('Acciones')),
+        ],
+        rows: vehiculos
+            .map(
+              (v) => DataRow(
+                cells: [
+                  DataCell(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          v.placa,
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                        Text('${v.tipo} · ${v.anioFabricacion}'),
+                      ],
+                    ),
+                  ),
+                  DataCell(Text('${v.capacidadKg} kg')),
+                  DataCell(Text('${v.consumoKmL} km/L')),
+                  DataCell(Text('${v.factorEmisionKgKm} kg/km')),
+                  DataCell(StatusBadge(v.estado)),
+                  DataCell(
+                    IconButton(
+                      tooltip: 'Editar vehículo',
+                      icon: const Icon(Icons.edit_outlined),
+                      onPressed: () =>
+                          ModalFormularioVehiculo.mostrar(context, vehiculo: v),
+                    ),
+                  ),
+                ],
+              ),
+            )
+            .toList(),
+        cards: vehiculos.map(_vehiculoCard).toList(),
       );
 
   Widget _vehiculoCard(VehiculoModel vehiculo) {
     final color = _colorTipo(vehiculo.tipo);
-    final estaActivo = vehiculo.estado == 'ACTIVO';
     final superficie = Theme.of(context).colorScheme.surface;
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: superficie,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2EAE6)),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0A173D34),
@@ -267,10 +304,10 @@ class _FlotaScreenState extends State<FlotaScreen> {
                   children: [
                     Text(
                       vehiculo.placa,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
-                        color: Color(0xFF173D34),
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     Text(
@@ -315,30 +352,18 @@ class _FlotaScreenState extends State<FlotaScreen> {
               ),
             ],
           ),
-          const Spacer(),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Fabricación ${vehiculo.anioFabricacion}',
-                style: const TextStyle(fontSize: 12, color: Color(0xFF66736E)),
-              ),
-              Chip(
-                label: Text(
-                  estaActivo ? 'ACTIVO' : 'DESACTIVADO',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: estaActivo
-                        ? const Color(0xFF167D62)
-                        : const Color(0xFF9A4B4B),
-                  ),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
-                backgroundColor: estaActivo
-                    ? const Color(0xFFEAF6F0)
-                    : const Color(0xFFF9EAEA),
-                side: BorderSide.none,
               ),
+              StatusBadge(vehiculo.estado),
             ],
           ),
         ],
@@ -349,18 +374,25 @@ class _FlotaScreenState extends State<FlotaScreen> {
   Widget _datoVehiculo(IconData icon, String valor, String etiqueta) => Row(
     mainAxisSize: MainAxisSize.min,
     children: [
-      Icon(icon, size: 17, color: const Color(0xFF7A8B84)),
+      Icon(
+        icon,
+        size: 17,
+        color: Theme.of(context).colorScheme.onSurfaceVariant,
+      ),
       const SizedBox(width: 5),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             valor,
-            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
           ),
           Text(
             etiqueta,
-            style: const TextStyle(color: Color(0xFF8A9691), fontSize: 10),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontSize: 12,
+            ),
           ),
         ],
       ),
@@ -375,7 +407,7 @@ class _FlotaScreenState extends State<FlotaScreen> {
         color: superficie,
         borderRadius: BorderRadius.circular(14),
       ),
-      child: const Column(
+      child: Column(
         children: [
           Icon(Icons.search_off_rounded, size: 44, color: Color(0xFF9AA9A2)),
           SizedBox(height: 10),
@@ -385,7 +417,9 @@ class _FlotaScreenState extends State<FlotaScreen> {
           ),
           Text(
             'Prueba otra placa, tipo o estado.',
-            style: TextStyle(color: Color(0xFF66736E)),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),
@@ -407,6 +441,9 @@ class _FlotaScreenState extends State<FlotaScreen> {
   }
 
   Color _colorTipo(String tipo) {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      return Theme.of(context).colorScheme.primary;
+    }
     final normalizado = tipo.toLowerCase();
     if (normalizado.contains('moto')) {
       return const Color(0xFF8D5CB5);

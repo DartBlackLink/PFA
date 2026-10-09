@@ -5,8 +5,9 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.models.entities import Ruta,Repartidor,Usuario,Vehiculo,Pedido,RutaDetalle,Cliente
 from app.api.deps import get_current_user,require_roles
-from app.schemas import RutaCreate,RutaRead
+from app.schemas import RutaCreate,RutaRead,RutaHorario
 from app.services.routing import compute_route
+from app.services.scheduling import schedule
 router=APIRouter()
 
 def accessible(db,user):
@@ -50,9 +51,30 @@ def assign(payload:RutaCreate,db:Session=Depends(get_db),user:Usuario=Depends(re
     if sum(o.peso_kg for o in ordered)>vehicle.capacidad_kg:raise HTTPException(422,"El peso supera la capacidad del vehículo.")
     points=[(float(driver.origen_latitud),float(driver.origen_longitud))]+[(float(o.latitud),float(o.longitud)) for o in ordered]
     geometry,distance,duration=compute_route(points)
-    route=Ruta(vehiculo_id=vehicle.vehiculo_id,repartidor_id=driver.repartidor_id,algoritmo="ASIGNACION_MANUAL_OSRM",estado="PLANIFICADA",origen_latitud=driver.origen_latitud,origen_longitud=driver.origen_longitud,geometria=geometry,distancia_km=distance,tiempo_min=duration)
+    start,end=schedule(db,driver,vehicle,payload.inicio_planificado,duration,len(ordered),payload.servicio_min_por_entrega)
+    route=Ruta(inicio_planificado=start,fin_planificado=end,servicio_min_por_entrega=payload.servicio_min_por_entrega,vehiculo_id=vehicle.vehiculo_id,repartidor_id=driver.repartidor_id,algoritmo="ASIGNACION_MANUAL_OSRM",estado="PLANIFICADA",origen_latitud=driver.origen_latitud,origen_longitud=driver.origen_longitud,geometria=geometry,distancia_km=distance,tiempo_min=duration)
     db.add(route);db.flush()
     for index,order in enumerate(ordered,1):
         db.add(RutaDetalle(ruta_id=route.ruta_id,pedido_id=order.pedido_id,secuencia=index));order.estado="ASIGNADO"
+    db.commit();db.refresh(route)
+    return result(route,db)
+
+
+@router.put("/{ruta_id}/horario", response_model=RutaRead)
+def change_schedule(ruta_id:uuid.UUID,payload:RutaHorario,db:Session=Depends(get_db),user:Usuario=Depends(require_roles("ADMIN"))):
+    # Same resource lock order as assignment: driver, vehicle, then route.
+    current=db.get(Ruta,ruta_id)
+    if not current:raise HTTPException(404,"Ruta no encontrada.")
+    driver=db.scalar(select(Repartidor).where(Repartidor.repartidor_id==current.repartidor_id).with_for_update())
+    vehicle=db.scalar(select(Vehiculo).where(Vehiculo.vehiculo_id==current.vehiculo_id).with_for_update())
+    route=db.scalar(select(Ruta).where(Ruta.ruta_id==ruta_id).with_for_update().execution_options(populate_existing=True))
+    if route.estado!="PLANIFICADA":raise HTTPException(409,"Solo se modifica el horario de rutas planificadas.")
+    account=db.get(Usuario,driver.usuario_id)
+    if driver.estado!="ACTIVO" or vehicle.estado!="ACTIVO" or not account or account.estado!="ACTIVO":raise HTTPException(422,"Selecciona recursos activos.")
+    if route.tiempo_min is None:raise HTTPException(422,"La ruta no tiene duración vial estimada.")
+    count=len(db.scalars(select(RutaDetalle).where(RutaDetalle.ruta_id==ruta_id)).all())
+    if not count:raise HTTPException(422,"La ruta no tiene entregas.")
+    start,end=schedule(db,driver,vehicle,payload.inicio_planificado,route.tiempo_min,count,payload.servicio_min_por_entrega,route.ruta_id)
+    route.inicio_planificado=start;route.fin_planificado=end;route.servicio_min_por_entrega=payload.servicio_min_por_entrega
     db.commit();db.refresh(route)
     return result(route,db)

@@ -201,5 +201,21 @@ CREATE INDEX ix_ruta_detalle_pedido ON ruta_detalle (pedido_id);
 
 UPDATE alembic_version SET version_num='0003_route_geometry' WHERE alembic_version.version_num = '0002_access_resources';
 
+-- Running upgrade 0003_route_geometry -> 0004_route_schedule
+
+ALTER TABLE ruta ADD COLUMN inicio_planificado TIMESTAMP WITH TIME ZONE;
+
+ALTER TABLE ruta ADD COLUMN fin_planificado TIMESTAMP WITH TIME ZONE;
+
+ALTER TABLE ruta ADD COLUMN servicio_min_por_entrega INTEGER;
+
+ALTER TABLE ruta ADD CONSTRAINT ck_ruta_horario CHECK ((inicio_planificado IS NULL AND fin_planificado IS NULL AND servicio_min_por_entrega IS NULL) OR (inicio_planificado IS NOT NULL AND fin_planificado IS NOT NULL AND fin_planificado > inicio_planificado AND servicio_min_por_entrega BETWEEN 0 AND 120));
+
+CREATE INDEX ix_ruta_repartidor_inicio ON ruta (repartidor_id, inicio_planificado);
+
+CREATE INDEX ix_ruta_vehiculo_inicio ON ruta (vehiculo_id, inicio_planificado);
+
+UPDATE alembic_version SET version_num='0004_route_schedule' WHERE alembic_version.version_num = '0003_route_geometry';
+
 COMMIT;
 

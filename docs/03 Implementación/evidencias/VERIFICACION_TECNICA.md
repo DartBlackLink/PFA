@@ -1,40 +1,49 @@
-# Verificación técnica — 07/10/2026
+# Verificación técnica del incremento
 
-Versión comprobada: fuentes locales actualizadas de EcoLogística, sin commit/push. Cliente Flutter Web, backend Python 3.12/FastAPI y PostgreSQL 16 en Docker. Es una verificación técnica; no es acta de Sprint Review ni aceptación del docente.
+**Ejecuciones registradas:** 07 y 09/10/2026. **Corte de fuentes y documentos:** 09/10/2026. Cliente Flutter Web, FastAPI/Python 3.12 y PostgreSQL 16. El registro describe las comprobaciones técnicas realizadas y sus entornos; la aceptación académica se gestiona en la Review.
 
-## API — 7/7 aprobadas
+## API: 8 pruebas aprobadas
 
-Suite: `backend/tests/test_integration.py`. Última ejecución: `Ran 7 tests in 7.443s — OK`.
+Suite: `backend/tests/test_integration.py`. Última ejecución registrada: 8 pruebas, 9.392 s, resultado OK. Base aislada `ecologistica_revision_20261007`; proveedor HTTP simulado local para el caso de rutas. La base/contenedor temporales se retiraron al finalizar.
 
 | Caso | Resultado comprobado |
 | --- | --- |
-| 01 Login | Fallos 3/4/5: 429 con espera 5/10/300; bloqueos no se amplían; éxito reinicia intentos |
-| 02 Concurrencia | Seis peticiones para identidad desconocida: dos 401, cuatro 429, sin saltarse el bloqueo |
-| 03 Sesión/roles | Sesión válida/vencida, permisos y perfil propio |
-| 04 Vehículos | Alta/edición/inactivación, placa normalizada, duplicado 409, cero 422 |
-| 05 Repartidores | Campos independientes, duplicado, horario inválido, actualización e inactivación de acceso |
-| 06 Rutas | Repartidor ve exclusivamente sus asignaciones; ADMIN consulta ambas |
-| 07 Pedidos | Alta y lectura persistente; rechazo de peso cero, ventana inválida y cliente inexistente |
+| 01 Identidad | Fallos 3/4/5 producen 5/10/300 s; plazo no se extiende; éxito reinicia. |
+| 02 Concurrencia | Intentos simultáneos para identidad desconocida respetan el estado compartido. |
+| 03 Sesión/roles | Token válido/vencido, usuario inactivo y permisos controlados. |
+| 04 Vehículos | Alta, lectura, edición, inactivación, placa normalizada, duplicado y cero. |
+| 05 Repartidores | Campos independientes, DNI/correo duplicado, horario y cuenta vinculada. |
+| 06 Rutas | Aislamiento de asignaciones según el repartidor autenticado. |
+| 07 Pedidos | Alta/lectura y rechazo de peso, ventana o cliente inválidos. |
+| 08 Asignación/mapa | Geometría y detalle; acceso propio; duplicados, coordenadas, peso y concurrencia; proveedor falla sin asignar parcialmente. |
 
-Base aislada: `ecologistica_revision_20261007`; contenedor `ecologistica-revision`. Se crearon datos ficticios solo allí. Los plazos largos se vencieron de forma controlada sobre identidades de prueba; no se esperaron cinco minutos reales. La base, el contenedor y la imagen temporales se retiraron al finalizar.
+Los bloqueos largos se vencieron de forma controlada en identidades de prueba. El proveedor real se comprobó por separado: 57 puntos, 2.709 km y 5.52 min en el ejemplo sintético de Huancayo.
 
-## Flutter — 7/7 aprobadas
+## Flutter: 27 pruebas aprobadas
 
-`flutter test --no-pub`: All tests passed. Tres casos de bloqueo (5/10/300), persistencia del plazo, sesión vencida, restauración del rol/ logout, inicio concurrente y validación del contador/botón tras tercer fallo en pantalla 360 × 640. Los tres casos de bloqueo cuentan por separado; el total es siete pruebas.
+`flutter test --no-pub`: All tests passed. Siete pruebas de autenticación/contador/sesión, cuatro de distribución a 360×640, 768×1024, 1440×900 y 1200×500, catorce de regresión de interfaz y dos de expansión/contracción del menú en ambos temas. `flutter analyze --no-pub`: No issues found. `flutter build web --no-pub`: construcción satisfactoria.
 
-`flutter analyze --no-pub`: No issues found. `flutter build web --no-pub`: Built build/web.
+Las comprobaciones identifican exactamente la plataforma Web y el alcance de las pruebas; su cantidad no representa un porcentaje de cobertura.
 
-## Verificación en navegador y despliegue
+## Navegador y persistencia
 
-- Acceso del administrador y resumen de registros desde la base principal.
-- Listado y formulario de edición de repartidor con datos anteriores preservados.
-- Pantalla/modal de flota; rechazo de campos vacíos sin guardar un vehículo.
-- CORS corregido para los dos orígenes locales del puerto 8080.
-- Consola del navegador sin errores al finalizar la revisión.
-- API principal: health devuelve status=ok; Alembic indica 0002_access_resources (head); PostgreSQL saludable.
+ADMIN consultó recursos y su ruta; REPARTIDOR consultó el mismo recorrido como propietario. Se verificó el mapa base cargado, origen, destino y trazado. El rechazo de campos vacíos se observó en flota. La consulta posterior confirmó los datos guardados. Las migraciones llegan a `0003_route_geometry`.
 
-Evidencias reales: `resumen-app.jpg` y `flota-validacion.jpg`. No acreditan una demostración al docente ni cierre del Sprint.
+| Evidencia | Uso |
+| --- | --- |
+| [Resumen administrativo](resumen-app.jpg) | Consulta de registros. |
+| [Validación de flota](flota-validacion.jpg) | Rechazo de formulario inválido. |
+| [Ruta ADMIN](ruta-admin.jpg) | Consulta del recorrido asignado. |
+| [Ruta REPARTIDOR](ruta-repartidor.jpg) | Consulta de asignación propia. |
 
-## Límites y continuidad
+## Reproducción
 
-No se verificó Android físico, iOS, cobertura >= 80 %, todos los criterios de accesibilidad, recuperación de contraseña ni el alcance futuro de rutas/entregas/reportes. El perfil antiguo requiere datos reales completos. Las restricciones históricas NOT VALID requieren auditoría adicional. Consulta `D:\UC\App\ecologistica\CAMBIOS_Y_PENDIENTES.md` y la guía documental de PFA.
+Seguir `backend/README.md` para el entorno aislado y `apps/web/README.md` para Flutter. Mantener los datos de prueba separados de operación y registrar comandos, versión, fecha y resultado de cada nueva ejecución. [Asignación y mapa](ASIGNACION_Y_MAPA.md) describe entradas, reglas y manejo del proveedor.
+
+## Revalidación al corte documental
+
+El 09/10/2026 se repitieron análisis, 27 pruebas Flutter, construcción Web y las 8 pruebas API en base aislada: todos aprobados. Se comprobó login y lectura de ruta por ambos roles en la base original. [Resultado del 09/10](PRUEBAS_20261009.md).
+
+## Corte posterior de disponibilidad
+
+La ampliación de US-004 y el traslado de US-002 a S3 se verificaron después del corte anterior: **29 pruebas Flutter y 9 API**; análisis y compilación Web correctos. Fuentes sincronizadas y base en migración 0004. [Último resultado y límites](DISPONIBILIDAD_20261009.md).

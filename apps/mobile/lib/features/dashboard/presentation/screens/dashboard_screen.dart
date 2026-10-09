@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/network/api_client.dart';
+import '../../../../core/widgets/record_widgets.dart';
 import '../../../../core/theme/theme_controller.dart';
+import '../../../../core/widgets/operation_sidebar.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../../repartidores/presentation/repartidores_screen.dart';
 import '../../../rutas/presentation/routes_screen.dart';
@@ -16,6 +18,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _section = 0;
+  bool _menuCollapsed = false;
   bool _loading = true;
   String? _error;
   String _search = '';
@@ -102,95 +105,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ? const SingleChildScrollView(child: RepartidoresScreen())
           : _content(),
     );
-    final nav = SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(24, 28, 24, 8),
-            child: Row(
-              children: [
-                Icon(Icons.eco_rounded, color: Color(0xFF54C79C), size: 32),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    'EcoLogística',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(24, 8, 24, 24),
-            child: Text(
-              'PANEL ADMINISTRATIVO',
-              style: TextStyle(
-                color: Color(0xFFA8C7BA),
-                fontSize: 11,
-                letterSpacing: 1.2,
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              children: [
-                for (var i = 0; i < _sections.length; i++)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: ListTile(
-                      selected: _section == i,
-                      selectedTileColor: const Color(0xFF216550),
-                      selectedColor: Colors.white,
-                      textColor: const Color(0xFFCCE0D7),
-                      iconColor: const Color(0xFFCCE0D7),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      leading: Icon(_icons[i], size: 22),
-                      title: Text(_sections[i]),
-                      onTap: () {
-                        if (!wide) Navigator.pop(context);
-                        _select(i);
-                      },
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(24),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Color(0xFF216550),
-                  child: Icon(Icons.person_outline, color: Colors.white),
-                ),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    'Administrador\nGestión de operaciones',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      height: 1.6,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    final nav = OperationSidebar(
+      collapsed: wide && _menuCollapsed,
+      labels: _sections,
+      icons: _icons,
+      selected: _section,
+      onSelected: (index) {
+        if (!wide) Navigator.pop(context);
+        _select(index);
+      },
     );
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 72,
+        leading: wide
+            ? IconButton(
+                tooltip: _menuCollapsed ? 'Expandir menú' : 'Contraer menú',
+                icon: Icon(_menuCollapsed ? Icons.menu_open : Icons.menu),
+                onPressed: () =>
+                    setState(() => _menuCollapsed = !_menuCollapsed),
+              )
+            : null,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -242,17 +177,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
           const SizedBox(width: 12),
         ],
       ),
-      drawer: wide
-          ? null
-          : Drawer(backgroundColor: const Color(0xFF123E32), child: nav),
+      drawer: wide ? null : Drawer(child: nav),
       body: wide
           ? Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  width: 248,
-                  color: const Color(0xFF123E32),
-                  child: Material(color: const Color(0xFF123E32), child: nav),
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 200),
+                  alignment: Alignment.topLeft,
+                  child: SizedBox(width: _menuCollapsed ? 80 : 248, child: nav),
                 ),
                 Expanded(child: content),
               ],
@@ -310,12 +243,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Resumen de registros',
+              'Tu operación de hoy',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             const Text(
-              'Datos consultados en la base de datos. Actualiza después de realizar cambios.',
+              'Consulta tus pedidos, organiza al equipo y prepara las rutas de entrega.',
             ),
             const SizedBox(height: 24),
             LayoutBuilder(
@@ -360,11 +293,43 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
             ),
             const SizedBox(height: 24),
-            const Card(
+            Card(
               child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  'Comienza registrando la flota y los repartidores con sus datos completos. Los pedidos y las rutas constituyen los siguientes módulos de la operación.',
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Prepara tu próxima entrega',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${countLabel(_orders.where((e) => e['estado'] == 'PENDIENTE').length, 'pedido pendiente', 'pedidos pendientes')} de asignación. Revisa el destino, elige al repartidor y consulta el recorrido.',
+                    ),
+                    const SizedBox(height: 20),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      children: [
+                        FilledButton.icon(
+                          onPressed: _newOrder,
+                          icon: const Icon(Icons.add),
+                          label: const Text('Registrar pedido'),
+                        ),
+                        OutlinedButton.icon(
+                          onPressed: () => _select(2),
+                          icon: const Icon(Icons.route_outlined),
+                          label: const Text('Organizar rutas'),
+                        ),
+                        OutlinedButton.icon(
+                          onPressed: () => _select(3),
+                          icon: const Icon(Icons.badge_outlined),
+                          label: const Text('Ver equipo'),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -372,13 +337,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       );
     }
-    final orders = _section == 1;
-    final items = (orders ? _orders : _routes)
+    final items = _orders
         .where(
           (e) =>
               e.values.join(' ').toLowerCase().contains(_search.toLowerCase()),
         )
         .toList();
+    Widget summary(Map<String, dynamic> e) => SizedBox(
+      width: 240,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${e['cliente_nombre']}',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          Text(
+            '${e['direccion']}',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -388,74 +372,167 @@ class _DashboardScreenState extends State<DashboardScreen> {
           runSpacing: 12,
           children: [
             Text(
-              orders ? 'Pedidos registrados' : 'Rutas registradas',
+              'Pedidos registrados',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            if (orders)
-              FilledButton.icon(
-                onPressed: _newOrder,
-                icon: const Icon(Icons.add),
-                label: const Text('Nuevo pedido'),
-              ),
+            FilledButton.icon(
+              onPressed: _newOrder,
+              icon: const Icon(Icons.add),
+              label: const Text('Nuevo pedido'),
+            ),
           ],
         ),
         const SizedBox(height: 12),
-        if (!orders)
-          const Padding(
-            padding: EdgeInsets.only(bottom: 12),
-            child: Text(
-              'Se muestran las asignaciones guardadas. La planificación automática y el mapa de entregas requieren implementar el optimizador y las coordenadas de los pedidos.',
-            ),
-          ),
+        const Text(
+          'Consulta los destinos y horarios antes de asignar una ruta.',
+        ),
+        const SizedBox(height: 20),
         TextField(
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search),
-            labelText: 'Buscar',
-            border: OutlineInputBorder(),
+            labelText: 'Buscar cliente, dirección o estado',
           ),
           onChanged: (v) => setState(() => _search = v),
         ),
         const SizedBox(height: 12),
+        Text(
+          countLabel(items.length, 'pedido encontrado', 'pedidos encontrados'),
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        const SizedBox(height: 12),
         Expanded(
           child: items.isEmpty
-              ? const Center(child: Text('No hay registros para mostrar.'))
-              : ListView.separated(
-                  itemCount: items.length,
-                  separatorBuilder: (_, index) => const SizedBox(height: 8),
-                  itemBuilder: (_, index) {
-                    final e = items[index];
-                    final driver = _drivers
-                        .where((d) => d['repartidor_id'] == e['repartidor_id'])
-                        .firstOrNull;
-                    final vehicle = _vehicles
-                        .where((v) => v['vehiculo_id'] == e['vehiculo_id'])
-                        .firstOrNull;
-                    return Card(
-                      child: ListTile(
-                        isThreeLine: true,
-                        leading: Icon(
-                          orders
-                              ? Icons.inventory_2_outlined
-                              : Icons.route_outlined,
-                        ),
-                        title: Text(
-                          orders
-                              ? '${e['cliente_nombre']} — ${e['estado']}'
-                              : '${driver?['nombre'] ?? e['repartidor_id']} — ${e['estado']}',
-                        ),
-                        subtitle: Text(
-                          orders
-                              ? '${e['direccion']}\n${e['peso_kg']} kg · ${e['prioridad']} · ${e['ventana_inicio']} → ${e['ventana_fin']}'
-                              : 'Vehículo: ${vehicle?['placa'] ?? e['vehiculo_id']}\nAlgoritmo: ${e['algoritmo']} · ${e['creado_en']}',
-                        ),
-                      ),
-                    );
-                  },
+              ? const Center(
+                  child: Text('No hay pedidos que coincidan con tu búsqueda.'),
+                )
+              : SingleChildScrollView(
+                  child: AdaptiveRecords(
+                    columns: const [
+                      DataColumn(label: Text('Cliente y destino')),
+                      DataColumn(label: Text('Carga')),
+                      DataColumn(label: Text('Horario de entrega')),
+                      DataColumn(label: Text('Prioridad')),
+                      DataColumn(label: Text('Estado')),
+                      DataColumn(label: Text('Detalles')),
+                    ],
+                    rows: items
+                        .map(
+                          (e) => DataRow(
+                            cells: [
+                              DataCell(summary(e)),
+                              DataCell(Text('${e['peso_kg']} kg')),
+                              DataCell(
+                                Text(
+                                  '${friendlyDate(e['ventana_inicio'])}\n${friendlyDate(e['ventana_fin'])}',
+                                ),
+                              ),
+                              DataCell(Text('${e['prioridad']}')),
+                              DataCell(StatusBadge('${e['estado']}')),
+                              DataCell(
+                                IconButton(
+                                  tooltip: 'Ver pedido',
+                                  icon: const Icon(Icons.open_in_new),
+                                  onPressed: () => _orderDetail(e),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                    cards: items
+                        .map(
+                          (e) => Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Wrap(
+                                    spacing: 12,
+                                    runSpacing: 8,
+                                    children: [
+                                      Text(
+                                        '${e['cliente_nombre']}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                      ),
+                                      StatusBadge('${e['estado']}'),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text('${e['direccion']}'),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    '${e['peso_kg']} kg · ${e['prioridad']}',
+                                  ),
+                                  Text(
+                                    'Desde ${friendlyDate(e['ventana_inicio'])}\nHasta ${friendlyDate(e['ventana_fin'])}',
+                                  ),
+                                  const SizedBox(height: 8),
+                                  TextButton.icon(
+                                    onPressed: () => _orderDetail(e),
+                                    icon: const Icon(Icons.open_in_new),
+                                    label: const Text('Ver detalles'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
         ),
       ],
     );
   }
+
+  void _orderDetail(Map<String, dynamic> e) => showDialog<void>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const FormHeading(
+        'Detalle del pedido',
+        'Destino, carga y ventana de entrega.',
+        Icons.inventory_2_outlined,
+      ),
+      content: SizedBox(
+        width: 480,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              StatusBadge('${e['estado']}'),
+              const SizedBox(height: 20),
+              Text(
+                '${e['cliente_nombre']}',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              Text('${e['direccion']}'),
+              const SizedBox(height: 16),
+              Text(
+                'Referencia: ${e['punto_referencia'] ?? 'Sin referencia adicional'}',
+              ),
+              Text('Producto: ${e['tipo_producto']} · ${e['peso_kg']} kg'),
+              Text('Prioridad: ${e['prioridad']}'),
+              const SizedBox(height: 16),
+              Text(
+                'Desde: ${friendlyDate(e['ventana_inicio'])}\nHasta: ${friendlyDate(e['ventana_fin'])}',
+              ),
+              Text('Destino: ${e['latitud']}, ${e['longitud']}'),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        FilledButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cerrar'),
+        ),
+      ],
+    ),
+  );
 
   Widget _metric(String title, int value, IconData icon, double width) =>
       SizedBox(
@@ -466,7 +543,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(icon, color: Theme.of(context).colorScheme.primary),
+                CircleAvatar(
+                  backgroundColor: Theme.of(context)
+                      .colorScheme
+                      .primaryContainer,
+                  foregroundColor: Theme.of(context)
+                      .colorScheme
+                      .onPrimaryContainer,
+                  child: Icon(icon),
+                ),
                 const SizedBox(height: 12),
                 Text(
                   '$value',
@@ -599,7 +684,12 @@ class _OrderFormState extends State<_OrderForm> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: const Text('Nuevo pedido'),
+    title: const FormHeading(
+      'Nuevo pedido',
+      'Completa el destino y horario para preparar su entrega.',
+      Icons.inventory_2_outlined,
+    ),
+    insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
     content: SizedBox(
       width: 480,
       child: SingleChildScrollView(
@@ -609,6 +699,7 @@ class _OrderFormState extends State<_OrderForm> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const FormSection('Cliente y carga'),
               for (final field in [
                 (_name, 'Cliente'),
                 (_address, 'Dirección'),
@@ -620,9 +711,18 @@ class _OrderFormState extends State<_OrderForm> {
                     controller: field.$1,
                     enabled: !_saving,
                     decoration: InputDecoration(labelText: field.$2),
-                    validator: (v) => (v?.trim().length ?? 0) < 2
-                        ? 'Completa este campo'
-                        : null,
+                    validator: (v) {
+                      final length = v?.trim().length ?? 0;
+                      final min = field.$1 == _address ? 5 : 2;
+                      final max = field.$1 == _product
+                          ? 30
+                          : field.$1 == _name
+                          ? 160
+                          : 255;
+                      return length < min || length > max
+                          ? 'Usa entre $min y $max caracteres'
+                          : null;
+                    },
                   ),
                 ),
               TextFormField(
@@ -634,14 +734,14 @@ class _OrderFormState extends State<_OrderForm> {
                 decoration: const InputDecoration(labelText: 'Peso (kg)'),
                 validator: (v) {
                   final n = double.tryParse((v ?? '').replaceAll(',', '.'));
-                  return n == null || !n.isFinite || n <= 0
-                      ? 'Ingresa un peso mayor que cero'
+                  return n == null || !n.isFinite || n <= 0 || n > 99999999
+                      ? 'Ingresa un peso entre 0 y 99999999 kg, mayor que cero'
                       : null;
                 },
               ),
               const SizedBox(height: 12),
               const Text(
-                'Ubicación de entrega. Ingresa coordenadas verificadas del destino; la dirección sola no calcula el mapa.',
+                'Ubicación de entrega: usa las coordenadas del destino para dibujar el recorrido.',
               ),
               const SizedBox(height: 12),
               TextFormField(
@@ -701,11 +801,12 @@ class _OrderFormState extends State<_OrderForm> {
               const SizedBox(height: 12),
               OutlinedButton(
                 onPressed: _saving ? null : () => _date(true),
-                child: Text('Inicio: ${_start.toString().substring(0, 16)}'),
+                child: Text('Inicio: ${friendlyDate(_start)}'),
               ),
+              const SizedBox(height: 12),
               OutlinedButton(
                 onPressed: _saving ? null : () => _date(false),
-                child: Text('Fin: ${_end.toString().substring(0, 16)}'),
+                child: Text('Fin: ${friendlyDate(_end)}'),
               ),
               if (_error != null)
                 Padding(

@@ -85,6 +85,9 @@ class Pedido(Base):
     estado: Mapped[str] = mapped_column(String(20), default="PENDIENTE")
 
 class Ruta(Base):
+    inicio_planificado: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    fin_planificado: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    servicio_min_por_entrega: Mapped[int | None] = mapped_column(Integer, nullable=True)
     __tablename__ = "ruta"
     ruta_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     vehiculo_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("vehiculo.vehiculo_id"))

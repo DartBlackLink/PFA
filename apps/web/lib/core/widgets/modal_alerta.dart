@@ -18,19 +18,24 @@ class ModalAlerta {
           ),
           title: Row(
             children: [
-              const Icon(Icons.error_outline, color: Colors.red),
+              Icon(
+                Icons.error_outline,
+                color: Theme.of(context).colorScheme.error,
+              ),
               const SizedBox(width: 8),
-              Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold)),
+              Expanded(
+                child: Text(
+                  titulo,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
           ),
           content: Text(mensaje),
           actions: [
-            TextButton(
+            FilledButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
-                'Entendido',
-                style: TextStyle(color: Color(0xFF1E88E5)),
-              ),
+              child: const Text('Entendido'),
             ),
           ],
         );

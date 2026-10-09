@@ -137,7 +137,7 @@ class Integration(unittest.TestCase):
             status,vehicle,_=call('/vehicles/','POST',body,self.admin);self.assertEqual(status,201)
             order_body={"cliente_nombre":"Entrega QA","direccion":"Av. Ejemplo 123","peso_kg":4,"tipo_producto":"GENERAL","prioridad":"ALTA","ventana_inicio":"2026-10-08T13:00:00Z","ventana_fin":"2026-10-08T15:00:00Z","latitud":-12.07,"longitud":-75.21,"punto_referencia":"Puerta de prueba"}
             status,order,_=call('/orders/','POST',order_body,self.admin);self.assertEqual(status,201)
-            payload={"vehiculo_id":vehicle['vehiculo_id'],"repartidor_id":driver['repartidor_id'],"pedidos":[order['pedido_id']]}
+            payload={"inicio_planificado":"2026-10-08T13:00:00Z","vehiculo_id":vehicle['vehiculo_id'],"repartidor_id":driver['repartidor_id'],"pedidos":[order['pedido_id']]}
             self.assertEqual(call('/routes/','POST',payload,token)[0],403)
             self.assertEqual(call('/orders/','POST',dict(order_body,latitud=91),self.admin)[0],422)
             self.assertEqual(call('/routes/','POST',dict(payload,pedidos=[order['pedido_id'],order['pedido_id']]),self.admin)[0],422)
@@ -154,11 +154,62 @@ class Integration(unittest.TestCase):
             status,heavy,_=call('/orders/','POST',dict(order_body,peso_kg=51),self.admin)
             self.assertEqual(call('/routes/','POST',dict(payload,pedidos=[heavy['pedido_id']]),self.admin)[0],422)
             status,second,_=call('/orders/','POST',order_body,self.admin)
-            with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda _:call('/routes/','POST',dict(payload,pedidos=[second['pedido_id']]),self.admin)[0],range(2)))
+            with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda _:call('/routes/','POST',dict(payload,pedidos=[second['pedido_id']],inicio_planificado='2026-10-08T14:00:00Z'),self.admin)[0],range(2)))
             self.assertEqual(sorted(results),[201,409])
         finally:server.shutdown();server.server_close();thread.join()
         status,pending,_=call('/orders/','POST',order_body,self.admin)
         self.assertEqual(call('/routes/','POST',dict(payload,pedidos=[pending['pedido_id']]),self.admin)[0],503)
         status,orders,_=call('/orders/?limit=1000',token=self.admin);self.assertEqual(next(o for o in orders if o['pedido_id']==pending['pedido_id'])['estado'],'PENDIENTE')
+
+    def test_09_schedule_shift_duration_conflicts_and_legacy(self):
+        import threading
+        from http.server import HTTPServer,BaseHTTPRequestHandler
+        from app.models.entities import Repartidor
+        class Stub(BaseHTTPRequestHandler):
+            def log_message(self,*args):pass
+            def do_GET(self):
+                coords=[[float(n) for n in point.split(',')] for point in self.path.split('/')[-1].split('?')[0].split(';')]
+                body=json.dumps({"code":"Ok","routes":[{"geometry":{"type":"LineString","coordinates":coords},"distance":2500,"duration":600}]}).encode()
+                self.send_response(200);self.end_headers();self.wfile.write(body)
+        server=HTTPServer(('127.0.0.1',8090),Stub);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+        try:
+            _,driver,token=self.driver();_,other_driver,_=self.driver()
+            def vehicle():
+                status,item,_=call('/vehicles/','POST',{"placa":"hr-"+uuid.uuid4().hex[:8],"tipo":"Furgon","capacidad_kg":500,"consumo_km_l":12,"factor_emision_kg_km":0.1,"anio_fabricacion":2025},self.admin)
+                self.assertEqual(status,201,item);return item
+            v=vehicle();v2=vehicle()
+            def order():
+                status,item,_=call('/orders/','POST',{"cliente_nombre":"Horario QA","direccion":"Av. Horario 123","peso_kg":4,"tipo_producto":"GENERAL","prioridad":"ALTA","ventana_inicio":"2026-10-10T12:00:00Z","ventana_fin":"2026-10-10T23:00:00Z","latitud":-12.07,"longitud":-75.21},self.admin)
+                self.assertEqual(status,201,item);return item['pedido_id']
+            pending=order()
+            payload={"repartidor_id":driver['repartidor_id'],"vehiculo_id":v['vehiculo_id'],"pedidos":[pending],"inicio_planificado":"2026-10-10T08:00:00-05:00"}
+            self.assertEqual(call('/routes/','POST',{k:v for k,v in payload.items() if k!='inicio_planificado'},self.admin)[0],422)
+            self.assertEqual(call('/routes/','POST',dict(payload,inicio_planificado='2026-10-10T08:00:00'),self.admin)[0],422)
+            self.assertEqual(call('/routes/','POST',dict(payload,inicio_planificado='2026-10-10T07:59:00-05:00'),self.admin)[0],422)
+            self.assertEqual(call('/routes/','POST',dict(payload,inicio_planificado='2026-10-10T16:50:00-05:00'),self.admin)[0],422)
+            status,r,_=call('/routes/','POST',payload,self.admin);self.assertEqual(status,201,r)
+            self.assertEqual(datetime.fromisoformat(r['fin_planificado'])-datetime.fromisoformat(r['inicio_planificado']),timedelta(minutes=15))
+            self.assertEqual(call('/routes/'+r['ruta_id']+'/horario','PUT',{'inicio_planificado':'2026-10-10T10:00:00-05:00'},token)[0],403)
+            next_order=order();next_payload=dict(payload,pedidos=[next_order],inicio_planificado='2026-10-10T08:10:00-05:00')
+            self.assertEqual(call('/routes/','POST',dict(next_payload,vehiculo_id=v2['vehiculo_id']),self.admin)[0],409) # same driver
+            self.assertEqual(call('/routes/','POST',dict(next_payload,repartidor_id=other_driver['repartidor_id']),self.admin)[0],409) # same vehicle
+            status,orders,_=call('/orders/?limit=1000',token=self.admin)
+            self.assertEqual(next(o for o in orders if o['pedido_id']==next_order)['estado'],'PENDIENTE')
+            status,r2,_=call('/routes/','POST',dict(next_payload,inicio_planificado='2026-10-10T08:15:00-05:00'),self.admin);self.assertEqual(status,201,r2) # adjacent permitted
+            status,_,_=call('/routes/'+r2['ruta_id']+'/horario','PUT',{'inicio_planificado':'2026-10-10T08:05:00-05:00'},self.admin);self.assertEqual(status,409)
+            status,_,_=call('/routes/'+r2['ruta_id']+'/horario','PUT',{'inicio_planificado':'2026-10-10T09:00:00-05:00'},self.admin);self.assertEqual(status,200)
+            # Historical routes have no inferred dates; they block new allocation until regularized.
+            with SessionLocal() as db:
+                legacy=db.get(Ruta,uuid.UUID(r['ruta_id']));legacy.inicio_planificado=None;legacy.fin_planificado=None;legacy.servicio_min_por_entrega=None;db.commit()
+            self.assertEqual(call('/routes/','POST',dict(payload,pedidos=[order()],inicio_planificado='2026-10-10T10:00:00-05:00'),self.admin)[0],409)
+            self.assertEqual(call('/routes/'+r['ruta_id']+'/horario','PUT',{'inicio_planificado':'2026-10-10T08:00:00-05:00'},self.admin)[0],200)
+            # Distinct orders competing for the same resources/time: exactly one succeeds.
+            candidates=[dict(payload,pedidos=[order()],inicio_planificado='2026-10-10T11:00:00-05:00') for _ in range(2)]
+            with ThreadPoolExecutor(max_workers=2) as pool:codes=list(pool.map(lambda body:call('/routes/','POST',body,self.admin)[0],candidates))
+            self.assertEqual(sorted(codes),[201,409])
+            with SessionLocal() as db:
+                d=db.get(Repartidor,uuid.UUID(driver['repartidor_id']));d.disponible_desde=None;d.disponible_hasta=None;db.commit()
+            self.assertEqual(call('/routes/','POST',dict(payload,pedidos=[order()],inicio_planificado='2026-10-10T12:00:00-05:00'),self.admin)[0],422)
+        finally:server.shutdown();server.server_close();thread.join()
 
 if __name__=='__main__':unittest.main(verbosity=2)

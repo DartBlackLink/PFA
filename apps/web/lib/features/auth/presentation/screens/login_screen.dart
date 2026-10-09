@@ -50,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.local_shipping_outlined,
                       size: 56,
-                      color: Color(0xFF167D62),
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     const SizedBox(height: 16),
                     const Text(
@@ -173,7 +173,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F7FA),
       body: SafeArea(
         child: wide
             ? Row(

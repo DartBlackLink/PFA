@@ -1,4 +1,4 @@
-[⌂ README principal](../../README.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_2_0.md)
 
 # Presupuesto del proyecto
 
@@ -7,8 +7,8 @@
 | Proyecto | EcoLogística Huancayo - DistriRápido S.A.C. |
 | Responsable | Jordy Steve Chancasanampa Torres |
 | Modalidad | Individual; responsabilidades Scrum adaptadas |
-| Fecha de revisión | 07/10/2026 |
-| Versión documental | 1.1.0 |
+| Fecha de revisión | 09/10/2026 |
+| Versión documental | 1.2.0 |
 | Estado | Especificación y plan de trabajo; validación según criterios de aceptación |
 
 ## Marco y alcance de estimación
@@ -74,5 +74,6 @@ Uso ligado a riesgo identificado, importe solicitado, decisión y saldo. No tran
 |---|---|---|---|
 | 1.0.0 | 27/09/2026 | Jordy Steve Chancasanampa Torres | Versión previa del repositorio; conservada en historial Git y respaldo de revisión. |
 | 1.1.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Refinamiento documental: requisitos verificables, trazabilidad, decisiones y estado real de evidencias. Calendario propuesto, RN-023 y guía de ajustes alineados. Sin modificación del software ni cierre de sprint. |
+| 1.2.0 | 09/10/2026 | Jordy Steve Chancasanampa Torres | Coherencia con el incremento comprobado, navegación y expediente S1/S2. |
 
-[⌂ README principal](../../README.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_1_0.md)
+[⌂ README principal](../../README.md) | [← Anterior](03%20Registro%20de%20riesgos%20V_1_2_0.md)

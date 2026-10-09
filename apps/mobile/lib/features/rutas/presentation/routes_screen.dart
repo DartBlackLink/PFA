@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/api_client.dart';
+import '../../../core/widgets/record_widgets.dart';
 import '../../auth/presentation/providers/auth_provider.dart';
 import 'route_detail_screen.dart';
+import 'route_schedule_input.dart';
 
 class RoutesScreen extends StatefulWidget {
   const RoutesScreen({super.key, this.admin = false});
@@ -49,6 +51,15 @@ class _RoutesScreenState extends State<RoutesScreen> {
       context: context,
       barrierDismissible: false,
       builder: (_) => const _AssignmentForm(),
+    );
+    if (saved == true && mounted) await _load();
+  }
+
+  Future<void> _schedule(Map<String, dynamic> route) async {
+    final saved = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => _ScheduleForm(route: route),
     );
     if (saved == true && mounted) await _load();
   }
@@ -122,17 +133,28 @@ class _RoutesScreenState extends State<RoutesScreen> {
                     return Card(
                       child: ListTile(
                         contentPadding: const EdgeInsets.all(16),
-                        leading: const Icon(
-                          Icons.route,
-                          color: Color(0xFF167D62),
+                        leading: CircleAvatar(
+                          backgroundColor: Theme.of(context)
+                              .colorScheme
+                              .primaryContainer,
+                          foregroundColor: Theme.of(context)
+                              .colorScheme
+                              .onPrimaryContainer,
+                          child: const Icon(Icons.route),
                         ),
                         title: Text(
                           '${r['repartidor_nombre'] ?? 'Repartidor'} · ${r['vehiculo_placa'] ?? 'Vehículo'}',
                         ),
                         subtitle: Text(
-                          '${(r['entregas'] as List).length} entregas · ${r['estado']}\n${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min estimados',
+                          '${countLabel((r['entregas'] as List).length, 'entrega', 'entregas')} · ${r['estado']}\n${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min de viaje\n${r['inicio_planificado'] == null ? 'Horario por registrar' : '${friendlyDate(r['inicio_planificado'])} → ${friendlyDate(r['fin_planificado'])}'}',
                         ),
-                        trailing: const Icon(Icons.chevron_right),
+                        trailing: widget.admin && r['estado'] == 'PLANIFICADA'
+                            ? IconButton(
+                                tooltip: 'Registrar o cambiar horario',
+                                icon: const Icon(Icons.edit_calendar_outlined),
+                                onPressed: () => _schedule(r),
+                              )
+                            : const Icon(Icons.chevron_right),
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -168,6 +190,7 @@ class _AssignmentFormState extends State<_AssignmentForm> {
   List<Map<String, dynamic>> _drivers = [], _vehicles = [], _orders = [];
   final List<String> _selected = [];
   String? _driver, _vehicle, _error;
+  final _schedule = RouteScheduleDraft();
   bool _loading = true, _saving = false;
   @override
   void initState() {
@@ -217,6 +240,10 @@ class _AssignmentFormState extends State<_AssignmentForm> {
       );
       return;
     }
+    if (_schedule.error != null) {
+      setState(() => _error = _schedule.error);
+      return;
+    }
     setState(() {
       _saving = true;
       _error = null;
@@ -229,6 +256,7 @@ class _AssignmentFormState extends State<_AssignmentForm> {
           'repartidor_id': _driver,
           'vehiculo_id': _vehicle,
           'pedidos': _selected,
+          ..._schedule.payload,
         },
       );
       if (mounted) Navigator.pop(context, true);
@@ -243,7 +271,12 @@ class _AssignmentFormState extends State<_AssignmentForm> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: const Text('Asignar pedidos y calcular ruta'),
+    title: const FormHeading(
+      'Asignar pedidos',
+      'Elige equipo y entregas para generar el recorrido.',
+      Icons.add_road,
+    ),
+    insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
     content: SizedBox(
       width: 600,
       child: _loading
@@ -266,7 +299,7 @@ class _AssignmentFormState extends State<_AssignmentForm> {
                           (r) => DropdownMenuItem(
                             value: r['repartidor_id'] as String,
                             child: Text(
-                              '${r['nombre']} ${r['origen_latitud'] == null ? '(completar origen)' : ''}',
+                              '${r['nombre']} · ${r['disponible_desde'] ?? 'sin turno'}–${r['disponible_hasta'] ?? ''} ${r['origen_latitud'] == null ? '(completar origen)' : ''}',
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -296,6 +329,8 @@ class _AssignmentFormState extends State<_AssignmentForm> {
                         : (v) => setState(() => _vehicle = v),
                   ),
                   const SizedBox(height: 16),
+                  RouteScheduleInput(draft: _schedule, enabled: !_saving),
+                  const SizedBox(height: 20),
                   const Text(
                     'Selecciona las entregas en el orden del recorrido (máximo 20).',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -338,7 +373,7 @@ class _AssignmentFormState extends State<_AssignmentForm> {
                     ),
                   const SizedBox(height: 8),
                   const Text(
-                    'El recorrido consulta OSRM usando las coordenadas seleccionadas. Los tiempos son estimaciones sin tráfico en tiempo real.',
+                    'Revisa el orden de las entregas antes de guardar. El tiempo del recorrido es estimado y no incluye tráfico en tiempo real.',
                   ),
                   if (_saving)
                     const Padding(
@@ -367,6 +402,90 @@ class _AssignmentFormState extends State<_AssignmentForm> {
       FilledButton(
         onPressed: _loading || _saving ? null : _save,
         child: Text(_saving ? 'Calculando…' : 'Guardar asignación'),
+      ),
+    ],
+  );
+}
+
+class _ScheduleForm extends StatefulWidget {
+  const _ScheduleForm({required this.route});
+  final Map<String, dynamic> route;
+  @override
+  State<_ScheduleForm> createState() => _ScheduleFormState();
+}
+
+class _ScheduleFormState extends State<_ScheduleForm> {
+  late final RouteScheduleDraft _draft = RouteScheduleDraft(
+    initial: widget.route['inicio_planificado'],
+    serviceMinutes: widget.route['servicio_min_por_entrega'],
+  );
+  bool _saving = false;
+  String? _error;
+  Future<void> _save() async {
+    if (_draft.error != null) {
+      setState(() => _error = _draft.error);
+      return;
+    }
+    setState(() {
+      _saving = true;
+      _error = null;
+    });
+    try {
+      await ApiClient(context.read<AuthProvider>()).request(
+        '/routes/${widget.route['ruta_id']}/horario',
+        method: 'PUT',
+        body: _draft.payload,
+      );
+      if (mounted) Navigator.pop(context, true);
+    } catch (e) {
+      if (mounted) {
+        setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
+      }
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: const FormHeading(
+      'Horario de ruta',
+      'Programa la ocupación del equipo.',
+      Icons.edit_calendar_outlined,
+    ),
+    insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+    content: SizedBox(
+      width: 480,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '${widget.route['repartidor_nombre']} · ${widget.route['vehiculo_placa']}',
+            ),
+            const SizedBox(height: 16),
+            RouteScheduleInput(draft: _draft, enabled: !_saving),
+            if (_error != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Text(
+                  _error!,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ),
+          ],
+        ),
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: _saving ? null : () => Navigator.pop(context, false),
+        child: const Text('Cancelar'),
+      ),
+      FilledButton(
+        onPressed: _saving ? null : _save,
+        child: Text(_saving ? 'Guardando…' : 'Guardar horario'),
       ),
     ],
   );

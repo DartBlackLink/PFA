@@ -1,0 +1,15 @@
+
+test_01_login_delays_and_reset (__main__.Integration.test_01_login_delays_and_reset) ... ok
+test_02_unknown_identity_and_concurrency (__main__.Integration.test_02_unknown_identity_and_concurrency) ... ok
+test_03_session_expiry_and_rbac (__main__.Integration.test_03_session_expiry_and_rbac) ... ok
+test_04_vehicle_crud_validation (__main__.Integration.test_04_vehicle_crud_validation) ... ok
+test_05_driver_fields_update_and_disable (__main__.Integration.test_05_driver_fields_update_and_disable) ... ok
+test_06_route_owner_isolation (__main__.Integration.test_06_route_owner_isolation) ... ok
+test_07_orders_validation_and_persistence (__main__.Integration.test_07_orders_validation_and_persistence) ... ok
+test_08_assignment_map_details_and_ownership (__main__.Integration.test_08_assignment_map_details_and_ownership) ... ok
+test_09_schedule_shift_duration_conflicts_and_legacy (__main__.Integration.test_09_schedule_shift_duration_conflicts_and_legacy) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 9.854s
+
+OK
