@@ -1,0 +1,31 @@
+{
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "dataset": "150 synthetic orders, 15 vehicles, Euclidean km and 30 km/h, 8h windows",
+  "wall_ms": 7907.6,
+  "routes": 15,
+  "validated_deliveries": 150,
+  "stats": {
+    "seed": 42,
+    "generations": 40,
+    "evaluations": 866,
+    "elapsed_ms": 7903.36,
+    "baseline_feasible": true,
+    "baseline_objective": 0.6654338016864882,
+    "objective": 0.6641792543960527,
+    "algorithm": "GA_VRPTW_1",
+    "global_optimum_guaranteed": false
+  },
+  "scope": "solver only; excludes database, provider, network, rendering",
+  "parameters": {
+    "seed": 42,
+    "population": 24,
+    "generations": 40,
+    "mutation": 0.2,
+    "seconds": 8,
+    "distance_weight": 0.35,
+    "fuel_weight": 0.15,
+    "carbon_weight": 0.35,
+    "time_weight": 0.15
+  }
+}

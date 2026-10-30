@@ -1,4 +1,4 @@
-[README principal](../../README.md) | [Anterior](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) | [Siguiente](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
+[README principal](../../../../README.md) | [Anterior](02%20Registro%20de%20Impedimentos%20V_1_0_0.md) | [Siguiente](04%20Retrospectiva%20del%20Sprint%20V_1_0_0.md)
 
 # Revisión del Sprint
 
@@ -78,9 +78,9 @@ ADMIN selecciona repartidor, vehículo y 1-20 pedidos ordenados. La API valida r
 
 Prueba API 08: creación 201, duplicado 409, entrada inválida 422, acceso indebido denegado y fallo del proveedor 503 sin asignación parcial. El ejemplo real devolvió 2.709 km, 5.52 min y 57 puntos; corresponde a datos sintéticos de Huancayo.
 
-![Ruta consultada por administrador](evidencias/ruta-admin.jpg)
+![Ruta consultada por administrador](../../evidencias/ruta-admin.jpg)
 
-![Ruta propia del repartidor](evidencias/ruta-repartidor.jpg)
+![Ruta propia del repartidor](../../evidencias/ruta-repartidor.jpg)
 
 ### Pendientes
 
@@ -88,7 +88,7 @@ Los controles de aceptación se siguen en IMP-07-B/08. La ampliación funcional 
 
 ## Resultado y trazabilidad de la revisión
 
-La ejecución registrada reúne **9 pruebas API y 29 pruebas Flutter aprobadas**, análisis sin incidencias y compilación Web. [Detalle técnico](evidencias/VERIFICACION_TECNICA.md) y [mapa/asignación](evidencias/ASIGNACION_Y_MAPA.md). Los resultados son técnicos; el cómputo de SP aceptados y los acuerdos de la Review corresponden a su acta de aceptación.
+La ejecución registrada reúne **9 pruebas API y 29 pruebas Flutter aprobadas**, análisis sin incidencias y compilación Web. [Detalle técnico](../../evidencias/VERIFICACION_TECNICA.md) y [mapa/asignación](../../evidencias/ASIGNACION_Y_MAPA.md). Los resultados son técnicos; el cómputo de SP aceptados y los acuerdos de la Review corresponden a su acta de aceptación.
 
 ## Demostración ampliada del corte — 09/10/2026
 
@@ -99,13 +99,13 @@ La ejecución registrada reúne **9 pruebas API y 29 pruebas Flutter aprobadas**
 | S2-C09 | Revisar vehículos, repartidores y pedidos del conjunto ficticio. | 6 nuevas unidades con capacidades diferentes, 6 perfiles y 20 pedidos añadidos sin sustituir los anteriores. |
 | AD-C01 | Abrir los 20 recorridos y consultar rutas con las seis cuentas ficticias. | 20 destinos y geometrías distintos; reparto 4/4/3/3/3/3, cada cuenta consulta exclusivamente sus rutas. |
 
-[Interfaz y pruebas](evidencias/REVISION_UI_Y_PRUEBAS_20261009.md) · [Datos ficticios y totales](evidencias/DATOS_DE_PRUEBA_20261009.md). La asignación sigue siendo manual y el recorrido vial se obtiene del proveedor; estos casos no acreditan optimización genética, seguimiento GPS ni factibilidad de turnos.
+[Interfaz y pruebas](../../evidencias/REVISION_UI_Y_PRUEBAS_20261009.md) · [Datos ficticios y totales](../../evidencias/DATOS_DE_PRUEBA_20261009.md). La asignación sigue siendo manual y el recorrido vial se obtiene del proveedor; estos casos no acreditan optimización genética, seguimiento GPS ni factibilidad de turnos.
 
 ## Ajuste de alcance y disponibilidad — 09/10/2026
 
 US-002 móvil (3 SP) se traslada a Sprint 3 por decisión del responsable; S1/S2/S3 quedan en 19/19/22 SP. La base de identidad API/Web permanece en S1 y no se duplica el esfuerzo. El cierre S1 ya no incluye una demostración de APK.
 
-US-004 incorpora validación efectiva de la asignación: fecha y hora de salida, fin calculado con viaje y atención, turno completo del repartidor y rechazo de cruces del repartidor o vehículo. La API serializa solicitudes y no modifica pedidos al rechazar. Las rutas antiguas requieren registrar su horario mediante el calendario de Rutas. [Funcionamiento, pruebas y límites](evidencias/DISPONIBILIDAD_20261009.md).
+US-004 incorpora validación efectiva de la asignación: fecha y hora de salida, fin calculado con viaje y atención, turno completo del repartidor y rechazo de cruces del repartidor o vehículo. La API serializa solicitudes y no modifica pedidos al rechazar. Las rutas antiguas requieren registrar su horario mediante el calendario de Rutas. [Funcionamiento, pruebas y límites](../../evidencias/DISPONIBILIDAD_20261009.md).
 
 ## Historial de control de cambios
 
@@ -114,4 +114,4 @@ US-004 incorpora validación efectiva de la asignación: fecha y hora de salida,
 | 1.0.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Primera redacción de alcance, controles y criterios S1/S2. |
 | 1.0.0, revisión de entrega | 09/10/2026 | Jordy Steve Chancasanampa Torres | Consolidación de S1/S2 con fuentes sincronizadas, 29 pruebas Flutter, 9 API, mejoras UI y conjunto ficticio de 20 rutas. |
 
-[README principal](../../README.md)
+[README principal](../../../../README.md)

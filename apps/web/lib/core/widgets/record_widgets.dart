@@ -13,20 +13,47 @@ class StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final muted = ['INACTIVO', 'CANCELADO', 'DESACTIVADO'].contains(status);
+    final inactive = ['INACTIVO', 'CANCELADO', 'DESACTIVADO'].contains(status);
+    final waiting = ['PENDIENTE', 'PLANIFICADA'].contains(status);
+    final moving = ['ASIGNADO', 'EN_RUTA', 'EN_CURSO'].contains(status);
+    final background = inactive
+        ? scheme.surfaceContainerHighest
+        : waiting
+        ? scheme.secondaryContainer
+        : scheme.primaryContainer;
+    final foreground = inactive
+        ? scheme.onSurface
+        : waiting
+        ? scheme.onSecondaryContainer
+        : scheme.onPrimaryContainer;
+    final icon = inactive
+        ? Icons.remove_circle_outline
+        : waiting
+        ? Icons.schedule
+        : moving
+        ? Icons.alt_route
+        : Icons.check_circle_outline;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: muted ? scheme.surfaceContainerHighest : scheme.primaryContainer,
-        borderRadius: BorderRadius.circular(30),
+        color: background,
+        borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(
-        status.replaceAll('_', ' '),
-        style: TextStyle(
-          color: muted ? scheme.onSurface : scheme.onPrimaryContainer,
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: foreground, size: 14),
+          const SizedBox(width: 6),
+          Text(
+            status.replaceAll('_', ' '),
+            style: TextStyle(
+              color: foreground,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              letterSpacing: .2,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -50,7 +77,7 @@ class FormHeading extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title),
+            Text(title, style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 6),
             Text(
               subtitle,

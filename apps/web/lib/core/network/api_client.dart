@@ -6,8 +6,9 @@ import '../../features/auth/presentation/providers/auth_provider.dart';
 import '../config/env.dart';
 
 class ApiClient {
-  ApiClient(this.auth);
+  ApiClient(this.auth, {this.requestTimeout = const Duration(seconds: 15)});
   final AuthProvider auth;
+  final Duration requestTimeout;
   Future<dynamic> request(
     String path, {
     String method = 'GET',
@@ -24,7 +25,7 @@ class ApiClient {
                 : method == 'PUT'
                 ? http.put(uri, headers: headers, body: jsonEncode(body))
                 : http.get(uri, headers: headers))
-            .timeout(const Duration(seconds: 15));
+            .timeout(requestTimeout);
     if (response.statusCode == 401) {
       await auth.cerrarSesion(
         mensaje: 'Tu sesión venció. Inicia sesión nuevamente.',
@@ -34,6 +35,9 @@ class ApiClient {
     final data = jsonDecode(response.body);
     if (response.statusCode >= 400) {
       final detail = data is Map ? data['detail'] : null;
+      if (detail is Map && detail['mensaje'] is String) {
+        throw Exception(detail['mensaje']);
+      }
       if (detail is List) {
         throw Exception(
           detail

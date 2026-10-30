@@ -1,13 +1,27 @@
 from app.models.entities import (
-    Usuario, 
-    Vehiculo, 
-    Repartidor, 
-    Cliente, 
-    PreferenciaEntrega, 
-    Pedido, 
-    Ruta, 
-    RutaDetalle, 
-    Incidente, 
-    ReporteSostenibilidad, 
-    CompensacionCarbono
+    Cliente,
+    CompensacionCarbono,
+    Incidente,
+    Pedido,
+    PreferenciaEntrega,
+    Repartidor,
+    ReporteSostenibilidad,
+    Ruta,
+    RutaDetalle,
+    Usuario,
+    Vehiculo,
 )
+
+__all__ = [
+    "Cliente",
+    "CompensacionCarbono",
+    "Incidente",
+    "Pedido",
+    "PreferenciaEntrega",
+    "Repartidor",
+    "ReporteSostenibilidad",
+    "Ruta",
+    "RutaDetalle",
+    "Usuario",
+    "Vehiculo",
+]

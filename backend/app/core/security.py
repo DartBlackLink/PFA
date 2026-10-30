@@ -1,37 +1,42 @@
-from datetime import datetime, timedelta
-from passlib.context import CryptContext
-from jose import jwt
+"""Password and signed-session primitives; compatible with existing bcrypt hashes."""
+
+import uuid
+from datetime import datetime, timedelta, timezone
+
+import bcrypt
+import jwt
 
 from app.core.config import get_settings
 
-# Configuración del algoritmo de hashing bcrypt
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """
-    Verifica que la contraseña en texto plano coincida con el hash de la base de datos.
-    """
-    return pwd_context.verify(plain_password, hashed_password)
+    encoded = plain_password.encode("utf-8")
+    if not 1 <= len(encoded) <= 72:
+        return False
+    try:
+        return bcrypt.checkpw(encoded, hashed_password.encode("ascii"))
+    except (ValueError, TypeError, UnicodeError):
+        return False
+
 
 def get_password_hash(password: str) -> str:
-    """
-    Genera un hash seguro utilizando bcrypt para una nueva contraseña.
-    """
-    return pwd_context.hash(password)
+    encoded = password.encode("utf-8")
+    if not 8 <= len(encoded) <= 72:
+        raise ValueError("La contraseña debe tener entre 8 y 72 bytes UTF-8")
+    return bcrypt.hashpw(encoded, bcrypt.gensalt(rounds=12)).decode("ascii")
+
 
 def create_access_token(subject: str, role: str) -> str:
-    """
-    Crea un token JWT firmado para la sesión del usuario.
-    Inyecta la fecha de expiración y el identificador (email).
-    """
     settings = get_settings()
-    expire = datetime.utcnow() + timedelta(minutes=settings.access_token_expire_minutes)
-    
-    to_encode = {"exp": expire, "sub": str(subject), "rol": role}
-    
-    encoded_jwt = jwt.encode(
-        to_encode, 
-        settings.secret_key, 
-        algorithm=settings.algorithm
+    now = datetime.now(timezone.utc)
+    return jwt.encode(
+        {
+            "exp": now + timedelta(minutes=settings.access_token_expire_minutes),
+            "iat": now,
+            "jti": str(uuid.uuid4()),
+            "sub": str(subject),
+            "rol": role,
+        },
+        settings.secret_key,
+        algorithm=settings.algorithm,
     )
-    return encoded_jwt
