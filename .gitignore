@@ -62,3 +62,10 @@ Thumbs.db
 
 # Seguimiento local de la entrega
 /ACCIONES_PARA_LA_ENTREGA.md
+
+# Resultados locales de calidad y autenticación efímera
+/reports/
+.coverage
+**/.scannerwork/
+/sonar-token.local.txt
+/ui-scriptcode/

@@ -7,6 +7,7 @@ import '../../features/dashboard/presentation/screens/dashboard_screen.dart';
 import '../../features/auth/presentation/screens/repartidor_screen.dart';
 import '../../flota/presentation/screens/flota_screen.dart';
 import '../../features/auth/presentation/providers/auth_provider.dart';
+import '../../features/optimization/presentation/optimization_screen.dart';
 
 class AppRouter {
   static GoRouter crearRouter(AuthProvider authProvider) {
@@ -34,6 +35,11 @@ class AppRouter {
         return null;
       },
       routes: [
+        GoRoute(
+          path: '/optimization',
+          name: 'optimization',
+          builder: (context, state) => const OptimizationScreen(),
+        ),
         GoRoute(
           path: '/login',
           name: 'login',

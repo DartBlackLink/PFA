@@ -2,6 +2,8 @@
 
 # Artefactos Jira
 
+> **Control de cambio 30/10/2026:** esta versión 1.2.0 se conserva como línea base histórica. Sus IDs US y la propuesta S3 de 22 SP difieren del Jira reportado (EHAPP-13/US-005, optimización, 13 SP). Aplicar la [reconciliación explícita](../03%20Implementaci%C3%B3n/evidencias/RECONCILIACION_20261030.md); no reasignar historias ni declarar APK aceptada sin evidencia.
+
 | Campo | Valor |
 | --- | --- |
 | Proyecto | EcoLogística Huancayo - DistriRápido S.A.C. |

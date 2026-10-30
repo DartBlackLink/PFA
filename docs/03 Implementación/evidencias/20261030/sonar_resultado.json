@@ -1,0 +1,37 @@
+{
+  "project_key": "ecologisticas",
+  "date_lima": "2026-10-30T11:45:51-05:00",
+  "analysis_id": "aaabf7bf-fe6c-43be-b38d-8e41ba8eb4e3",
+  "task_id": "9d781306-23ca-4ccd-ae74-599cb86d29a4",
+  "task_status": "SUCCESS",
+  "gate": {
+    "status": "OK",
+    "conditions": [],
+    "ignoredConditions": false,
+    "caycStatus": "compliant"
+  },
+  "metrics": {
+    "coverage": "91.4",
+    "bugs": "0",
+    "reliability_rating": "1.0",
+    "code_smells": "0",
+    "duplicated_lines_density": "0.0",
+    "security_rating": "1.0",
+    "vulnerabilities": "0",
+    "security_hotspots": "0",
+    "sqale_rating": "1.0"
+  },
+  "open_issues": 0,
+  "server_version": "26.10.0",
+  "scanner_version": "5.0.2",
+  "profiles": {
+    "python": "Sonar way core",
+    "docker": "Sonar way core"
+  },
+  "scope": "backend/app, backend/migrations, backend/Dockerfile; Flutter verified separately",
+  "fingerprint": {
+    "source_files": 38,
+    "source_tree_sha256": "2088a78191a2df052e5e3ccc560241c55ca7b098f1323288c9da136e8579a27d",
+    "matches_development": true
+  }
+}

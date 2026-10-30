@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/network/api_client.dart';
 import '../../../core/widgets/record_widgets.dart';
@@ -88,6 +89,15 @@ class _RoutesScreenState extends State<RoutesScreen> {
             ),
             if (widget.admin)
               FilledButton.icon(
+                onPressed: () async {
+                  await context.push('/optimization');
+                  if (mounted) await _load();
+                },
+                icon: const Icon(Icons.auto_awesome_outlined),
+                label: const Text('Optimizar rutas'),
+              ),
+            if (widget.admin)
+              OutlinedButton.icon(
                 onPressed: _assign,
                 icon: const Icon(Icons.add_road),
                 label: const Text('Asignar pedidos'),

@@ -1,4 +1,5 @@
-import uuid
+from typing import Literal
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -9,17 +10,28 @@ from app.schemas import PedidoCreate, PedidoRead
 
 router = APIRouter()
 
+
 @router.get("/", response_model=list[PedidoRead])
-def read_pedidos(skip: int = Query(0,ge=0), limit: int = Query(100,ge=1,le=1000), db: Session = Depends(get_db)):
-    rows = db.execute(
+def read_pedidos(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1, le=1000),
+    estado: Literal["PENDIENTE", "ASIGNADO"] | None = Query(default=None),
+    db: Session = Depends(get_db),
+):
+    query = (
         select(Pedido, Cliente.nombre)
         .join(Cliente, Cliente.cliente_id == Pedido.cliente_id)
-        .offset(skip)
-        .limit(limit)
-    ).all()
+        .order_by(Pedido.ventana_inicio, Pedido.pedido_id)
+    )
+    if estado is not None:
+        query = query.where(Pedido.estado == estado)
+    rows = db.execute(query.offset(skip).limit(limit)).all()
     return [
         {
-            **{column.name: getattr(pedido, column.name) for column in Pedido.__table__.columns},
+            **{
+                column.name: getattr(pedido, column.name)
+                for column in Pedido.__table__.columns
+            },
             "cliente_nombre": cliente_nombre,
         }
         for pedido, cliente_nombre in rows
@@ -36,7 +48,7 @@ def create_pedido(pedido_in: PedidoCreate, db: Session = Depends(get_db)):
         cliente_id = cliente.cliente_id
 
     elif not db.get(Cliente, cliente_id):
-        raise HTTPException(422,"Cliente no encontrado.")
+        raise HTTPException(422, "Cliente no encontrado.")
 
     pedido = Pedido(
         cliente_id=cliente_id,
@@ -54,5 +66,10 @@ def create_pedido(pedido_in: PedidoCreate, db: Session = Depends(get_db)):
     db.add(pedido)
     db.commit()
     db.refresh(pedido)
-    return {**{column.name: getattr(pedido, column.name) for column in Pedido.__table__.columns},
-            "cliente_nombre": pedido_in.cliente_nombre}
+    return {
+        **{
+            column.name: getattr(pedido, column.name)
+            for column in Pedido.__table__.columns
+        },
+        "cliente_nombre": pedido_in.cliente_nombre,
+    }

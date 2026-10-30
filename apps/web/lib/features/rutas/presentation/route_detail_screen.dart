@@ -87,6 +87,8 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
   }
 
   Widget _details(Map<String, dynamic> r) {
+    final scheme = Theme.of(context).colorScheme;
+    final dark = Theme.of(context).brightness == Brightness.dark;
     final stops = (r['entregas'] as List).cast<Map<String, dynamic>>();
     final points = ((r['geometria']?['coordinates'] as List?) ?? [])
         .map((p) => LatLng(_number(p[1]), _number(p[0])))
@@ -114,11 +116,13 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
             child: Tooltip(
               message: '${s['secuencia']}. ${s['direccion']}',
               child: CircleAvatar(
-                backgroundColor: const Color(0xFF167D62),
+                backgroundColor: dark
+                    ? scheme.primary
+                    : const Color(0xFF167D62),
                 child: Text(
                   '${s['secuencia']}',
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: dark ? scheme.onPrimary : Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -210,7 +214,9 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                       polylines: [
                         Polyline(
                           points: points,
-                          color: const Color(0xFF167D62),
+                          color: dark
+                              ? scheme.primary
+                              : const Color(0xFF167D62),
                           strokeWidth: 5,
                         ),
                       ],

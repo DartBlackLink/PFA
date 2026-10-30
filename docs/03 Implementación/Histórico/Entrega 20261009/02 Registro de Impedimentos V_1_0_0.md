@@ -1,4 +1,4 @@
-[README principal](../../README.md) | [Anterior](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) | [Siguiente](03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
+[README principal](../../../../README.md) | [Anterior](01%20Informe%20de%20estado%20del%20proyecto%20V_1_0_0.md) | [Siguiente](03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md)
 
 # Registro de Impedimentos
 
@@ -53,13 +53,13 @@ Abierto → En curso → En verificación → Resuelto. Una regresión reabre el
 | IMP-11 | Menú fijo ocupaba espacio y conservaba verde independiente del tema. | Superficies del tema, modo de 248/80 px, selección y navegación comprobadas mediante dos pruebas. | Resuelto técnico, 09/10/2026 |
 | IMP-12 | PFA conservaba fuentes anteriores a las mejoras de interfaz. | Copia selectiva con respaldo, exclusión de configuraciones privadas y verificación de fuentes. | Resuelto técnico, 09/10/2026 |
 
-[Resultados del corte](evidencias/REVISION_UI_Y_PRUEBAS_20261009.md). Los controles externos de aceptación conservan sus IDs IMP-07-B/08; una corrección visual no acredita por sí sola toda la DoD.
+[Resultados del corte](../../evidencias/REVISION_UI_Y_PRUEBAS_20261009.md). Los controles externos de aceptación conservan sus IDs IMP-07-B/08; una corrección visual no acredita por sí sola toda la DoD.
 
 ## Ajuste de alcance y disponibilidad — 09/10/2026
 
 US-002 móvil (3 SP) se traslada a Sprint 3 por decisión del responsable; S1/S2/S3 quedan en 19/19/22 SP. La base de identidad API/Web permanece en S1 y no se duplica el esfuerzo. El cierre S1 ya no incluye una demostración de APK.
 
-US-004 incorpora validación efectiva de la asignación: fecha y hora de salida, fin calculado con viaje y atención, turno completo del repartidor y rechazo de cruces del repartidor o vehículo. La API serializa solicitudes y no modifica pedidos al rechazar. Las rutas antiguas requieren registrar su horario mediante el calendario de Rutas. [Funcionamiento, pruebas y límites](evidencias/DISPONIBILIDAD_20261009.md).
+US-004 incorpora validación efectiva de la asignación: fecha y hora de salida, fin calculado con viaje y atención, turno completo del repartidor y rechazo de cruces del repartidor o vehículo. La API serializa solicitudes y no modifica pedidos al rechazar. Las rutas antiguas requieren registrar su horario mediante el calendario de Rutas. [Funcionamiento, pruebas y límites](../../evidencias/DISPONIBILIDAD_20261009.md).
 
 ## Historial de control de cambios
 
@@ -68,4 +68,4 @@ US-004 incorpora validación efectiva de la asignación: fecha y hora de salida,
 | 1.0.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Primera redacción de alcance, controles y criterios S1/S2. |
 | 1.0.0, revisión de entrega | 09/10/2026 | Jordy Steve Chancasanampa Torres | Consolidación de S1/S2 con fuentes sincronizadas, 29 pruebas Flutter, 9 API, mejoras UI y conjunto ficticio de 20 rutas. |
 
-[README principal](../../README.md)
+[README principal](../../../../README.md)

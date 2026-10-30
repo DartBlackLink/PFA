@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import 'operation_overview.dart';
+
 import '../../../../core/network/api_client.dart';
+import '../../../../core/widgets/delivery_location_picker.dart';
 import '../../../../core/widgets/record_widgets.dart';
 import '../../../../core/theme/theme_controller.dart';
 import '../../../../core/widgets/operation_sidebar.dart';
@@ -130,7 +133,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              wide ? 'Centro de operaciones' : _sections[_section],
+              wide
+                  ? 'Operaciones / ${_sections[_section]}'
+                  : _sections[_section],
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
             if (wide)
@@ -150,7 +155,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             IconButton(
               tooltip: 'Cambiar tema',
               onPressed: theme.toggle,
-              icon: const Icon(Icons.brightness_6_outlined),
+              icon: Icon(
+                theme.isDark
+                    ? Icons.light_mode_outlined
+                    : Icons.dark_mode_outlined,
+              ),
             ),
           PopupMenuButton<String>(
             tooltip: 'Opciones de cuenta',
@@ -183,7 +192,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AnimatedSize(
-                  duration: const Duration(milliseconds: 200),
+                  duration: MediaQuery.disableAnimationsOf(context)
+                      ? Duration.zero
+                      : const Duration(milliseconds: 200),
                   alignment: Alignment.topLeft,
                   child: SizedBox(width: _menuCollapsed ? 80 : 248, child: nav),
                 ),
@@ -238,103 +249,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
       );
     }
     if (_section == 0) {
-      return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Tu operación de hoy',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Consulta tus pedidos, organiza al equipo y prepara las rutas de entrega.',
-            ),
-            const SizedBox(height: 24),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                final columns = constraints.maxWidth >= 1050
-                    ? 4
-                    : constraints.maxWidth >= 580
-                    ? 2
-                    : 1;
-                final width =
-                    (constraints.maxWidth - 16 * (columns - 1)) / columns;
-                return Wrap(
-                  spacing: 16,
-                  runSpacing: 16,
-                  children: [
-                    _metric(
-                      'Pedidos',
-                      _orders.length,
-                      Icons.inventory_2_outlined,
-                      width,
-                    ),
-                    _metric(
-                      'Repartidores activos',
-                      _drivers.where((e) => e['estado'] == 'ACTIVO').length,
-                      Icons.badge_outlined,
-                      width,
-                    ),
-                    _metric(
-                      'Vehículos activos',
-                      _vehicles.where((e) => e['estado'] == 'ACTIVO').length,
-                      Icons.local_shipping_outlined,
-                      width,
-                    ),
-                    _metric(
-                      'Rutas registradas',
-                      _routes.length,
-                      Icons.route_outlined,
-                      width,
-                    ),
-                  ],
-                );
-              },
-            ),
-            const SizedBox(height: 24),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Prepara tu próxima entrega',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '${countLabel(_orders.where((e) => e['estado'] == 'PENDIENTE').length, 'pedido pendiente', 'pedidos pendientes')} de asignación. Revisa el destino, elige al repartidor y consulta el recorrido.',
-                    ),
-                    const SizedBox(height: 20),
-                    Wrap(
-                      spacing: 12,
-                      runSpacing: 12,
-                      children: [
-                        FilledButton.icon(
-                          onPressed: _newOrder,
-                          icon: const Icon(Icons.add),
-                          label: const Text('Registrar pedido'),
-                        ),
-                        OutlinedButton.icon(
-                          onPressed: () => _select(2),
-                          icon: const Icon(Icons.route_outlined),
-                          label: const Text('Organizar rutas'),
-                        ),
-                        OutlinedButton.icon(
-                          onPressed: () => _select(3),
-                          icon: const Icon(Icons.badge_outlined),
-                          label: const Text('Ver equipo'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+      return OperationOverview(
+        orders: _orders,
+        drivers: _drivers,
+        vehicles: _vehicles,
+        routes: _routes,
+        onNewOrder: _newOrder,
+        onOrders: () => _select(1),
+        onRoutes: () => _select(2),
+        onTeam: () => _select(3),
+        onFleet: () => _select(4),
+        onOrderDetail: _orderDetail,
       );
     }
     final items = _orders
@@ -534,36 +459,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     ),
   );
 
-  Widget _metric(String title, int value, IconData icon, double width) =>
-      SizedBox(
-        width: width,
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Theme.of(context)
-                      .colorScheme
-                      .primaryContainer,
-                  foregroundColor: Theme.of(context)
-                      .colorScheme
-                      .onPrimaryContainer,
-                  child: Icon(icon),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  '$value',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                Text(title),
-              ],
-            ),
-          ),
-        ),
-      );
-
   Future<void> _newOrder() async {
     final saved = await showDialog<bool>(
       context: context,
@@ -583,32 +478,35 @@ class _OrderForm extends StatefulWidget {
 class _OrderFormState extends State<_OrderForm> {
   final _form = GlobalKey<FormState>();
   final _name = TextEditingController(),
-      _address = TextEditingController(),
       _weight = TextEditingController(),
       _product = TextEditingController(),
-      _latitude = TextEditingController(),
-      _longitude = TextEditingController(),
       _reference = TextEditingController();
-  DateTime _start = DateTime.now(),
-      _end = DateTime.now().add(const Duration(hours: 2));
+  DateTime _start = DateTime.now().toUtc().subtract(const Duration(hours: 5)),
+      _end = DateTime.now().toUtc().subtract(const Duration(hours: 3));
+  DeliveryLocation? _location;
   String _priority = 'ESTANDAR';
   String? _error;
   bool _saving = false;
   @override
   void dispose() {
-    for (final c in [
-      _name,
-      _address,
-      _weight,
-      _product,
-      _latitude,
-      _longitude,
-      _reference,
-    ]) {
+    for (final c in [_name, _weight, _product, _reference]) {
       c.dispose();
     }
     super.dispose();
   }
+
+  String _limaLabel(DateTime value) {
+    String pad(int n) => n.toString().padLeft(2, '0');
+    return '${pad(value.day)}/${pad(value.month)}/${value.year} ${pad(value.hour)}:${pad(value.minute)}';
+  }
+
+  String _limaUtc(DateTime value) => DateTime.utc(
+    value.year,
+    value.month,
+    value.day,
+    value.hour + 5,
+    value.minute,
+  ).toIso8601String();
 
   Future<void> _date(bool start) async {
     final current = start ? _start : _end;
@@ -634,6 +532,9 @@ class _OrderFormState extends State<_OrderForm> {
     setState(() {
       if (start) {
         _start = value;
+        if (!_end.isAfter(value)) {
+          _end = value.add(const Duration(hours: 2));
+        }
       } else {
         _end = value;
       }
@@ -642,6 +543,13 @@ class _OrderFormState extends State<_OrderForm> {
 
   Future<void> _save() async {
     if (!_form.currentState!.validate()) return;
+    if (_location == null) {
+      setState(
+        () =>
+            _error = 'Selecciona el punto y confirma la dirección de entrega.',
+      );
+      return;
+    }
     if (!_end.isAfter(_start)) {
       setState(
         () => _error = 'El fin de la ventana debe ser posterior al inicio.',
@@ -658,17 +566,17 @@ class _OrderFormState extends State<_OrderForm> {
         method: 'POST',
         body: {
           'cliente_nombre': _name.text.trim(),
-          'direccion': _address.text.trim(),
-          'latitud': double.parse(_latitude.text.replaceAll(',', '.')),
-          'longitud': double.parse(_longitude.text.replaceAll(',', '.')),
+          'direccion': _location!.address,
+          'latitud': _location!.point.latitude,
+          'longitud': _location!.point.longitude,
           'punto_referencia': _reference.text.trim().isEmpty
               ? null
               : _reference.text.trim(),
           'peso_kg': double.parse(_weight.text.replaceAll(',', '.')),
           'tipo_producto': _product.text.trim(),
           'prioridad': _priority,
-          'ventana_inicio': _start.toUtc().toIso8601String(),
-          'ventana_fin': _end.toUtc().toIso8601String(),
+          'ventana_inicio': _limaUtc(_start),
+          'ventana_fin': _limaUtc(_end),
           'estado': 'PENDIENTE',
         },
       );
@@ -702,7 +610,6 @@ class _OrderFormState extends State<_OrderForm> {
               const FormSection('Cliente y carga'),
               for (final field in [
                 (_name, 'Cliente'),
-                (_address, 'Dirección'),
                 (_product, 'Tipo de producto'),
               ])
                 Padding(
@@ -713,7 +620,7 @@ class _OrderFormState extends State<_OrderForm> {
                     decoration: InputDecoration(labelText: field.$2),
                     validator: (v) {
                       final length = v?.trim().length ?? 0;
-                      final min = field.$1 == _address ? 5 : 2;
+                      const min = 2;
                       final max = field.$1 == _product
                           ? 30
                           : field.$1 == _name
@@ -740,44 +647,17 @@ class _OrderFormState extends State<_OrderForm> {
                 },
               ),
               const SizedBox(height: 12),
-              const Text(
-                'Ubicación de entrega: usa las coordenadas del destino para dibujar el recorrido.',
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _latitude,
-                enabled: !_saving,
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true,
-                  signed: true,
+              const FormSection('Ubicación de entrega'),
+              AbsorbPointer(
+                absorbing: _saving,
+                child: DeliveryLocationPicker(
+                  onChanged: (value) {
+                    setState(() {
+                      _location = value;
+                      if (value != null) _error = null;
+                    });
+                  },
                 ),
-                decoration: const InputDecoration(
-                  labelText: 'Latitud de entrega',
-                ),
-                validator: (v) {
-                  final n = double.tryParse((v ?? '').replaceAll(',', '.'));
-                  return n == null || !n.isFinite || n < -90 || n > 90
-                      ? 'Latitud válida entre -90 y 90'
-                      : null;
-                },
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _longitude,
-                enabled: !_saving,
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true,
-                  signed: true,
-                ),
-                decoration: const InputDecoration(
-                  labelText: 'Longitud de entrega',
-                ),
-                validator: (v) {
-                  final n = double.tryParse((v ?? '').replaceAll(',', '.'));
-                  return n == null || !n.isFinite || n < -180 || n > 180
-                      ? 'Longitud válida entre -180 y 180'
-                      : null;
-                },
               ),
               const SizedBox(height: 12),
               TextFormField(
@@ -788,6 +668,11 @@ class _OrderFormState extends State<_OrderForm> {
                   labelText: 'Punto de referencia (opcional)',
                 ),
               ),
+              const FormSection('Prioridad y horario de entrega'),
+              const Text(
+                'Horario de Lima (UTC−5). El fin debe ser posterior al inicio.',
+              ),
+              const SizedBox(height: 12),
               DropdownButtonFormField<String>(
                 initialValue: _priority,
                 decoration: const InputDecoration(labelText: 'Prioridad'),
@@ -801,12 +686,12 @@ class _OrderFormState extends State<_OrderForm> {
               const SizedBox(height: 12),
               OutlinedButton(
                 onPressed: _saving ? null : () => _date(true),
-                child: Text('Inicio: ${friendlyDate(_start)}'),
+                child: Text('Inicio: ${_limaLabel(_start)}'),
               ),
               const SizedBox(height: 12),
               OutlinedButton(
                 onPressed: _saving ? null : () => _date(false),
-                child: Text('Fin: ${friendlyDate(_end)}'),
+                child: Text('Fin: ${_limaLabel(_end)}'),
               ),
               if (_error != null)
                 Padding(

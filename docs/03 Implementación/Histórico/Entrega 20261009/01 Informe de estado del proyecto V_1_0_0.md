@@ -1,4 +1,4 @@
-[README principal](../../README.md) | [Siguiente](02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
+[README principal](../../../../README.md) | [Siguiente](02%20Registro%20de%20Impedimentos%20V_1_0_0.md)
 
 # Informe de estado del proyecto
 
@@ -19,7 +19,7 @@ El documento presenta el avance técnico asociado al alcance de Sprint 1 y Sprin
 | Sprint 1 | Base técnica, identidad, sesión y bloqueo progresivo | US-001; EN-001-S1, EN-002-S1, EN-007-S1, EN-003-S1 | 19 |
 | Sprint 2 | Gestión válida de flota/repartidores, formularios y contrato API | US-003/004; EN-005-S2, EN-007-S2, EN-009-S2 | 19 |
 
-El alcance detallado se conserva en [Backlog y DoD](../02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_2_0.md). Los SP expresan planificación: el avance se informa por capacidades verificadas, sin convertir automáticamente pruebas aprobadas en SP aceptados.
+El alcance detallado se conserva en [Backlog y DoD](../../../02%20Planificaci%C3%B3n/01%20Transformando%20a%20%C3%A1gil%20V_1_2_0.md). Los SP expresan planificación: el avance se informa por capacidades verificadas, sin convertir automáticamente pruebas aprobadas en SP aceptados.
 
 ## Sprint 1
 
@@ -92,7 +92,7 @@ Ejecutar la demostración por escenarios ADMIN/REPARTIDOR, revisar los criterios
 
 ### Notas
 
-La base de demostración conserva datos sintéticos etiquetados. Los tiempos del mapa son estimaciones del recorrido planificado. [Verificación técnica](evidencias/VERIFICACION_TECNICA.md) y [asignación/mapa](evidencias/ASIGNACION_Y_MAPA.md) contienen el soporte de este informe.
+La base de demostración conserva datos sintéticos etiquetados. Los tiempos del mapa son estimaciones del recorrido planificado. [Verificación técnica](../../evidencias/VERIFICACION_TECNICA.md) y [asignación/mapa](../../evidencias/ASIGNACION_Y_MAPA.md) contienen el soporte de este informe.
 
 ## Consolidación técnica de ambos incrementos — 09/10/2026
 
@@ -104,13 +104,13 @@ La base de demostración conserva datos sintéticos etiquetados. Los tiempos del
 | Demostración adicional | 6 vehículos de 20 a 3000 kg, 6 repartidores, 20 pedidos y 20 rutas diferentes añadidos. Totales locales: 7 vehículos, 8 repartidores, 22 pedidos y 21 rutas. Datos ficticios, pedidos ASIGNADOS y rutas PLANIFICADAS. |
 | Entrega | apps/web, apps/mobile, backend y database alineados con las fuentes actuales. Los registros viven en PostgreSQL local; schema.sql distribuye estructura, sin exportar usuarios ni contraseñas. |
 
-[Pruebas y capturas actuales](evidencias/REVISION_UI_Y_PRUEBAS_20261009.md) · [Conjunto de demostración](evidencias/DATOS_DE_PRUEBA_20261009.md).
+[Pruebas y capturas actuales](../../evidencias/REVISION_UI_Y_PRUEBAS_20261009.md) · [Conjunto de demostración](../../evidencias/DATOS_DE_PRUEBA_20261009.md).
 
 ## Ajuste de alcance y disponibilidad — 09/10/2026
 
 US-002 móvil (3 SP) se traslada a Sprint 3 por decisión del responsable; S1/S2/S3 quedan en 19/19/22 SP. La base de identidad API/Web permanece en S1 y no se duplica el esfuerzo. El cierre S1 ya no incluye una demostración de APK.
 
-US-004 incorpora validación efectiva de la asignación: fecha y hora de salida, fin calculado con viaje y atención, turno completo del repartidor y rechazo de cruces del repartidor o vehículo. La API serializa solicitudes y no modifica pedidos al rechazar. Las rutas antiguas requieren registrar su horario mediante el calendario de Rutas. [Funcionamiento, pruebas y límites](evidencias/DISPONIBILIDAD_20261009.md).
+US-004 incorpora validación efectiva de la asignación: fecha y hora de salida, fin calculado con viaje y atención, turno completo del repartidor y rechazo de cruces del repartidor o vehículo. La API serializa solicitudes y no modifica pedidos al rechazar. Las rutas antiguas requieren registrar su horario mediante el calendario de Rutas. [Funcionamiento, pruebas y límites](../../evidencias/DISPONIBILIDAD_20261009.md).
 
 ## Historial de control de cambios
 
@@ -119,4 +119,4 @@ US-004 incorpora validación efectiva de la asignación: fecha y hora de salida,
 | 1.0.0 | 07/10/2026 | Jordy Steve Chancasanampa Torres | Primera redacción de alcance, controles y criterios S1/S2. |
 | 1.0.0, revisión de entrega | 09/10/2026 | Jordy Steve Chancasanampa Torres | Consolidación de S1/S2 con fuentes sincronizadas, 29 pruebas Flutter, 9 API, mejoras UI y conjunto ficticio de 20 rutas. |
 
-[README principal](../../README.md)
+[README principal](../../../../README.md)

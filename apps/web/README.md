@@ -1,18 +1,17 @@
-# Cliente Web
+# Cliente Web EcoLogística
 
-Copia del cliente Flutter actual, con destino Web: login por rol, administración de flota/repartidores/pedidos, asignaciones y mapa; incluye la vista web de repartidor existente.
-
-Desde esta carpeta:
+Cliente Flutter para administración y consulta de repartidor en navegador. La Web incluye gestión de recursos/pedidos, asignación manual, planificación genética con revisión y confirmación, y consulta de recorridos. Conserva la identidad visual aprobada y temas claro/oscuro.
 
 ```powershell
-Set-Content -Path .env -Value 'API_BASE_URL=http://127.0.0.1:8000/api/v1'
 flutter pub get
 flutter analyze
-flutter test
-flutter run -d chrome --web-port 8080
-# Distribución web:
-flutter build web
+flutter test --coverage
+flutter run -d chrome --web-port 8080 --dart-define=API_BASE_URL=http://127.0.0.1:8000/api/v1
+flutter build web --release --dart-define=API_BASE_URL=http://127.0.0.1:8000/api/v1
 ```
 
-Primero iniciar el backend siguiendo `../../backend/README.md`. Las credenciales son las configuradas en `backend/.env`. La API se configura en este `.env` del cliente; solo contiene la URL pública, nunca claves del servidor. No subir compilaciones ni archivos `.env`.
+Inicia primero el [backend](../../backend/README.md). API_BASE_URL es un valor público de compilación; usa HTTPS al distribuir. No se carga .env ni se empaquetan claves del servidor. Para otro entorno hay que recompilar con su URL y configurar sus orígenes permitidos en la API.
 
+Como administrador abre Rutas → Optimizar rutas, selecciona pedidos/equipos, configura salida, genera una propuesta y revisa destinos/ETA antes de confirmar. Los pedidos deben tener coordenadas y ventanas compatibles con la salida y los turnos. Generar no asigna; confirmar guarda y comprueba cambios.
+
+Las 58 pruebas de widgets/unidades incluyen login, formularios, temas, flota y GOLD de optimización a 360/768/1440 px. La validación Web no prueba una APK: [cliente móvil separado](../mobile/README.md). Consulta la [evidencia técnica](../../docs/03%20Implementaci%C3%B3n/evidencias/20261030/RESULTADOS.md).

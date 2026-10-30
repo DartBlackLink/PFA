@@ -1,22 +1,42 @@
+import re
 import uuid
 from datetime import datetime, time
 from decimal import Decimal
-import re
 from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    ValidationInfo,
+    field_validator,
+    model_validator,
+)
+
 
 class Token(BaseModel):
     access_token: str
-    token_type: str
+    token_type: Literal["bearer"] = "bearer"
     rol: str
 
 
-class VehiculoCreate(BaseModel):
+class ValidatedInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    @field_validator("*", mode="before")
+    @classmethod
+    def trim_non_secret_text(cls, value, info: ValidationInfo):
+        if isinstance(value, str) and info.field_name != "password":
+            return value.strip()
+        return value
+
+
+class VehiculoCreate(ValidatedInput):
     placa: str = Field(min_length=3, max_length=15)
     tipo: str = Field(min_length=2, max_length=30)
-    capacidad_kg: Decimal = Field(gt=0)
-    consumo_km_l: Decimal = Field(gt=0)
-    factor_emision_kg_km: Decimal = Field(ge=0)
+    capacidad_kg: Decimal = Field(gt=0, max_digits=10, decimal_places=2)
+    consumo_km_l: Decimal = Field(gt=0, max_digits=8, decimal_places=3)
+    factor_emision_kg_km: Decimal = Field(ge=0, max_digits=10, decimal_places=4)
     anio_fabricacion: int = Field(ge=1950, le=datetime.now().year + 1)
     estado: Literal["ACTIVO", "INACTIVO"] = "ACTIVO"
 
@@ -24,15 +44,18 @@ class VehiculoCreate(BaseModel):
     @classmethod
     def normalizar_placa(cls, value):
         value = value.strip().upper()
-        if not re.fullmatch(r"[A-Z0-9-]{3,15}", value): raise ValueError("Placa inválida")
+        if not re.fullmatch(r"[A-Z0-9-]{3,15}", value):
+            raise ValueError("Placa inválida")
         return value
 
     @field_validator("tipo")
     @classmethod
     def limpiar_tipo(cls, value):
-        value=value.strip()
-        if len(value)<2: raise ValueError("Tipo obligatorio")
+        value = value.strip()
+        if len(value) < 2:
+            raise ValueError("Tipo obligatorio")
         return value
+
 
 class VehiculoRead(BaseModel):
     vehiculo_id: uuid.UUID
@@ -45,47 +68,69 @@ class VehiculoRead(BaseModel):
     estado: str
     model_config = ConfigDict(from_attributes=True)
 
-class RepartidorCreate(BaseModel):
+
+class RepartidorCreate(ValidatedInput):
     usuario_id: uuid.UUID | None = None
     nombre: str = Field(min_length=2, max_length=160)
     dni: str = Field(pattern=r"^[0-9]{8}$")
     licencia: str = Field(min_length=3, max_length=30)
-    categoria_licencia: str = Field(min_length=2,max_length=20)
-    anios_experiencia: int = Field(ge=0,le=70)
-    contacto: str = Field(min_length=7,max_length=50)
+    categoria_licencia: str = Field(min_length=2, max_length=20)
+    anios_experiencia: int = Field(ge=0, le=70)
+    contacto: str = Field(min_length=7, max_length=50)
     disponible_desde: time
     disponible_hasta: time
-    origen_latitud: Decimal = Field(ge=-90,le=90)
-    origen_longitud: Decimal = Field(ge=-180,le=180)
-    estado: Literal["ACTIVO","INACTIVO"] = "ACTIVO"
-    correo: str | None = None
-    password: str | None = Field(default=None,min_length=8,max_length=72)
+    origen_latitud: Decimal = Field(ge=-90, le=90)
+    origen_longitud: Decimal = Field(ge=-180, le=180)
+    estado: Literal["ACTIVO", "INACTIVO"] = "ACTIVO"
+    correo: str | None = Field(default=None, max_length=254)
+    password: str | None = Field(default=None, min_length=8, max_length=72)
 
-    @field_validator("nombre","licencia","categoria_licencia","contacto")
+    @field_validator("origen_latitud", "origen_longitud")
+    @classmethod
+    def precision_coordenadas(cls, value):
+        return value.quantize(Decimal("0.000001"))
+
+    @field_validator("nombre", "licencia", "categoria_licencia", "contacto")
     @classmethod
     def limpiar(cls, value):
-        value=value.strip()
-        if not value:raise ValueError("Campo obligatorio")
+        value = value.strip()
+        if not value:
+            raise ValueError("Campo obligatorio")
         return value
 
     @field_validator("correo")
     @classmethod
     def validar_correo(cls, value):
-        if value is None:return None
-        value=value.strip().lower()
-        if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+",value):raise ValueError("Correo inválido")
+        if value is None:
+            return None
+        value = value.strip().lower()
+        local, separator, domain = value.partition("@")
+        labels = domain.split(".")
+        if (
+            not separator
+            or not local
+            or len(local) > 64
+            or "@" in domain
+            or len(labels) < 2
+            or not all(labels)
+            or any(character.isspace() for character in value)
+        ):
+            raise ValueError("Correo inválido")
         return value
 
     @field_validator("password")
     @classmethod
     def validar_password(cls, value):
-        if value is not None and len(value.encode("utf-8"))>72:raise ValueError("Contraseña demasiado larga")
+        if value is not None and len(value.encode("utf-8")) > 72:
+            raise ValueError("Contraseña demasiado larga")
         return value
 
     @model_validator(mode="after")
     def validar_turno(self):
-        if self.disponible_desde >= self.disponible_hasta:raise ValueError("Inicio debe ser anterior al fin de disponibilidad")
+        if self.disponible_desde >= self.disponible_hasta:
+            raise ValueError("Inicio debe ser anterior al fin de disponibilidad")
         return self
+
 
 class RepartidorRead(BaseModel):
     repartidor_id: uuid.UUID
@@ -102,37 +147,53 @@ class RepartidorRead(BaseModel):
     origen_longitud: Decimal | None
     estado: str
     correo: str | None = None
-    model_config=ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
 
-class PedidoCreate(BaseModel):
+
+class PedidoCreate(ValidatedInput):
     cliente_id: uuid.UUID | None = None
-    cliente_nombre: str | None = Field(default=None,min_length=2,max_length=160)
-    direccion: str = Field(min_length=5,max_length=255)
-    latitud: Decimal | None = Field(default=None,ge=-90,le=90)
-    longitud: Decimal | None = Field(default=None,ge=-180,le=180)
-    punto_referencia: str | None = Field(default=None,max_length=500)
-    peso_kg: Decimal = Field(gt=0,le=99999999)
+    cliente_nombre: str | None = Field(default=None, min_length=2, max_length=160)
+    direccion: str = Field(min_length=5, max_length=255)
+    latitud: Decimal = Field(ge=-90, le=90)
+    longitud: Decimal = Field(ge=-180, le=180)
+    punto_referencia: str | None = Field(default=None, max_length=500)
+    peso_kg: Decimal = Field(gt=0, le=99999999, max_digits=10, decimal_places=2)
     ventana_inicio: datetime
     ventana_fin: datetime
-    prioridad: Literal["ESTANDAR","ALTA","URGENTE"] = "ESTANDAR"
-    tipo_producto: str = Field(min_length=2,max_length=30)
-    estado: Literal["PENDIENTE","EN_RUTA","ENTREGADO","CANCELADO"] = "PENDIENTE"
+    prioridad: Literal["ESTANDAR", "ALTA", "URGENTE"] = "ESTANDAR"
+    tipo_producto: str = Field(min_length=2, max_length=30)
+    estado: Literal["PENDIENTE"] = "PENDIENTE"
 
-    @field_validator("cliente_nombre","direccion","tipo_producto")
+    @field_validator("latitud", "longitud")
     @classmethod
-    def limpiar_texto(cls,value):
-        if value is None:return None
-        value=value.strip()
-        if len(value)<2:raise ValueError("Campo obligatorio")
+    def precision_coordenadas(cls, value):
+        return value.quantize(Decimal("0.000001"))
+
+    @field_validator("cliente_nombre", "direccion", "tipo_producto")
+    @classmethod
+    def limpiar_texto(cls, value):
+        if value is None:
+            return None
+        value = value.strip()
+        if len(value) < 2:
+            raise ValueError("Campo obligatorio")
         return value
 
     @model_validator(mode="after")
     def validar_pedido(self):
-        if (self.latitud is None)!=(self.longitud is None):raise ValueError("Indica latitud y longitud juntas")
-        if not self.cliente_id and not self.cliente_nombre:raise ValueError("Indica el nombre del cliente")
-        if (self.ventana_inicio.tzinfo is None)!=(self.ventana_fin.tzinfo is None):raise ValueError("Usa la misma zona horaria en ambas fechas")
-        if self.ventana_fin<=self.ventana_inicio:raise ValueError("Fin debe ser posterior al inicio")
+        if len(self.direccion) < 5:
+            raise ValueError("Dirección de al menos 5 caracteres")
+        if not self.cliente_id and not self.cliente_nombre:
+            raise ValueError("Indica el nombre del cliente")
+        if (
+            self.ventana_inicio.utcoffset() is None
+            or self.ventana_fin.utcoffset() is None
+        ):
+            raise ValueError("Indica zona horaria en ambas fechas")
+        if self.ventana_fin <= self.ventana_inicio:
+            raise ValueError("Fin debe ser posterior al inicio")
         return self
+
 
 class PedidoRead(BaseModel):
     latitud: Decimal | None = None
@@ -150,7 +211,8 @@ class PedidoRead(BaseModel):
     estado: str
     model_config = ConfigDict(from_attributes=True)
 
-class RutaHorario(BaseModel):
+
+class RutaHorario(ValidatedInput):
     inicio_planificado: datetime
     servicio_min_por_entrega: int = Field(default=5, ge=0, le=120)
 
@@ -165,15 +227,18 @@ class RutaHorario(BaseModel):
 class RutaCreate(RutaHorario):
     vehiculo_id: uuid.UUID
     repartidor_id: uuid.UUID
-    pedidos: list[uuid.UUID] = Field(min_length=1,max_length=20)
+    pedidos: list[uuid.UUID] = Field(min_length=1, max_length=20)
 
     @field_validator("pedidos")
     @classmethod
-    def no_repetidos(cls,value):
-        if len(set(value))!=len(value):raise ValueError("No repitas pedidos")
+    def no_repetidos(cls, value):
+        if len(set(value)) != len(value):
+            raise ValueError("No repitas pedidos")
         return value
 
+
 class RutaRead(BaseModel):
+    plan_optimizacion_id: uuid.UUID | None = None
     inicio_planificado: datetime | None = None
     fin_planificado: datetime | None = None
     servicio_min_por_entrega: int | None = None

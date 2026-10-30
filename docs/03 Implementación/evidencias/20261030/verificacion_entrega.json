@@ -1,0 +1,10 @@
+{
+  "checked_versionable_files": 282,
+  "source_files_equal": 78,
+  "private_files_versionable": false,
+  "server_signing_key_found": false,
+  "sonar_token_found": false,
+  "diff_whitespace": "passed",
+  "branch": "codex/sprint3-20261030",
+  "head": "66f25c8"
+}

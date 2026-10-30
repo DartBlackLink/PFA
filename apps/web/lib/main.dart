@@ -1,6 +1,5 @@
 // Archivo: lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,7 +11,9 @@ import 'features/auth/presentation/providers/flota_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+
+  final themeController = ThemeController();
+  await themeController.ready;
 
   // Inyección global de dependencias (Múltiples Módulos)
   runApp(
@@ -22,7 +23,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => FlotaProvider(context.read<AuthProvider>()),
         ), // Inyección del módulo Flota
-        ChangeNotifierProvider(create: (_) => ThemeController()),
+        ChangeNotifierProvider.value(value: themeController),
       ],
       child: const EcoLogisticaWebApp(),
     ),
