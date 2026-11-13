@@ -5,7 +5,7 @@
 | Metadato | Valor |
 |---|---|
 | Responsable | Jordy Steve Chancasanampa Torres; modalidad individual. |
-| Versión del contenido | 1.2.0, 13/11/2026, America/Lima. Se conserva el nombre oficial del archivo. |
+| Versión del contenido | 1.2.1, 13/11/2026, America/Lima. Se conserva el nombre oficial del archivo. |
 | Código de entrega examinado | PFA, `ad8012c`; el código funcional no cambia con esta actualización documental. |
 | Antecedente ANTES disponible | `66f25c8`: consultas de rutas por registro y declaración de dotenv. No existe una campaña ambiental completa de ese commit. |
 | DESPUÉS disponible | Fuentes de PFA y ensayos históricos enlazados; desarrollo activo en D diferenciado. No se inventa una medición ambiental comparable. |
@@ -42,22 +42,89 @@ La huella digital del software y el CO₂ logístico de los vehículos se evalú
 
 ### 3.1 Optimización 1 — Consultas y serialización
 
-**ANTES:** el listado invocaba la serialización individual por ruta. Fragmento propio conservado en `66f25c8`:
+**Problema:** serializar una lista mediante consultas por registro repite trabajo. Estos recortes son código propio conservado, no una implementación nueva realizada al escribir el informe.
+
+**ANTES — `66f25c8`:** recursos recuperados dentro de la serialización de cada ruta:
+
+[Fuente exacta: backend/app/api/routes/routes.py, línea 20](https://github.com/DartBlackLink/PFA/blob/66f25c86403423db0678e6df6c6bb9e353052ef4/backend/app/api/routes/routes.py#L20)
 
 ```python
-driver=db.get(Repartidor,route.repartidor_id)
-vehicle=db.get(Vehiculo,route.vehiculo_id)
+    driver=db.get(Repartidor,route.repartidor_id);vehicle=db.get(Vehiculo,route.vehiculo_id)
 ```
 
-**DESPUÉS:** [results()](../../../backend/app/api/routes/routes.py) reúne recursos y detalles de todas las rutas del lote y luego serializa con esos datos. El [ensayo del 30/10](../evidencias/20261030/RESULTADOS.md) registró cuatro SELECT tanto para una como para cuatro rutas, sin autenticación.
+**DESPUÉS — `c53d5bc`:** cargar los repartidores de todo el lote. El archivo aplica el mismo patrón a vehículos y reúne los detalles por ruta:
 
-**Estado:** cambio implementado y probado históricamente. No existe conteo ANTES comparable para publicar una reducción porcentual ni se afirma una proyección mínima de todas las columnas implementada.
+[Fuente exacta: backend/app/api/routes/routes.py, línea 81](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/backend/app/api/routes/routes.py#L81)
+
+```python
+    drivers = {
+        row.repartidor_id: row
+        for row in db.scalars(
+            select(Repartidor).where(
+                Repartidor.repartidor_id.in_({r.repartidor_id for r in routes})
+            )
+        )
+    }
+```
+
+Después se reutilizan esos datos para construir la respuesta:
+
+[Fuente exacta: backend/app/api/routes/routes.py, línea 107](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/backend/app/api/routes/routes.py#L107)
+
+```python
+    return [_route_data(route, drivers, vehicles, details) for route in routes]
+```
+
+**Qué demuestra:** se sustituyeron lecturas por registro por tres cargas relacionadas y la consulta de rutas, conservando el filtro de propietario. El número de consultas se comprueba con esta instrumentación de regresión:
+
+[Prueba de regresión, línea 344](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/backend/tests/test_optimization_api.py#L344)
+
+```python
+    counts = []
+    for size in (1, 4):
+        calls = []
+
+        def count(connection, cursor, statement, parameters, context, many):
+            if statement.lstrip().upper().startswith("SELECT"):
+                calls.append(statement)
+
+        event.listen(engine, "before_cursor_execute", count)
+        try:
+            with SessionLocal() as db:
+                routes = db.scalars(
+                    select(Ruta)
+                    .where(Ruta.repartidor_id == uuid.UUID(driver["repartidor_id"]))
+                    .limit(size)
+                )
+                data = results(routes, db)
+                assert len(data) == size
+        finally:
+            event.remove(engine, "before_cursor_execute", count)
+        counts.append(len(calls))
+    assert counts == [4, 4]
+```
+
+**Resultado ejecutado:** el [corte del 30/10](../evidencias/20261030/RESULTADOS.md) registra cuatro SELECT para una y cuatro rutas. La prueba excluye autenticación. Se muestra evidencia histórica; no se reejecutó al editar este documento ni acredita ahorro energético medido.
 
 ### 3.2 Optimización 2 — Paginación de datos
 
 **ANTES/DESPUÉS observado:** el endpoint original ya tenía `skip` y `limit`; PFA conserva límites, pero la Web consulta hasta 1000 registros. No se presenta como una paginación nueva de 12 registros tomada del ejemplo.
 
 **Estado:** parcial. Debe evaluarse carga de páginas bajo demanda, payload y respuesta con los mismos registros y permisos. Cambiarlo requiere una intervención de código posterior, no realizada en este informe.
+
+**Código actual que permite comprobar el diagnóstico** (fragmento de la colección de solicitudes, no un DESPUÉS correctivo):
+
+[Fuente exacta: apps/web/lib/features/dashboard/presentation/screens/dashboard_screen.dart, línea 81](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/apps/web/lib/features/dashboard/presentation/screens/dashboard_screen.dart#L81)
+
+```dart
+          '/orders/?limit=1000',
+          '/drivers/?limit=1000',
+          '/vehicles/?limit=1000',
+          '/routes/?limit=1000',
+```
+
+Los límites de 1000 existen en el código; una búsqueda local o una tabla visible no prueba que se haya descargado solo una página.
+
 
 ### 3.3 Optimización 3 — Imágenes, fuentes y recursos estáticos
 
@@ -73,19 +140,86 @@ vehicle=db.get(Vehiculo,route.vehiculo_id)
 
 ### 3.5 Optimización 5 — Dependencias y APIs
 
-**ANTES:** `66f25c8:apps/web/pubspec.yaml` declaraba `flutter_dotenv` y `.env` como asset. **DESPUÉS:** el [pubspec actual](../../../apps/web/pubspec.yaml) ya no los declara y el build histórico verificó ausencia de configuración privada empaquetada.
+**ANTES — `66f25c8`:** la URL se consultaba desde dotenv y el manifiesto incluía su dependencia:
 
-**Estado:** retiro verificable; no existe un antes/después equivalente del bundle que permita cuantificar ahorro. Se conservan las dependencias funcionales y no se inventa su peso evitado.
+[Fuente exacta: apps/web/lib/core/config/env.dart, línea 6](https://github.com/DartBlackLink/PFA/blob/66f25c86403423db0678e6df6c6bb9e353052ef4/apps/web/lib/core/config/env.dart#L6)
+
+```dart
+    final url = dotenv.env['API_BASE_URL'];
+```
+
+[Fuente exacta: apps/web/pubspec.yaml, línea 25](https://github.com/DartBlackLink/PFA/blob/66f25c86403423db0678e6df6c6bb9e353052ef4/apps/web/pubspec.yaml#L25)
+
+```yaml
+  flutter_dotenv: ^5.1.0
+```
+
+El mismo manifiesto declaraba `.env` como asset. El diff entre las versiones propias elimina estas tres líneas:
+
+```diff
+-  flutter_dotenv: ^5.1.0
+-  assets:
+-    - .env
+```
+
+[Diff completo y verificable](https://github.com/DartBlackLink/PFA/compare/66f25c86403423db0678e6df6c6bb9e353052ef4...c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251) — limitar la revisión a `apps/web/pubspec.yaml` y `apps/web/lib/core/config/env.dart`; esa comparación incluye otros cambios históricos que no se adjudican a esta optimización.
+
+**DESPUÉS — `c53d5bc`:** la URL pública se recibe como configuración de compilación; el resto del getter valida su formato:
+
+[Fuente exacta: apps/web/lib/core/config/env.dart, línea 3](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/apps/web/lib/core/config/env.dart#L3)
+
+```dart
+  static const _configured = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'http://127.0.0.1:8000/api/v1',
+  );
+```
+
+**Qué demuestra:** retiro de la dependencia/recurso y cambio del mecanismo de configuración. No demuestra un tamaño ahorrado. El [artefacto inspeccionado](../evidencias/20261030/verificacion_build.json) registra `dotenv_asset: false` y `private_configuration_packaged: false` para su propio corte; no contiene valores privados en estos fragmentos.
 
 ### 3.6 Optimización 6 — Reducción de solicitudes HTTP
 
 **Diagnóstico:** paneles ADMIN/REPARTIDOR actualizan cada 10 s. La [caché de matrices](../../../backend/app/services/matrix.py) devuelve `provider_calls: 0` cuando hay un acierto válido, pero esto no significa cero solicitudes del navegador.
+
+**Estado actual visible en código:**
+
+[Fuente exacta: apps/web/lib/features/dashboard/presentation/screens/dashboard_screen.dart, línea 58](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/apps/web/lib/features/dashboard/presentation/screens/dashboard_screen.dart#L58)
+
+```dart
+    _refreshTimer = Timer.periodic(
+      const Duration(seconds: 10),
+      (_) => _load(silent: true),
+    );
+```
+
+El temporizador explica por qué sigue pendiente medir el trabajo periódico; no se presenta como reducción aplicada.
 
 **Estado:** medir peticiones por la misma tarea e intervalo y evaluar actualización selectiva/visibilidad de pestaña. Cualquier mejora debe conservar avisos, acuse de ruta y datos actuales. No se afirma que se hayan implantado SVG inline o eliminado todas las peticiones redundantes.
 
 ### 3.7 Optimización 7 — Caché de API, matrices y estáticos
 
 **Control presente en PFA:** cuatro matrices, TTL 300 s, bloques de 40 orígenes/destinos y hasta cuatro trabajadores. La clave incluye proveedor y coordenadas; no implica tráfico en vivo.
+
+**Código vigente en PFA — acierto de caché** (implementación existente; no un ANTES/DESPUÉS de rendimiento medido):
+
+[Fuente exacta: backend/app/services/matrix.py, línea 64](https://github.com/DartBlackLink/PFA/blob/c53d5bcfec4b59a3c4e0e50038b8f9be67ad7251/backend/app/services/matrix.py#L64)
+
+```python
+        entry = _cache.get(key)
+        if entry and now - entry[0] < TTL_SECONDS:
+            _cache.move_to_end(key)
+            return (
+                entry[1],
+                entry[2],
+                {
+                    "provider_calls": 0,
+                    "cache_hit": True,
+                    "age_seconds": round(now - entry[0], 2),
+                },
+            )
+```
+
+**Qué demuestra:** con clave y edad válidas devuelve la matriz guardada e informa cero llamadas al proveedor para esa recuperación. No significa cero solicitudes del navegador ni garantiza que toda operación encuentre caché.
 
 **Cambio posterior de D:** se verificó entrada Web con hash y cabeceras de revalidación. Es una corrección de versión servida; no se presume sincronizada a PFA ni se presenta como caché inmutable o ahorro medido. Comparar frío/caliente por separado y no compartir respuestas privadas entre usuarios.
 
@@ -170,6 +304,7 @@ Histórico `66f25c8` → evidencia técnica del 30/10 → consolidación PFA `c5
 | 1.0.0 | 30/10/2026 | Diagnóstico y controles iniciales. |
 | 1.1.0 | 13/11/2026 | Corrección de afirmaciones antiguas y vínculo con S4. |
 | 1.2.0 | 13/11/2026 | Estructura directa del Informe 01 de la guía: ocho apartados individuales, comparación, modelo ambiental, evidencia y Git; datos propios y límites explícitos. |
+| 1.2.1 | 13/11/2026 | Fragmentos literales ANTES/DESPUÉS, diff de manifiesto, prueba SQL y código vigente de consultas/refresco/caché con enlaces permanentes. |
 
 ## 8. Límites generales del informe
 

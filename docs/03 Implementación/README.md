@@ -11,7 +11,7 @@ Los informes de estado corresponden a un único sprint. Cada carpeta conserva su
 
 [Resultados del 30/10](evidencias/20261030/RESULTADOS.md) · [matriz académica](evidencias/20261030/MATRIZ_DE_CUMPLIMIENTO.md) · [inspección UI](evidencias/20261030/INSPECCION_UI.md) · [acciones externas](evidencias/20261030/ACCIONES_EXTERNAS.md).
 
-Informes Green IT de semana 13, **revisados el 13/11/2026 (contenido 1.2.0)** y vinculados al Sprint 4: [impacto ambiental](reduccion%20del%20impacto%20ambiental/01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md) y [estándares](reduccion%20del%20impacto%20ambiental/02%20Estandares%20Ingenier%C3%ADa%20de%20software%20V_1_0_0.md).
+Informes Green IT de semana 13, **revisados el 13/11/2026 (contenido 1.2.1)** y vinculados al Sprint 4: [impacto ambiental](reduccion%20del%20impacto%20ambiental/01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md) y [estándares](reduccion%20del%20impacto%20ambiental/02%20Estandares%20Ingenier%C3%ADa%20de%20software%20V_1_0_0.md).
 
 - [Reconciliación de IDs, alcance e impedimentos](evidencias/RECONCILIACION_20261030.md).
 - [Entrega histórica combinada](Hist%C3%B3rico/Entrega%2020261009/README.md).

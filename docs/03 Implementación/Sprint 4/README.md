@@ -1,6 +1,6 @@
 # Sprint 4 — Mapa, indicadores y validación del rendimiento
 
-**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Versión documental:** 1.0.2. **Fecha:** 13/11/2026.
+**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Versión documental:** 1.0.3. **Fecha:** 13/11/2026.
 
 Expediente documental preparatorio. El responsable aceptó el alcance sugerido: EHAPP-15/US-006, EHAPP-16/US-007 y EHAPP-14/EN-002, **15 SP propuestos**. Jira todavía no contiene un Sprint 4: no se atribuyen fechas oficiales, historias aceptadas ni una reunión de cierre. Esta intervención prepara documentos; no implementa funciones ni ejecuta pruebas nuevas del producto.
 
@@ -37,10 +37,12 @@ Zona: Huancayo, El Tambo, Chilca y alrededores urbanos aprobados de Pilcomayo, S
 
 ## Green IT y estándares de ingeniería
 
-Los dos informes existentes se actualizaron el 13/11/2026 a contenido **1.2.0**, conservando sus nombres y ubicación de entrega. Se sigue el orden de los dos informes concretos del GitHub de ejemplo: diagnóstico, ocho optimizaciones individuales, comparación, modelo ambiental, evidencias y versionamiento; ISO, GSF, WSG, guía por capa y matriz de correspondencia se adaptan a Flutter/FastAPI/PostgreSQL con resultados propios.
+Los dos informes existentes se actualizaron el 13/11/2026 a contenido **1.2.1**, conservando sus nombres y ubicación de entrega. Se sigue el orden de los dos informes concretos del GitHub de ejemplo: diagnóstico, ocho optimizaciones individuales, comparación, modelo ambiental, evidencias y versionamiento; ISO, GSF, WSG, guía por capa y matriz de correspondencia se adaptan a Flutter/FastAPI/PostgreSQL con resultados propios.
 
 - [Informe de reducción del impacto ambiental](../reduccion%20del%20impacto%20ambiental/01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md).
 - [Estándares de ingeniería y guía de desarrollo verde](../reduccion%20del%20impacto%20ambiental/02%20Estandares%20Ingenier%C3%ADa%20de%20software%20V_1_0_0.md).
+
+El Informe 01 muestra código propio ANTES/DESPUÉS, la prueba SQL y fragmentos actuales con enlaces permanentes a sus commits.
 
 No se declara un ahorro de energía o CO₂ digital sin un ANTES/DESPUÉS comparable. La organización sigue la guía de clase y el ejemplo; los resultados y límites corresponden a EcoLogística Huancayo.
 

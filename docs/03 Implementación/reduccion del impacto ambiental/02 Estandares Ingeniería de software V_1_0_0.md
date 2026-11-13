@@ -5,7 +5,7 @@
 | Metadato | Valor |
 |---|---|
 | Responsable | Jordy Steve Chancasanampa Torres; modalidad individual, sin revisor ficticio. |
-| Versión del contenido | 1.2.0, 13/11/2026, America/Lima. Se conserva el nombre oficial del archivo. |
+| Versión del contenido | 1.2.1, 13/11/2026, America/Lima. Se conserva el nombre oficial del archivo. |
 | Código de entrega examinado | PFA `ad8012c`; desarrollo activo D diferenciado. |
 | Guía de estructura | [Informe 02 del ejemplo](https://github.com/JulioNaupariC/EcoLog-stica-Lima/blob/main/docs/03%20Implementaci%C3%B3n/reduccion%20del%20impacto%20ambiental/02%20Estandares%20Ingenier%C3%ADa%20de%20software%20V_1_0_0.md); sus personas, tickets y cifras no se trasladan a EHAPP. |
 
@@ -78,6 +78,19 @@ En esa publicación, 1.2 trata las capas de orientación, 2.4 los recorridos de 
 | Justificar paquetes, fuentes, iconos y medios. | pubspec y artefacto con sus versiones; no usar conclusiones de React/Vite para Dart. |
 | Confirmar el build servido y la caché real. | Hash/cabeceras y recuperación; la corrección de D no se presume incorporada a PFA. |
 
+### 5.3 Evidencia de código que respalda la documentación
+
+El Informe 01 incorpora fragmentos literales y enlaces con commit/línea, verificados contra Git. Son recortes explicativos; el código completo y sus importaciones permanecen en sus archivos originales.
+
+| Cambio o diagnóstico | Dónde verlo | Qué permite demostrar |
+|---|---|---|
+| Consultas por registro → cargas por lote | [Informe 01, apartado 3.1](01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md#31-optimización-1--consultas-y-serialización) | Código de ambos commits, serialización actual y prueba `counts == [4, 4]`. |
+| Dotenv/asset → configuración de compilación | Informe 01, apartado 3.5; `env.dart` y diff de `pubspec.yaml`. | Líneas retiradas y mecanismo público vigente; no ahorro de bytes inventado. |
+| Caché existente | Informe 01, apartado 3.7; `matrix.py`. | Guarda/recupera por clave y edad; no demuestra un porcentaje ambiental. |
+| Carga de 1000 y refresco de 10 s | Informe 01, apartados 3.2/3.6; `dashboard_screen.dart`. | Estado actual que sustenta una mejora pendiente; no corrección implementada. |
+
+Cada corrección se explica como **problema → ANTES → DESPUÉS → efecto verificable → prueba/resultado**. Cuando no existe una corrección acreditada, se muestra el estado actual o se conserva la propuesta, sin fabricar un DESPUÉS para completar las ocho áreas.
+
 ## 6. Matriz de mapeo directo de las ocho optimizaciones
 
 | N.º / área del Informe 01 | Calidad pretendida | Principio GSF | Correspondencia WSG | Evidencia propia / estado |
@@ -117,5 +130,6 @@ Fuentes normativas y técnicas enlazadas en sus apartados: ISO 25010/12207/29119
 | 1.0.0 | 30/10/2026 | Relación inicial de estándares. |
 | 1.1.0 | 13/11/2026 | Actualización de referencias, guía verde y relación S4. |
 | 1.2.0 | 13/11/2026 | Organización directa del Informe 02 de la guía: ISO, GSF, SCI/SWDM, WSG, reglas por capa, matriz de ocho áreas y cierre, adaptados a Flutter. |
+| 1.2.1 | 13/11/2026 | Correspondencia explícita entre las prácticas, sus cambios históricos, fragmentos de código y pruebas. |
 
 [Informe 01](01%20Informe%20de%20reduccion%20del%20impacto%20ambiental%20V_1_0_0.md) · [Sprint 4](../Sprint%204/README.md) · [Índice de implementación](../README.md)
