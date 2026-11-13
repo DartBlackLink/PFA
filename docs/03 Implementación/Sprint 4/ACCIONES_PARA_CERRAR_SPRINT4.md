@@ -33,6 +33,17 @@ Después de ejecutar cada caso, guardar archivos con nombres descriptivos y fech
 
 Antes de capturar: ocultar claves, tokens y datos personales; mostrar el contexto necesario, unidades, estado y versión. Las coordenadas deben ser de puntos públicos autorizados de Huancayo. Una captura del mapa no reemplaza la medición; el benchmark necesita resultados crudos. No reutilizar imágenes de Lima ni imágenes del ejemplo como evidencia propia.
 
+### Medición Green IT y estándares
+
+Los informes actualizados permanecen en `../reduccion del impacto ambiental/`. Para acreditar su parte cuantitativa:
+
+1. Acordar una versión base y una candidata y la misma tarea de consulta de plan/mapa/dashboard; identificar datos, hardware, navegador y build servido. No reconstruir un ANTES ficticio.
+2. Capturar al menos cinco repeticiones en caché fría y caliente: bytes, peticiones, tiempos, consultas SQL y CPU/RAM. Guardar la configuración y los resultados desfavorables.
+3. Evaluar las oportunidades detectadas: carga de hasta 1000 elementos, refresco de 10 s, creación de listas y recursos/compresión. No declararlas optimizadas sin implementar y medir un cambio autorizado.
+4. Si se estiman emisiones digitales, definir límites y unidad funcional, instrumento/modelo, energía, intensidad de carbono y hardware. Separarlas de los litros/kg CO₂ estimados de los vehículos.
+5. Guardar la evidencia ambiental seleccionada dentro de `reduccion del impacto ambiental/evidencias/` cuando exista; su carpeta y archivos de medición no se inventan en este corte. Enlazar desde los dos informes y conservar datos crudos saneados.
+6. Registrar la versión de las referencias empleadas. WSG es un borrador; ISO, OWASP y WCAG no se declaran certificados solo por citarse. Mantener separados Sonar histórico, cobertura local y mediciones ambientales.
+
 ## 4. Review, retrospectiva y publicación
 
 Registrar fecha, asistentes reales, criterios demostrados, feedback y decisión por historia. En la retrospectiva completar problemas efectivamente encontrados durante la ejecución, corrección comprobada, aprendizaje y compromisos con responsable y hito. Mantener la reflexión preparatoria del 13/11 como corte identificado.
