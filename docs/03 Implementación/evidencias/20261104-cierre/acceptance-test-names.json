@@ -1,0 +1,11 @@
+[
+  "test_unhappy_capacity_no_false_feasible_route",
+  "test_gold_preview_confirm_consult_and_owner_routes",
+  "test_confirmation_is_idempotent_under_concurrency",
+  "test_stale_preview_cannot_change_orders_or_create_partial_routes[order]",
+  "test_stale_preview_cannot_change_orders_or_create_partial_routes[capacity]",
+  "test_stale_preview_cannot_change_orders_or_create_partial_routes[shift]",
+  "test_expired_plan_rejected_and_preview_consultable",
+  "test_unhappy_capacity_window_provider_and_invalid_resources",
+  "test_gold_versions_keep_completed_deliveries_and_require_receipt"
+]

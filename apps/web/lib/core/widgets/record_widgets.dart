@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 String friendlyDate(Object? value) {
-  final date = DateTime.tryParse(value?.toString() ?? '')?.toLocal();
+  final date = DateTime.tryParse(value?.toString() ?? '')
+      ?.toUtc()
+      .subtract(const Duration(hours: 5));
   if (date == null) return 'Sin fecha';
   String pad(int n) => n.toString().padLeft(2, '0');
   return '${pad(date.day)}/${pad(date.month)}/${date.year} ${pad(date.hour)}:${pad(date.minute)}';
@@ -44,13 +46,15 @@ class StatusBadge extends StatelessWidget {
         children: [
           Icon(icon, color: foreground, size: 14),
           const SizedBox(width: 6),
-          Text(
-            status.replaceAll('_', ' '),
-            style: TextStyle(
-              color: foreground,
-              fontSize: 11,
-              fontWeight: FontWeight.w700,
-              letterSpacing: .2,
+          Flexible(
+            child: Text(
+              status.replaceAll('_', ' '),
+              style: TextStyle(
+                color: foreground,
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                letterSpacing: .2,
+              ),
             ),
           ),
         ],

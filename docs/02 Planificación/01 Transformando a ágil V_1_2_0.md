@@ -15,7 +15,7 @@
 
 ## Alcance y fuentes de evidencia
 
-EcoLogística Huancayo es la propuesta del estudiante; el escenario de evaluación sigue siendo Lima (San Juan de Lurigancho, El Agustino, Santa Anita y Ate), con RF-01 a RF-10, RNF-01 a RNF-07 y RES-01 a RES-12. Los mapas de Huancayo son una demo adicional.
+La entrega implementa EcoLogística en Huancayo, Junín, y su entorno urbano definido. La consigna original planteó Lima (San Juan de Lurigancho, El Agustino, Santa Anita y Ate) y se conserva como antecedente académico. La adaptación mantiene RF-01 a RF-10, RNF-01 a RNF-07 y RES-01 a RES-12 como alcance objetivo.
 
 Arquitectura objetivo: Web ADMIN con preferencias CLIENTE (RF-09), móvil REPARTIDOR, FastAPI y PostgreSQL. Este documento define el diseño y sus criterios de validación. La trazabilidad del incremento se registra en los cuatro documentos de Implementación y sus evidencias.
 
@@ -168,7 +168,7 @@ Como **Administrador**, quiero **registrar pedidos completos y georreferenciados
 
 **Aceptación principal**
 
-- **Dado** un cliente y coordenadas confirmadas en Lima.
+- **Dado** un cliente y coordenadas confirmadas en la zona operativa de Huancayo.
 - **Cuando** se registra un pedido de 10 kg y 0.1 m³ con ventana 09:00 a 11:00.
 - **Entonces** se guarda el pedido con datos completos y queda disponible para planificación.
 
@@ -224,11 +224,11 @@ Como **Administrador**, quiero **ejecutar el algoritmo genético con recursos y 
 
 **Épica:** EP-05. **Requisito:** RF-04. **Sprint objetivo:** S5. **Estimación:** 8 SP. **Estado de planificación:** To Do; cierre conforme a BDD y DoD.
 
-Como **Administrador**, quiero **consultar rutas, ETA y capas de contexto**, para **supervisar la planificación de Lima**.
+Como **Administrador**, quiero **consultar rutas, ETA y capas de contexto**, para **supervisar la planificación de Huancayo**.
 
 **Aceptación principal**
 
-- **Dado** un plan válido de Lima.
+- **Dado** un plan válido de Huancayo.
 - **Cuando** ADMIN abre el mapa.
 - **Entonces** se muestran trazado, paradas, ETA, límites y origen de los datos; consultar no modifica la asignación.
 

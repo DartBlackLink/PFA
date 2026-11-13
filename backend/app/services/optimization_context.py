@@ -6,11 +6,13 @@ import math
 from datetime import datetime, time, timedelta, timezone
 
 from fastapi import HTTPException
-from sqlalchemy import or_, select
+from sqlalchemy import or_, select, text
 
 from app.models.entities import Pedido, Repartidor, Ruta, RutaDetalle, Usuario, Vehiculo
 from app.services.genetic import Delivery, Rules, Team
+from app.services.operation_area import contains
 from app.services.scheduling import ACTIVE, LIMA
+from app.services.traffic import policy_snapshot
 
 
 def minute_offset(value, origin):
@@ -18,6 +20,8 @@ def minute_offset(value, origin):
 
 
 def valid_coordinates(latitude, longitude):
+    if not contains(latitude, longitude):
+        raise HTTPException(422, 'Una ubicación está fuera de Huancayo y sus alrededores habilitados; corrígela antes de planificar.')
     if latitude is None or longitude is None:
         raise HTTPException(
             422, "Todos los orígenes y pedidos necesitan coordenadas confirmadas."
@@ -36,6 +40,8 @@ def valid_coordinates(latitude, longitude):
 
 
 def load_context(payload, db, lock=False):
+    if lock:
+        db.execute(text('SELECT pg_advisory_xact_lock_shared(7351007)'))
     driver_ids = [team.repartidor_id for team in payload.equipos]
     vehicle_ids = [team.vehiculo_id for team in payload.equipos]
     drivers_query = (
@@ -214,9 +220,13 @@ def load_context(payload, db, lock=False):
                     order.ventana_fin.isoformat(),
                 ),
                 "state": order.estado,
+                "address": order.direccion,
+                "reference": order.punto_referencia,
             }
         )
+    traffic = policy_snapshot(db)
     snapshot = {
+        'traffic': traffic,
         "resources": resource_snapshot,
         "orders": order_snapshot,
         "busy": [
@@ -251,4 +261,5 @@ def load_context(payload, db, lock=False):
         "fingerprint": fingerprint,
         "start": start,
         "rules": rules,
+        "traffic": traffic,
     }

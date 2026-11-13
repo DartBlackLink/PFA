@@ -1,0 +1,86 @@
+[
+  {
+    "key": "EHAPP-13",
+    "summary": "US-005 — Generar rutas optimizadas",
+    "description": "```\nHistoria de usuario:\n\nComo coordinador logístico,\nquiero generar rutas mediante un Algoritmo Genético,\npara obtener una planificación válida que considere capacidad, distancia y ventanas de tiempo.\n\nCriterios de aceptación:\n\nEscenario 1: Generar solución válida\nDado que existen pedidos, vehículos y conductores elegibles,\ncuando se ejecuta la optimización,\nentonces el sistema devuelve rutas que respetan las restricciones obligatorias.\n\nEscenario 2: Escenario sin solución factible\nDado que la demanda o las restricciones hacen imposible una asignación válida,\ncuando se ejecuta el algoritmo,\nentonces el sistema informa que no existe solución factible y no presenta una ruta inválida como correcta.\n```",
+    "status": {
+      "name": "Tareas por hacer",
+      "statusCategory": {
+        "name": "Por hacer"
+      }
+    },
+    "customFields": {
+      "Sprint": {
+        "id": "customfield_10020",
+        "value": [
+          {
+            "id": 37,
+            "name": "EHAPP Sprint 3",
+            "state": "future",
+            "boardId": 35,
+            "goal": "Obtener la primera optimización válida de rutas utilizando los datos operativos registrados y respetando las restricciones definidas.",
+            "startDate": "2026-10-07T05:00:00.000Z",
+            "endDate": "2026-10-21T05:00:00.000Z"
+          }
+        ]
+      },
+      "Status pages": {
+        "id": "customfield_10100",
+        "value": []
+      },
+      "Clasificación": {
+        "id": "customfield_10019",
+        "value": "0|i000e7:"
+      },
+      "Enlace de epic": {
+        "id": "customfield_10014",
+        "value": "EHAPP-4"
+      },
+      "development": {
+        "id": "customfield_10000",
+        "value": "{}"
+      },
+      "Organizations": {
+        "id": "customfield_10002",
+        "value": []
+      },
+      "Story Points": {
+        "id": "customfield_10039",
+        "value": 13
+      }
+    }
+  },
+  {
+    "key": "EHAPP-19",
+    "summary": "US-008 — Generar reporte PDF básico",
+    "description": "```\nHistoria de usuario:\n\nComo gerencia o auditor,\nquiero descargar un reporte básico,\npara conservar evidencia de los resultados.\n\nCriterios de aceptación:\n\nEscenario 1: Generar reporte\nDado que existe una planificación con indicadores,\ncuando se solicita el reporte,\nentonces se genera un PDF con identificación e indicadores principales.\n\nEscenario 2: Impedir reporte sin planificación\nDado que no existe una planificación válida seleccionada,\ncuando se solicita el PDF,\nentonces se informa que primero debe seleccionarse o generarse una planificación.\n```",
+    "status": {
+      "name": "Tareas por hacer",
+      "statusCategory": {
+        "name": "Por hacer"
+      }
+    },
+    "customFields": {
+      "Status pages": {
+        "id": "customfield_10100",
+        "value": []
+      },
+      "Clasificación": {
+        "id": "customfield_10019",
+        "value": "0|i000fj:"
+      },
+      "Enlace de epic": {
+        "id": "customfield_10014",
+        "value": "EHAPP-6"
+      },
+      "Organizations": {
+        "id": "customfield_10002",
+        "value": []
+      },
+      "Story Points": {
+        "id": "customfield_10039",
+        "value": 5
+      }
+    }
+  }
+]

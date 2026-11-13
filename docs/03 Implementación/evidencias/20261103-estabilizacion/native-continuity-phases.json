@@ -1,0 +1,66 @@
+[
+  {
+    "stage": "initial_receipt_preserved_and_idempotent",
+    "at": 1793765615.8897371
+  },
+  {
+    "stage": "first_delivery_previously_confirmed_preserved",
+    "at": 1793765986.8617933,
+    "timestamp": "2026-11-04T04:13:44.510019+00:00"
+  },
+  {
+    "stage": "initial_receipt_preserved_and_idempotent",
+    "at": 1793765987.9445603
+  },
+  {
+    "stage": "start_preserved_and_idempotent",
+    "at": 1793765991.7234707
+  },
+  {
+    "stage": "gps_public_point_injected",
+    "at": 1793765996.6313746
+  },
+  {
+    "stage": "incident_sent_waiting_admin",
+    "at": 1793766003.7882576,
+    "route_id": "045076c1-d16c-4f2b-ba14-5a74a59ad97f",
+    "first_delivered_at": "2026-11-04T04:13:44.510019+00:00",
+    "gps_latitude": -12.049215
+  },
+  {
+    "stage": "version2_already_approved_first_delivery_preserved",
+    "at": 1793766332.839241
+  },
+  {
+    "stage": "version2_already_approved_first_delivery_preserved",
+    "at": 1793766513.7388442
+  },
+  {
+    "stage": "version2_already_approved_first_delivery_preserved",
+    "at": 1793766646.7995522
+  },
+  {
+    "stage": "version2_received_confirmed_ui_and_database",
+    "at": 1793766653.826988
+  },
+  {
+    "stage": "deliveries_complete",
+    "at": 1793766664.0801084
+  },
+  {
+    "stage": "airplane_enabled",
+    "at": 1793766667.4805868
+  },
+  {
+    "stage": "airplane_disabled",
+    "at": 1793766687.7167845
+  },
+  {
+    "stage": "logout_and_recovery_passed",
+    "at": 1793766705.0079215
+  },
+  {
+    "stage": "done",
+    "at": 1793766705.9059253
+  }
+]

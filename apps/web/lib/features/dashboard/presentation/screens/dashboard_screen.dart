@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'operation_overview.dart';
+import '../../../../core/widgets/operation_notifications.dart';
 
 import '../../../../core/network/api_client.dart';
 import '../../../../core/widgets/delivery_location_picker.dart';
@@ -23,6 +26,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _section = 0;
   bool _menuCollapsed = false;
   bool _loading = true;
+  bool _refreshing = false;
+  Timer? _refreshTimer;
   String? _error;
   String _search = '';
   List<Map<String, dynamic>> _orders = [],
@@ -50,12 +55,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _load());
+    _refreshTimer = Timer.periodic(
+      const Duration(seconds: 10),
+      (_) => _load(silent: true),
+    );
   }
 
-  Future<void> _load() async {
-    if (!mounted) return;
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _load({bool silent = false}) async {
+    if (!mounted || _refreshing) return;
+    _refreshing = true;
     setState(() {
-      _loading = true;
+      if (!silent) _loading = true;
       _error = null;
     });
     try {
@@ -81,6 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
       }
     } finally {
+      _refreshing = false;
       if (mounted) setState(() => _loading = false);
     }
   }
@@ -146,6 +163,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
         actions: [
+          const OperationNotifications(),
           IconButton(
             tooltip: 'Actualizar datos',
             onPressed: _loading ? null : _load,
@@ -670,7 +688,7 @@ class _OrderFormState extends State<_OrderForm> {
               ),
               const FormSection('Prioridad y horario de entrega'),
               const Text(
-                'Horario de Lima (UTC−5). El fin debe ser posterior al inicio.',
+                'Hora de Huancayo, Perú (UTC−5; America/Lima). El fin debe ser posterior al inicio.',
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(

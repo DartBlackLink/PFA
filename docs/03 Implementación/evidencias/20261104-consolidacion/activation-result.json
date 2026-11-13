@@ -1,0 +1,63 @@
+{
+  "project": "ecologistica",
+  "services": [
+    {
+      "id": "874f2705151c8520ab42a06b3479496a1c800ec004900f56dee1d446c33fbe20",
+      "name": "/ecologistica-postgres",
+      "service": "postgres",
+      "image_id": "sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea",
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "ecologistica_ecologistica_postgres_data",
+          "Source": "/var/lib/docker/volumes/ecologistica_ecologistica_postgres_data/_data",
+          "Destination": "/var/lib/postgresql/data",
+          "Driver": "local",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    {
+      "id": "17e2cf0dacb606435d3965de0cc17715c1733b56f0aa141607723b3746c2fd0e",
+      "name": "/ecologistica-api",
+      "service": "api",
+      "image_id": "sha256:e60671455b462405d8023972444b72698b90d68a23e42843fcfd2ce6c6f31144",
+      "mounts": []
+    },
+    {
+      "id": "1045608fe5b84e7d508c471f67d86ca6a10520caf9e764ca670c7d7f158c8bc8",
+      "name": "/ecologistica-web",
+      "service": "web",
+      "image_id": "sha256:0ba8f928c3905652133f0b503baee348545b9f40b667a7b086b2ac0a3e61ea57",
+      "mounts": []
+    }
+  ],
+  "operational_database": "ecologistica_operativa",
+  "legacy_database_retained": "ecologistica",
+  "runtime_depends_on_workspace_or_stage": false,
+  "protected_resources": [
+    {
+      "id": "4c5477a83f4327fa16b22e5272ce4001eeee20dd56eb69423ad6cdccdc4d5bb7",
+      "name": "/sonarqube-custom",
+      "configuration_and_state_unchanged": true
+    },
+    {
+      "id": "c8a9df55c35b54cbc71b241baf4c0eb1064490701c348dbd3e1a2e5fc843284d",
+      "name": "/megablog-mongo",
+      "configuration_and_state_unchanged": true
+    },
+    {
+      "id": "32574dc57bb24fa5a7d1e42ed635f78b2c23ab897f5cfb460a96547afe61e52c",
+      "name": "/danleopay-tests-20261021-150014",
+      "configuration_and_state_unchanged": true
+    },
+    {
+      "id": "dfa2aef58eaa8ce930192e84eda659541c0530267184b05534c5ff12d855378c",
+      "name": "/danleopay-postgres-1",
+      "configuration_and_state_unchanged": true
+    }
+  ],
+  "resources_deleted": []
+}

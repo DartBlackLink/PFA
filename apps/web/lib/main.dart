@@ -1,5 +1,7 @@
 // Archivo: lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,6 +41,14 @@ class EcoLogisticaWebApp extends StatefulWidget {
 
 class _EcoLogisticaWebAppState extends State<EcoLogisticaWebApp> {
   GoRouter? _router;
+  SemanticsHandle? _semantics;
+
+  @override
+  void initState() {
+    super.initState();
+    if (kIsWeb) _semantics = SemanticsBinding.instance.ensureSemantics();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -48,6 +58,7 @@ class _EcoLogisticaWebAppState extends State<EcoLogisticaWebApp> {
   @override
   void dispose() {
     _router?.dispose();
+    _semantics?.dispose();
     super.dispose();
   }
 

@@ -1,0 +1,73 @@
+{
+  "timestamp_utc": "2026-11-04T14:47:20.274093+00:00",
+  "checks": [
+    {
+      "path": "/auth/me",
+      "status": 200,
+      "identity": "ADMIN"
+    },
+    {
+      "path": "/orders/",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "path": "/drivers/",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "path": "/vehicles/",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "path": "/routes/",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "path": "/orders/",
+      "authenticated": false,
+      "status": 401
+    }
+  ],
+  "services": [
+    {
+      "name": "/ecologistica-postgres",
+      "healthy": true
+    },
+    {
+      "name": "/ecologistica-api",
+      "healthy": true
+    },
+    {
+      "name": "/ecologistica-web",
+      "healthy": true
+    }
+  ],
+  "protected": [
+    {
+      "name": "/sonarqube-custom",
+      "id": "4c5477a83f4327fa16b22e5272ce4001eeee20dd56eb69423ad6cdccdc4d5bb7",
+      "unchanged": true
+    },
+    {
+      "name": "/megablog-mongo",
+      "id": "c8a9df55c35b54cbc71b241baf4c0eb1064490701c348dbd3e1a2e5fc843284d",
+      "unchanged": true
+    },
+    {
+      "name": "/danleopay-tests-20261021-150014",
+      "id": "32574dc57bb24fa5a7d1e42ed635f78b2c23ab897f5cfb460a96547afe61e52c",
+      "unchanged": true
+    },
+    {
+      "name": "/danleopay-postgres-1",
+      "id": "dfa2aef58eaa8ce930192e84eda659541c0530267184b05534c5ff12d855378c",
+      "unchanged": true
+    }
+  ],
+  "business_test_records_added": 0,
+  "resources_deleted": 0
+}

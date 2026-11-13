@@ -1,0 +1,72 @@
+name: ecologistica
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ecologistica-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Configura POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER:?Configura POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Configura POSTGRES_PASSWORD}
+      APP_DB_NAME: ${APP_DB_NAME:?Configura APP_DB_NAME}
+      APP_DB_USER: ${APP_DB_USER:?Configura APP_DB_USER}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Configura APP_DB_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ecologistica_postgres_data:/var/lib/postgresql/data
+      - ./deploy/postgres-init.sh:/docker-entrypoint-initdb.d/10-operational.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  api:
+    image: ecologistica-api:final
+    build:
+      context: ./backend
+    container_name: ecologistica-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Configura DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY:?Configura SECRET_KEY}
+      BOOTSTRAP_DEMO_USERS: "false"
+      TRUSTED_HOSTS: ${TRUSTED_HOSTS:?Configura TRUSTED_HOSTS}
+      CORS_ORIGINS: ${CORS_ORIGINS:?Configura CORS_ORIGINS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; from sqlalchemy import text; from app.db.session import engine; c=engine.connect(); c.execute(text('SELECT 1')); c.close(); urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+  web:
+    image: ecologistica-web:final
+    build:
+      context: ./apps/web
+      dockerfile: deploy/web.Dockerfile
+      args:
+        NGINX_IMAGE: ${NGINX_IMAGE:?Configura NGINX_IMAGE}
+    container_name: ecologistica-web
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+volumes:
+  ecologistica_postgres_data:
+    external: true
+    name: ecologistica_ecologistica_postgres_data

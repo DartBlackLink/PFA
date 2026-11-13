@@ -1,0 +1,9 @@
+{
+  "route_id": "f95beaed-6a52-4905-8cd8-c468ce19ddae",
+  "same_route_and_history_after_api_restart": true,
+  "completed_unique_orders": 3,
+  "version": 2,
+  "received": 2,
+  "first_delivery_timestamp_preserved": "2026-11-04T13:00:16.536244+00:00",
+  "previous_two_qa_routes_unchanged": true
+}

@@ -94,7 +94,7 @@ class _RouteScheduleInputState extends State<RouteScheduleInput> {
     mainAxisSize: MainAxisSize.min,
     children: [
       const Text(
-        'Salida planificada · hora de Lima (UTC−5)',
+        'Salida planificada · hora de Huancayo (UTC−5; America/Lima)',
         style: TextStyle(fontWeight: FontWeight.w600),
       ),
       const SizedBox(height: 8),

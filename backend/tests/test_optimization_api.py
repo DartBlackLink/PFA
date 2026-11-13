@@ -84,7 +84,7 @@ def api_case():
                 "disponible_desde": "08:00",
                 "disponible_hasta": "17:00",
                 "origen_latitud": -12.03,
-                "origen_longitud": -77.01,
+                "origen_longitud": -75.21,
                 "correo": f"ga.driver.{suffix}@example.test",
                 "password": password,
             },
@@ -93,9 +93,9 @@ def api_case():
         driver = driver_response.json()
         order_body = {
             "cliente_nombre": "QA Planificación",
-            "direccion": "Av. QA Lima 123",
+            "direccion": "Calle Real QA, Huancayo 123",
             "latitud": -12.04,
-            "longitud": -77.02,
+            "longitud": -75.22,
             "peso_kg": 5,
             "tipo_producto": "GENERAL",
             "ventana_inicio": "2030-01-02T09:00:00-05:00",
@@ -145,7 +145,7 @@ def test_gold_preview_confirm_consult_and_owner_routes(api_case):
     plan = preview(client, payload)
     assert plan["estado"] == "PREVISUALIZADO" and plan["ruta_ids"] == []
     assert all(
-        stop["direccion"] == "Av. QA Lima 123"
+        stop["direccion"] == "Calle Real QA, Huancayo 123"
         for route in plan["rutas"]
         for stop in route["entregas"]
     )

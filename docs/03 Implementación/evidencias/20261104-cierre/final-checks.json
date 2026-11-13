@@ -1,0 +1,11 @@
+{
+  "at": "2026-11-04T13:21:13.887804+00:00",
+  "new_evidence_secret_scan_passed": true,
+  "git_diff_check_exit": 0,
+  "head_unchanged": "ac7fda0d2863a2092254c36f32735b72b8233eaa",
+  "sprint1_sprint2_inicio_planificacion_unchanged": true,
+  "code_changed_in_this_intervention": false,
+  "suites_reexecuted": false,
+  "git_push": false,
+  "jira_writes": false
+}

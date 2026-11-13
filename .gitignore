@@ -57,7 +57,6 @@ Thumbs.db
 /MANIFIESTO_COPIA.json
 /REVISION_DOCUMENTAL.md
 /PREPARACION_GITHUB.md
-/docker-compose.yml
 
 
 # Seguimiento local de la entrega
@@ -69,3 +68,61 @@ Thumbs.db
 **/.scannerwork/
 /sonar-token.local.txt
 /ui-scriptcode/
+
+# Evidencia local y defines privados de pruebas de integración
+**/reports/
+**/test_outputs/
+**/*.private.json
+**/*.private.env
+
+# Configuración local, compilaciones y resultados de auditoría
+*.private.*
+*.apk
+*.aab
+*.ipa
+*.bak
+*.sqlite3-*
+*.sqlite-*
+*.sql.gz
+**/htmlcov/
+**/consolidacion_*/
+**/sonar-token*.txt
+
+# Cortes intermedios y diagnósticos que se conservan solo localmente
+/docs/03 Implementación/evidencias/20261102/01_mapa_propuesta.jpg
+/docs/03 Implementación/evidencias/20261102/02_plan_confirmado.jpg
+/docs/03 Implementación/evidencias/20261102/03_repartidor_incidencia.jpg
+/docs/03 Implementación/evidencias/20261102/04_ruta_finalizada_desktop.jpg
+/docs/03 Implementación/evidencias/20261102/05_admin_sincronizado.jpg
+/docs/03 Implementación/evidencias/20261102/06_mapa_campos_corregidos.jpg
+/docs/03 Implementación/evidencias/20261102/bandit.json
+/docs/03 Implementación/evidencias/20261102/dependencies.json
+/docs/03 Implementación/evidencias/20261102/resultado.json
+/docs/03 Implementación/evidencias/20261102-trafico/01_comparacion_mapa.jpg
+/docs/03 Implementación/evidencias/20261102-trafico/02_version_pendiente_acuse.jpg
+/docs/03 Implementación/evidencias/20261102-trafico/03_ruta_v2_finalizada.jpg
+/docs/03 Implementación/evidencias/20261102-trafico/04_mapa_recuperado_ruta_v2.jpg
+/docs/03 Implementación/evidencias/20261102-trafico/android_ruta_propia_finalizada.png
+/docs/03 Implementación/evidencias/20261102-trafico/android_ruta_v2_recibida_finalizada.png
+/docs/03 Implementación/evidencias/20261102-trafico/bandit-traffic.json
+/docs/03 Implementación/evidencias/20261102-trafico/benchmark-first.json
+/docs/03 Implementación/evidencias/20261102-trafico/database-after-restart.json
+/docs/03 Implementación/evidencias/20261102-trafico/database-gold.json
+/docs/03 Implementación/evidencias/20261102-trafico/docker-resources.txt
+/docs/03 Implementación/evidencias/20261102-trafico/flutter-tests-final.jsonl
+/docs/03 Implementación/evidencias/20261102-trafico/hardware-cpu.json
+/docs/03 Implementación/evidencias/20261102-trafico/hardware-memory.json
+/docs/03 Implementación/evidencias/20261102-trafico/metrics.json
+/docs/03 Implementación/evidencias/20261103-huancayo/audit-main.json
+/docs/03 Implementación/evidencias/20261103-huancayo/flutter-tests-final.jsonl
+/docs/03 Implementación/evidencias/20261103-huancayo/flutter-tests.jsonl
+/docs/03 Implementación/evidencias/20261103-huancayo/recovered-files.json
+/docs/03 Implementación/evidencias/20261104-cierre/adb-devices.txt
+/docs/03 Implementación/evidencias/20261104-cierre/environment-checks.json
+/docs/03 Implementación/evidencias/20261104-cierre/sonar-authorization-rejected.json
+/docs/03 Implementación/evidencias/20261104-cierre/sync-secret-audit.json
+/docs/03 Implementación/evidencias/20261104-consolidacion/backup-result.json
+/docs/03 Implementación/evidencias/20261104-consolidacion/operational-backup-result.json
+/docs/03 Implementación/evidencias/20261104-consolidacion/qa-backup-result.json
+/docs/03 Implementación/evidencias/20261108-verificacion-integral/api-cases.jsonl
+/docs/03 Implementación/evidencias/20261108-verificacion-integral/operational-restored.json

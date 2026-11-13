@@ -1,14 +1,22 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-/// Dirección pública de la API. Este archivo no almacena secretos.
+/// Public connection setting. Backend secrets are never loaded as Flutter assets.
 class EntornoConfig {
+  static const _configured = String.fromEnvironment(
+    'API_BASE_URL',
+    defaultValue: 'http://127.0.0.1:8000/api/v1',
+  );
+
   static String get apiBaseUrl {
-    final url = dotenv.env['API_BASE_URL'];
-    if (url == null || url.isEmpty) {
-      throw Exception(
-        'ERROR CRÍTICO: API_BASE_URL no está definida en el archivo .env',
-      );
+    final uri = Uri.tryParse(_configured);
+    if (uri == null ||
+        !{'http', 'https'}.contains(uri.scheme) ||
+        uri.host.isEmpty ||
+        uri.userInfo.isNotEmpty ||
+        uri.hasQuery ||
+        uri.hasFragment) {
+      throw StateError('Configura una dirección pública de API válida.');
     }
-    return url;
+    return _configured.endsWith('/')
+        ? _configured.substring(0, _configured.length - 1)
+        : _configured;
   }
 }

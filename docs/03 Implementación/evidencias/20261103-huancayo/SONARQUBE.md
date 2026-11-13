@@ -1,0 +1,3 @@
+# SonarQube — comprobación del 03/11/2026
+
+El servidor local respondió UP (26.10.0.133078). Las consultas de métricas y último análisis de ecologisticas devolvieron HTTPError sin autenticación; no se pudo leer un resultado actual. Ver sonar-readonly.json. No hay token local vigente en el archivo previsto y no se reutilizaron tokens expuestos en chat. No se ejecutó un análisis nuevo: los resultados históricos no certifican estas fuentes. La cobertura 90,88 % de esta corrección proviene de Coverage.py/XML, no de SonarQube. Para nuevo análisis se requiere credencial local válida y asociar su analysisId con esta versión.

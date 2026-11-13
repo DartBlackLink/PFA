@@ -9,6 +9,8 @@ import math
 from dataclasses import dataclass
 from time import perf_counter
 
+from app.services.traffic import travel_minutes
+
 EPS = 1e-7
 
 
@@ -32,6 +34,8 @@ class Team:
     ends: float
     busy: tuple = ()
     assigned_minutes: float = 0
+    return_node: int | None = None
+    initial_driving: float = 0
 
 
 @dataclass(frozen=True)
@@ -196,16 +200,18 @@ def evaluate_route(team, deliveries, distance, duration, rules):
         return None
     clock = team.starts
     node = team.origin
-    km = travel = waiting = rest = driving = 0.0
+    km = travel = waiting = rest = 0.0
+    driving = team.initial_driving
     stops = []
     for delivery in deliveries:
-        leg = duration[node][delivery.node]
+        leg = travel_minutes(duration, node, delivery.node, clock)
         if leg > rules.break_after + EPS:
             return None  # No safe intermediate rest point is present in the input.
         if driving + leg > rules.break_after + EPS:
             clock += rules.break_minutes
             rest += rules.break_minutes
             driving = 0
+            leg = travel_minutes(duration, node, delivery.node, clock)
         clock += leg
         driving += leg
         travel += leg
@@ -220,15 +226,17 @@ def evaluate_route(team, deliveries, distance, duration, rules):
         clock = finish
         node = delivery.node
     if rules.return_to_origin:
-        leg = duration[node][team.origin]
+        destination = team.origin if team.return_node is None else team.return_node
+        leg = travel_minutes(duration, node, destination, clock)
         if leg > rules.break_after + EPS:
             return None
         if driving + leg > rules.break_after + EPS:
             clock += rules.break_minutes
             rest += rules.break_minutes
+            leg = travel_minutes(duration, node, destination, clock)
         clock += leg
         travel += leg
-        km += distance[node][team.origin]
+        km += distance[node][destination]
     if (
         clock > team.ends + EPS
         or clock - team.starts + team.assigned_minutes > rules.max_work + EPS

@@ -1,0 +1,10 @@
+{
+  "at": "2026-11-04T15:06:46.302362+00:00",
+  "candidate_files_scanned": 600,
+  "private_candidate_files": [],
+  "secret_findings": [],
+  "compose_valid": true,
+  "coverage_and_junit_valid": true,
+  "sources_unchanged": true,
+  "published": false
+}

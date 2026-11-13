@@ -15,3 +15,13 @@ Informes preparatorios de semana 13: [impacto ambiental](reduccion%20del%20impac
 - [Reconciliación de IDs, alcance e impedimentos](evidencias/RECONCILIACION_20261030.md).
 - [Entrega histórica combinada](Hist%C3%B3rico/Entrega%2020261009/README.md).
 - [README del proyecto](../../README.md).
+
+## Evidencia seleccionada
+
+| Sprint | Alcance y evidencia |
+| --- | --- |
+| 1 | Autenticación y control de acceso en la [revisión del Sprint 1](Sprint%201/03%20Revisi%C3%B3n%20del%20Sprint%20V_1_1_0.md) y la [verificación técnica histórica](evidencias/VERIFICACION_TECNICA.md). |
+| 2 | Recursos, pedidos, asignación y mapa en la [revisión del Sprint 2](Sprint%202/03%20Revisi%C3%B3n%20del%20Sprint%20V_1_1_0.md) y la [revalidación histórica](evidencias/PRUEBAS_20261009.md). |
+| 3 | Optimización genética (EHAPP-13 / US-005) en el [corte del 30/10](evidencias/20261030/RESULTADOS.md). [Verificación de CRUD y permisos](evidencias/20261108-verificacion-integral/RESULTADOS.md), [mapa de Huancayo, congestión, aprobación, acuse Android y persistencia](evidencias/20261109-validacion-danleo/CIERRE_DANLEO_20261109.md), [cobertura backend](evidencias/20261103-estabilizacion/COBERTURA.md) y [análisis SonarQube del 04/11](evidencias/20261104-cierre/SONARQUBE_ACTUAL.md). |
+
+Los cortes conservan sus resultados y fechas. Los HTML generados y registros brutos excluidos de Git permanecen en la copia local de auditoría. Cada revisión distingue las verificaciones técnicas de la aceptación académica.

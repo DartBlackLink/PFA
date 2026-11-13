@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 import '../network/api_client.dart';
+import '../config/operation_area.dart';
 import '../../features/auth/presentation/providers/auth_provider.dart';
 
 class DeliveryLocation {
@@ -58,6 +59,14 @@ class _DeliveryLocationPickerState extends State<DeliveryLocationPicker> {
   }
 
   void _setPoint(LatLng point, {String? address, bool center = false}) {
+    if (!OperationArea.contains(point.latitude, point.longitude)) {
+      setState(() {
+        _invalidate();
+        _point = null;
+        _message = 'El punto está fuera de Huancayo y sus alrededores urbanos habilitados.';
+      });
+      return;
+    }
     setState(() {
       _revision++;
       _invalidate();
@@ -153,13 +162,14 @@ class _DeliveryLocationPickerState extends State<DeliveryLocationPicker> {
     final colors = Theme.of(context).colorScheme;
     final valid =
         _point != null &&
+        OperationArea.contains(_point!.latitude, _point!.longitude) &&
         _address.text.trim().length >= 5 &&
         _address.text.trim().length <= 255;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Text(
-          'Busca un lugar en Perú o marca el destino manualmente. Ajusta el punto hasta la entrada de entrega.',
+          'Busca en Huancayo y sus alrededores urbanos o marca el destino manualmente. Ajusta el punto hasta la entrada de entrega.',
         ),
         const SizedBox(height: 12),
         TextField(

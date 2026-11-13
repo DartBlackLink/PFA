@@ -1,0 +1,7 @@
+{
+  "unauthenticated_routes": 401,
+  "courier_vehicles": 403,
+  "courier_foreign_route": 404,
+  "own_routes_only": true,
+  "own_route_after_restart": true
+}

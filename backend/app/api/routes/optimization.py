@@ -8,7 +8,7 @@ from time import monotonic
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
 from app.api.deps import require_roles
@@ -18,7 +18,8 @@ from app.optimization_schemas import OptimizationRequest, PlanView
 from app.services.genetic import NoFeasiblePlan, Parameters, evaluate_route, solve
 from app.services.matrix import road_matrix, road_shape
 from app.services.optimization_context import load_context
-from app.services.scheduling import schedule
+from app.services.scheduling import ACTIVE, schedule
+from app.services.traffic import TrafficDurations
 
 router = APIRouter(dependencies=[Depends(require_roles("ADMIN"))])
 _slot = BoundedSemaphore(1)
@@ -76,6 +77,8 @@ def _validated_roads(plan, context, distance, duration, deadline):
         ):
             final_distance[source][destination] = km
             final_duration[source][destination] = minutes
+    if isinstance(duration, TrafficDurations):
+        final_duration = duration.with_base(final_duration)
     routes = []
     for candidate, (geometry, _) in zip(plan.routes, shapes):
         team = teams[candidate.team]
@@ -120,6 +123,8 @@ def _validated_roads(plan, context, distance, duration, deadline):
                         "peso_kg": float(
                             context["orders"][UUID(stop.delivery)].peso_kg
                         ),
+                        "latitud": float(context["orders"][UUID(stop.delivery)].latitud),
+                        "longitud": float(context["orders"][UUID(stop.delivery)].longitud),
                         "eta": (
                             start + timedelta(minutes=stop.service_start)
                         ).isoformat(),
@@ -169,6 +174,7 @@ def preview(
         db.rollback()
         deadline = monotonic() + 40
         distance, duration, provider = road_matrix(context["coordinates"], deadline)
+        duration = TrafficDurations(duration, context['coordinates'], context['start'], context['traffic'])
         parameters = Parameters(
             seed=payload.semilla,
             population=payload.poblacion,
@@ -203,7 +209,8 @@ def preview(
                 "distancia_km": sum(r["distance"] for r in routes),
                 "combustible_l": sum(r["fuel"] for r in routes),
                 "co2_kg": sum(r["carbon"] for r in routes),
-                "fuente": "OSRM; tiempos estimados sin tráfico en tiempo real",
+                "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+                "trafico": context['traffic'],
                 "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
                 "retorno_al_origen": payload.regresar_al_origen,
             }
@@ -248,6 +255,20 @@ def list_plans(limit: int = Query(20, ge=1, le=50), db: Session = Depends(get_db
     ]
 
 
+@router.get("/resources")
+def resource_warnings(db: Session = Depends(get_db)):
+    """Expose concrete legacy scheduling blockers before the expensive calculation."""
+    rows = db.scalars(select(Ruta).where(
+        Ruta.estado.in_(ACTIVE),
+        or_(Ruta.inicio_planificado.is_(None), Ruta.fin_planificado.is_(None)),
+    ).order_by(Ruta.ruta_id))
+    return [
+        {"ruta_id": str(r.ruta_id), "repartidor_id": str(r.repartidor_id),
+         "vehiculo_id": str(r.vehiculo_id), "motivo": "Ruta activa sin horario completo"}
+        for r in rows
+    ]
+
+
 @router.get("/{plan_id}", response_model=PlanView)
 def get_plan(plan_id: UUID, db: Session = Depends(get_db)):
     plan = db.get(PlanOptimizacion, plan_id)
@@ -267,6 +288,8 @@ def confirm(plan_id: UUID, db: Session = Depends(get_db)):
         raise HTTPException(404, "Plan no encontrado.")
     if plan.estado == "CONFIRMADO":
         return view(plan, db)
+    if plan.estado == 'CANCELADO':
+        raise HTTPException(409, 'Esta propuesta fue cancelada. Genera una nueva.')
     if plan.vence_en < datetime.now(timezone.utc):
         raise HTTPException(409, "La vista previa venció. Genera una nueva propuesta.")
     payload = OptimizationRequest.model_validate(plan.solicitud)
@@ -325,4 +348,16 @@ def confirm(plan_id: UUID, db: Session = Depends(get_db)):
     plan.estado = "CONFIRMADO"
     db.commit()
     db.refresh(plan)
+    return view(plan, db)
+
+
+@router.post('/{plan_id}/cancel', response_model=PlanView)
+def cancel(plan_id: UUID, db: Session = Depends(get_db)):
+    plan = db.scalar(select(PlanOptimizacion).where(PlanOptimizacion.plan_id == plan_id).with_for_update())
+    if plan is None:
+        raise HTTPException(404, 'Plan no encontrado.')
+    if plan.estado == 'CONFIRMADO':
+        raise HTTPException(409, 'La planificación ya está confirmada; no se puede cancelar como propuesta.')
+    plan.estado = 'CANCELADO'
+    db.commit()
     return view(plan, db)

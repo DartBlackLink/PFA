@@ -6,6 +6,7 @@ from app.api.routes import (
     drivers,
     geocoding,
     health,
+    operations,
     optimization,
     orders,
     routes,
@@ -13,6 +14,8 @@ from app.api.routes import (
 )
 
 api_router = APIRouter()
+api_router.include_router(operations.router, prefix='/operations', tags=['operacion'],
+    dependencies=[Depends(require_roles('ADMIN', 'REPARTIDOR'))])
 api_router.include_router(
     optimization.router, prefix="/optimizations", tags=["optimizacion"]
 )

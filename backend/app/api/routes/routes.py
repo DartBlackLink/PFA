@@ -1,13 +1,19 @@
 import uuid
+from datetime import datetime, timezone
+from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import Field, field_validator, model_validator
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, require_roles
 from app.db.session import get_db
 from app.models.entities import (
     Cliente,
+    Incidente,
+    Notificacion,
     Pedido,
     Repartidor,
     Ruta,
@@ -15,7 +21,8 @@ from app.models.entities import (
     Usuario,
     Vehiculo,
 )
-from app.schemas import RutaCreate, RutaHorario, RutaRead
+from app.schemas import RutaCreate, RutaHorario, RutaRead, ValidatedInput
+from app.services.operation_area import NAME, contains
 from app.services.routing import compute_route
 from app.services.scheduling import schedule
 
@@ -38,6 +45,11 @@ def _route_data(route, drivers, vehicles, details):
     data["repartidor_nombre"] = driver.nombre if driver else None
     data["vehiculo_placa"] = vehicle.placa if vehicle else None
     rows = details.get(route.ruta_id, [])
+    known_points = [(route.origen_latitud, route.origen_longitud)] if route.origen_latitud is not None else []
+    known_points.extend((order.latitud, order.longitud) for _, order, _ in rows if order.latitud is not None)
+    known_points.extend((p[1], p[0]) for p in (route.geometria or {}).get('coordinates', []))
+    data['ambito_operativo'] = NAME
+    data['fuera_zona'] = any(not contains(lat, lon) for lat, lon in known_points)
     data["entregas"] = [
         dict(
             pedido_id=str(order.pedido_id),
@@ -54,6 +66,7 @@ def _route_data(route, drivers, vehicles, details):
             eta=detail.eta.isoformat() if detail.eta else None,
             secuencia=detail.secuencia,
             estado_entrega=detail.estado_entrega,
+            entregado_en=detail.entregado_en.isoformat() if detail.entregado_en else None,
         )
         for detail, order, client in rows
     ]
@@ -128,6 +141,171 @@ def read_route(
     return result(route, db)
 
 
+def owned_route(db, user, route_id):
+    current = db.scalar(accessible(db, user).where(Ruta.ruta_id == route_id))
+    if current is None:
+        raise HTTPException(404, 'Ruta no encontrada.')
+    db.scalar(select(Repartidor).where(Repartidor.repartidor_id == current.repartidor_id).with_for_update())
+    db.scalar(select(Vehiculo).where(Vehiculo.vehiculo_id == current.vehiculo_id).with_for_update())
+    route = db.scalar(accessible(db, user).where(Ruta.ruta_id == route_id).with_for_update(of=Ruta)
+        .execution_options(populate_existing=True))
+    if route is None:
+        raise HTTPException(404, 'Ruta no encontrada.')
+    return route
+
+
+def require_route_area(route, db):
+    if result(route, db)['fuera_zona']:
+        raise HTTPException(409, 'Registro histórico fuera de Huancayo: consulta permitida, operación y recálculo deshabilitados.')
+
+
+@router.post('/{ruta_id}/iniciar', response_model=RutaRead)
+def start_route(ruta_id: uuid.UUID, db: Session = Depends(get_db),
+                user: Usuario = Depends(require_roles('REPARTIDOR'))):
+    route = owned_route(db, user, ruta_id)
+    require_route_area(route, db)
+    if route.estado == 'EN_CURSO':
+        return result(route, db)
+    if route.estado != 'PLANIFICADA':
+        raise HTTPException(409, 'Solo puedes iniciar una ruta planificada.')
+    if route.inicio_planificado is None or route.fin_planificado is None:
+        raise HTTPException(409, 'Solicita al administrador completar el horario de esta ruta.')
+    driver = db.scalar(select(Repartidor).where(Repartidor.repartidor_id == route.repartidor_id).with_for_update())
+    vehicle = db.scalar(select(Vehiculo).where(Vehiculo.vehiculo_id == route.vehiculo_id).with_for_update())
+    if driver.estado != 'ACTIVO' or vehicle.estado != 'ACTIVO':
+        raise HTTPException(409, 'El repartidor y el vehículo deben estar activos.')
+    if db.scalar(select(Ruta.ruta_id).where(Ruta.ruta_id != ruta_id, Ruta.estado.in_(('EN_CURSO','EN_RUTA')),
+                  (Ruta.repartidor_id == route.repartidor_id) | (Ruta.vehiculo_id == route.vehiculo_id))):
+        raise HTTPException(409, 'El equipo ya tiene otra ruta en ejecución.')
+    route.estado = 'EN_CURSO'
+    route.iniciado_en = datetime.now(timezone.utc)
+    # Explicit initiation from the courier app proves receipt of the initial plan.
+    route.version_recibida = route.version
+    db.commit()
+    return result(route, db)
+
+
+@router.post('/{ruta_id}/entregas/{pedido_id}/confirmar', response_model=RutaRead)
+def complete_delivery(ruta_id: uuid.UUID, pedido_id: uuid.UUID, version: int | None = Query(None, ge=1),
+                      db: Session = Depends(get_db), user: Usuario = Depends(require_roles('REPARTIDOR'))):
+    route = owned_route(db, user, ruta_id)
+    require_route_area(route, db)
+    if route.version > 1 and (version != route.version or route.version_recibida != route.version):
+        raise HTTPException(409, 'Recibe y confirma la versión vigente antes de continuar las entregas.')
+    details = list(db.scalars(select(RutaDetalle).where(RutaDetalle.ruta_id == ruta_id)
+                             .order_by(RutaDetalle.secuencia).with_for_update()))
+    detail = next((row for row in details if row.pedido_id == pedido_id), None)
+    if detail is None:
+        raise HTTPException(404, 'Entrega no encontrada en esta ruta.')
+    if detail.estado_entrega == 'ENTREGADO':
+        return result(route, db)
+    if route.estado != 'EN_CURSO':
+        raise HTTPException(409, 'Inicia la ruta antes de confirmar una entrega.')
+    if any(row.secuencia < detail.secuencia and row.estado_entrega != 'ENTREGADO' for row in details):
+        raise HTTPException(409, 'Confirma primero la parada anterior para respetar la secuencia.')
+    now = datetime.now(timezone.utc)
+    detail.estado_entrega = 'ENTREGADO'
+    detail.entregado_en = now
+    detail.entregado_por = user.usuario_id
+    db.get(Pedido, pedido_id).estado = 'ENTREGADO'
+    if all(row.estado_entrega == 'ENTREGADO' for row in details):
+        route.estado = 'FINALIZADA'
+        route.finalizado_en = now
+    db.commit()
+    return result(route, db)
+
+
+class IncidentInput(ValidatedInput):
+    evento_id: uuid.UUID
+    tipo: Literal['AVERIA', 'ACCIDENTE', 'ENTREGA_FALLIDA', 'OTRO', 'CONGESTION', 'VIA_CERRADA']
+    descripcion: str = Field(min_length=10, max_length=1000)
+    latitud: float | None = Field(None, ge=-90, le=90, allow_inf_nan=False)
+    longitud: float | None = Field(None, ge=-180, le=180, allow_inf_nan=False)
+    ocurrido_en: datetime | None = None
+    demora_min: int | None = Field(None, ge=0, le=240)
+    afectacion: Literal['BAJA', 'MEDIA', 'ALTA', 'NO_INDICADA'] = 'NO_INDICADA'
+
+    @field_validator('latitud', 'longitud')
+    @classmethod
+    def coordinate_precision(cls, value):
+        return round(value, 6) if value is not None else None
+
+    @model_validator(mode='after')
+    def valid_report(self):
+        if (self.latitud is None) != (self.longitud is None):
+            raise ValueError('Indica ambas coordenadas o ninguna')
+        if self.latitud is not None and not contains(self.latitud, self.longitud):
+            raise ValueError('La incidencia debe ubicarse dentro de Huancayo y sus alrededores habilitados.')
+        if self.ocurrido_en is not None:
+            if self.ocurrido_en.utcoffset() is None:
+                raise ValueError('La hora del evento necesita zona horaria')
+            age = (datetime.now(timezone.utc) - self.ocurrido_en).total_seconds()
+            if not -60 <= age <= 86400:
+                raise ValueError('El evento debe corresponder a las últimas 24 horas')
+        return self
+
+    @field_validator('descripcion')
+    @classmethod
+    def clean_description(cls, value):
+        value = value.strip()
+        if len(value) < 10:
+            raise ValueError('Describe el incidente con al menos 10 caracteres')
+        return value
+
+
+def incident_view(item):
+    return {'evento_id': str(item.incidente_id), 'tipo': item.tipo,
+            'descripcion': item.descripcion, 'ocurrido_en': item.ocurrido_en.isoformat(),
+            'ruta_id': str(item.ruta_id), 'repartidor_id': str(item.repartidor_id),
+            'latitud': float(item.latitud) if item.latitud is not None else None,
+            'longitud': float(item.longitud) if item.longitud is not None else None,
+            'demora_min': item.demora_min, 'afectacion': item.afectacion,
+            'fuente': 'REPORTE_MANUAL_REPARTIDOR',
+            'resuelto_en': item.resuelto_en.isoformat() if item.resuelto_en else None,
+            'resolucion': item.resolucion}
+
+
+@router.get('/{ruta_id}/incidentes')
+def read_incidents(ruta_id: uuid.UUID, db: Session = Depends(get_db),
+                   user: Usuario = Depends(get_current_user)):
+    if db.scalar(accessible(db, user).where(Ruta.ruta_id == ruta_id)) is None:
+        raise HTTPException(404, 'Ruta no encontrada.')
+    return [incident_view(row) for row in db.scalars(select(Incidente)
+        .where(Incidente.ruta_id == ruta_id).order_by(Incidente.ocurrido_en))]
+
+
+@router.post('/{ruta_id}/incidentes')
+def report_incident(ruta_id: uuid.UUID, payload: IncidentInput, db: Session = Depends(get_db),
+                    user: Usuario = Depends(require_roles('REPARTIDOR'))):
+    route = owned_route(db, user, ruta_id)
+    require_route_area(route, db)
+    previous = db.get(Incidente, payload.evento_id)
+    if previous:
+        if (previous.ruta_id != ruta_id or previous.repartidor_id != route.repartidor_id
+                or previous.tipo != payload.tipo or previous.descripcion != payload.descripcion
+                or previous.demora_min != payload.demora_min or previous.afectacion != payload.afectacion
+                or (float(previous.latitud) if previous.latitud is not None else None) != payload.latitud
+                or (float(previous.longitud) if previous.longitud is not None else None) != payload.longitud
+                or (payload.ocurrido_en is not None and previous.ocurrido_en != payload.ocurrido_en)):
+            raise HTTPException(409, 'El identificador del evento ya fue utilizado.')
+        return incident_view(previous)
+    if route.estado != 'EN_CURSO':
+        raise HTTPException(409, 'Reporta incidencias desde una ruta en ejecución.')
+    item = Incidente(incidente_id=payload.evento_id, ruta_id=ruta_id,
+                    repartidor_id=route.repartidor_id, tipo=payload.tipo, descripcion=payload.descripcion,
+                    latitud=payload.latitud, longitud=payload.longitud, demora_min=payload.demora_min,
+                    afectacion=payload.afectacion,
+                    ocurrido_en=payload.ocurrido_en or datetime.now(timezone.utc))
+    db.add(item)
+    db.add(Notificacion(rol='ADMIN', ruta_id=ruta_id, tipo='INCIDENCIA', referencia_id=payload.evento_id))
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(409, 'El evento ya se registró; consulta el historial antes de reintentar.')
+    return incident_view(item)
+
+
 @router.post("/", response_model=RutaRead, status_code=201)
 def assign(
     payload: RutaCreate,
@@ -182,6 +360,8 @@ def assign(
     points = [(float(driver.origen_latitud), float(driver.origen_longitud))] + [
         (float(o.latitud), float(o.longitud)) for o in ordered
     ]
+    if any(not contains(lat, lon) for lat, lon in points):
+        raise HTTPException(422, 'El origen y las entregas deben pertenecer a Huancayo y sus alrededores habilitados.')
     geometry, distance, duration = compute_route(points)
     start, end = schedule(
         db,
@@ -249,6 +429,7 @@ def change_schedule(
     )
     if route.estado != "PLANIFICADA":
         raise HTTPException(409, "Solo se modifica el horario de rutas planificadas.")
+    require_route_area(route, db)
     account = db.get(Usuario, driver.usuario_id)
     if (
         driver.estado != "ACTIVO"

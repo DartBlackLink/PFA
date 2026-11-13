@@ -113,6 +113,10 @@ class Pedido(Base):
 
 
 class Ruta(Base):
+    version: Mapped[int] = mapped_column(Integer, default=1)
+    version_recibida: Mapped[int] = mapped_column(Integer, default=0)
+    iniciado_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    finalizado_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     plan_optimizacion_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("plan_optimizacion.plan_id"), nullable=True, index=True
     )
@@ -149,6 +153,8 @@ class Ruta(Base):
 
 
 class RutaDetalle(Base):
+    entregado_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    entregado_por: Mapped[uuid.UUID | None] = mapped_column(ForeignKey('usuario.usuario_id'), nullable=True)
     __tablename__ = "ruta_detalle"
     ruta_detalle_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
@@ -161,6 +167,11 @@ class RutaDetalle(Base):
 
 
 class Incidente(Base):
+    demora_min: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    afectacion: Mapped[str] = mapped_column(String(20), default='NO_INDICADA')
+    registrado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    resuelto_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    resolucion: Mapped[str | None] = mapped_column(Text, nullable=True)
     __tablename__ = "incidente"
     incidente_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
@@ -220,3 +231,48 @@ class PlanOptimizacion(Base):
     solicitud: Mapped[dict] = mapped_column(JSONB)
     solucion: Mapped[dict] = mapped_column(JSONB)
     huella_datos: Mapped[str] = mapped_column(String(64))
+
+
+class PoliticaTrafico(Base):
+    __tablename__ = 'politica_trafico'
+    politica_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    revision: Mapped[int] = mapped_column(Integer, default=1)
+    reglas: Mapped[list] = mapped_column(JSONB, default=list)
+    actualizado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    usuario_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('usuario.usuario_id'))
+
+
+class RevisionRuta(Base):
+    __tablename__ = 'revision_ruta'
+    revision_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    ruta_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('ruta.ruta_id'), index=True)
+    version_base: Mapped[int] = mapped_column(Integer)
+    estado: Mapped[str] = mapped_column(String(20), default='PROPUESTA')
+    autor_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('usuario.usuario_id'))
+    aprobado_por: Mapped[uuid.UUID | None] = mapped_column(ForeignKey('usuario.usuario_id'), nullable=True)
+    creado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    vence_en: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    aprobado_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    recibido_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    motivo: Mapped[str] = mapped_column(Text)
+    huella: Mapped[str] = mapped_column(String(64))
+    anterior: Mapped[dict] = mapped_column(JSONB)
+    propuesta: Mapped[dict] = mapped_column(JSONB)
+
+
+class Notificacion(Base):
+    __tablename__ = 'notificacion'
+    notificacion_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    usuario_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey('usuario.usuario_id'), nullable=True, index=True)
+    rol: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    ruta_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('ruta.ruta_id'))
+    tipo: Mapped[str] = mapped_column(String(40))
+    referencia_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True))
+    creado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+
+
+class LecturaNotificacion(Base):
+    __tablename__ = 'lectura_notificacion'
+    notificacion_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('notificacion.notificacion_id'), primary_key=True)
+    usuario_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('usuario.usuario_id'), primary_key=True)
+    leido_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))

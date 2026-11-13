@@ -15,3 +15,11 @@ La confirmación usa una transacción y bloqueos: no duplica una propuesta ni as
 Al comprobar el arranque del 30/10 se conservaron 8 vehículos, 8 repartidores, 23 pedidos y 21 rutas de desarrollo. Estos conteos describen la base local; no se distribuyen esos registros. La carpeta móvil se mantiene independiente y no acredita una APK validada.
 
 [Resultados](../docs/03%20Implementaci%C3%B3n/evidencias/20261030/RESULTADOS.md).
+
+## Esquema hasta 0006 — 02/11/2026
+
+schema.sql contiene únicamente estructura de la base QA hasta 0006_route_operation. Incluye tiempos reales de ruta/entrega, autor de entrega y estado CANCELADO de propuesta. No contiene pedidos, usuarios ni contraseñas. El camino de actualización de bases existentes son las migraciones Alembic; no ejecutar schema.sql encima de una base existente. La base principal conserva su versión hasta el despliegue autorizado.
+
+## Esquema hasta 0007 — ampliación operativa
+
+schema.sql se actualiza a 0007_traffic_replanning e incluye únicamente estructura, no cuentas ni datos de negocio. politica_trafico conserva revisión/reglas; revision_ruta conserva snapshot, propuesta, motivo, autor/aprobación/acuse; notificacion y lectura_notificacion separan aviso de recepción de ruta. ruta.version_recibida=0 significa sin confirmación efectiva. No reimportar este SQL sobre una base existente: actualizar mediante Alembic, con respaldo y autorización de despliegue.

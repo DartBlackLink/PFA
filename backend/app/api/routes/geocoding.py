@@ -8,6 +8,15 @@ from urllib.parse import urlencode
 from fastapi import APIRouter, HTTPException, Query
 
 from app.core.config import get_settings
+from app.services.operation_area import (
+    CENTER,
+    EAST,
+    NORTH,
+    SOUTH,
+    WEST,
+    contains,
+    metadata,
+)
 from app.services.provider_http import fetch_json
 
 router = APIRouter()
@@ -45,6 +54,8 @@ def _fetch(path, params):
             if geometry.get("type") != "Point":
                 continue
             lon, lat = map(float, geometry["coordinates"])
+            if not contains(lat, lon):
+                continue
             if (
                 not math.isfinite(lat)
                 or not math.isfinite(lon)
@@ -101,9 +112,9 @@ def search(q: str = Query(min_length=3, max_length=200)):
         {
             "q": q,
             "limit": 6,
-            "lat": -12.0675,
-            "lon": -75.2103,
-            "bbox": "-81.4,-18.4,-68.6,0.1",
+            "lat": CENTER[0],
+            "lon": CENTER[1],
+            "bbox": f'{WEST},{SOUTH},{EAST},{NORTH}',
         },
     )
 
@@ -113,4 +124,11 @@ def reverse(
     lat: float = Query(ge=-90, le=90, allow_inf_nan=False),
     lon: float = Query(ge=-180, le=180, allow_inf_nan=False),
 ):
+    if not contains(lat, lon):
+        raise HTTPException(422, 'El punto está fuera de la zona operativa de Huancayo.')
     return _fetch("/reverse", {"lat": lat, "lon": lon, "limit": 1})
+
+
+@router.get('/area')
+def read_operation_area():
+    return metadata()

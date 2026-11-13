@@ -1,0 +1,11 @@
+{
+  "route_unchanged_after_restart": true,
+  "finalized_v2_ack2": true,
+  "three_unique_orders": true,
+  "all_delivered": true,
+  "public_huancayo_points": true,
+  "revision_approved_and_ack": true,
+  "one_own_route": true,
+  "permissions": true,
+  "geometry_within_area": true
+}

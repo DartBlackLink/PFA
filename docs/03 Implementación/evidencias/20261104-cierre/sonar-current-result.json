@@ -1,0 +1,111 @@
+{
+  "project": "ecologisticas2.1",
+  "at": "2026-11-04T13:35:05.550882+00:00",
+  "scanner_exit": 0,
+  "suites_reexecuted": false,
+  "source_snapshot_matches_tested_backend": true,
+  "task_id": "6bed0ce1-1e23-4fde-b577-243bcafacb17",
+  "processing_status": "SUCCESS",
+  "analysis_id": "99085f8d-8f96-432a-865a-a5b23c56ef41",
+  "quality_gate": {
+    "status": "OK",
+    "conditions": [],
+    "ignoredConditions": false,
+    "caycStatus": "compliant"
+  },
+  "measures": [
+    {
+      "metric": "coverage",
+      "value": "90.9",
+      "bestValue": false
+    },
+    {
+      "metric": "reliability_rating",
+      "value": "1.0",
+      "bestValue": true
+    },
+    {
+      "metric": "code_smells",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "duplicated_lines_density",
+      "value": "0.0",
+      "bestValue": true
+    },
+    {
+      "metric": "security_rating",
+      "value": "1.0",
+      "bestValue": true
+    },
+    {
+      "metric": "software_quality_security_issues",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "security_hotspots",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "sqale_rating",
+      "value": "1.0",
+      "bestValue": true
+    },
+    {
+      "metric": "bugs",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "lines_to_cover",
+      "value": "2410"
+    },
+    {
+      "metric": "uncovered_conditions",
+      "value": "126",
+      "bestValue": false
+    },
+    {
+      "metric": "software_quality_reliability_issues",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "branch_coverage",
+      "value": "79.1",
+      "bestValue": false
+    },
+    {
+      "metric": "uncovered_lines",
+      "value": "149",
+      "bestValue": false
+    },
+    {
+      "metric": "ncloc",
+      "value": "3827"
+    },
+    {
+      "metric": "software_quality_maintainability_issues",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "vulnerabilities",
+      "value": "0",
+      "bestValue": true
+    },
+    {
+      "metric": "conditions_to_cover",
+      "value": "604"
+    },
+    {
+      "metric": "line_coverage",
+      "value": "93.8",
+      "bestValue": false
+    }
+  ],
+  "issues_summary": 0
+}

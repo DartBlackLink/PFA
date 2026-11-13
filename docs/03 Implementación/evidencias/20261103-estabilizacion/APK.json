@@ -1,0 +1,11 @@
+{
+  "apk": "D:\\UC\\App\\ecologistica\\build\\apk\\ecologistica-huancayo-debug.apk",
+  "target": "lib/main.dart",
+  "mode": "debug",
+  "api": "http://10.0.2.2:8000/api/v1",
+  "bytes": 195397156,
+  "sha256": "7abd7e926d5939c89c3493cbcfdb750b988dfd38f1f4b1b8a428720a1d474edf",
+  "private_qa_credentials_found": false,
+  "instrumentation_control_found": false,
+  "normal_apk_installed_and_launched": true
+}

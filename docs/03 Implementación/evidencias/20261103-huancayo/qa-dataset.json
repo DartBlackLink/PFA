@@ -1,0 +1,50 @@
+{
+  "creado_en": "2026-11-03T00:13:46.426833-05:00",
+  "area": {
+    "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+    "zona_horaria": "America/Lima",
+    "sur": -12.18,
+    "norte": -11.94,
+    "oeste": -75.32,
+    "este": -75.12,
+    "centro": {
+      "latitud": -12.0675,
+      "longitud": -75.2103
+    },
+    "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+  },
+  "locations": [
+    {
+      "consulta": "Plaza de la Constitución Huancayo",
+      "direccion": "Plaza de la Constitución, San Carlos, Huancayo, Junin, Perú",
+      "latitud": -12.0680457,
+      "longitud": -75.2100731,
+      "detalle": "Plaza de la Constitución, San Carlos, Huancayo, Junin, Perú",
+      "fuente": "OpenStreetMap / Photon"
+    },
+    {
+      "consulta": "Plaza Huamanmarca Huancayo",
+      "direccion": "Plaza Huamanmarca, San Carlos, Huancayo, Junin, Perú",
+      "latitud": -12.0708548,
+      "longitud": -75.2083245,
+      "detalle": "Plaza Huamanmarca, San Carlos, Huancayo, Junin, Perú",
+      "fuente": "OpenStreetMap / Photon"
+    },
+    {
+      "consulta": "Parque de la Identidad Huanca",
+      "direccion": "Parque de la Identidad Huanca, San Carlos, Huancayo, Junin, Perú",
+      "latitud": -12.0492152,
+      "longitud": -75.1978246,
+      "detalle": "Parque de la Identidad Huanca, San Carlos, Huancayo, Junin, Perú",
+      "fuente": "OpenStreetMap / Photon"
+    }
+  ],
+  "driver_id": "5f732496-e277-40ca-970f-57e6a73d9308",
+  "vehicle_id": "3a5ad536-c59a-42b7-b7da-071987edad09",
+  "orders": [
+    "945abfe0-7c42-4d2a-9284-84bf12dcb300",
+    "ce2192c8-4a3a-4c91-a179-d4c1dea03434",
+    "dc5cbbfe-3f9b-4471-bdcd-718a04bcb0a0"
+  ],
+  "aviso": "DATOS QA NUEVOS HUANCAYO. No sustituyen ni relocalizan evidencia anterior de Lima."
+}

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +9,7 @@ import '../../../core/widgets/record_widgets.dart';
 import '../../auth/presentation/providers/auth_provider.dart';
 import 'route_detail_screen.dart';
 import 'route_schedule_input.dart';
+import 'traffic_policy_screen.dart';
 
 class RoutesScreen extends StatefulWidget {
   const RoutesScreen({super.key, this.admin = false});
@@ -20,16 +23,27 @@ class _RoutesScreenState extends State<RoutesScreen> {
   String? _error;
   String _search = '';
   bool _loading = true;
+  bool _refreshing = false;
+  Timer? _refreshTimer;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _load());
+    _refreshTimer = Timer.periodic(const Duration(seconds: 10), (_) => _load());
+  }
+
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> _load() async {
+    if (!mounted || _refreshing) return;
+    _refreshing = true;
     if (!mounted) return;
     setState(() {
-      _loading = true;
+      _loading = _routes.isEmpty;
       _error = null;
     });
     try {
@@ -43,6 +57,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
         setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
       }
     } finally {
+      _refreshing = false;
       if (mounted) setState(() => _loading = false);
     }
   }
@@ -70,7 +85,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
     final rows = _routes
         .where(
           (r) =>
-              '${r['repartidor_nombre']} ${r['vehiculo_placa']} ${r['estado']} ${r['entregas']}'
+              '${r['ruta_id']} ${r['repartidor_nombre']} ${r['vehiculo_placa']} ${r['estado']} ${r['entregas']}'
                   .toLowerCase()
                   .contains(_search.toLowerCase()),
         )
@@ -87,6 +102,17 @@ class _RoutesScreenState extends State<RoutesScreen> {
               widget.admin ? 'Asignación y rutas' : 'Mis rutas de entrega',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
+            if (widget.admin)
+              OutlinedButton.icon(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TrafficPolicyScreen(),
+                  ),
+                ),
+                icon: const Icon(Icons.traffic_outlined),
+                label: const Text('Tráfico estimado'),
+              ),
             if (widget.admin)
               FilledButton.icon(
                 onPressed: () async {
@@ -156,7 +182,7 @@ class _RoutesScreenState extends State<RoutesScreen> {
                           '${r['repartidor_nombre'] ?? 'Repartidor'} · ${r['vehiculo_placa'] ?? 'Vehículo'}',
                         ),
                         subtitle: Text(
-                          '${countLabel((r['entregas'] as List).length, 'entrega', 'entregas')} · ${r['estado']}\n${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min de viaje\n${r['inicio_planificado'] == null ? 'Horario por registrar' : '${friendlyDate(r['inicio_planificado'])} → ${friendlyDate(r['fin_planificado'])}'}',
+                          'Ruta ${r['ruta_id'].toString().substring(0, 8)} · ${countLabel((r['entregas'] as List).length, 'entrega', 'entregas')} · ${r['estado']}\n${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min de viaje\n${r['inicio_planificado'] == null ? 'Horario por registrar' : '${friendlyDate(r['inicio_planificado'])} → ${friendlyDate(r['fin_planificado'])}'}',
                         ),
                         trailing: widget.admin && r['estado'] == 'PLANIFICADA'
                             ? IconButton(
@@ -165,13 +191,16 @@ class _RoutesScreenState extends State<RoutesScreen> {
                                 onPressed: () => _schedule(r),
                               )
                             : const Icon(Icons.chevron_right),
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                RouteDetailScreen(routeId: r['ruta_id']),
-                          ),
-                        ),
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  RouteDetailScreen(routeId: r['ruta_id']),
+                            ),
+                          );
+                          if (mounted) await _load();
+                        },
                       ),
                     );
                   },

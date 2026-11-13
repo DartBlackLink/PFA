@@ -48,3 +48,11 @@ La propuesta conserva parámetros/semilla y vence en 10 minutos; confirmar verif
 [Runner reproducible de calidad](../tools/quality/README.md): crea PostgreSQL temporal, aplica/revierte migraciones, verifica Ruff/Bandit/dependencias y ejecuta pytest con cobertura. No sigue el procedimiento antiguo que usaba la base local de la aplicación.
 
 [Resultados del incremento](../docs/03%20Implementaci%C3%B3n/evidencias/20261030/RESULTADOS.md) y [revisión S3](../docs/03%20Implementaci%C3%B3n/Sprint%203/03%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md).
+
+## Operación y migración 0006 — 02/11/2026
+
+Se conserva la base de autenticación y autorización por recurso. Nuevos endpoints de operación propia: POST /routes/{id}/iniciar, POST /routes/{id}/entregas/{pedido}/confirmar y GET/POST /routes/{id}/incidentes. ADMIN consulta el resultado sin suplantar al repartidor. La migración 0006 agrega horas reales y autor de entrega, y permite CANCELADO en propuestas. Mantener respaldo antes de alembic upgrade head; no aplicar a la base principal hasta el despliegue autorizado. Evidencia y límites (archivo histórico local del corte de Lima).
+
+## Operación versionada y migración 0007
+
+0007 agrega política de tráfico manual, versiones de ruta, revisiones auditadas, notificaciones/lecturas y campos de afectación/resolución de incidencias. Los endpoints /operations documentados en OpenAPI separan propuesta, aprobación y acuse. POST de entrega en versión >1 exige version=vigente y acuse; una ruta inicial solo se declara recibida por acción efectiva del repartidor. Las configuraciones concurrentes y propuestas desactualizadas reciben 409. No ejecutar la migración principal sin respaldo/despliegue autorizado. Resultados (archivo histórico local del corte de Lima).

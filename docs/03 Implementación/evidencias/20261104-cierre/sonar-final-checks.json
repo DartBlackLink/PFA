@@ -1,0 +1,11 @@
+{
+  "gate": "OK",
+  "coverage_backend_sonar_percent": 90.9,
+  "exposed_sonar_tokens_in_git_visible_text": 0,
+  "git_diff_check_exit": 0,
+  "head_unchanged": "ac7fda0d2863a2092254c36f32735b72b8233eaa",
+  "git_push": false,
+  "jira_write": false,
+  "functional_sources_changed": false,
+  "quality_project_key_updated": "ecologisticas2.1"
+}

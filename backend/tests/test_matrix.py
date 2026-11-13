@@ -32,7 +32,7 @@ def table(url, timeout=8):
 
 
 def test_directed_matrix_units_and_cached_provider_call_count():
-    points = [(-12, -77), (-12.01, -77.01), (-12.02, -77.02)]
+    points = [(-12, -75.2), (-12.01, -75.21), (-12.02, -75.22)]
     with patch.object(matrix, "fetch_json", side_effect=table) as fetch:
         distance, duration, first = matrix.road_matrix(points, monotonic() + 10)
         second_distance, second_duration, second = matrix.road_matrix(
@@ -46,7 +46,7 @@ def test_directed_matrix_units_and_cached_provider_call_count():
 
 
 def test_provider_batches_fit_location_limit_and_cache_is_bounded():
-    points = [(-12 - i * 0.001, -77) for i in range(41)]
+    points = [(-12 - i * 0.001, -75.2) for i in range(41)]
     with patch.object(matrix, "fetch_json", side_effect=table) as fetch:
         distance, _, metadata = matrix.road_matrix(points, monotonic() + 10)
         assert len(distance) == 41 and metadata["provider_calls"] == 4
@@ -55,7 +55,7 @@ def test_provider_batches_fit_location_limit_and_cache_is_bounded():
             assert len(coordinates) <= 80
         for i in range(6):
             matrix.road_matrix(
-                [(-11 - i * 0.001, -77), (-11.01, -77.01)], monotonic() + 10
+                [(-12 - i * 0.001, -75.2), (-12.01, -75.21)], monotonic() + 10
             )
     assert len(matrix._cache) == matrix.MAX_CACHE_ENTRIES
 
@@ -72,17 +72,17 @@ def test_provider_batches_fit_location_limit_and_cache_is_bounded():
 def test_invalid_or_disconnected_matrix_never_cached(response):
     with patch.object(matrix, "fetch_json", return_value=response):
         with pytest.raises(HTTPException) as error:
-            matrix.road_matrix([(-12, -77)], monotonic() + 10)
+            matrix.road_matrix([(-12, -75.2)], monotonic() + 10)
     assert error.value.status_code == 503 and not matrix._cache
 
 
 def test_matrix_deadline_and_provider_failure():
     with pytest.raises(HTTPException) as error:
-        matrix.road_matrix([(-12, -77)], monotonic() - 1)
+        matrix.road_matrix([(-12, -75.2)], monotonic() - 1)
     assert error.value.status_code == 503
     with patch.object(matrix, "fetch_json", side_effect=TimeoutError):
         with pytest.raises(HTTPException):
-            matrix.road_matrix([(-12, -77)], monotonic() + 10)
+            matrix.road_matrix([(-12, -75.2)], monotonic() + 10)
 
 
 def test_road_shape_requires_valid_complete_legs():
@@ -92,7 +92,7 @@ def test_road_shape_requires_valid_complete_legs():
             {
                 "geometry": {
                     "type": "LineString",
-                    "coordinates": [[-77, -12], [-77.01, -12.01]],
+                    "coordinates": [[-75.2, -12], [-75.21, -12.01]],
                 },
                 "legs": [{"distance": 1000, "duration": 120}],
             }
@@ -100,10 +100,10 @@ def test_road_shape_requires_valid_complete_legs():
     }
     with patch.object(matrix, "fetch_json", return_value=valid):
         geometry, legs = matrix.road_shape(
-            [(-12, -77), (-12.01, -77.01)], monotonic() + 10
+            [(-12, -75.2), (-12.01, -75.21)], monotonic() + 10
         )
     assert geometry["type"] == "LineString" and legs == [(1, 2)]
     valid["routes"][0]["legs"] = []
     with patch.object(matrix, "fetch_json", return_value=valid):
         with pytest.raises(HTTPException):
-            matrix.road_shape([(-12, -77), (-12.01, -77.01)], monotonic() + 10)
+            matrix.road_shape([(-12, -75.2), (-12.01, -75.21)], monotonic() + 10)

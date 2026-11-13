@@ -1,0 +1,36 @@
+{
+  "at": "2026-11-04T19:45:59.406638+00:00",
+  "synthetic_account_only": true,
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": 401,
+      "retry_after": null,
+      "passed": true
+    },
+    {
+      "attempt": 2,
+      "status": 401,
+      "retry_after": null,
+      "passed": true
+    },
+    {
+      "attempt": 3,
+      "status": 429,
+      "retry_after": "5",
+      "passed": true
+    },
+    {
+      "attempt": 4,
+      "status": 429,
+      "retry_after": "10",
+      "passed": true
+    },
+    {
+      "attempt": 5,
+      "status": 429,
+      "retry_after": "300",
+      "passed": true
+    }
+  ]
+}

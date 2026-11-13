@@ -1,3 +1,5 @@
+import '../../../core/config/operation_area.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +27,8 @@ class OptimizationScreen extends StatefulWidget {
 
 class _OptimizationScreenState extends State<OptimizationScreen> {
   final _form = GlobalKey<FormState>();
+  final _feedback = GlobalKey();
+  final _result = GlobalKey();
   final _selected = <String>{};
   final _teams = <Map<String, String>>[];
   final _fields = <String, TextEditingController>{
@@ -41,6 +45,7 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
   };
   late OptimizationGateway _api;
   Records _orders = [], _drivers = [], _vehicles = [], _history = [];
+  Records _warnings = [];
   Map<String, dynamic>? _plan;
   String? _driver, _vehicle, _error;
   String _search = '';
@@ -77,6 +82,65 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
     _plan = null;
     _error = null;
   });
+  void _reveal(GlobalKey key) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && key.currentContext != null) {
+        Scrollable.ensureVisible(
+          key.currentContext!,
+          duration: const Duration(milliseconds: 250),
+          alignment: .1,
+        );
+      }
+    });
+  }
+
+  String? _orderIssue(Map<String, dynamic> order) {
+    if (order['latitud'] == null || order['longitud'] == null) {
+      return 'Faltan coordenadas confirmadas';
+    }
+    if (!OperationArea.contains(order['latitud'], order['longitud'])) {
+      return 'Destino fuera de Huancayo y sus alrededores habilitados';
+    }
+    final finish = DateTime.tryParse('${order['ventana_fin']}')?.toUtc();
+    final departure = DateTime.utc(
+      _start.year,
+      _start.month,
+      _start.day,
+      _start.hour + 5,
+      _start.minute,
+    );
+    if (finish == null) return 'Falta una ventana de entrega válida';
+    if (!finish.isAfter(departure)) {
+      return 'La ventana termina antes de la salida. Corrige la fecha de salida o el pedido.';
+    }
+    return null;
+  }
+
+  String? _teamIssue(String? driver, String? vehicle) {
+    final conflicts = _warnings
+        .where(
+          (r) => r['repartidor_id'] == driver || r['vehiculo_id'] == vehicle,
+        )
+        .toList();
+    if (conflicts.isNotEmpty) {
+      return '${conflicts.length} ruta(s) activa(s) sin horario del equipo. En Rutas, registra su horario antes de planificar. IDs: ${conflicts.map((r) => r['ruta_id'].toString().substring(0, 8)).join(', ')}';
+    }
+    final rows = _drivers.where((d) => d['repartidor_id'] == driver);
+    if (rows.isNotEmpty) {
+      final d = rows.first;
+      if (d['origen_latitud'] == null ||
+          d['origen_longitud'] == null ||
+          d['disponible_desde'] == null ||
+          d['disponible_hasta'] == null) {
+        return 'Completa origen y turno del repartidor en Repartidores.';
+      }
+      if (!OperationArea.contains(d['origen_latitud'], d['origen_longitud'])) {
+        return 'El origen del repartidor está fuera de Huancayo y sus alrededores.';
+      }
+    }
+    return null;
+  }
+
   double _number(dynamic value) => double.tryParse('$value') ?? 0;
 
   Future<void> _load({bool keepPlan = false}) async {
@@ -99,6 +163,7 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
             .where((row) => row['estado'] == 'ACTIVO')
             .toList();
         _history = values['plans']!;
+        _warnings = values['warnings'] ?? [];
         _selected.retainAll(_orders.map((row) => '${row['pedido_id']}'));
         _teams.removeWhere(
           (team) =>
@@ -131,11 +196,17 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
       initialDate: _start,
       firstDate: DateTime(2020),
       lastDate: DateTime(2050),
+      helpText: 'Fecha de salida (Huancayo)',
+      cancelText: 'Cancelar',
+      confirmText: 'Aceptar',
     );
     if (date == null || !mounted) return;
     final time = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(_start),
+      helpText: 'Hora de salida (Huancayo)',
+      cancelText: 'Cancelar',
+      confirmText: 'Aceptar',
     );
     if (time == null || !mounted) return;
     setState(() {
@@ -151,7 +222,28 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
   }
 
   Future<void> _preview() async {
-    if (!_form.currentState!.validate() || _selected.isEmpty || _teams.isEmpty) {
+    if (!_form.currentState!.validate() ||
+        _selected.isEmpty ||
+        _teams.isEmpty) {
+      return;
+    }
+    final invalidOrders = _orders
+        .where(
+          (o) =>
+              _selected.contains('${o['pedido_id']}') && _orderIssue(o) != null,
+        )
+        .toList();
+    final invalidTeams = _teams
+        .map((t) => _teamIssue(t['repartidor_id'], t['vehiculo_id']))
+        .whereType<String>()
+        .toList();
+    if (invalidOrders.isNotEmpty || invalidTeams.isNotEmpty) {
+      setState(
+        () => _error = invalidOrders.isNotEmpty
+            ? 'Revisa ${invalidOrders.length} pedido(s): ${_orderIssue(invalidOrders.first)}'
+            : invalidTeams.first,
+      );
+      _reveal(_feedback);
       return;
     }
     setState(() {
@@ -180,12 +272,16 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
         'poblacion': int.parse(_fields['population']!.text),
         'generaciones': int.parse(_fields['generations']!.text),
       });
-      if (mounted) setState(() => _plan = result);
+      if (mounted) {
+        setState(() => _plan = result);
+        _reveal(_result);
+      }
     } catch (error) {
       if (mounted) {
         setState(
           () => _error = error.toString().replaceFirst('Exception: ', ''),
         );
+        _reveal(_feedback);
       }
     } finally {
       if (mounted) setState(() => _working = false);
@@ -202,6 +298,7 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
       if (!mounted) return;
       setState(() => _plan = result);
       await _load(keepPlan: true);
+      _reveal(_result);
     } catch (error) {
       if (mounted) {
         setState(
@@ -220,7 +317,10 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
     });
     try {
       final result = await _api.getPlan(identifier);
-      if (mounted) setState(() => _plan = result);
+      if (mounted) {
+        setState(() => _plan = result);
+        _reveal(_result);
+      }
     } catch (error) {
       if (mounted) {
         setState(
@@ -230,6 +330,87 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
     } finally {
       if (mounted) setState(() => _working = false);
     }
+  }
+
+  Future<void> _cancelPlan() async {
+    final accepted = await showDialog<bool>(
+      context: context,
+      builder: (dialog) => AlertDialog(
+        title: const Text('Cancelar propuesta'),
+        content: const Text(
+          'La propuesta quedará cancelada. Los pedidos seguirán pendientes y podrás volver a planificarlos.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialog, false),
+            child: const Text('Volver'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(dialog, true),
+            child: const Text('Cancelar propuesta'),
+          ),
+        ],
+      ),
+    );
+    if (accepted != true || !mounted) return;
+    setState(() => _working = true);
+    try {
+      final plan = await _api.cancel('${_plan!['plan_id']}');
+      if (!mounted) return;
+      setState(() => _plan = plan);
+      await _load(keepPlan: true);
+      _reveal(_result);
+    } catch (e) {
+      if (mounted) {
+        setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
+        _reveal(_feedback);
+      }
+    } finally {
+      if (mounted) setState(() => _working = false);
+    }
+  }
+
+  void _previewMap(Map<String, dynamic> route) {
+    final stops = (route['entregas'] as List).cast<Map<String, dynamic>>();
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => RouteDetailScreen(
+          routeId: 'preview',
+          preview: {
+            ...route,
+            'estado': 'PROPUESTA',
+            'distancia_km': route['distance'],
+            'tiempo_min': route['travel'],
+            'servicio_min_por_entrega': int.tryParse(_fields['service']!.text),
+            'entregas': [
+              for (var i = 0; i < stops.length; i++)
+                {
+                  ...stops[i],
+                  'secuencia': i + 1,
+                  'cliente':
+                      _orders
+                          .where((o) => o['pedido_id'] == stops[i]['pedido_id'])
+                          .firstOrNull?['cliente_nombre'] ??
+                      'Destino ${i + 1}',
+                  'tipo_producto': _orders
+                      .where((o) => o['pedido_id'] == stops[i]['pedido_id'])
+                      .firstOrNull?['tipo_producto'],
+                  'prioridad': _orders
+                      .where((o) => o['pedido_id'] == stops[i]['pedido_id'])
+                      .firstOrNull?['prioridad'],
+                  'estado_entrega': 'PENDIENTE',
+                  'ventana_inicio': _orders
+                      .where((o) => o['pedido_id'] == stops[i]['pedido_id'])
+                      .firstOrNull?['ventana_inicio'],
+                  'ventana_fin': _orders
+                      .where((o) => o['pedido_id'] == stops[i]['pedido_id'])
+                      .firstOrNull?['ventana_fin'],
+                },
+            ],
+          },
+        ),
+      ),
+    );
   }
 
   Widget _card(String title, String help, Widget child) => Card(
@@ -350,7 +531,7 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
                     '${order['cliente_nombre'] ?? 'Cliente'} · ${order['direccion']}',
                   ),
                   subtitle: Text(
-                    '${order['peso_kg']} kg · ${optimizationLimaDate(order['ventana_inicio'])} a ${optimizationLimaDate(order['ventana_fin'])}',
+                    '${order['peso_kg']} kg · ${optimizationLimaDate(order['ventana_inicio'])} a ${optimizationLimaDate(order['ventana_fin'])}${_orderIssue(order) == null ? '' : '\n⚠ ${_orderIssue(order)}'}',
                   ),
                   onChanged: _working
                       ? null
@@ -435,6 +616,14 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
           },
         ),
         const SizedBox(height: 12),
+        if (_teamIssue(_driver, _vehicle) != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(
+              _teamIssue(_driver, _vehicle)!,
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
+            ),
+          ),
         Align(
           alignment: Alignment.centerLeft,
           child: OutlinedButton.icon(
@@ -494,7 +683,7 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
 
   Widget _settingsCard() => _card(
     '3. Salida y condiciones',
-    'Horario de Lima (UTC−05). La propuesta respeta la ventana completa de cada entrega.',
+    'Hora de Huancayo, Perú (UTC−05; America/Lima). La propuesta respeta la ventana completa de cada entrega.',
     Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -502,10 +691,43 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
           onPressed: _working ? null : _pickStart,
           icon: const Icon(Icons.schedule),
           label: Text(
-            'Salida: ${_start.day}/${_start.month}/${_start.year} ${_start.hour.toString().padLeft(2, '0')}:${_start.minute.toString().padLeft(2, '0')} · Lima',
+            'Salida: ${_start.day}/${_start.month}/${_start.year} ${_start.hour.toString().padLeft(2, '0')}:${_start.minute.toString().padLeft(2, '0')} · hora Perú',
           ),
         ),
         const SizedBox(height: 16),
+        TextButton.icon(
+          onPressed: _working || _selected.isEmpty
+              ? null
+              : () {
+                  final dates =
+                      _orders
+                          .where((o) => _selected.contains('${o['pedido_id']}'))
+                          .map(
+                            (o) =>
+                                DateTime.tryParse('${o['ventana_inicio']}')
+                                    ?.toUtc(),
+                          )
+                          .whereType<DateTime>()
+                          .toList()
+                        ..sort();
+                  if (dates.isEmpty) return;
+                  final date = dates.first.subtract(const Duration(hours: 5));
+                  setState(() {
+                    _start = DateTime(
+                      date.year,
+                      date.month,
+                      date.day,
+                      date.hour,
+                      date.minute,
+                    );
+                    _plan = null;
+                    _error = null;
+                  });
+                },
+          icon: const Icon(Icons.event_available_outlined),
+          label: const Text('Usar inicio de la primera ventana seleccionada'),
+        ),
+        const SizedBox(height: 8),
         _numeric('service', 'Atención por entrega (min)', 1, 120),
         const SizedBox(height: 8),
         SwitchListTile(
@@ -598,15 +820,22 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
   Widget _planCard() {
     final plan = _plan!, stats = plan['estadisticas'] as Map;
     final confirmed = plan['estado'] == 'CONFIRMADO';
+    final cancelled = plan['estado'] == 'CANCELADO';
     final expired =
         DateTime.tryParse('${plan['vence_en']}')?.isBefore(DateTime.now()) ??
         true;
     final routeIds = (plan['ruta_ids'] as List?) ?? [];
     return _card(
-      confirmed ? '4. Plan confirmado' : '4. Revisa la propuesta',
+      confirmed
+          ? '4. Plan confirmado'
+          : cancelled
+          ? '4. Propuesta cancelada'
+          : '4. Revisa la propuesta',
       confirmed
           ? 'Las rutas ya están guardadas y los pedidos fueron asignados.'
-          : 'Disponible hasta ${optimizationLimaDate(plan['vence_en'])}, hora de Lima.',
+          : cancelled
+          ? 'Los pedidos siguen pendientes. Genera una nueva propuesta cuando lo necesites.'
+          : 'Disponible hasta ${optimizationLimaDate(plan['vence_en'])}, hora de Huancayo.',
       Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -654,11 +883,18 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
                     Text(
                       '${i + 1}. ${item['entregas'][i]['direccion'] ?? 'Destino registrado'}\nEntrega prevista: ${optimizationLimaDate(item['entregas'][i]['eta'])}',
                     ),
+                  if (!confirmed)
+                    TextButton.icon(
+                      onPressed: () =>
+                          _previewMap(Map<String, dynamic>.from(item)),
+                      icon: const Icon(Icons.map_outlined),
+                      label: const Text('Revisar mapa de la propuesta'),
+                    ),
                 ],
               ),
             ),
           const SizedBox(height: 18),
-          if (!confirmed)
+          if (!confirmed && !cancelled)
             FilledButton.icon(
               key: const ValueKey('opt-confirm'),
               onPressed: _working || expired ? null : _confirm,
@@ -668,6 +904,11 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
                     ? 'Propuesta vencida: vuelve a generar'
                     : 'Confirmar y asignar pedidos',
               ),
+            ),
+          if (!confirmed && !cancelled)
+            TextButton(
+              onPressed: _working ? null : _cancelPlan,
+              child: const Text('Cancelar propuesta'),
             ),
           if (confirmed)
             for (var i = 0; i < routeIds.length; i++)
@@ -737,6 +978,12 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
                             'Selecciona pedidos y equipos, genera una propuesta y confirma cuando estés conforme.',
                           ),
                           const SizedBox(height: 20),
+                          _ordersCard(),
+                          const SizedBox(height: 16),
+                          _teamsCard(),
+                          const SizedBox(height: 16),
+                          _settingsCard(),
+                          SizedBox(key: _feedback),
                           if (_error != null)
                             Semantics(
                               liveRegion: true,
@@ -769,14 +1016,10 @@ class _OptimizationScreenState extends State<OptimizationScreen> {
                                 ),
                               ),
                             ),
-                          _ordersCard(),
-                          const SizedBox(height: 16),
-                          _teamsCard(),
-                          const SizedBox(height: 16),
-                          _settingsCard(),
+
                           if (_plan != null) ...[
                             const SizedBox(height: 16),
-                            _planCard(),
+                            SizedBox(key: _result, child: _planCard()),
                           ],
                           if (_history.isNotEmpty) ...[
                             const SizedBox(height: 16),

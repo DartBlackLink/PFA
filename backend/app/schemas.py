@@ -127,6 +127,8 @@ class RepartidorCreate(ValidatedInput):
 
     @model_validator(mode="after")
     def validar_turno(self):
+        from app.services.operation_area import validate_point
+        validate_point(self.origen_latitud, self.origen_longitud)
         if self.disponible_desde >= self.disponible_hasta:
             raise ValueError("Inicio debe ser anterior al fin de disponibilidad")
         return self
@@ -181,6 +183,8 @@ class PedidoCreate(ValidatedInput):
 
     @model_validator(mode="after")
     def validar_pedido(self):
+        from app.services.operation_area import validate_point
+        validate_point(self.latitud, self.longitud)
         if len(self.direccion) < 5:
             raise ValueError("Dirección de al menos 5 caracteres")
         if not self.cliente_id and not self.cliente_nombre:
@@ -238,6 +242,12 @@ class RutaCreate(RutaHorario):
 
 
 class RutaRead(BaseModel):
+    ambito_operativo: str = 'Huancayo y alrededores urbanos, Junín, Perú'
+    fuera_zona: bool = False
+    version: int = 1
+    version_recibida: int = 0
+    iniciado_en: datetime | None = None
+    finalizado_en: datetime | None = None
     plan_optimizacion_id: uuid.UUID | None = None
     inicio_planificado: datetime | None = None
     fin_planificado: datetime | None = None

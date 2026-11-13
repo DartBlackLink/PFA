@@ -1,0 +1,13 @@
+{
+  "system/status": {
+    "id": "147B411E-AaFlWqpHQ1_GIHYyFBKn",
+    "version": "26.10.0.133078",
+    "status": "UP"
+  },
+  "measures/component?component=ecologisticas&metricKeys=coverage,bugs,vulnerabilities,alert_status": {
+    "error": "HTTPError"
+  },
+  "project_analyses/search?project=ecologisticas&ps=1": {
+    "error": "HTTPError"
+  }
+}

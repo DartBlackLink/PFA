@@ -153,6 +153,23 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> confirmarSesionInvalida(String? tokenSolicitado) async {
+    if (tokenSolicitado == null || tokenSolicitado != _token) return false;
+    try {
+      final response = await _client
+          .get(
+            Uri.parse('$_base/auth/me'),
+            headers: {'Authorization': 'Bearer $tokenSolicitado'},
+          )
+          .timeout(const Duration(seconds: 5));
+      return response.statusCode == 401 && tokenSolicitado == _token;
+    } on TimeoutException {
+      return false;
+    } on http.ClientException {
+      return false;
+    }
+  }
+
   Future<void> cerrarSesion({String? mensaje}) async {
     _token = null;
     _rol = null;

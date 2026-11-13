@@ -1,0 +1,25 @@
+{
+  "route_id": "16e23300-c351-4b13-97c6-c15d4701aece",
+  "base_geometry_points": 165,
+  "proposed_geometry_points": 87,
+  "shared_unique_points": 85,
+  "distinct_geometries": true,
+  "approved_geometry_is_active": true,
+  "manual_delay_min": 3,
+  "comparison": {
+    "base": "Pendientes desde la misma ubicación y hora; no incluye trayecto ya completado",
+    "vigente_km": 4.0404,
+    "vigente_min": 19.1,
+    "diferencia_km": 0.0,
+    "alternativa_km": 4.0404,
+    "diferencia_min": 0.0,
+    "alternativa_min": 19.1,
+    "retrasos_vigente": "Sin incumplimientos estimados",
+    "vigente_factible": true,
+    "ventanas_alternativa": "Todas factibles bajo la estimación; no es puntualidad real"
+  },
+  "route_version": 2,
+  "receipt_version": 2,
+  "receipt_at": "2026-11-08T15:09:59.221938+00:00",
+  "approval_at": "2026-11-08T15:09:47.804807+00:00"
+}

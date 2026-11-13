@@ -19,6 +19,9 @@ def isolated_database():
     backend = Path(__file__).resolve().parents[1]
     config = Config(str(backend / "alembic.ini"))
     config.set_main_option("script_location", str(backend / "migrations"))
+    # This exact disposable DB is guarded above. Rebuild its schema before every
+    # suite, so an interrupted development run cannot reuse obsolete constraints.
+    command.downgrade(config, 'base')
     command.upgrade(config, "head")
     yield
     command.downgrade(config, "base")

@@ -1,0 +1,10 @@
+[
+  {
+    "tool": "bandit",
+    "exit_code": 0
+  },
+  {
+    "tool": "pip-audit",
+    "exit_code": 0
+  }
+]

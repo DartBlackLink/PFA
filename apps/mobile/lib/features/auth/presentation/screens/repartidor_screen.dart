@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../core/widgets/operation_notifications.dart';
 
 import '../providers/auth_provider.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/theme/theme_controller.dart';
-import '../../../../core/widgets/record_widgets.dart';
+import 'courier_workspace.dart';
 import '../../../rutas/presentation/route_detail_screen.dart';
 
 class RepartidorScreen extends StatefulWidget {
@@ -17,17 +21,33 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
   Map<String, dynamic>? _profile;
   List<dynamic> _routes = [];
   String? _error;
+  String? _profileError;
   bool _loading = true;
+  bool _refreshing = false;
+  bool _loadedOnce = false;
+  Timer? _refreshTimer;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => _load());
+    _refreshTimer = Timer.periodic(const Duration(seconds: 10), (_) {
+      if (mounted && (ModalRoute.of(context)?.isCurrent ?? false)) _load();
+    });
+  }
+
+  @override
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> _load() async {
+    if (!mounted || _refreshing) return;
+    _refreshing = true;
     setState(() {
-      _loading = true;
+      _loading = !_loadedOnce;
       _error = null;
+      _profileError = null;
     });
     final api = ApiClient(context.read<AuthProvider>());
     try {
@@ -35,12 +55,13 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
       Map<String, dynamic>? profile;
       try {
         profile = await api.request('/drivers/me');
-      } catch (_) {
+      } catch (error) {
         profile = null;
+        _profileError = error.toString().replaceFirst('Exception: ', '');
       }
       if (mounted) {
         setState(() {
-          _profile = profile;
+          _profile = profile ?? _profile;
           _routes = routes as List;
         });
       }
@@ -49,6 +70,8 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
         setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
       }
     } finally {
+      _refreshing = false;
+      _loadedOnce = true;
       if (mounted) setState(() => _loading = false);
     }
   }
@@ -58,6 +81,7 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
     appBar: AppBar(
       title: const Text('Mi operación'),
       actions: [
+        const OperationNotifications(),
         IconButton(
           tooltip: 'Cambiar tema',
           onPressed: context.read<ThemeController>().toggle,
@@ -81,89 +105,21 @@ class _RepartidorScreenState extends State<RepartidorScreen> {
     ),
     body: _loading
         ? const Center(child: CircularProgressIndicator())
-        : ListView(
-            padding: const EdgeInsets.all(20),
-            children: [
-              if (_error != null)
-                Card(
-                  child: ListTile(
-                    title: Text(_error!),
-                    trailing: TextButton(
-                      onPressed: _load,
-                      child: const Text('Reintentar'),
-                    ),
-                  ),
+        : CourierWorkspace(
+            routes: _routes,
+            profile: _profile,
+            error: _error,
+            profileError: _profileError,
+            onRefresh: _load,
+            onOpen: (route) async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => RouteDetailScreen(routeId: route['ruta_id']),
                 ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Mi perfil',
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      if (_profile != null)
-                        StatusBadge('${_profile!['estado']}'),
-                      const SizedBox(height: 12),
-                      Text(
-                        _profile == null
-                            ? 'Solicita al administrador completar tu perfil.'
-                            : '${_profile!['nombre']}\nDNI: ${_profile!['dni']}\nLicencia: ${_profile!['licencia']}\nContacto: ${_profile!['contacto'] ?? 'Completar'}\nHorario: ${_profile!['disponible_desde'] ?? 'Completar'} — ${_profile!['disponible_hasta'] ?? 'Completar'}',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Mis rutas asignadas',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                countLabel(
-                  _routes.length,
-                  'recorrido disponible',
-                  'recorridos disponibles',
-                ),
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              if (_routes.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Text('Todavía no tienes rutas asignadas.'),
-                ),
-              const SizedBox(height: 12),
-              ..._routes.map(
-                (r) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Card(
-                    child: ListTile(
-                      leading: const Icon(Icons.route),
-                      title: Text(
-                        'Recorrido · ${r['vehiculo_placa'] ?? 'Vehículo asignado'}',
-                      ),
-                      subtitle: Text(
-                        '${countLabel((r['entregas'] as List).length, 'entrega', 'entregas')} · ${r['distancia_km'] ?? '—'} km · ${r['tiempo_min'] ?? '—'} min estimados',
-                      ),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              RouteDetailScreen(routeId: r['ruta_id']),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              );
+              if (mounted) await _load();
+            },
           ),
   );
 }

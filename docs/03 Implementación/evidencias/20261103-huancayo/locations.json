@@ -1,0 +1,26 @@
+[
+  {
+    "consulta": "Plaza de la Constitución Huancayo",
+    "direccion": "Plaza de la Constitución, San Carlos, Huancayo, Junin, Perú",
+    "latitud": -12.0680457,
+    "longitud": -75.2100731,
+    "detalle": "Plaza de la Constitución, San Carlos, Huancayo, Junin, Perú",
+    "fuente": "OpenStreetMap / Photon"
+  },
+  {
+    "consulta": "Plaza Huamanmarca Huancayo",
+    "direccion": "Plaza Huamanmarca, San Carlos, Huancayo, Junin, Perú",
+    "latitud": -12.0708548,
+    "longitud": -75.2083245,
+    "detalle": "Plaza Huamanmarca, San Carlos, Huancayo, Junin, Perú",
+    "fuente": "OpenStreetMap / Photon"
+  },
+  {
+    "consulta": "Parque de la Identidad Huanca",
+    "direccion": "Parque de la Identidad Huanca, San Carlos, Huancayo, Junin, Perú",
+    "latitud": -12.0492152,
+    "longitud": -75.1978246,
+    "detalle": "Parque de la Identidad Huanca, San Carlos, Huancayo, Junin, Perú",
+    "fuente": "OpenStreetMap / Photon"
+  }
+]

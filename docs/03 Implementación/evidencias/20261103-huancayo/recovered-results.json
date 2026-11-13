@@ -1,0 +1,20 @@
+{
+  "changed_sources": 26,
+  "coverage": {
+    "version": "7.17.0",
+    "timestamp": "1793710129766",
+    "lines-valid": "2410",
+    "lines-covered": "2261",
+    "line-rate": "0.9382",
+    "branches-valid": "604",
+    "branches-covered": "478",
+    "branch-rate": "0.7914",
+    "complexity": "0"
+  },
+  "flutter_test_done": 73,
+  "flutter_done": {
+    "success": true,
+    "type": "done",
+    "time": 18188
+  }
+}

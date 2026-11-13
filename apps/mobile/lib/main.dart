@@ -1,6 +1,7 @@
 // Archivo: lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,7 +13,9 @@ import 'features/auth/presentation/providers/flota_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+
+  final themeController = ThemeController();
+  await themeController.ready;
 
   // Inyección global de dependencias (Múltiples Módulos)
   runApp(
@@ -22,7 +25,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => FlotaProvider(context.read<AuthProvider>()),
         ), // Inyección del módulo Flota
-        ChangeNotifierProvider(create: (_) => ThemeController()),
+        ChangeNotifierProvider.value(value: themeController),
       ],
       child: const EcoLogisticaWebApp(),
     ),
@@ -38,6 +41,14 @@ class EcoLogisticaWebApp extends StatefulWidget {
 
 class _EcoLogisticaWebAppState extends State<EcoLogisticaWebApp> {
   GoRouter? _router;
+  SemanticsHandle? _semantics;
+
+  @override
+  void initState() {
+    super.initState();
+    if (kIsWeb) _semantics = SemanticsBinding.instance.ensureSemantics();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -47,6 +58,7 @@ class _EcoLogisticaWebAppState extends State<EcoLogisticaWebApp> {
   @override
   void dispose() {
     _router?.dispose();
+    _semantics?.dispose();
     super.dispose();
   }
 

@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-04T07:55:13.123553-05:00",
+  "orders": [
+    "30b91efb-1a34-455d-b78d-30098550f9ea",
+    "fbf8dbc7-b5ca-4e05-9a28-39d3b3a39dcc",
+    "09fe37be-4a37-4525-a9c4-f9130a7039d4"
+  ],
+  "plate": "HYO-CONT-03",
+  "driver_email": "qa.continuity.20261103@example.test",
+  "existing_order_count_before": 29,
+  "notice": "Solo tres pedidos QA nuevos; cuentas, contrase\u00f1as y entregas anteriores conservadas."
+}

@@ -48,7 +48,7 @@ class OptimizationRequest(ValidatedInput):
 
 class PlanView(BaseModel):
     plan_id: UUID
-    estado: Literal["PREVISUALIZADO", "CONFIRMADO"]
+    estado: Literal["PREVISUALIZADO", "CONFIRMADO", "CANCELADO"]
     creado_en: datetime
     vence_en: datetime
     algoritmo: str
