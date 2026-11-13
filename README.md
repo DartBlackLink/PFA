@@ -50,3 +50,10 @@ El informe conserva los pendientes de reconexión Android, validación en teléf
 - [Cobertura backend por módulo](docs/03%20Implementaci%C3%B3n/evidencias/20261103-estabilizacion/COBERTURA.md)
 - [Evidencia SonarQube](docs/03%20Implementaci%C3%B3n/evidencias/20261104-cierre/SONARQUBE_ACTUAL.md)
 - [Línea base de planificación y reconciliación con Jira](docs/03%20Implementaci%C3%B3n/evidencias/RECONCILIACION_20261030.md)
+
+## Documentación del Sprint 4
+
+Expediente preparatorio de mapa, dashboard y validación del rendimiento: dos historias de usuario y un enabler, 15 SP propuestos. El alcance documental fue aceptado por el responsable; Jira todavía no tiene Sprint 4 creado. No se atribuyen implementación, pruebas nuevas o aceptación a este corte del 13/11/2026.
+
+- [Documentos y anexos del Sprint 4](docs/03%20Implementaci%C3%B3n/Sprint%204/README.md).
+- [Acciones de Jira, evidencias y cierre](docs/03%20Implementaci%C3%B3n/Sprint%204/ACCIONES_PARA_CERRAR_SPRINT4.md).

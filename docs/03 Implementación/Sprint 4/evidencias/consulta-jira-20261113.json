@@ -1,0 +1,35 @@
+{
+  "project": "EcoLogística Huancayo APP",
+  "project_key": "EHAPP",
+  "site": "https://ecologistica.atlassian.net",
+  "board_id": 35,
+  "consulted_on": "2026-11-13",
+  "timezone": "America/Lima",
+  "mode": "read_only",
+  "sources": [
+    "listJiraBoardSprints: boardId=35, state=all, isLast=true",
+    "getJiraIssue: EHAPP-13, evidence",
+    "searchJiraIssuesUsingJql: project = EHAPP ORDER BY key ASC, isLast=true"
+  ],
+  "observed_sprints": [
+    {"id": 35, "name": "EHAPP Sprint 1", "state": "active"},
+    {"id": 36, "name": "EHAPP Sprint 2", "state": "future"},
+    {"id": 37, "name": "EHAPP Sprint 3", "state": "future"}
+  ],
+  "sprint_4_exists_in_observed_board": false,
+  "sprint_3_reference": {
+    "key": "EHAPP-13", "id": "US-005", "summary": "Generar rutas optimizadas",
+    "story_points": 13, "sprint_id": 37, "status": "Tareas por hacer"
+  },
+  "sprint_4_documentary_proposal_accepted_by_owner": true,
+  "candidates": [
+    {"key": "EHAPP-15", "id": "US-006", "summary": "Visualizar rutas en mapa", "story_points": 5, "status": "Tareas por hacer", "sprint": null},
+    {"key": "EHAPP-16", "id": "US-007", "summary": "Consultar dashboard esencial", "story_points": 5, "status": "Tareas por hacer", "sprint": null},
+    {"key": "EHAPP-14", "id": "EN-002", "summary": "Rendimiento del motor", "story_points": 5, "status": "Tareas por hacer", "sprint": null}
+  ],
+  "proposed_story_points": 15,
+  "administratively_committed_story_points_for_sprint_4": null,
+  "accepted_story_points_for_sprint_4": null,
+  "jira_modified": false,
+  "note": "Propuesta documental aceptada en el chat; no equivale a asignación en Jira, ejecución ni aceptación académica. Se omiten perfiles personales y datos privados."
+}
