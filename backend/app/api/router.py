@@ -65,3 +65,9 @@ api_router.include_router(
     tags=["ubicaciones"],
     dependencies=[Depends(require_roles("ADMIN"))],
 )
+
+
+from app.api.routes import clients, reports
+
+api_router.include_router(clients.router, prefix="/clients", tags=["clientes"])
+api_router.include_router(reports.router, prefix="/reports", tags=["reportes"])

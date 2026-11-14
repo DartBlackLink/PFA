@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-14T18:37:34.703791+00:00",
+  "scope": "SERVER_ENDPOINT_POSTGRESQL_REAL_OSRM_SOLVER; excludes browser/proxy/render",
+  "orders": 150,
+  "teams": 15,
+  "public_destinations": 3,
+  "demand": "SYNTHETIC_REPEATED_DESTINATIONS_NOT_REPRESENTATIVE_REAL_DEMAND",
+  "provider": "https://router.project-osrm.org",
+  "python": "3.14.7",
+  "records": [
+    {
+      "path": "/api/v1/optimizations/preview",
+      "seconds": 16.649721699999645,
+      "status": 201,
+      "expected": 201
+    },
+    {
+      "path": "/api/v1/operations/routes/{ruta_id}/replan",
+      "seconds": 1.7807393000111915,
+      "status": 201,
+      "expected": 201
+    }
+  ],
+  "optimization_below_45s": true,
+  "initial_harness_correction": "El primer runner esperaba 200; POST /optimizations/preview documenta 201. Se conserva el resultado original y se usa su tiempo real sin repetir la optimización.",
+  "statistics": {
+    "seed": 42,
+    "rutas": 14,
+    "co2_kg": 29.213120000000004,
+    "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+    "pedidos": 150,
+    "trafico": {
+      "fuente": "APROXIMACION_MANUAL_ZONAL",
+      "reglas": [],
+      "revision": 0,
+      "zona_horaria": "America/Lima",
+      "area_operativa": {
+        "sur": -12.18,
+        "este": -75.12,
+        "norte": -11.94,
+        "oeste": -75.32,
+        "centro": {
+          "latitud": -12.0675,
+          "longitud": -75.2103
+        },
+        "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+        "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+        "zona_horaria": "America/Lima"
+      },
+      "trafico_en_vivo": false
+    },
+    "algorithm": "GA_VRPTW_1",
+    "cache_hit": false,
+    "objective": 1.486760245833333,
+    "elapsed_ms": 8029.88,
+    "age_seconds": 0,
+    "evaluations": 248,
+    "generations": 11,
+    "distancia_km": 146.0656,
+    "combustible_l": 14.60656,
+    "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+    "provider_calls": 25,
+    "parametros_motor": {
+      "seed": 42,
+      "seconds": 8,
+      "mutation": 0.2,
+      "population": 24,
+      "fuel_weight": 0.15,
+      "generations": 40,
+      "time_weight": 0.15,
+      "carbon_weight": 0.35,
+      "distance_weight": 0.35
+    },
+    "baseline_feasible": true,
+    "retorno_al_origen": true,
+    "baseline_objective": 3.412156833333333,
+    "global_optimum_guaranteed": false
+  },
+  "assigned": 150,
+  "confirm_status": 200,
+  "reoptimization_pending": 3,
+  "start_status": 200,
+  "incident_status": 200,
+  "reoptimization_below_30s": true,
+  "reoptimization_statistics": {
+    "seed": 42,
+    "algorithm": "GA_VRPTW_1",
+    "cache_hit": false,
+    "objective": 0.005,
+    "elapsed_ms": 34.17,
+    "age_seconds": 0,
+    "evaluations": 219,
+    "generations": 40,
+    "provider_calls": 1,
+    "baseline_feasible": true,
+    "baseline_objective": 0.005,
+    "global_optimum_guaranteed": false
+  }
+}

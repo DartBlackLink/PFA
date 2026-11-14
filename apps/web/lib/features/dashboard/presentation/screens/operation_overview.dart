@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Solo presenta los registros cargados: no calcula indicadores ambientales.
+import '../../../reports/reports_screen.dart';
+
+/// Conteos operativos y resumen ambiental calculado en servidor.
 class OperationOverview extends StatelessWidget {
   const OperationOverview({
     super.key,
@@ -76,6 +78,8 @@ class OperationOverview extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 16),
+          const SustainabilityOverview(),
           const SizedBox(height: 24),
           LayoutBuilder(
             builder: (context, constraints) {

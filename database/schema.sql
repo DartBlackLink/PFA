@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict d33dwg5N6cziM92a24sIOFd8LxL7J1WY9edOFycYWAZ18KUim0ndI7YfVoAYDxG
+\restrict Sc2ZAmDjMtlNvpM0szZsSaAFdqwxSzXK78ykZTTKOKD90CXsBFgASt0JVdmM8Hw
 
 -- Dumped from database version 16.15
 -- Dumped by pg_dump version 16.15
@@ -17,20 +17,6 @@ SET check_function_bodies = false;
 SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA public;
-
-
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 
 SET default_tablespace = '';
 
@@ -67,6 +53,42 @@ CREATE TABLE public.compensacion_carbono (
     co2_objetivo_kg numeric(14,3) NOT NULL,
     descripcion_plan text NOT NULL
 );
+
+
+--
+-- Name: configuracion_ambiental; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.configuracion_ambiental (
+    configuracion_id integer NOT NULL,
+    factor_kg_por_unidad numeric(16,6),
+    unidad character varying(80),
+    fuente character varying(500),
+    actualizado_por uuid NOT NULL,
+    actualizado_en timestamp with time zone NOT NULL,
+    CONSTRAINT ck_ambiental_complete CHECK ((((factor_kg_por_unidad IS NULL) AND (unidad IS NULL) AND (fuente IS NULL)) OR ((factor_kg_por_unidad IS NOT NULL) AND (factor_kg_por_unidad > (0)::numeric) AND (factor_kg_por_unidad <= (100000000)::numeric) AND (unidad IS NOT NULL) AND (fuente IS NOT NULL)))),
+    CONSTRAINT ck_ambiental_singleton CHECK ((configuracion_id = 1))
+);
+
+
+--
+-- Name: configuracion_ambiental_configuracion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.configuracion_ambiental_configuracion_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: configuracion_ambiental_configuracion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.configuracion_ambiental_configuracion_id_seq OWNED BY public.configuracion_ambiental.configuracion_id;
 
 
 --
@@ -355,6 +377,13 @@ CREATE TABLE public.vehiculo (
 
 
 --
+-- Name: configuracion_ambiental configuracion_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.configuracion_ambiental ALTER COLUMN configuracion_id SET DEFAULT nextval('public.configuracion_ambiental_configuracion_id_seq'::regclass);
+
+
+--
 -- Name: politica_trafico politica_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -439,6 +468,14 @@ ALTER TABLE ONLY public.cliente
 
 ALTER TABLE ONLY public.compensacion_carbono
     ADD CONSTRAINT compensacion_carbono_pkey PRIMARY KEY (compensacion_id);
+
+
+--
+-- Name: configuracion_ambiental configuracion_ambiental_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.configuracion_ambiental
+    ADD CONSTRAINT configuracion_ambiental_pkey PRIMARY KEY (configuracion_id);
 
 
 --
@@ -658,6 +695,14 @@ ALTER TABLE ONLY public.compensacion_carbono
 
 
 --
+-- Name: configuracion_ambiental configuracion_ambiental_actualizado_por_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.configuracion_ambiental
+    ADD CONSTRAINT configuracion_ambiental_actualizado_por_fkey FOREIGN KEY (actualizado_por) REFERENCES public.usuario(usuario_id);
+
+
+--
 -- Name: ruta_detalle fk_entrega_autor; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -829,4 +874,4 @@ ALTER TABLE ONLY public.ruta
 -- PostgreSQL database dump complete
 --
 
-\unrestrict d33dwg5N6cziM92a24sIOFd8LxL7J1WY9edOFycYWAZ18KUim0ndI7YfVoAYDxG
+\unrestrict Sc2ZAmDjMtlNvpM0szZsSaAFdqwxSzXK78ykZTTKOKD90CXsBFgASt0JVdmM8Hw

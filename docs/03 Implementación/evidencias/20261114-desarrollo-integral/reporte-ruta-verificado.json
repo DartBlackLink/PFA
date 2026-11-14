@@ -1,0 +1,31 @@
+{
+  "ruta_id": "25de59bc-cd4f-4157-8f94-12593080be99",
+  "version": 2,
+  "estado": "FINALIZADA",
+  "algoritmo": "GA_VRPTW_1",
+  "inicio_planificado": "2026-11-13T17:35:38.442936+00:00",
+  "distancia_km": 6.439,
+  "tiempo_min": 12.94,
+  "combustible_l": 0.537,
+  "co2_kg": 1.288,
+  "ventanas": {
+    "entregas": 2,
+    "entregadas": 2,
+    "previstas_evaluadas": 2,
+    "previstas_en_ventana": 2,
+    "reales_evaluadas": 2,
+    "reales_en_ventana": 2,
+    "cumplimiento_previsto_pct": 100.0,
+    "cumplimiento_real_pct": 100.0
+  },
+  "equivalencia": {
+    "valor": 0.14493079779453133,
+    "unidad": "galones US de gasolina quemada (equivalencia teórica)",
+    "factor_kg_por_unidad": 8.887,
+    "fuente": "US EPA: 8,887 gramos CO₂ por galón US de gasolina = 8.887 kg/galón. Referencia comparativa, no factor medido en Huancayo ni compensación. Consultado 14/11/2026: https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references",
+    "advertencia": "Equivalencia teórica; no acredita compensación, captura real ni créditos de carbono."
+  },
+  "ambito": "Huancayo y alrededores urbanos autorizados, Junín, Perú",
+  "zona_horaria": "America/Lima",
+  "metodologia": "Estimaciones guardadas al planificar/reoptimizar. No son mediciones de consumo real ni tráfico en vivo. Sin línea base comparable no se declara ahorro."
+}

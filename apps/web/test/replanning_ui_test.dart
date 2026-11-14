@@ -19,6 +19,7 @@ Map<String, dynamic> revision(String state) => {
   'revision_id': 'revision-qa',
   'version_base': 1,
   'estado': state,
+  'vence_en': DateTime.now().toUtc().add(const Duration(minutes: 2)).toIso8601String(),
   'motivo': 'Cambio solicitado por congestión reportada por el conductor.',
   'recibido_en': null,
   'propuesta': {
@@ -35,6 +36,19 @@ Map<String, dynamic> revision(String state) => {
   },
 };
 void main() {
+  test('No se decide una propuesta vencida, de otra versión o ruta terminada', () {
+    final now = DateTime.utc(2026, 11, 13, 18);
+    final route = <String, dynamic>{'estado': 'EN_CURSO', 'version': 1};
+    final proposal = <String, dynamic>{'estado': 'PROPUESTA', 'version_base': 1,
+      'vence_en': now.add(const Duration(minutes: 2)).toIso8601String()};
+    expect(canDecideReplanning(route, proposal, now), isTrue);
+    expect(canDecideReplanning(route, proposal, now.add(const Duration(minutes: 2))), isFalse);
+    expect(canDecideReplanning({...route, 'version': 2}, proposal, now), isFalse);
+    expect(canDecideReplanning({...route, 'estado': 'FINALIZADA'}, proposal, now), isFalse);
+    expect(canDecideReplanning(route, {...proposal, 'vence_en': null}, now), isFalse);
+    expect(canDecideReplanning(route, {...proposal, 'estado': 'APROBADA'}, now), isFalse);
+  });
+
   test('La comparación informa empate y distingue tiempo de distancia', () {
     expect(
       replanningComparisonSummary({'diferencia_min': 0, 'diferencia_km': 0}),

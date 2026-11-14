@@ -23,10 +23,12 @@ class DeliveryLocationPicker extends StatefulWidget {
     required this.onChanged,
     this.lookup,
     this.showMap = true,
+    this.initialValue,
   });
   final ValueChanged<DeliveryLocation?> onChanged;
   final LocationLookup? lookup;
   final bool showMap;
+  final DeliveryLocation? initialValue;
   @override
   State<DeliveryLocationPicker> createState() => _DeliveryLocationPickerState();
 }
@@ -43,6 +45,19 @@ class _DeliveryLocationPickerState extends State<DeliveryLocationPicker> {
   String? _mapError;
   bool _busy = false, _confirmed = false, _mapReady = false;
   int _revision = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    final initial = widget.initialValue;
+    if (initial != null) {
+      _point = initial.point;
+      _address.text = initial.address;
+      _latitude.text = initial.point.latitude.toString();
+      _longitude.text = initial.point.longitude.toString();
+      _confirmed = true;
+    }
+  }
 
   @override
   void dispose() {

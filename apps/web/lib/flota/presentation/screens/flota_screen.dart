@@ -58,7 +58,13 @@ class _FlotaScreenState extends State<FlotaScreen> {
       appBar: AppBar(
         leading: IconButton(
           tooltip: 'Volver al centro de control',
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/dashboard');
+            }
+          },
           icon: const Icon(Icons.arrow_back_rounded),
         ),
         title: const Text('Gestión de Flota'),

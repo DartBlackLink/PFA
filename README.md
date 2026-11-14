@@ -57,3 +57,17 @@ Expediente preparatorio de mapa, dashboard y validación del rendimiento: dos hi
 
 - [Documentos y anexos del Sprint 4](docs/03%20Implementaci%C3%B3n/Sprint%204/README.md).
 - [Acciones de Jira, evidencias y cierre](docs/03%20Implementaci%C3%B3n/Sprint%204/ACCIONES_PARA_CERRAR_SPRINT4.md).
+
+
+## Actualización web — 14/11/2026
+
+La web incorpora reportes PDF, indicadores, clientes/preferencias y equivalencia con fuente. Se corrigieron la asignación manual, los horarios y el contrato de indicadores; se preservaron los datos y se verificó el ciclo ADMIN → REPARTIDOR → ADMIN → REPARTIDOR por botones.
+
+Regresión compartida: 141 pruebas backend, 93 pruebas Flutter; cobertura backend: 90.03135%. No es un análisis Sonar nuevo ni significa que todos los sprints estén aceptados. Los resultados anteriores de este README son cortes históricos.
+
+- [Distribución de sprints 1–6](docs/03%20Implementaci%C3%B3n/PLAN_FINAL_SPRINTS_WEB.md).
+- [Matriz de aceptación de 12 US y 5 EN](docs/03%20Implementaci%C3%B3n/MATRIZ_FINAL_BACKLOG_WEB.md).
+- [Sprint 4 actualizado](docs/03%20Implementaci%C3%B3n/Sprint%204/README.md), [Sprint 5](docs/03%20Implementaci%C3%B3n/Sprint%205/README.md), [Sprint 6](docs/03%20Implementaci%C3%B3n/Sprint%206/README.md).
+- [Resultados/evidencias](docs/03%20Implementaci%C3%B3n/evidencias/20261114-desarrollo-integral/RESULTADOS.md) y [acciones externas](docs/03%20Implementaci%C3%B3n/ACCIONES_EXTERNAS_Y_CIERRE_WEB.md).
+
+La aplicación activa se ejecuta en D:/UC/App/ecologistica, web http://127.0.0.1:8080. PFA contiene las fuentes y la documentación de entrega; no crea otra base operativa ni incluye credenciales. Consulte INICIAR_WEB.ps1 y OPERACION_LOCAL.md para el arranque configurado.

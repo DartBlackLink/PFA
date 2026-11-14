@@ -31,6 +31,15 @@ String replanningComparisonSummary(Map<String, dynamic> comparison) {
   return '$timeLabel y $distanceLabel.';
 }
 
+bool canDecideReplanning(Map<String, dynamic> route,
+    Map<String, dynamic> revision, DateTime now) {
+  final expires = DateTime.tryParse('${revision['vence_en']}');
+  return route['estado'] == 'EN_CURSO' &&
+      revision['estado'] == 'PROPUESTA' &&
+      revision['version_base'] == route['version'] &&
+      expires != null && now.isBefore(expires);
+}
+
 class ReplanningPanel extends StatefulWidget {
   const ReplanningPanel({
     super.key,
@@ -448,7 +457,7 @@ class _ReplanningPanelState extends State<ReplanningPanel> {
                   icon: const Icon(Icons.map_outlined),
                   label: const Text('Comparar en mapa'),
                 ),
-                if (admin && item['estado'] == 'PROPUESTA') ...[
+                if (admin && canDecideReplanning(widget.route, item, DateTime.now())) ...[
                   FilledButton(
                     onPressed: _busy ? null : () => _decide(item, 'confirm'),
                     child: const Text('Aprobar y enviar ruta optimizada'),

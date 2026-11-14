@@ -1,0 +1,118 @@
+{
+  "at": "2026-11-14T22:52:40.383837+00:00",
+  "source": "Private pre-migration backup vs live COPY SELECT, no restore performed",
+  "original_business_rows_preserved": true,
+  "tables": {
+    "alembic_version": {
+      "before": 1,
+      "after": 1,
+      "original_rows_missing_or_changed": 1,
+      "expected_control_changes": true
+    },
+    "cliente": {
+      "before": 21,
+      "after": 22,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "compensacion_carbono": {
+      "before": 0,
+      "after": 0,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "control_acceso": {
+      "before": 4,
+      "after": 4,
+      "original_rows_missing_or_changed": 3,
+      "expected_control_changes": true
+    },
+    "incidente": {
+      "before": 1,
+      "after": 2,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "lectura_notificacion": {
+      "before": 2,
+      "after": 2,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": true
+    },
+    "notificacion": {
+      "before": 3,
+      "after": 6,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "pedido": {
+      "before": 21,
+      "after": 24,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "plan_optimizacion": {
+      "before": 13,
+      "after": 14,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "politica_trafico": {
+      "before": 0,
+      "after": 0,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "preferencia_entrega": {
+      "before": 0,
+      "after": 1,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "repartidor": {
+      "before": 10,
+      "after": 10,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "reporte_sostenibilidad": {
+      "before": 0,
+      "after": 0,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "revision_ruta": {
+      "before": 2,
+      "after": 3,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "ruta": {
+      "before": 14,
+      "after": 15,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "ruta_detalle": {
+      "before": 26,
+      "after": 28,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "usuario": {
+      "before": 12,
+      "after": 12,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    },
+    "vehiculo": {
+      "before": 20,
+      "after": 20,
+      "original_rows_missing_or_changed": 0,
+      "expected_control_changes": false
+    }
+  },
+  "backup_sha256": "afebb2eb7fc59d52cdb26675f338a1352cb96274aff80b9fe3173e3e413503cf",
+  "new_configuration_table": "configuracion_ambiental",
+  "private_data_in_output": false
+}

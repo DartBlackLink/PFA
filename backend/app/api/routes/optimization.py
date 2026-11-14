@@ -20,6 +20,7 @@ from app.services.matrix import road_matrix, road_shape
 from app.services.optimization_context import load_context
 from app.services.scheduling import ACTIVE, schedule
 from app.services.traffic import TrafficDurations
+from app.services.operation_area import contains_geometry
 
 router = APIRouter(dependencies=[Depends(require_roles("ADMIN"))])
 _slot = BoundedSemaphore(1)
@@ -81,6 +82,8 @@ def _validated_roads(plan, context, distance, duration, deadline):
         final_duration = duration.with_base(final_duration)
     routes = []
     for candidate, (geometry, _) in zip(plan.routes, shapes):
+        if not contains_geometry(geometry):
+            raise HTTPException(422, "El recorrido vial sale de la zona operativa. Revisa los destinos y recalcula.")
         team = teams[candidate.team]
         checked = evaluate_route(
             team,

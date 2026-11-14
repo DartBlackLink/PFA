@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
@@ -19,6 +20,7 @@ class ApiClient {
     String path, {
     String method = 'GET',
     Map<String, dynamic>? body,
+    bool binary = false,
   }) async {
     final requestToken = auth.token;
     final headers = {
@@ -68,6 +70,17 @@ class ApiClient {
         mensaje: 'Tu sesión venció. Inicia sesión nuevamente.',
       );
       throw Exception('Tu sesión venció.');
+    }
+    if (binary && response.statusCode >= 200 && response.statusCode < 300) {
+      final bytes = response.bodyBytes;
+      if (!(response.headers['content-type'] ?? '').startsWith(
+            'application/pdf',
+          ) ||
+          bytes.length < 5 ||
+          ascii.decode(bytes.sublist(0, 5), allowInvalid: true) != '%PDF-') {
+        throw Exception('El servidor no devolvió un PDF válido.');
+      }
+      return Uint8List.fromList(bytes);
     }
     dynamic data;
     try {

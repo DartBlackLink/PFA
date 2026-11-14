@@ -38,6 +38,7 @@ from app.services.genetic import (
     solve,
 )
 from app.services.matrix import road_matrix, road_shape
+from app.services.operation_area import contains_geometry
 from app.services.operation_area import validate_point
 from app.services.optimization_context import valid_coordinates
 from app.services.scheduling import schedule
@@ -260,6 +261,8 @@ def build_proposal(route, payload, db):
     by_id = {d.identifier: d for d in deliveries}
     indices = [0] + [by_id[k].node for k in candidate.deliveries] + ([1] if rules.return_to_origin else [])
     geometry, legs = road_shape([coordinates[i] for i in indices], deadline)
+    if not contains_geometry(geometry):
+        raise HTTPException(422, "La alternativa vial sale de la zona operativa. Revisa la ubicación y los destinos.")
     final_distance = [row[:] for row in distance]
     final_duration = [row[:] for row in duration]
     for (a, b), (km, minutes) in zip(zip(indices, indices[1:]), legs):

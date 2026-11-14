@@ -1,52 +1,44 @@
 # Retrospectiva del Sprint 4
 
-**Nombre del proyecto:** EcoLogística Huancayo. **Líder:** Jordy Steve Chancasanampa Torres. **Versión:** 1.0.0. **Corte:** 13/11/2026.
+**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte técnico:** 14/11/2026, America/Lima. **Versión:** 1.1.0.
 
-**Método:** reflexión individual sobre la preparación documental del Sprint 4. Se registran los problemas observados en esta preparación y su tratamiento. La retrospectiva de la ejecución se completará con resultados propios; no se inventa una ceremonia, asistentes, acuerdo docente o desempeño futuro.
+**Método:** análisis técnico de problemas, correcciones y pruebas del corte. No se inventa una reunión. Los compromisos preventivos siguientes quedan propuestos al responsable para su retrospectiva real.
 
 ## ¿Qué aprendimos?
 
-| Problema observado | Cómo lo tratamos en esta preparación | Aprendizaje aplicable al Sprint 4 |
-|---|---|---|
-| La planificación LEG-V1.2 proponía optimización en S4 como US-007; Jira conserva esa funcionalidad en EHAPP-13/US-005/S3 | Se consultaron los sprints e historias actuales, se preservó el histórico y se documentó una propuesta S4 distinta: mapa, dashboard y rendimiento | La clave EHAPP, el nombre y la fuente deben acompañar al número US. No repetir una entrega ni sumar SP de baselines distintas. |
-| Se pidió documentar S4, pero el tablero solo tiene sprints 1, 2 y 3 | El responsable aceptó el alcance propuesto y los archivos lo identifican como preparación, sin cambiar Jira ni inventar fechas | Un documento completo puede preparar la ejecución; no sustituye el compromiso administrativo ni la aceptación de una historia. |
-| El ejemplo contiene otro equipo, otro backlog y resultados de otra aplicación | Se adaptó su organización de calidad, OWASP, WCAG, trazabilidad y rendimiento a Flutter/FastAPI/PostgreSQL, con fuentes propias | La referencia ayuda a estructurar; sus métricas, capturas y decisiones no prueban nuestro sistema. |
-| Los antecedentes contienen cobertura y tiempos de cortes diferentes | Se mantuvieron fechados y se definió qué evidencia debe producir la versión candidata S4 | Un porcentaje necesita versión y alcance; una prueba del motor aislado no demuestra rendimiento integrado ni cifras ambientales reales. |
+Un trazado visible no acredita una planificación temporal válida. La asignación manual guardaba distancia/tiempo, pero no combustible, CO₂ ni ETA por entrega; el cambio de horario tampoco revalidaba toda la ventana. Se reutilizó la evaluación de restricciones del motor, se guardaron los indicadores y ETA y se comprobó rechazo sin modificar la ruta ante una salida inviable. El cumplimiento previsto incluye atención completa, no solo la llegada.
 
 ## ¿Qué estamos haciendo bien?
 
-Se conserva la estructura de cuatro archivos independientes y el historial de los sprints anteriores. El alcance se contrasta con Jira en modo lectura y con los RF/RNF, en lugar de deducirlo del ejemplo. Los criterios contemplan GOLD, feliz, infeliz y borde. Los pendientes externos se agrupan en un documento separado y no se convierten en impedimentos ficticios.
+Se conservó el mapa de Huancayo y el historial; se revalidó el flujo por navegador y se diferenció ETA de hora real. El benchmark usa carreteras reales y demanda sintética identificada, sin llamarla tráfico en vivo ni una muestra de 150 direcciones distintas.
 
 ## ¿Qué podemos hacer mejor?
 
 ### Personas
 
-Jordy debe explicar la diferencia entre implementar, probar y aceptar. En la próxima revisión presentará un criterio, su resultado y su evidencia antes de afirmar que una historia está terminada. La modalidad individual no permite atribuir una revisión por pares a una persona inexistente.
+Antes de exponer, explicar si el dato es una estimación de la última versión, un tramo pendiente o una entrega real. Una métrica ausente no se sustituye por cero.
 
 ### Relaciones
 
-Antes de la demostración debe acordarse con el docente el objetivo, el calendario y la evidencia esperada. La retroalimentación se registrará de forma literal o como resumen identificado, con fecha y participantes reales; este documento no presume aprobación.
+Acordar con el docente qué evidencia mínima cierra EN-002 y registrar su decisión; una prueba favorable no es una aprobación del profesor.
 
 ### Procesos
 
-La preparación evidenció un desfase entre planificación histórica y Jira. La mejora es fijar al inicio una fotografía de claves, alcance y fechas, y revisarla antes del cierre. Cada indicador del dashboard debe tener fórmula y origen; cada benchmark debe conservar sus resultados fallidos además de los satisfactorios.
+El runner esperaba HTTP 200 aunque el endpoint documenta 201. Se corrigió el instrumento y conservó el tiempo real y la evidencia original, sin repetir selectivamente para ocultar el resultado. Deben conciliarse contrato y medición antes de ejecutar campañas.
 
 ### Herramientas
 
-Se usarán Git para conservar versiones, Jira para el compromiso y los informes de pruebas para verificar resultados. SonarQube complementa las pruebas; no acredita automáticamente accesibilidad, tráfico real ni calidad de todo Flutter. Las capturas se tomarán de Huancayo y sin credenciales.
+Se midieron SQL/proveedor/motor por endpoint, separándolos del navegador. Una muestra no establece percentiles poblacionales ni el peor caso. Quedan campañas de cinco semillas y un escenario de reoptimización mayor si se mantiene el protocolo ampliado.
 
 ### Acciones a realizar
 
-Compromisos preventivos propuestos para Jordy, orientados a evitar la repetición de los problemas observados:
-
-| ID | Acción concreta | Hito de cumplimiento | Condición verificable de éxito |
+| ID | Compromiso preventivo | Hito | Verificación |
 |---|---|---|---|
-| R4-A01 | Conciliar Jira y el expediente antes de incorporar trabajo a S4 | Antes del primer compromiso | S4 con fechas acordadas y tres claves coherentes; sin EHAPP-13 duplicado ni 21 SP históricos mezclados. |
-| R4-A02 | Preparar el contrato de los cuatro indicadores antes de validar dashboard | Antes de su prueba GOLD | Cada cifra tiene unidad, fuente, fórmula, versión y tratamiento de ausencia. |
-| R4-A03 | Registrar versión desplegada y medición integrada | Antes de presentar EN-002 | Informe reproducible con dataset, cinco semillas, red, BD, tiempos y factibilidad; sin extrapolar un ensayo aislado. |
-| R4-A04 | Revisar teclado, lector y claro/oscuro en las vistas nuevas | Antes de la Review | Matriz WCAG con resultados por criterio y evidencia, sin aprobar solo por capturas o tests de widgets. |
-| R4-A05 | Preparar una revisión por par o una adaptación acordada con el docente | Antes de solicitar Done | Evidencia real de revisión; decisión de aceptación y acciones registradas. |
+| R4-A01 | Verificar ETA + atención, turno y solapamientos en toda nueva asignación o cambio de horario | Antes de integrar otra modificación de agenda | Regresión de horario inviable conserva fecha, ETA y pedidos. |
+| R4-A02 | Anotar versión y alcance del indicador en toda tabla/PDF | Antes de agregar otro indicador | No confundir el pendiente recalculado con un acumulado físico. |
+| R4-A03 | Validar HTTP esperado y guardar los resultados fallidos del instrumento | Antes de repetir el benchmark | Contrato201 y log original conservados; muestra y caché identificadas. |
+| R4-A04 | Ampliar la campaña según protocolo acordado, sin cambiar las pruebas para obtener un porcentaje | Antes de aceptación formal de rendimiento | Cinco semillas o alcance reducido aprobado explícitamente por docente. |
 
-No se marcan estos compromisos como cumplidos por redactarlos. Su seguimiento y la retrospectiva final utilizarán las evidencias de ejecución y el [documento de acciones](ACCIONES_PARA_CERRAR_SPRINT4.md).
+Responsable propuesto: Jordy. No se marcan compromisos como cumplidos solo por redactarlos. Vinculación: [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md) y [acciones externas](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md).
 
-[Índice del Sprint 4](README.md) · [Volver a Implementación](../README.md)
+[Índice](README.md)

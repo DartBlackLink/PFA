@@ -553,7 +553,7 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Text(
-                'Registro histórico fuera de la zona de Huancayo. Se conserva para consulta, sin mostrarlo como ruta local ni habilitar su operación.',
+                'El recorrido sale de la zona operativa de Huancayo. Se conserva para consulta y su operación está deshabilitada.',
               ),
             ),
           ),
@@ -644,6 +644,17 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
                 ),
             ],
           ),
+        if (widget.preview == null &&
+            context.watch<AuthProvider>().esAdministrador &&
+            r['estado'] == 'PLANIFICADA')
+          OutlinedButton.icon(
+            onPressed: _busy ? null : () => _operate(
+              'cancelar',
+              '¿Cancelar esta ruta planificada? Se conserva el historial y sus pedidos vuelven a pendientes.',
+            ),
+            icon: const Icon(Icons.cancel_outlined),
+            label: const Text('Cancelar ruta planificada'),
+          ),
         if (_busy) const LinearProgressIndicator(),
         if (r['iniciado_en'] != null)
           Text('Inicio real: ${friendlyDate(r['iniciado_en'])}'),
@@ -676,7 +687,7 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
         const SizedBox(height: 8),
         Text(
           origin == null
-              ? 'Este registro antiguo no tiene origen guardado.'
+              ? (r['origen_latitud'] == null ? 'Este registro no tiene origen guardado.' : 'Punto de partida disponible en los datos de la ruta.')
               : 'Partida: ${origin.latitude}, ${origin.longitude}',
         ),
         const SizedBox(height: 12),

@@ -6,7 +6,7 @@ from app.core.config import get_settings
 from app.services.provider_http import fetch_json
 
 
-def compute_route(points):
+def compute_route(points, *, include_legs=False):
     coordinates = ";".join(f"{lon},{lat}" for lat, lon in points)
     url = (
         get_settings().routing_base_url.rstrip("/")
@@ -39,7 +39,21 @@ def compute_route(points):
             or duration < 0
         ):
             raise ValueError("Medición inválida")
-        return geometry, round(distance / 1000, 3), round(duration / 60, 2)
+        result = geometry, round(distance / 1000, 3), round(duration / 60, 2)
+        if not include_legs:
+            return result
+        legs = route.get("legs", [])
+        if not legs and len(points) == 2:
+            # One segment equals the full route: this is exact, not interpolation.
+            legs = [{"distance": distance, "duration": duration}]
+        if len(legs) != len(points) - 1:
+            raise ValueError("Tramos incompletos")
+        values = [(float(leg["distance"]) / 1000, float(leg["duration"]) / 60) for leg in legs]
+        if any(not math.isfinite(v) or v < 0 for pair in values for v in pair):
+            raise ValueError("Tramo inválido")
+        if abs(sum(pair[0] for pair in values) * 1000 - distance) > max(2, distance * .01) or abs(sum(pair[1] for pair in values) * 60 - duration) > max(2, duration * .01):
+            raise ValueError("Totales de tramos incoherentes")
+        return (*result, values)
     except Exception as error:
         raise HTTPException(
             503,

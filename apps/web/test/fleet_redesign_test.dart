@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,46 @@ class FleetFixture extends FlotaProvider {
 }
 
 void main() {
+
+  testWidgets('Flota abierta por URL vuelve al dashboard', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    final auth = AuthProvider(
+      apiUrl: 'http://test/api/v1',
+      client: MockClient((_) async => http.Response('{}', 401)),
+    );
+    await auth.ready;
+    final controller = ThemeController();
+    await controller.ready;
+    final fleet = FleetFixture(auth);
+    final router = GoRouter(
+      initialLocation: '/flota',
+      routes: [
+        GoRoute(path: '/flota', builder: (_, _) => const FlotaScreen()),
+        GoRoute(
+          path: '/dashboard',
+          builder: (_, _) => const Scaffold(body: Text('Panel de operaciones')),
+        ),
+      ],
+    );
+    addTearDown(router.dispose);
+    await tester.pumpWidget(MultiProvider(
+      providers: [
+        ChangeNotifierProvider<FlotaProvider>.value(value: fleet),
+        ChangeNotifierProvider<ThemeController>.value(value: controller),
+      ],
+      child: MaterialApp.router(routerConfig: router),
+    ));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Volver al centro de control'));
+    await tester.pumpAndSettle();
+    expect(find.text('Panel de operaciones'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+    fleet.dispose();
+    controller.dispose();
+    auth.dispose();
+  });
+
   for (final brightness in Brightness.values) {
     for (final width in [360.0, 768.0, 1440.0]) {
       testWidgets('Flota filtros y vistas $brightness $width', (tester) async {

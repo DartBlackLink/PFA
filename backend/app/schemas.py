@@ -259,6 +259,8 @@ class RutaRead(BaseModel):
     estado: str
     creado_en: datetime
     distancia_km: Decimal | None = None
+    combustible_l: Decimal | None = None
+    co2_kg: Decimal | None = None
     tiempo_min: Decimal | None = None
     origen_latitud: Decimal | None = None
     origen_longitud: Decimal | None = None

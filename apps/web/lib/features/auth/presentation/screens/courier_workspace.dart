@@ -78,6 +78,7 @@ class _CourierWorkspaceState extends State<CourierWorkspace> {
         .where((e) => e['estado_entrega'] != 'ENTREGADO')
         .length;
     final updates = routes
+        .where(_active)
         .where(
           (r) =>
               (r['version'] as num? ?? 1) >

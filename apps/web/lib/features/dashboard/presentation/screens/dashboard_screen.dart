@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'operation_overview.dart';
+import '../../../reports/reports_screen.dart';
+import '../../../clients/clients_screen.dart';
 import '../../../../core/widgets/operation_notifications.dart';
 
 import '../../../../core/network/api_client.dart';
@@ -41,6 +44,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     'Repartidores',
     'Flota',
     'Reportes',
+    'Clientes',
   ];
   static const _icons = [
     Icons.dashboard_outlined,
@@ -49,6 +53,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Icons.badge_outlined,
     Icons.local_shipping_outlined,
     Icons.description_outlined,
+    Icons.people_outline,
   ];
 
   @override
@@ -69,6 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<void> _load({bool silent = false}) async {
     if (!mounted || _refreshing) return;
+    if (silent && (_section == 3 || _section == 5 || _section == 6)) return;
     _refreshing = true;
     setState(() {
       if (!silent) _loading = true;
@@ -112,7 +118,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _section = index;
       _search = '';
     });
-    if (index != 3 && index != 5) await _load();
+    if (index != 3 && index != 5 && index != 6) await _load();
   }
 
   @override
@@ -225,33 +231,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _content() {
     if (_section == 2) return const RoutesScreen(admin: true);
-    if (_section == 5) {
-      return Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 580),
-          child: Card(
-            child: Padding(
-              padding: EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.description_outlined, size: 48),
-                  SizedBox(height: 16),
-                  Text(
-                    'Reportes de sostenibilidad',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    'Los reportes y la exportación PDF estarán disponibles al implementar los cálculos de rutas, emisiones y costos. Aún no hay resultados ambientales calculados.',
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
+    if (_section == 5) return const ReportsScreen();
+    if (_section == 6) {
+      return const SingleChildScrollView(child: ClientsScreen());
     }
     if (_loading) return const Center(child: CircularProgressIndicator());
     if (_error != null) {
@@ -473,9 +455,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
           onPressed: () => Navigator.pop(context),
           child: const Text('Cerrar'),
         ),
+        if (e['estado'] == 'PENDIENTE')
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _editOrder(e);
+            },
+            child: const Text('Editar pedido'),
+          ),
       ],
     ),
   );
+
+  Future<void> _editOrder(Map<String, dynamic> order) async {
+    final saved = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => _OrderForm(order: order),
+    );
+    if (saved == true && mounted) await _load();
+  }
 
   Future<void> _newOrder() async {
     final saved = await showDialog<bool>(
@@ -488,7 +487,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
 class _OrderForm extends StatefulWidget {
-  const _OrderForm();
+  const _OrderForm({this.order});
+  final Map<String, dynamic>? order;
   @override
   State<_OrderForm> createState() => _OrderFormState();
 }
@@ -502,9 +502,36 @@ class _OrderFormState extends State<_OrderForm> {
   DateTime _start = DateTime.now().toUtc().subtract(const Duration(hours: 5)),
       _end = DateTime.now().toUtc().subtract(const Duration(hours: 3));
   DeliveryLocation? _location;
+  String? _clientId;
   String _priority = 'ESTANDAR';
   String? _error;
   bool _saving = false;
+  @override
+  void initState() {
+    super.initState();
+    final order = widget.order;
+    if (order == null) return;
+    _clientId = order['cliente_id']?.toString();
+    _name.text = order['cliente_nombre']?.toString() ?? '';
+    _weight.text = order['peso_kg'].toString();
+    _product.text = order['tipo_producto'].toString();
+    _reference.text = order['punto_referencia']?.toString() ?? '';
+    _priority = order['prioridad'].toString();
+    _start = DateTime.parse(order['ventana_inicio'])
+        .toUtc()
+        .subtract(const Duration(hours: 5));
+    _end = DateTime.parse(order['ventana_fin'])
+        .toUtc()
+        .subtract(const Duration(hours: 5));
+    _location = DeliveryLocation(
+      order['direccion'].toString(),
+      LatLng(
+        double.parse(order['latitud'].toString()),
+        double.parse(order['longitud'].toString()),
+      ),
+    );
+  }
+
   @override
   void dispose() {
     for (final c in [_name, _weight, _product, _reference]) {
@@ -580,9 +607,12 @@ class _OrderFormState extends State<_OrderForm> {
     });
     try {
       await ApiClient(context.read<AuthProvider>()).request(
-        '/orders/',
-        method: 'POST',
+        widget.order == null
+            ? '/orders/'
+            : '/orders/${widget.order!['pedido_id']}',
+        method: widget.order == null ? 'POST' : 'PUT',
         body: {
+          if (_clientId != null) 'cliente_id': _clientId,
           'cliente_nombre': _name.text.trim(),
           'direccion': _location!.address,
           'latitud': _location!.point.latitude,
@@ -610,8 +640,8 @@ class _OrderFormState extends State<_OrderForm> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-    title: const FormHeading(
-      'Nuevo pedido',
+    title: FormHeading(
+      widget.order == null ? 'Nuevo pedido' : 'Editar pedido',
       'Completa el destino y horario para preparar su entrega.',
       Icons.inventory_2_outlined,
     ),
@@ -626,6 +656,57 @@ class _OrderFormState extends State<_OrderForm> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const FormSection('Cliente y carga'),
+              OutlinedButton.icon(
+                onPressed: _saving
+                    ? null
+                    : () async {
+                        final selected = await showDialog<Map<String, dynamic>>(
+                          context: context,
+                          builder: (dialogContext) => AlertDialog(
+                            title: const Text('Seleccionar cliente registrado'),
+                            content: SizedBox(
+                              width: 600,
+                              child: SingleChildScrollView(
+                                child: ClientsScreen(
+                                  onSelect: (client) =>
+                                      Navigator.pop(dialogContext, client),
+                                ),
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(dialogContext),
+                                child: const Text('Cancelar'),
+                              ),
+                            ],
+                          ),
+                        );
+                        if (selected != null && mounted) {
+                          setState(() {
+                            _clientId = selected['cliente_id'];
+                            _name.text = selected['nombre'];
+                            final pref = selected['preferencia'];
+                            if (pref != null) {
+                              _reference.text = pref['punto_referencia'] ?? '';
+                            }
+                          });
+                        }
+                      },
+                icon: const Icon(Icons.person_search_outlined),
+                label: const Text('Buscar cliente registrado'),
+              ),
+              if (_clientId != null) ...[
+                Text(
+                  'Cliente registrado: ${_name.text}. Revisa sus preferencias en Clientes; confirma la ventana de este pedido.',
+                ),
+                TextButton(
+                  onPressed: _saving
+                      ? null
+                      : () => setState(() => _clientId = null),
+                  child: const Text('Registrar con otro cliente nuevo'),
+                ),
+              ],
+
               for (final field in [
                 (_name, 'Cliente'),
                 (_product, 'Tipo de producto'),
@@ -634,7 +715,8 @@ class _OrderFormState extends State<_OrderForm> {
                   padding: const EdgeInsets.only(bottom: 12),
                   child: TextFormField(
                     controller: field.$1,
-                    enabled: !_saving,
+                    enabled:
+                        !_saving && (field.$1 != _name || _clientId == null),
                     decoration: InputDecoration(labelText: field.$2),
                     validator: (v) {
                       final length = v?.trim().length ?? 0;
@@ -669,6 +751,7 @@ class _OrderFormState extends State<_OrderForm> {
               AbsorbPointer(
                 absorbing: _saving,
                 child: DeliveryLocationPicker(
+                  initialValue: _location,
                   onChanged: (value) {
                     setState(() {
                       _location = value;

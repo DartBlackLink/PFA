@@ -1,3 +1,5 @@
+import uuid
+
 from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -47,7 +49,7 @@ def create_pedido(pedido_in: PedidoCreate, db: Session = Depends(get_db)):
         db.flush()
         cliente_id = cliente.cliente_id
 
-    elif not db.get(Cliente, cliente_id):
+    elif not (client := db.get(Cliente, cliente_id)) or client.estado != "ACTIVO":
         raise HTTPException(422, "Cliente no encontrado.")
 
     pedido = Pedido(
@@ -71,5 +73,32 @@ def create_pedido(pedido_in: PedidoCreate, db: Session = Depends(get_db)):
             column.name: getattr(pedido, column.name)
             for column in Pedido.__table__.columns
         },
-        "cliente_nombre": pedido_in.cliente_nombre,
+        "cliente_nombre": db.get(Cliente, cliente_id).nombre,
+    }
+
+
+@router.put("/{pedido_id}", response_model=PedidoRead)
+def update_pedido(pedido_id: uuid.UUID, payload: PedidoCreate, db: Session = Depends(get_db)):
+    pedido = db.scalar(select(Pedido).where(Pedido.pedido_id == pedido_id).with_for_update())
+    if pedido is None:
+        raise HTTPException(404, "Pedido no encontrado.")
+    if pedido.estado != "PENDIENTE":
+        raise HTTPException(409, "Solo puedes editar pedidos pendientes sin asignación.")
+    if payload.cliente_id is not None:
+        cliente = db.get(Cliente, payload.cliente_id)
+        if cliente is None or cliente.estado != "ACTIVO":
+            raise HTTPException(422, "Cliente activo no encontrado.")
+        pedido.cliente_id = cliente.cliente_id
+    elif payload.cliente_nombre != db.get(Cliente, pedido.cliente_id).nombre:
+        cliente = Cliente(nombre=payload.cliente_nombre)
+        db.add(cliente)
+        db.flush()
+        pedido.cliente_id = cliente.cliente_id
+    for key, value in payload.model_dump(exclude={"cliente_id", "cliente_nombre", "estado"}).items():
+        setattr(pedido, key, value)
+    db.commit()
+    db.refresh(pedido)
+    return {
+        **{column.name: getattr(pedido, column.name) for column in Pedido.__table__.columns},
+        "cliente_nombre": db.get(Cliente, pedido.cliente_id).nombre,
     }

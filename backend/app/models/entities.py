@@ -276,3 +276,13 @@ class LecturaNotificacion(Base):
     notificacion_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('notificacion.notificacion_id'), primary_key=True)
     usuario_id: Mapped[uuid.UUID] = mapped_column(ForeignKey('usuario.usuario_id'), primary_key=True)
     leido_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+
+
+class ConfiguracionAmbiental(Base):
+    __tablename__ = "configuracion_ambiental"
+    configuracion_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    factor_kg_por_unidad: Mapped[Decimal | None] = mapped_column(Numeric(16, 6), nullable=True)
+    unidad: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    fuente: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    actualizado_por: Mapped[uuid.UUID] = mapped_column(ForeignKey("usuario.usuario_id"))
+    actualizado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True))

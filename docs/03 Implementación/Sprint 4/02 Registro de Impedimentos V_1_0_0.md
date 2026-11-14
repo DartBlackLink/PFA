@@ -1,22 +1,17 @@
 # Registro de impedimentos — Sprint 4
 
-**Nombre del proyecto:** EcoLogística Huancayo. **Líder:** Jordy Steve Chancasanampa Torres. **Sprint:** 4. **Versión:** 1.0.0. **Corte:** 13/11/2026.
+**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte técnico:** 14/11/2026, America/Lima. **Versión:** 1.1.0.
 
 ## Criterio de registro
 
-Se consigna una condición observada que detenga una actividad comprometida y necesite gestión para continuar, con impacto y evidencia. No se incluyen tareas pendientes, riesgos hipotéticos, errores corregibles por el desarrollo ni obstáculos de otros sprints.
+Solo se consignan bloqueos efectivos. Defectos corregidos, tareas normales, firmas académicas y decisiones de planificación se gestionan en los demás documentos. No se convierten en impedimentos ficticios.
 
-En este corte solo se preparó documentación y todavía no existe un Sprint 4 administrativo. **No se registraron interrupciones de ejecución atribuibles a este sprint.** Se conserva la tabla oficial sin crear impedimentos ficticios. Esto no afirma que la futura ejecución estará libre de bloqueos.
-
-| Impedimento # | Fecha de registro | Descripción e impacto en el proyecto | Prioridad | Reportado por / responsable | Fecha tope de resolución | Estado | Fecha de resolución | Resolución / comentarios |
-|---|---|---|---|---|---|---|---|---|
+| ID común | Impedimento real | Efecto | Estado y desbloqueo |
+|---|---|---|---|
+| IMP-SQ-01 | No existe token vigente en el archivo privado local previsto para SonarQube. Los tokens expuestos en el chat no se reutilizan. | No se puede ejecutar un análisis nuevo autenticado ni atribuir un Quality Gate a esta versión. No impide ejecutar la web ni sus pruebas locales. | BLOQUEADO únicamente el análisis nuevo. El responsable debe guardar una credencial válida fuera de los repositorios y autorizar su uso; conservar su resultado con fecha y versión. |
 
 ## Gestión del registro
 
-Al producirse un bloqueo, Jordy debe registrar: identificador IMP-S4-nn, actividad EHAPP afectada, inicio verificable, impacto, responsable de gestión y fecha límite acordada. Al resolverlo, añadir la acción efectivamente ejecutada y el enlace a la evidencia; no cerrar la fila solo por proponer una solución.
+Es el mismo impedimento transversal, no tres incidencias diferentes. Responsable: Jordy. Sin fecha ficticia de solución. Los análisis locales sí ejecutados se presentan en las [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md). Consulte [acciones externas](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md) para Jira, aceptación y protocolos.
 
-Por ejemplo, una indisponibilidad del proveedor vial solo se registraría aquí si realmente detuviera una prueba comprometida y no pudiera resolverse con el procedimiento ordinario. La posibilidad de que ocurra pertenece a Riesgos, no a una fila histórica inventada.
-
-Crear S4 en Jira, obtener capturas, completar el benchmark y registrar la Review son [acciones de cierre](ACCIONES_PARA_CERRAR_SPRINT4.md). La diferencia entre identificadores antiguos y actuales se trata en [Trazabilidad](08%20Trazabilidad%20y%20versionamiento%20V_1_0_0.md); no se declara un impedimento técnico de la aplicación.
-
-[Índice del Sprint 4](README.md) · [Volver a Implementación](../README.md)
+[Índice](README.md)

@@ -1,0 +1,11 @@
+{
+  "health_api": true,
+  "health_web": true,
+  "main_sha256": "360afb9e5a87b26da3981375030d7626dc4cbdfcfb9bb3cf318f067773732c57",
+  "served_hash_matches": true,
+  "opentelemetry_api": "1.45.2",
+  "migration": "0008_environmental_config",
+  "existing_compose_only": true,
+  "postgres_not_recreated": true,
+  "private_configuration_in_build": false
+}

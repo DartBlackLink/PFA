@@ -29,3 +29,15 @@ def metadata():
         'sur': SOUTH, 'norte': NORTH, 'oeste': WEST, 'este': EAST,
         'centro': {'latitud': CENTER[0], 'longitud': CENTER[1]},
         'tipo_limite': 'ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO'}
+
+
+def contains_geometry(geometry):
+    if not isinstance(geometry, dict) or geometry.get("type") != "LineString":
+        return False
+    coordinates = geometry.get("coordinates")
+    return (
+        isinstance(coordinates, list)
+        and len(coordinates) >= 2
+        and all(isinstance(point, (list, tuple)) and len(point) >= 2
+                and contains(point[1], point[0]) for point in coordinates)
+    )

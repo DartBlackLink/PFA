@@ -1,0 +1,330 @@
+{
+  "route": {
+    "ambito_operativo": "Huancayo y alrededores urbanos, Junín, Perú",
+    "fuera_zona": false,
+    "version": 2,
+    "version_recibida": 2,
+    "iniciado_en": "2026-11-14T18:29:06.662977Z",
+    "finalizado_en": "2026-11-14T18:33:23.379078Z",
+    "plan_optimizacion_id": "592b0e60-5180-4959-940b-a73050c172f8",
+    "inicio_planificado": "2026-11-14T18:15:00Z",
+    "fin_planificado": "2026-11-14T18:37:18.288847Z",
+    "servicio_min_por_entrega": 5,
+    "ruta_id": "98227d26-eb34-427e-a3a7-add6ff47a4b5",
+    "vehiculo_id": "be9ab496-8c86-43e5-b531-1a72413bc8d4",
+    "repartidor_id": "a2d246b3-c780-4d25-ba63-ca263135883c",
+    "algoritmo": "GA_VRPTW_1",
+    "estado": "FINALIZADA",
+    "creado_en": "2026-11-14T18:27:37.879038Z",
+    "distancia_km": "0.000",
+    "combustible_l": "0.000",
+    "co2_kg": "0.000",
+    "tiempo_min": "1.00",
+    "origen_latitud": "-12.068046",
+    "origen_longitud": "-75.210073",
+    "geometria": {
+      "type": "LineString",
+      "coordinates": [
+        [
+          -75.209689,
+          -12.067801
+        ],
+        [
+          -75.209689,
+          -12.067801
+        ],
+        [
+          -75.209689,
+          -12.067801
+        ]
+      ]
+    },
+    "repartidor_nombre": "DEMO Huancayo Repartidor 02",
+    "vehiculo_placa": "1131-WD",
+    "entregas": [
+      {
+        "pedido_id": "b6f292d1-786f-4d99-b4d8-ba6ff2c250bf",
+        "cliente": "QA WEB 20261114 · Cliente de validación",
+        "direccion": "Plaza Huamanmarca, San Carlos, Huancayo, Junin, Perú",
+        "punto_referencia": "QA WEB 20261114: prueba funcional identificada, sin envío real.",
+        "latitud": -12.070855,
+        "longitud": -75.208324,
+        "peso_kg": 1.0,
+        "prioridad": "ESTANDAR",
+        "tipo_producto": "QA VALIDACION",
+        "ventana_inicio": "2026-11-14T18:15:28.628634+00:00",
+        "ventana_fin": "2026-11-15T00:25:28.628634+00:00",
+        "eta": "2026-11-14T18:17:27.100000+00:00",
+        "secuencia": 1,
+        "estado_entrega": "ENTREGADO",
+        "entregado_en": "2026-11-14T18:29:54.341388+00:00"
+      },
+      {
+        "pedido_id": "f9fc9d0e-ff9d-45eb-855b-1ee604a99246",
+        "cliente": "QA WEB 20261114 · Cliente de validación",
+        "direccion": "Plaza de la Constitución, San Carlos, Huancayo, Junin, Perú",
+        "punto_referencia": "QA WEB 20261114: prueba funcional identificada, sin envío real.",
+        "latitud": -12.068046,
+        "longitud": -75.210073,
+        "peso_kg": 1.0,
+        "prioridad": "ESTANDAR",
+        "tipo_producto": "QA VALIDACION",
+        "ventana_inicio": "2026-11-14T18:15:28.628634+00:00",
+        "ventana_fin": "2026-11-15T00:25:28.628634+00:00",
+        "eta": "2026-11-14T18:32:18.288847+00:00",
+        "secuencia": 2,
+        "estado_entrega": "ENTREGADO",
+        "entregado_en": "2026-11-14T18:33:23.379078+00:00"
+      }
+    ]
+  },
+  "revisions": [
+    {
+      "revision_id": "fea0a285-26e0-4f0d-969b-58350ba65019",
+      "ruta_id": "98227d26-eb34-427e-a3a7-add6ff47a4b5",
+      "version_base": 1,
+      "estado": "APROBADA",
+      "motivo": "Evaluar alternativa por CONGESTION: QA WEB 20261114: congestión simulada para comprobar aviso y reoptimización. No es tráfico observado. Ubicación manual de prueba en el origen registrado.QA WEB 20261114: validar recálculo de pendiente conservando la entrega realizada. Posición manual de la simulación confirmada en el origen público registrado; no es GPS de una persona ni tráfico real.",
+      "creado_en": "2026-11-14T18:31:19.977494+00:00",
+      "vence_en": "2026-11-14T18:33:19.973033+00:00",
+      "aprobado_en": "2026-11-14T18:32:36.487444+00:00",
+      "aprobado_por": "945c5cb0-f056-4688-b5d9-aa8b24e1277c",
+      "recibido_en": "2026-11-14T18:33:11.582223+00:00",
+      "propuesta": {
+        "co2_kg": 0.0,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "entregas": [
+          {
+            "eta": "2026-11-14T18:32:18.288847+00:00",
+            "pedido_id": "f9fc9d0e-ff9d-45eb-855b-1ee604a99246",
+            "fin_servicio": "2026-11-14T18:37:18.288847+00:00"
+          }
+        ],
+        "geometria": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -75.209689,
+              -12.067801
+            ],
+            [
+              -75.209689,
+              -12.067801
+            ],
+            [
+              -75.209689,
+              -12.067801
+            ]
+          ]
+        },
+        "tiempo_min": 1.0,
+        "advertencia": "Aproximación zonal/manual, no tráfico en vivo. La búsqueda no garantiza una mejora ni el óptimo global.",
+        "comparacion": {
+          "base": "Pendientes desde la misma ubicación y hora; no incluye trayecto ya completado",
+          "vigente_km": 0.0,
+          "vigente_min": 6.0,
+          "diferencia_km": 0.0,
+          "alternativa_km": 0.0,
+          "diferencia_min": 0.0,
+          "alternativa_min": 6.0,
+          "retrasos_vigente": "Sin incumplimientos estimados",
+          "vigente_factible": true,
+          "ventanas_alternativa": "Todas factibles bajo la estimación; no es puntualidad real"
+        },
+        "distancia_km": 0.0,
+        "estadisticas": {
+          "seed": 42,
+          "algorithm": "GA_VRPTW_1",
+          "cache_hit": false,
+          "objective": 0.0018749999999999997,
+          "elapsed_ms": 21.95,
+          "age_seconds": 0,
+          "evaluations": 40,
+          "generations": 40,
+          "provider_calls": 1,
+          "baseline_feasible": true,
+          "baseline_objective": 0.0018749999999999997,
+          "global_optimum_guaranteed": false
+        },
+        "ubicacion_en": "2026-11-14T18:31:18.256000+00:00",
+        "combustible_l": 0.0,
+        "origen_latitud": -12.068046,
+        "fin_planificado": "2026-11-14T18:37:18.288847+00:00",
+        "origen_longitud": -75.210073,
+        "demora_manual_min": 1,
+        "inicio_planificado": "2026-11-14T18:31:18.288847+00:00"
+      },
+      "anterior": {
+        "co2_kg": "0.062",
+        "estado": "EN_CURSO",
+        "ruta_id": "98227d26-eb34-427e-a3a7-add6ff47a4b5",
+        "version": 1,
+        "algoritmo": "GA_VRPTW_1",
+        "creado_en": "2026-11-14 18:27:37.879038+00:00",
+        "geometria": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              -75.209689,
+              -12.067801
+            ],
+            [
+              -75.209697,
+              -12.067789
+            ],
+            [
+              -75.209299,
+              -12.067589
+            ],
+            [
+              -75.209519,
+              -12.067174
+            ],
+            [
+              -75.209856,
+              -12.067374
+            ],
+            [
+              -75.210159,
+              -12.067552
+            ],
+            [
+              -75.210741,
+              -12.067875
+            ],
+            [
+              -75.210253,
+              -12.068651
+            ],
+            [
+              -75.209788,
+              -12.069434
+            ],
+            [
+              -75.209544,
+              -12.069823
+            ],
+            [
+              -75.209298,
+              -12.070205
+            ],
+            [
+              -75.20881,
+              -12.070969
+            ],
+            [
+              -75.208483,
+              -12.071491
+            ],
+            [
+              -75.20847,
+              -12.071512
+            ],
+            [
+              -75.207701,
+              -12.071047
+            ],
+            [
+              -75.20772,
+              -12.071015
+            ],
+            [
+              -75.207817,
+              -12.070857
+            ],
+            [
+              -75.207937,
+              -12.070657
+            ],
+            [
+              -75.20795,
+              -12.070635
+            ],
+            [
+              -75.208233,
+              -12.070176
+            ],
+            [
+              -75.20844,
+              -12.069836
+            ],
+            [
+              -75.208592,
+              -12.069567
+            ],
+            [
+              -75.208963,
+              -12.068967
+            ],
+            [
+              -75.209406,
+              -12.068224
+            ],
+            [
+              -75.209689,
+              -12.067801
+            ],
+            [
+              -75.209689,
+              -12.067801
+            ]
+          ]
+        },
+        "tiempo_min": "3.36",
+        "iniciado_en": "2026-11-14 18:29:06.662977+00:00",
+        "vehiculo_id": "be9ab496-8c86-43e5-b531-1a72413bc8d4",
+        "distancia_km": "1.246",
+        "combustible_l": "0.042",
+        "finalizado_en": null,
+        "repartidor_id": "a2d246b3-c780-4d25-ba63-ca263135883c",
+        "origen_latitud": "-12.068046",
+        "fin_planificado": "2026-11-14 18:28:21.800000+00:00",
+        "origen_longitud": "-75.210073",
+        "version_recibida": 1,
+        "inicio_planificado": "2026-11-14 18:15:00+00:00",
+        "penalizacion_total": "0.00",
+        "plan_optimizacion_id": "592b0e60-5180-4959-940b-a73050c172f8",
+        "servicio_min_por_entrega": 5
+      }
+    }
+  ],
+  "incidents": [
+    {
+      "evento_id": "e0f3f46c-b8d1-4590-8a21-a07f59b2b837",
+      "tipo": "CONGESTION",
+      "descripcion": "QA WEB 20261114: congestión simulada para comprobar aviso y reoptimización. No es tráfico observado. Ubicación manual de prueba en el origen registrado.",
+      "ocurrido_en": "2026-11-14T18:30:17.059000+00:00",
+      "ruta_id": "98227d26-eb34-427e-a3a7-add6ff47a4b5",
+      "repartidor_id": "a2d246b3-c780-4d25-ba63-ca263135883c",
+      "latitud": -12.068046,
+      "longitud": -75.210073,
+      "demora_min": 1,
+      "afectacion": "MEDIA",
+      "fuente": "REPORTE_MANUAL_REPARTIDOR",
+      "resuelto_en": "2026-11-14T18:33:43.873141+00:00",
+      "resolucion": "QA WEB 20261114: flujo de simulación finalizado. Se aprobó y recibió la versión 2, se preservó la primera entrega y se confirmó la segunda. Sin congestión real ni mejora ambiental acreditada."
+    }
+  ],
+  "courier_acknowledged": true,
+  "other_driver_denied": true,
+  "scope": "WEB_BUTTONS_WITH_LIVE_FASTAPI_POSTGRESQL_AND_REAL_OSRM; synthetic orders/manual incident, no real traffic"
+}

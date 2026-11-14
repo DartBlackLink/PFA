@@ -15,6 +15,7 @@ from app.models.entities import (
     Incidente,
     Notificacion,
     Pedido,
+    PlanOptimizacion,
     Repartidor,
     Ruta,
     RutaDetalle,
@@ -22,9 +23,10 @@ from app.models.entities import (
     Vehiculo,
 )
 from app.schemas import RutaCreate, RutaHorario, RutaRead, ValidatedInput
-from app.services.operation_area import NAME, contains
+from app.services.operation_area import NAME, contains, contains_geometry
 from app.services.routing import compute_route
-from app.services.scheduling import schedule
+from app.services.scheduling import ACTIVE
+from app.services.manual_planning import evaluate_manual
 
 router = APIRouter()
 
@@ -348,7 +350,7 @@ def assign(
     if any(o.estado != "PENDIENTE" for o in ordered):
         raise HTTPException(409, "Algún pedido ya fue asignado o no está pendiente.")
     if db.scalar(
-        select(RutaDetalle).where(RutaDetalle.pedido_id.in_(payload.pedidos)).limit(1)
+        select(RutaDetalle).join(Ruta, Ruta.ruta_id == RutaDetalle.ruta_id).where(RutaDetalle.pedido_id.in_(payload.pedidos), Ruta.estado.in_(ACTIVE)).limit(1)
     ):
         raise HTTPException(409, "Un pedido ya tiene una asignación.")
     if any(o.latitud is None or o.longitud is None for o in ordered):
@@ -362,15 +364,12 @@ def assign(
     ]
     if any(not contains(lat, lon) for lat, lon in points):
         raise HTTPException(422, 'El origen y las entregas deben pertenecer a Huancayo y sus alrededores habilitados.')
-    geometry, distance, duration = compute_route(points)
-    start, end = schedule(
-        db,
-        driver,
-        vehicle,
-        payload.inicio_planificado,
-        duration,
-        len(ordered),
-        payload.servicio_min_por_entrega,
+    geometry, distance, duration, legs = compute_route(points, include_legs=True)
+    if not contains_geometry(geometry):
+        raise HTTPException(422, "El recorrido vial sale de la zona operativa. Revisa los destinos y recalcula.")
+    candidate, start, end, etas = evaluate_manual(
+        db, driver, vehicle, ordered, payload.inicio_planificado,
+        payload.servicio_min_por_entrega, points, legs,
     )
     route = Ruta(
         inicio_planificado=start,
@@ -383,15 +382,18 @@ def assign(
         origen_latitud=driver.origen_latitud,
         origen_longitud=driver.origen_longitud,
         geometria=geometry,
-        distancia_km=distance,
-        tiempo_min=duration,
+        distancia_km=candidate.distance,
+        tiempo_min=candidate.travel,
+        combustible_l=candidate.fuel,
+        co2_kg=candidate.carbon,
     )
     db.add(route)
     db.flush()
     for index, order in enumerate(ordered, 1):
         db.add(
             RutaDetalle(
-                ruta_id=route.ruta_id, pedido_id=order.pedido_id, secuencia=index
+                ruta_id=route.ruta_id, pedido_id=order.pedido_id, secuencia=index,
+                eta=etas[str(order.pedido_id)]
             )
         )
         order.estado = "ASIGNADO"
@@ -438,26 +440,57 @@ def change_schedule(
         or account.estado != "ACTIVO"
     ):
         raise HTTPException(422, "Selecciona recursos activos.")
-    if route.tiempo_min is None:
-        raise HTTPException(422, "La ruta no tiene duración vial estimada.")
-    count = len(
-        db.scalars(select(RutaDetalle).where(RutaDetalle.ruta_id == ruta_id)).all()
-    )
-    if not count:
+    details = list(db.scalars(select(RutaDetalle).where(RutaDetalle.ruta_id == ruta_id).order_by(RutaDetalle.secuencia)))
+    if not details:
         raise HTTPException(422, "La ruta no tiene entregas.")
-    start, end = schedule(
-        db,
-        driver,
-        vehicle,
-        payload.inicio_planificado,
-        route.tiempo_min,
-        count,
-        payload.servicio_min_por_entrega,
-        route.ruta_id,
-    )
+    orders_by_id = {order.pedido_id: order for order in db.scalars(select(Pedido).where(Pedido.pedido_id.in_([d.pedido_id for d in details])))}
+    orders = [orders_by_id[d.pedido_id] for d in details]
+    if route.origen_latitud is None or any(o.latitud is None or o.longitud is None for o in orders):
+        raise HTTPException(422, "Completa el origen y todas las ubicaciones antes de modificar el horario.")
+    points = [(float(route.origen_latitud), float(route.origen_longitud))] + [(float(o.latitud), float(o.longitud)) for o in orders]
+    plan = db.get(PlanOptimizacion, route.plan_optimizacion_id) if route.plan_optimizacion_id else None
+    return_home = bool(plan and plan.solicitud.get('regresar_al_origen', True))
+    if return_home:
+        points.append(points[0])
+    geometry, _, _, legs = compute_route(points, include_legs=True)
+    if not contains_geometry(geometry):
+        raise HTTPException(422, "El recorrido vial sale de la zona operativa. Se conserva el horario anterior.")
+    candidate, start, end, etas = evaluate_manual(db, driver, vehicle, orders, payload.inicio_planificado,
+        payload.servicio_min_por_entrega, points, legs, route.ruta_id, return_home)
     route.inicio_planificado = start
     route.fin_planificado = end
     route.servicio_min_por_entrega = payload.servicio_min_por_entrega
+    route.geometria = geometry
+    route.distancia_km, route.tiempo_min = candidate.distance, candidate.travel
+    route.combustible_l, route.co2_kg = candidate.fuel, candidate.carbon
+    for detail in details:
+        detail.eta = etas[str(detail.pedido_id)]
     db.commit()
     db.refresh(route)
+    return result(route, db)
+
+
+@router.post("/{ruta_id}/cancelar", response_model=RutaRead)
+def cancel_route(ruta_id: uuid.UUID, version: int | None = Query(None, ge=1),
+                 db: Session = Depends(get_db), user=Depends(require_roles("ADMIN"))):
+    current = db.get(Ruta, ruta_id)
+    if current is None:
+        raise HTTPException(404, "Ruta no encontrada.")
+    db.scalar(select(Repartidor).where(Repartidor.repartidor_id == current.repartidor_id).with_for_update())
+    db.scalar(select(Vehiculo).where(Vehiculo.vehiculo_id == current.vehiculo_id).with_for_update())
+    route = db.scalar(select(Ruta).where(Ruta.ruta_id == ruta_id).with_for_update().execution_options(populate_existing=True))
+    if route.estado == "CANCELADA":
+        return result(route, db)
+    if route.estado != "PLANIFICADA" or (version is not None and version != route.version):
+        raise HTTPException(409, "Solo puedes cancelar la versión vigente de una ruta planificada.")
+    details = list(db.scalars(select(RutaDetalle).where(RutaDetalle.ruta_id == ruta_id).with_for_update()))
+    if any(d.estado_entrega == "ENTREGADO" for d in details):
+        raise HTTPException(409, "Una ruta con entregas confirmadas no puede cancelarse.")
+    for detail in sorted(details, key=lambda d: str(d.pedido_id)):
+        order = db.scalar(select(Pedido).where(Pedido.pedido_id == detail.pedido_id).with_for_update())
+        if order.estado != "ASIGNADO":
+            raise HTTPException(409, "Los pedidos cambiaron. Actualiza la ruta antes de cancelar.")
+        order.estado = "PENDIENTE"
+    route.estado = "CANCELADA"
+    db.commit()
     return result(route, db)

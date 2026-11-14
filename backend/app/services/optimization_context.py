@@ -79,7 +79,7 @@ def load_context(payload, db, lock=False):
     if any(order.estado != "PENDIENTE" for order in orders.values()):
         raise HTTPException(409, "Selecciona exclusivamente pedidos pendientes.")
     if db.scalar(
-        select(RutaDetalle).where(RutaDetalle.pedido_id.in_(payload.pedidos)).limit(1)
+        select(RutaDetalle).join(Ruta, Ruta.ruta_id == RutaDetalle.ruta_id).where(RutaDetalle.pedido_id.in_(payload.pedidos), Ruta.estado.in_(ACTIVE)).limit(1)
     ):
         raise HTTPException(
             409, "Un pedido ya tiene una ruta; vuelve a cargar la lista."

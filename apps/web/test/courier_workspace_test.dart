@@ -50,6 +50,17 @@ Widget subject({
   ),
 );
 void main() {
+  testWidgets('El contador excluye versiones no recibidas de rutas cerradas', (tester) async {
+    await tester.pumpWidget(subject(data: [
+      {...routes[0], 'estado': 'CANCELADA', 'version': 3, 'version_recibida': 0},
+      {...routes[1], 'version': 2, 'version_recibida': 0},
+    ]));
+    await tester.pumpAndSettle();
+    final metric = find.ancestor(of: find.text('Versiones por recibir'), matching: find.byType(Card)).first;
+    expect(find.descendant(of: metric, matching: find.text('0')), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   for (final width in [360.0, 768.0, 1440.0]) {
     for (final brightness in [Brightness.light, Brightness.dark]) {
       testWidgets(

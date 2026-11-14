@@ -13,7 +13,7 @@ python -m venv .venv
 .\.venv\Scripts\uvicorn.exe app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Para una base nueva, activa BOOTSTRAP_DEMO_USERS=true solo de forma explícita y configura ADMIN_EMAIL, ADMIN_PASSWORD, DRIVER_EMAIL y DRIVER_PASSWORD con valores propios; el inicio crea únicamente cuentas inexistentes. Después desactiva esa opción. Las contraseñas existentes no se sobrescriben. Registrar el perfil de repartidor y vincular sus datos antes de asignarlo. No distribuir credenciales ni .env. Compose y los lanzadores particulares del equipo quedan locales por decisión del responsable.
+Para una base nueva, activa BOOTSTRAP_DEMO_USERS=true solo de forma explícita y configura ADMIN_EMAIL, ADMIN_PASSWORD, DRIVER_EMAIL y DRIVER_PASSWORD con valores propios; el inicio crea únicamente cuentas inexistentes. Después desactiva esa opción. Las contraseñas existentes no se sobrescriben. Registrar el perfil de repartidor y vincular sus datos antes de asignarlo. No distribuir credenciales ni .env. La configuración Compose reproducible está en la raíz de entrega; las variables privadas y los lanzadores particulares no incluyen credenciales en Git.
 
 Swagger/OpenAPI: http://127.0.0.1:8000/docs. Salud: GET /api/v1/health.
 
@@ -56,3 +56,14 @@ Se conserva la base de autenticación y autorización por recurso. Nuevos endpoi
 ## Operación versionada y migración 0007
 
 0007 agrega política de tráfico manual, versiones de ruta, revisiones auditadas, notificaciones/lecturas y campos de afectación/resolución de incidencias. Los endpoints /operations documentados en OpenAPI separan propuesta, aprobación y acuse. POST de entrega en versión >1 exige version=vigente y acuse; una ruta inicial solo se declara recibida por acción efectiva del repartidor. Las configuraciones concurrentes y propuestas desactualizadas reciben 409. No ejecutar la migración principal sin respaldo/despliegue autorizado. Resultados (archivo histórico local del corte de Lima).
+
+
+## Actualización web — 14/11/2026
+
+Migración aditiva 0008: configuración ambiental opcional con fuente, unidad, factor, autor y fecha. Aplicar Alembic con respaldo previo; el esquema SQL es de referencia y no se importa sobre datos existentes.
+
+ADMIN dispone de `/clients/`, preferencias por cliente, `/reports/summary`, `/reports/routes`, detalle/PDF por ruta y `/reports/environment`. El PDF es binario autenticado; el repartidor no accede a informes administrativos. La asignación manual y el cambio de horario validan ventanas completas y guardan ETA, combustible y CO₂. Los indicadores de la última versión representan el tramo pendiente tras reoptimizar; no son un acumulado físico. Ausencias no se convierten en cero.
+
+Regresión final: 141 pruebas aprobadas; cobertura combinada de líneas y ramas 90,0313479624 %. Se corrigió opentelemetry-api a 1.45.2 y se repitió la auditoría. No hay un análisis SonarQube nuevo.
+
+[Resultados y comandos](../docs/03%20Implementaci%C3%B3n/evidencias/20261114-desarrollo-integral/RESULTADOS.md) · [Matriz de operaciones](../docs/03%20Implementaci%C3%B3n/evidencias/20261114-desarrollo-integral/MATRIZ_OPERACIONES.md).

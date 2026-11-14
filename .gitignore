@@ -126,3 +126,18 @@ Thumbs.db
 /docs/03 Implementación/evidencias/20261104-consolidacion/qa-backup-result.json
 /docs/03 Implementación/evidencias/20261108-verificacion-integral/api-cases.jsonl
 /docs/03 Implementación/evidencias/20261108-verificacion-integral/operational-restored.json
+
+# Cobertura académica seleccionada, vinculada al corte verificado
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/htmlcov/
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/htmlcov/**
+
+# Código funcional: Reportes es un módulo, no un directorio de resultados
+!/apps/web/lib/features/reports/
+!/apps/web/lib/features/reports/**
+
+# Logs académicos seleccionados del corte validado
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/backend-full.log
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/build-web-final.log
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/dependency-audit.log
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/flutter-analyze-final.log
+!/docs/03 Implementación/evidencias/20261114-desarrollo-integral/flutter-full-final.log
