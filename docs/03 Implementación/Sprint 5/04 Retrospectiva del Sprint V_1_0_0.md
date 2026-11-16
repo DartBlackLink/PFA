@@ -1,43 +1,47 @@
 # Retrospectiva del Sprint 5
 
-**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte técnico:** 14/11/2026, America/Lima. **Versión:** 1.0.0.
+**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte del trabajo revisado:** 14/11/2026. **Actualización documental:** 16/11/2026. **Versión del contenido:** 1.1.0.
 
-**Método:** análisis técnico de problemas, correcciones y pruebas del corte. No se inventa una reunión. Los compromisos preventivos siguientes quedan propuestos al responsable para su retrospectiva real.
+Esta retrospectiva recoge lo aprendido durante el desarrollo y las pruebas del alcance del sprint. Las acciones siguientes orientan la próxima revisión del trabajo.
 
 ## ¿Qué aprendimos?
 
-El cliente HTTP solo manejaba JSON; un PDF necesita una respuesta binaria autenticada, validación de Content-Type y firma %PDF antes de descargar. Se añadió ese camino y se comprobó el rechazo de HTML exitoso y errores JSON. En la operación real, la versión 2 no se consideró recibida al aprobar: se esperó el acuse del repartidor y se conservó la fecha de la primera entrega.
+Aprendimos que generar un PDF en el servidor no completaba la descarga. Nuestro cliente HTTP estaba preparado para leer JSON, así que necesitaba recibir el archivo como bytes y comprobar que realmente fuera un PDF. Esta dificultad nos hizo revisar la función desde el botón hasta el archivo descargado.
+
+Al probar la reoptimización también confirmamos la importancia de separar la aprobación del administrador de la recepción del repartidor. La nueva versión debe tener su confirmación y conservar las entregas que ya se realizaron.
 
 ## ¿Qué estamos haciendo bien?
 
-Se realizó ADMIN → REPARTIDOR → ADMIN → REPARTIDOR por botones con FastAPI/PostgreSQL y OSRM. La incidencia se identificó como simulada, tuvo resolución y no se presentó una alternativa sin mejora como ahorro. El PDF descargado fue parseado y renderizado, no solo abierto.
+La prueba completa con ambos roles permitió comprobar la continuidad del trabajo: se entregó un pedido, se reportó una incidencia simulada y se completó la entrega restante después de recibir la nueva ruta. Revisar los datos guardados nos ayudó a confirmar que la primera entrega seguía intacta. Con el PDF hicimos algo parecido: lo descargamos y revisamos su contenido y presentación.
 
 ## ¿Qué podemos hacer mejor?
 
 ### Personas
 
-Distinguir quién aprueba una propuesta y quién confirma recepción. La descripción de la simulación debe evitar que un lector interprete un reporte QA como congestión real.
+Debemos revisar también las respuestas de error cuando desarrollamos una descarga. Al principio el trabajo estaba centrado en obtener el archivo; faltaba considerar que el servidor podía responder con un mensaje JSON o una página HTML. Incluir esos casos desde el comienzo reduce las correcciones al final.
 
 ### Relaciones
 
-El administrador comunica la nueva versión por el mecanismo del sistema; el repartidor confirma con su cuenta. No atribuir al docente la aceptación del flujo sin revisión real.
+En el flujo entre administrador y repartidor debe quedar claro qué acción corresponde a cada uno. Aprobar una alternativa no significa que el repartidor ya la recibió. Las notificaciones y la confirmación de recepción ayudan a evitar esa confusión; debemos comprobar ambas partes cuando cambiemos este flujo.
 
 ### Procesos
 
-La auditoría del lock encontró CVE-2026-126360 en opentelemetry-api 1.45.1. Se actualizó a 1.45.2, se conservó el hallazgo y se repitieron el análisis y las pruebas. No se demostró explotación en esta aplicación y no se afirma seguridad absoluta.
+La auditoría detectó una versión afectada de `opentelemetry-api`. La actualizamos de 1.45.1 a 1.45.2 y repetimos los controles. Aprendimos que la revisión de dependencias debe formar parte de cada entrega, aunque no hayamos cambiado directamente esa librería.
 
 ### Herramientas
 
-Los permisos se verificaron en el servidor: anónimo 401, repartidor 403 en reportes/clientes y recurso de otro repartidor404. Un botón oculto no sustituye esa autorización. El PDF escapa texto y no interpreta HTML ni URLs del usuario.
+Las pruebas de la API y de Flutter nos ayudaron a detectar respuestas que no debían convertirse en un PDF y accesos que el servidor debía rechazar. Nos conviene mantener esas comprobaciones junto a la prueba visual del archivo para no depender únicamente de que el botón responda.
 
 ### Acciones a realizar
 
-| ID | Compromiso preventivo | Hito | Verificación |
+| ID | Compromiso de mejora | Cuándo aplicarlo | Cómo comprobarlo |
 |---|---|---|---|
-| R5-A01 | Mantener prueba binaria válida/inválida al cambiar la exportación | Antes de modificar PDF | Un error JSON o HTML nunca se descarga como informe válido. |
-| R5-A02 | Preservar la primera entrega en cada nueva reoptimización | En cada revisión del flujo | Timestamps/historial iguales y acuse de la nueva versión registrado. |
-| R5-A03 | Auditar versiones bloqueadas antes de cada entrega | Antes de empaquetar una versión | Informe de dependencias con fecha y correcciones rastreables, sin ocultar hallazgos. |
+| R5-A01 | Probar la descarga con un PDF válido y con respuestas de error. | Cada vez que se modifique Reportes o el cliente HTTP. | El PDF se abre correctamente y JSON/HTML no se descargan como un informe válido. |
+| R5-A02 | Revisar la entrega previa y la confirmación del repartidor al reoptimizar. | En cada cambio del flujo de versiones. | La primera entrega conserva su fecha y la nueva versión registra recepción efectiva. |
+| R5-A03 | Revisar las versiones de las dependencias antes de preparar una entrega. | Antes de publicar una versión. | Se conserva el informe y se comprueba la corrección de los hallazgos detectados. |
 
-Responsable propuesto: Jordy. No se marcan compromisos como cumplidos solo por redactarlos. Vinculación: [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md) y [acciones externas](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md).
+**Responsable de seguimiento:** Jordy. Estas acciones se revisarán en el siguiente trabajo relacionado; su cumplimiento se registrará cuando se realicen.
+
+Los problemas y sus correcciones se detallan en el [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md). Los [resultados y evidencias](../evidencias/20261114-desarrollo-integral/RESULTADOS.md) respaldan las comprobaciones mencionadas.
 
 [Índice](README.md)

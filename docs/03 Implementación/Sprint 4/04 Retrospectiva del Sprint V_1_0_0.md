@@ -1,44 +1,48 @@
 # Retrospectiva del Sprint 4
 
-**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte técnico:** 14/11/2026, America/Lima. **Versión:** 1.1.0.
+**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte del trabajo revisado:** 14/11/2026. **Actualización documental:** 16/11/2026. **Versión del contenido:** 1.2.0.
 
-**Método:** análisis técnico de problemas, correcciones y pruebas del corte. No se inventa una reunión. Los compromisos preventivos siguientes quedan propuestos al responsable para su retrospectiva real.
+Esta retrospectiva recoge lo aprendido durante el desarrollo y las pruebas del alcance del sprint. Las acciones siguientes orientan la próxima revisión del trabajo.
 
 ## ¿Qué aprendimos?
 
-Un trazado visible no acredita una planificación temporal válida. La asignación manual guardaba distancia/tiempo, pero no combustible, CO₂ ni ETA por entrega; el cambio de horario tampoco revalidaba toda la ventana. Se reutilizó la evaluación de restricciones del motor, se guardaron los indicadores y ETA y se comprobó rechazo sin modificar la ruta ante una salida inviable. El cumplimiento previsto incluye atención completa, no solo la llegada.
+Aprendimos que ver una ruta dibujada en el mapa no era suficiente para darla por correcta. Al revisar las asignaciones manuales encontramos que faltaban las horas estimadas de llegada y los indicadores de combustible y CO₂. También vimos que cambiar la salida podía dejar una entrega fuera de su horario, aunque el recorrido siguiera apareciendo en pantalla.
+
+Al corregirlo entendimos que debemos revisar el recorrido, los tiempos y los datos guardados como una sola operación. Ahora la validación considera tanto la llegada como el tiempo necesario para atender cada entrega.
 
 ## ¿Qué estamos haciendo bien?
 
-Se conservó el mapa de Huancayo y el historial; se revalidó el flujo por navegador y se diferenció ETA de hora real. El benchmark usa carreteras reales y demanda sintética identificada, sin llamarla tráfico en vivo ni una muestra de 150 direcciones distintas.
+Fue útil comprobar las rutas con el mapa de Huancayo y revisar después lo que había quedado guardado. Así pudimos detectar diferencias que no se veían al abrir la pantalla. También conservamos los registros anteriores y añadimos pruebas para comprobar que un horario inválido se rechace sin cambiar la ruta existente.
 
 ## ¿Qué podemos hacer mejor?
 
 ### Personas
 
-Antes de exponer, explicar si el dato es una estimación de la última versión, un tramo pendiente o una entrega real. Una métrica ausente no se sustituye por cero.
+Necesitamos comprender mejor los datos que mostramos antes de dar una función por terminada. Por ejemplo, debemos poder explicar de dónde sale la hora estimada de llegada y qué significa que una ruta no tenga un indicador. Revisar esas preguntas durante el desarrollo nos habría ayudado a detectar antes los campos que faltaban.
 
 ### Relaciones
 
-Acordar con el docente qué evidencia mínima cierra EN-002 y registrar su decisión; una prueba favorable no es una aprobación del profesor.
+Al presentar el avance al docente, conviene mostrar un caso válido y otro que el sistema rechace, además del mapa. Esto permite explicar las restricciones y recibir observaciones concretas sobre lo que todavía debemos mejorar. Para rendimiento, debemos acordar qué cantidad y variedad de pruebas se espera como evidencia.
 
 ### Procesos
 
-El runner esperaba HTTP 200 aunque el endpoint documenta 201. Se corrigió el instrumento y conservó el tiempo real y la evidencia original, sin repetir selectivamente para ocultar el resultado. Deben conciliarse contrato y medición antes de ejecutar campañas.
+Nos faltó revisar el contrato de la API antes de medir el rendimiento: el script esperaba una respuesta 200, pero crear una propuesta devuelve 201. Corregimos el script y conservamos la medición original. En la siguiente ejecución comprobaremos primero qué respuesta debe devolver cada operación para no confundir un error de la prueba con un fallo del sistema.
 
 ### Herramientas
 
-Se midieron SQL/proveedor/motor por endpoint, separándolos del navegador. Una muestra no establece percentiles poblacionales ni el peor caso. Quedan campañas de cinco semillas y un escenario de reoptimización mayor si se mantiene el protocolo ampliado.
+Las pruebas automáticas ayudaron a revisar horarios e indicadores sin depender solo del mapa. La medición con el proveedor vial también fue útil, aunque se hizo con una sola semilla y tres destinos públicos repetidos. Debemos ampliar los casos antes de sacar conclusiones generales sobre el rendimiento.
 
 ### Acciones a realizar
 
-| ID | Compromiso preventivo | Hito | Verificación |
+| ID | Compromiso de mejora | Cuándo aplicarlo | Cómo comprobarlo |
 |---|---|---|---|
-| R4-A01 | Verificar ETA + atención, turno y solapamientos en toda nueva asignación o cambio de horario | Antes de integrar otra modificación de agenda | Regresión de horario inviable conserva fecha, ETA y pedidos. |
-| R4-A02 | Anotar versión y alcance del indicador en toda tabla/PDF | Antes de agregar otro indicador | No confundir el pendiente recalculado con un acumulado físico. |
-| R4-A03 | Validar HTTP esperado y guardar los resultados fallidos del instrumento | Antes de repetir el benchmark | Contrato201 y log original conservados; muestra y caché identificadas. |
-| R4-A04 | Ampliar la campaña según protocolo acordado, sin cambiar las pruebas para obtener un porcentaje | Antes de aceptación formal de rendimiento | Cinco semillas o alcance reducido aprobado explícitamente por docente. |
+| R4-A01 | Revisar llegada, atención, turno y cruces de horario al cambiar una asignación. | Antes de integrar cambios en rutas u horarios. | El caso inválido se rechaza y la ruta anterior conserva sus datos. |
+| R4-A02 | Comprobar que cada indicador calculado se guarda y llega a la pantalla. | Al agregar o modificar un indicador. | Se contrasta el valor calculado, la respuesta API y lo mostrado en la web. |
+| R4-A03 | Revisar las respuestas esperadas del script antes de medir tiempos. | Antes de la siguiente medición. | El script acepta el 201 documentado y conserva los resultados completos. |
+| R4-A04 | Ampliar la prueba de rendimiento siguiendo el protocolo acordado. | Antes de cerrar la validación de rendimiento. | Quedan registrados los distintos casos, las semillas y los tiempos obtenidos. |
 
-Responsable propuesto: Jordy. No se marcan compromisos como cumplidos solo por redactarlos. Vinculación: [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md) y [acciones externas](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md).
+**Responsable de seguimiento:** Jordy. Estas acciones se revisarán en el siguiente trabajo relacionado; su cumplimiento se registrará cuando se realicen.
+
+Los problemas y sus correcciones se detallan en el [registro de impedimentos](02%20Registro%20de%20Impedimentos%20V_1_0_0.md). Los [resultados y evidencias](../evidencias/20261114-desarrollo-integral/RESULTADOS.md) respaldan las comprobaciones mencionadas.
 
 [Índice](README.md)
