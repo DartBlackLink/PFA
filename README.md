@@ -1,5 +1,7 @@
 # EcoLogística Huancayo
 
+**Web pública:** [Abrir ADMIN / REPARTIDOR](https://ecologistica-huancayo-web.wasmer.app/). Wasmer + Neon; publicación manual verificada el 19/11/2026. Las credenciales se entregan de forma privada.
+
 Proyecto académico de Taller de Proyectos 2. Responsable: Jordy Steve Chancasanampa Torres.
 
 Sistema de planificación y seguimiento de entregas para Huancayo, Junín, y su entorno urbano definido. La consigna original de Lima se conserva como antecedente de la adaptación. La operación usa la zona horaria `America/Lima`.
@@ -53,7 +55,7 @@ El informe conserva los pendientes de reconexión Android, validación en teléf
 
 ## Documentación del Sprint 4
 
-Expediente preparatorio de mapa, dashboard y validación del rendimiento: dos historias de usuario y un enabler, 15 SP propuestos. El alcance documental fue aceptado por el responsable; Jira todavía no tiene Sprint 4 creado. No se atribuyen implementación, pruebas nuevas o aceptación a este corte del 13/11/2026.
+Actualización documental del 18/11/2026: Sprint 4 está creado en Jira, con dos historias y un habilitador (15 SP originales), En curso y sin fechas oficiales. El expediente conserva los cortes de prueba del 14/17 de noviembre y adopta la estructura de Semana 14. No se declara cierre académico ni nuevas ejecuciones por actualizar los informes.
 
 - [Documentos y anexos del Sprint 4](docs/03%20Implementaci%C3%B3n/Sprint%204/README.md).
 - [Acciones de Jira, evidencias y cierre](docs/03%20Implementaci%C3%B3n/Sprint%204/ACCIONES_PARA_CERRAR_SPRINT4.md).
@@ -71,3 +73,43 @@ Regresión compartida: 141 pruebas backend, 93 pruebas Flutter; cobertura backen
 - [Resultados/evidencias](docs/03%20Implementaci%C3%B3n/evidencias/20261114-desarrollo-integral/RESULTADOS.md) y [acciones externas](docs/03%20Implementaci%C3%B3n/ACCIONES_EXTERNAS_Y_CIERRE_WEB.md).
 
 La aplicación activa se ejecuta en D:/UC/App/ecologistica, web http://127.0.0.1:8080. PFA contiene las fuentes y la documentación de entrega; no crea otra base operativa ni incluye credenciales. Consulte INICIAR_WEB.ps1 y OPERACION_LOCAL.md para el arranque configurado.
+
+
+## Revisión funcional web — 17/11/2026
+
+Se completó nuevamente el ciclo ADMIN/REPARTIDOR con entregas, incidencia, reoptimización y confirmación de recepción. Se corrigieron las validaciones de franjas y el contraste del mapa. Resultado: 141 pruebas backend y 103 Flutter aprobadas; cobertura combinada backend 90,03 %. Los casos y sus límites se detallan en la [matriz de operaciones](docs/03%20Implementaci%C3%B3n/evidencias/20261117-verificacion-final/MATRIZ_OPERACIONES.md) y los [resultados verificables](docs/03%20Implementaci%C3%B3n/evidencias/20261117-verificacion-final/RESULTADOS.md). No es un nuevo análisis SonarQube ni una validación de Android.
+
+
+## Semana 14 — entregables del Sprint 4
+
+- [01 Revisión del sprint](docs/03%20Implementaci%C3%B3n/Sprint%204/01%20Revisi%C3%B3n%20del%20Sprint%20V_1_0_0.md).
+- [02 Retrospectiva del sprint](docs/03%20Implementaci%C3%B3n/Sprint%204/02%20Retrospectiva%20del%20Sprint%20V_1_0_0.md).
+- [03 Análisis Playwright](docs/03%20Implementaci%C3%B3n/Sprint%204/03%20Analisis%20PlayWrigth%20V_1_0_0.md).
+- [04 Usabilidad SUS](docs/03%20Implementaci%C3%B3n/Sprint%204/04%20Usabilidad%20V_1_0_0.md).
+- [Control híbrido](docs/03%20Implementaci%C3%B3n/Sprint%204/10%20Control%20h%C3%ADbrido%20V_1_0_0.md), [cierre y lecciones aprendidas](docs/03%20Implementaci%C3%B3n/Sprint%204/11%20Cierre%20y%20lecciones%20aprendidas%20V_1_0_0.md) y [correspondencia con la consigna](docs/03%20Implementaci%C3%B3n/Sprint%204/CONTROL_SEMANA14.md).
+
+**Estado de CI/CD:** tres workflows preparados y validados localmente, sin ejecución remota. La web ya está publicada manualmente en Wasmer con Neon; falta adaptar y ejecutar CD automático. [Configuración y puertas de despliegue](docs/03%20Implementaci%C3%B3n/Sprint%204/12%20Automatizaci%C3%B3n%20CI-CD%20V_1_0_0.md). No se publica en esta tarea.
+
+
+## Verificación complementaria de Semana 14 — 18/11/2026
+
+Se corrigió la consulta repetida de coordenadas en la matriz vial y el caso OSRM 1×1. Resultado: 145 pruebas backend y 30 E2E en Chromium, Firefox y WebKit aprobadas; cobertura combinada backend 2882/3200 ≈ 90.0625 %. Se conserva el corte Flutter del 17/11 con 103 aprobadas. La campaña ampliada verifica 15 escenarios después de la deduplicación; el fallo frío anterior se conserva.
+
+- [Resultados y límites](docs/03%20Implementaci%C3%B3n/evidencias/20261118-semana14/RESULTADOS.md), [Playwright HTML](docs/03%20Implementaci%C3%B3n/evidencias/20261118-semana14/playwright-html/index.html), [matriz E2E](docs/03%20Implementaci%C3%B3n/evidencias/20261118-semana14/MATRIZ_E2E.md) y [cobertura HTML](docs/03%20Implementaci%C3%B3n/evidencias/20261118-semana14/htmlcov/index.html).
+- [Encuesta SUS anónima](docs/03%20Implementaci%C3%B3n/Sprint%204/instrumentos/Encuesta_SUS.html): lista para aplicar; sin respuestas reales ni puntuación inventada. [Aplicación y cálculo](tools/sus/README.md).
+- [CI](.github/workflows/ci.yml), [pruebas](.github/workflows/tests.yml) y [producción](.github/workflows/deploy-production.yml): preparados localmente. Al corte local del 18/11 no se habían ejecutado ni elegido proveedor. El 19/11 se publicó manualmente en Wasmer con Neon; el workflow VPS continúa deshabilitado hasta adaptarlo a esa plataforma y autorizar su ejecución.
+
+Los badges siguientes consultan el estado remoto al publicarse; en este corte no acreditan una ejecución:
+
+[![CI](https://github.com/DartBlackLink/PFA/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/DartBlackLink/PFA/actions/workflows/ci.yml)
+[![Pruebas](https://github.com/DartBlackLink/PFA/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/DartBlackLink/PFA/actions/workflows/tests.yml)
+[![Producción](https://github.com/DartBlackLink/PFA/actions/workflows/deploy-production.yml/badge.svg?branch=main)](https://github.com/DartBlackLink/PFA/actions/workflows/deploy-production.yml)
+
+El [control de Semana 14](docs/03%20Implementaci%C3%B3n/Sprint%204/CONTROL_SEMANA14.md) separa lo verificado de lo que requiere usuarios reales, publicación autorizada y despliegue público. No se declara cierre formal del sprint.
+
+
+## Actualización de publicación — 19/11/2026
+
+La [web pública de EcoLogística Huancayo](https://ecologistica-huancayo-web.wasmer.app/) y FastAPI en Wasmer están conectados con Neon. Se comprobaron 41 operaciones/contratos API y 12 comprobaciones de Chromium; el repartidor confirmó por UI la recepción v2 y la última entrega. La persistencia se contrastó directamente en PostgreSQL. [Evidencias y límites](docs/03%20Implementaci%C3%B3n/evidencias/20261119-despliegue-publico/RESULTADOS.md).
+
+Este corte sustituye la ausencia de URL/proveedor indicada al 18/11; los resultados históricos conservan su fecha. No se publicaron cambios en GitHub ni se ejecutó Actions. El workflow preparado para VPS requiere adaptarse a Wasmer y comprobarse; la carga actual fue manual. SUS sigue sin respuestas reales y la aceptación formal continúa por realizar. No se declaran aprobados esos requisitos por disponer de URL.

@@ -1,0 +1,26 @@
+{
+  "migration": "0008_environmental_config",
+  "tables": [
+    "alembic_version",
+    "cliente",
+    "compensacion_carbono",
+    "configuracion_ambiental",
+    "control_acceso",
+    "incidente",
+    "lectura_notificacion",
+    "notificacion",
+    "pedido",
+    "plan_optimizacion",
+    "politica_trafico",
+    "preferencia_entrega",
+    "repartidor",
+    "reporte_sostenibilidad",
+    "revision_ruta",
+    "ruta",
+    "ruta_detalle",
+    "usuario",
+    "vehiculo"
+  ],
+  "original_database_was_empty": true,
+  "existing_data_overwritten": false
+}

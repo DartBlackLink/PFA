@@ -1,0 +1,55 @@
+[WebServer] INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+[WebServer] INFO  [alembic.runtime.migration] Will assume transactional DDL.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade  -> 0001_initial_schema, Initial frozen schema (eleven original tables).
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0001_initial_schema -> 0002_access_resources, Persistent login policy and driver fields; preserve historical records.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0002_access_resources -> 0003_route_geometry, Persist assignment origin and street geometry without removing records.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0003_route_geometry -> 0004_route_schedule, Persist planned route schedules without inventing dates for historical routes.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0004_route_schedule -> 0005_optimization_plan, Reproducible genetic preview and atomic confirmation, retaining existing routes.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0005_optimization_plan -> 0006_route_operation, Actual operational timestamps; retain existing planned routes unchanged.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0006_route_operation -> 0007_traffic_replanning, Durable traffic estimates, reports, route versions and notifications.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0007_traffic_replanning -> 0008_environmental_config, Optional, attributed environmental equivalence parameter. No invented defaults.
+[WebServer] INFO:     Started server process [29844]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+
+Running 30 tests using 1 worker
+
+(node:32752) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\e2e\gold.spec.ts:4:1 › GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas (33.8s)
+  ok  2 [chromium] › tests\e2e\sus.spec.ts:5:1 › SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo (1.3s)
+  ok  3 [chromium] › tests\e2e\web.spec.ts:3:1 › AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales (2.3s)
+  ok  4 [chromium] › tests\e2e\web.spec.ts:14:1 › AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar (7.8s)
+  ok  5 [chromium] › tests\e2e\web.spec.ts:25:1 › AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login (6.0s)
+  ok  6 [chromium] › tests\e2e\web.spec.ts:35:1 › ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN (6.5s)
+  ok  7 [chromium] › tests\e2e\web.spec.ts:42:1 › PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos (384ms)
+  ok  8 [chromium] › tests\e2e\web.spec.ts:48:1 › FORM-01 · borde: pedido sin datos no se guarda desde ADMIN (7.4s)
+  ok  9 [chromium] › tests\e2e\web.spec.ts:60:1 › UX-01 · borde: login móvil 360 px y tema accesible (1.9s)
+  ok 10 [chromium] › tests\e2e\web.spec.ts:72:1 › NET-01 · recuperación web después de desconectar y reconectar (6.7s)
+(node:31528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 11 [firefox] › tests\e2e\gold.spec.ts:4:1 › GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas (29.2s)
+  ok 12 [firefox] › tests\e2e\sus.spec.ts:5:1 › SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo (1.6s)
+  ok 13 [firefox] › tests\e2e\web.spec.ts:3:1 › AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales (2.6s)
+  ok 14 [firefox] › tests\e2e\web.spec.ts:14:1 › AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar (7.8s)
+  ok 15 [firefox] › tests\e2e\web.spec.ts:25:1 › AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login (6.1s)
+  ok 16 [firefox] › tests\e2e\web.spec.ts:35:1 › ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN (6.5s)
+  ok 17 [firefox] › tests\e2e\web.spec.ts:42:1 › PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos (708ms)
+  ok 18 [firefox] › tests\e2e\web.spec.ts:48:1 › FORM-01 · borde: pedido sin datos no se guarda desde ADMIN (8.4s)
+  ok 19 [firefox] › tests\e2e\web.spec.ts:60:1 › UX-01 · borde: login móvil 360 px y tema accesible (3.2s)
+  ok 20 [firefox] › tests\e2e\web.spec.ts:72:1 › NET-01 · recuperación web después de desconectar y reconectar (7.1s)
+(node:6644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 21 [webkit] › tests\e2e\gold.spec.ts:4:1 › GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas (46.4s)
+  ok 22 [webkit] › tests\e2e\sus.spec.ts:5:1 › SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo (1.4s)
+  ok 23 [webkit] › tests\e2e\web.spec.ts:3:1 › AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales (3.4s)
+  ok 24 [webkit] › tests\e2e\web.spec.ts:14:1 › AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar (13.9s)
+  ok 25 [webkit] › tests\e2e\web.spec.ts:25:1 › AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login (10.6s)
+  ok 26 [webkit] › tests\e2e\web.spec.ts:35:1 › ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN (11.5s)
+  ok 27 [webkit] › tests\e2e\web.spec.ts:42:1 › PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos (646ms)
+  ok 28 [webkit] › tests\e2e\web.spec.ts:48:1 › FORM-01 · borde: pedido sin datos no se guarda desde ADMIN (15.4s)
+  ok 29 [webkit] › tests\e2e\web.spec.ts:60:1 › UX-01 · borde: login móvil 360 px y tema accesible (2.4s)
+  ok 30 [webkit] › tests\e2e\web.spec.ts:72:1 › NET-01 · recuperación web después de desconectar y reconectar (12.3s)
+
+  30 passed (4.7m)

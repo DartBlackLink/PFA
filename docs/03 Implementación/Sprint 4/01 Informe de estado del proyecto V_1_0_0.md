@@ -1,8 +1,8 @@
 # Informe de estado del proyecto — Sprint 4
 
-**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte técnico:** 14/11/2026, America/Lima. **Sprint documental:** 4. **Versión:** 1.1.0.
+**Proyecto:** EcoLogística Huancayo. **Responsable:** Jordy Steve Chancasanampa Torres. **Corte técnico:** 14/11/2026, America/Lima. **Sprint documental:** 4. **Versión del contenido:** 1.2.0. **Actualización documental:** 18/11/2026.
 
-**Periodo del informe:** corte técnico del 14/11/2026 correspondiente únicamente al alcance de este sprint propuesto. No sustituye el calendario oficial por crear/confirmar en Jira.
+**Periodo del informe:** corte técnico del 14/11/2026 correspondiente únicamente al alcance del Sprint 4. Actualización de seguimiento al 18/11: Sprint 4 creado en Jira, sin fechas oficiales; no se inventa un periodo de ejecución.
 
 **Objetivo:** mapa, indicadores y rendimiento para la operación web ADMIN/REPARTIDOR de Huancayo.
 
@@ -37,6 +37,38 @@ Las estimaciones no son mediciones físicas; los datos de validación están ide
 
 ## Próximas acciones
 
-La agrupación es una propuesta técnica documental: Jira solo contiene los sprints 1, 2 y 3 al corte. No se inventan fechas oficiales, SP aceptados, reuniones ni decisiones del docente. Implementación y verificación no equivalen a aceptación académica. Las acciones no técnicas y la campaña ampliada se mantienen en [acciones externas y cierre](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md). La evidencia concreta está en las [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md).
+Al 18/11 Jira contiene seis sprints; Sprint 4 (ID 70) agrupa EHAPP-14, EHAPP-15 y EHAPP-16, con 15 SP originales y estado En curso. No se inició ni cerró el sprint en esta revisión documental. No se inventan fechas oficiales, SP aceptados, reuniones ni decisiones del docente. Implementación y verificación no equivalen a aceptación académica. Las acciones no técnicas y la campaña ampliada se mantienen en [acciones externas y cierre](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md). La evidencia concreta está en las [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md).
 
 [Índice](README.md)
+
+
+## Seguimiento según la guía de reporte híbrido — 18/11/2026
+
+| Categoría | Elemento | Situación del Sprint 4 |
+|---|---|---|
+| Alcance | Logros, cambios y calidad | Mapa/indicadores revalidados; asignación manual con ETA e indicadores corregida. Semana 14 exige además E2E, SUS y CI/CD; no se declaran cumplidos mediante pruebas previas. |
+| Cronograma | Plan no completado, causa e impacto | EN-002 tiene una campaña limitada y la aceptación no está cerrada; no hay fechas Sprint 4 en Jira. Impacto: no es posible afirmar cumplimiento de plazo. |
+| Cronograma | Acción correctiva/preventiva | Acordar calendario y campaña ampliada; comprobar criterio/evidencia antes de marcar cierre. |
+| Costos | Gasto, variación e impacto | Sin horas ni desembolsos reales acreditados por sprint. No hay base para calcular variación financiera ni consumo de contingencia. |
+| Costos | Acción correctiva/preventiva | Separar presupuesto académico de gastos reales; registrar fecha, concepto y comprobante si existe gasto. |
+| Próximo periodo | Logros y costos previstos | Preparar campaña de tres navegadores, evaluación SUS y pipelines; no hay costo comprometido o desembolso aprobado en este expediente. |
+| Riesgos y problemas | Situación nueva | Confundir evidencia manual con Playwright o cobertura con SUS produciría una conclusión inválida. Los defectos técnicos corregidos permanecen en el registro de impedimentos. |
+| Comentarios | Decisión | Documentación preparada; revisión formal y evidencias adicionales por completar. No publicación ni despliegue en esta tarea. |
+
+El [reporte de control híbrido](10%20Control%20h%C3%ADbrido%20V_1_0_0.md) desarrolla variaciones, valor ganado y tablero visual sin inventar datos financieros ni curvas diarias.
+
+[← Volver al README principal](../../../README.md)
+
+
+## Revalidación técnica — 18/11/2026
+
+Se añaden resultados posteriores sin sustituir los cortes históricos: 145 backend y 30 ejecuciones Playwright aprobadas, cobertura combinada backend 2882/3200 ≈ 90.0625 %. La campaña amplió a cinco semillas por cada tamaño 10/50/150; 15 casos posteriores a la deduplicación verificados. Se conservó el fallo frío inicial y se corrigió además el protocolo OSRM 1×1 con regresiones y GOLD posterior. La demanda sigue siendo sintética, sobre tres destinos, y no demuestra un SLA general.
+
+El instrumento SUS y su calculador están implementados, pero no hay respuestas humanas; por tanto no hay puntuación SUS. Existen los tres workflows localmente, validados por actionlint y sintaxis Bash, sin ejecución en GitHub y todavía sin producción al corte del 18/11. La publicación manual posterior del 19/11 consta en las evidencias enlazadas. La declaración anterior sobre ausencia de estos archivos queda sustituida por este corte; sus resultados anteriores no se reetiquetan. Las mediciones web pueden carecer de una entrada LCP elegible en canvas y no se completan artificialmente. Continúan sin acreditarse costos reales, aceptación formal o cierre administrativo.
+
+Consulte [resultados](../evidencias/20261118-semana14/RESULTADOS.md), [rendimiento](../evidencias/20261118-semana14/RENDIMIENTO.md), [análisis E2E](03%20Analisis%20PlayWrigth%20V_1_0_0.md), [usabilidad](04%20Usabilidad%20V_1_0_0.md) y [CI/CD](12%20Automatizaci%C3%B3n%20CI-CD%20V_1_0_0.md).
+
+
+## Estado documental consolidado — 19/11/2026
+
+La URL pública y la persistencia por roles ya se comprobaron en Wasmer y Neon; [resultado y límites](../evidencias/20261119-despliegue-publico/RESULTADOS.md). Esta evidencia actualiza el estado de publicación, sin alterar las cifras locales de rendimiento/cobertura, los costos no acreditados o el calendario no confirmado. SUS real, Actions/CD automático y aceptación permanecen abiertos en las [acciones de cierre](ACCIONES_PARA_CERRAR_SPRINT4.md).

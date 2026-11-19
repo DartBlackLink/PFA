@@ -1,0 +1,2560 @@
+{
+  "date": "2026-11-19T02:13:26.516244+00:00",
+  "python": "3.14.7",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "dataset_sha256": "9b8d3d37918593c59016f6d760b5808599fad2b4586a08a8729f867628ab40c6",
+  "cases": [
+    {
+      "orders": 10,
+      "teams": 15,
+      "seed": 11,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 8,
+            "unique_points": 3,
+            "seconds": 0.6730972999939695
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.6696590000065044
+          },
+          {
+            "points": 3,
+            "unique_points": 1,
+            "seconds": 2.6827156000072137
+          }
+        ],
+        "solver_seconds": 1.085462799994275,
+        "solver_statistics": {
+          "seed": 11,
+          "generations": 40,
+          "evaluations": 950,
+          "elapsed_ms": 1085.21,
+          "baseline_feasible": true,
+          "baseline_objective": 0.21033504583333332,
+          "objective": 0.07946558749999999,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 1,
+          "cache_hit": false,
+          "age_seconds": 0,
+          "input_locations": 25,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 11,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 10,
+          "rutas": 3,
+          "distancia_km": 7.469399999999999,
+          "combustible_l": 0.7469399999999999,
+          "co2_kg": 1.4938799999999999,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 3
+      },
+      "preview_seconds": 4.807480199960992,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 11,
+        "rutas": 3,
+        "co2_kg": 1.4938799999999999,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 10,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": false,
+        "objective": 0.07946558749999999,
+        "elapsed_ms": 1085.21,
+        "age_seconds": 0,
+        "evaluations": 950,
+        "generations": 40,
+        "distancia_km": 7.469399999999999,
+        "combustible_l": 0.7469399999999999,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 1,
+        "input_locations": 25,
+        "parametros_motor": {
+          "seed": 11,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 0.21033504583333332,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.10838869999861345,
+      "total_seconds": 4.916066900012083,
+      "confirm_status": 200,
+      "replan_seconds": 1.8031246999744326,
+      "replan_status": 201,
+      "pending_on_replanned_route": 5,
+      "unique_assigned": 10,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_10_11"
+    },
+    {
+      "orders": 10,
+      "teams": 15,
+      "seed": 22,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 0.6810783000546508
+          },
+          {
+            "points": 4,
+            "unique_points": 1,
+            "seconds": 1.6865134999970905
+          }
+        ],
+        "solver_seconds": 0.9868286999990232,
+        "solver_statistics": {
+          "seed": 22,
+          "generations": 40,
+          "evaluations": 946,
+          "elapsed_ms": 986.58,
+          "baseline_feasible": true,
+          "baseline_objective": 0.21033504583333332,
+          "objective": 0.07946558749999999,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 7.17,
+          "input_locations": 25,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 22,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 10,
+          "rutas": 2,
+          "distancia_km": 7.469399999999999,
+          "combustible_l": 0.7469399999999999,
+          "co2_kg": 1.4938799999999999,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 2
+      },
+      "preview_seconds": 2.7343131999950856,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 22,
+        "rutas": 2,
+        "co2_kg": 1.4938799999999999,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 10,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.07946558749999999,
+        "elapsed_ms": 986.58,
+        "age_seconds": 7.17,
+        "evaluations": 946,
+        "generations": 40,
+        "distancia_km": 7.469399999999999,
+        "combustible_l": 0.7469399999999999,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 25,
+        "parametros_motor": {
+          "seed": 22,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 0.21033504583333332,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.06668779999017715,
+      "total_seconds": 2.8012339000124484,
+      "confirm_status": 200,
+      "replan_seconds": 1.7536210999824107,
+      "replan_status": 201,
+      "pending_on_replanned_route": 7,
+      "unique_assigned": 10,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_10_22"
+    },
+    {
+      "orders": 10,
+      "teams": 15,
+      "seed": 33,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 9,
+            "unique_points": 3,
+            "seconds": 0.7060177000239491
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.6696191999944858
+          }
+        ],
+        "solver_seconds": 1.0214274000027217,
+        "solver_statistics": {
+          "seed": 33,
+          "generations": 40,
+          "evaluations": 953,
+          "elapsed_ms": 1021.15,
+          "baseline_feasible": true,
+          "baseline_objective": 0.21033504583333332,
+          "objective": 0.07946558749999999,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 12.99,
+          "input_locations": 25,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 33,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 10,
+          "rutas": 2,
+          "distancia_km": 7.469399999999999,
+          "combustible_l": 0.7469399999999999,
+          "co2_kg": 1.4938799999999999,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 2
+      },
+      "preview_seconds": 2.764859300048556,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 33,
+        "rutas": 2,
+        "co2_kg": 1.4938799999999999,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 10,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.07946558749999999,
+        "elapsed_ms": 1021.15,
+        "age_seconds": 12.99,
+        "evaluations": 953,
+        "generations": 40,
+        "distancia_km": 7.469399999999999,
+        "combustible_l": 0.7469399999999999,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 25,
+        "parametros_motor": {
+          "seed": 33,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 0.21033504583333332,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.06470300001092255,
+      "total_seconds": 2.8297513000434265,
+      "confirm_status": 200,
+      "replan_seconds": 0.8142871999880299,
+      "replan_status": 201,
+      "pending_on_replanned_route": 6,
+      "unique_assigned": 10,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_10_33"
+    },
+    {
+      "orders": 10,
+      "teams": 15,
+      "seed": 44,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 0.6874795999610797
+          },
+          {
+            "points": 4,
+            "unique_points": 1,
+            "seconds": 1.6701119999634102
+          }
+        ],
+        "solver_seconds": 1.3488527999725193,
+        "solver_statistics": {
+          "seed": 44,
+          "generations": 40,
+          "evaluations": 943,
+          "elapsed_ms": 1348.55,
+          "baseline_feasible": true,
+          "baseline_objective": 0.21033504583333332,
+          "objective": 0.07946558749999999,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 17.79,
+          "input_locations": 25,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 44,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 10,
+          "rutas": 2,
+          "distancia_km": 7.469399999999999,
+          "combustible_l": 0.7469399999999999,
+          "co2_kg": 1.4938799999999999,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 2
+      },
+      "preview_seconds": 3.082396100042388,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 44,
+        "rutas": 2,
+        "co2_kg": 1.4938799999999999,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 10,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.07946558749999999,
+        "elapsed_ms": 1348.55,
+        "age_seconds": 17.79,
+        "evaluations": 943,
+        "generations": 40,
+        "distancia_km": 7.469399999999999,
+        "combustible_l": 0.7469399999999999,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 25,
+        "parametros_motor": {
+          "seed": 44,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 0.21033504583333332,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.06315500003984198,
+      "total_seconds": 3.1458350000320934,
+      "confirm_status": 200,
+      "replan_seconds": 0.7995404000394046,
+      "replan_status": 201,
+      "pending_on_replanned_route": 7,
+      "unique_assigned": 10,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_10_44"
+    },
+    {
+      "orders": 10,
+      "teams": 15,
+      "seed": 55,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 9,
+            "unique_points": 3,
+            "seconds": 0.6757947999867611
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.6702508999733254
+          }
+        ],
+        "solver_seconds": 1.0249999999650754,
+        "solver_statistics": {
+          "seed": 55,
+          "generations": 40,
+          "evaluations": 926,
+          "elapsed_ms": 1024.74,
+          "baseline_feasible": true,
+          "baseline_objective": 0.21033504583333332,
+          "objective": 0.07946558749999999,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 22.92,
+          "input_locations": 25,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 55,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 10,
+          "rutas": 2,
+          "distancia_km": 7.469399999999999,
+          "combustible_l": 0.7469399999999999,
+          "co2_kg": 1.4938799999999999,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 2
+      },
+      "preview_seconds": 2.762105900037568,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 55,
+        "rutas": 2,
+        "co2_kg": 1.4938799999999999,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 10,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.07946558749999999,
+        "elapsed_ms": 1024.74,
+        "age_seconds": 22.92,
+        "evaluations": 926,
+        "generations": 40,
+        "distancia_km": 7.469399999999999,
+        "combustible_l": 0.7469399999999999,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 25,
+        "parametros_motor": {
+          "seed": 55,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 0.21033504583333332,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.06236169999465346,
+      "total_seconds": 2.8246578000253066,
+      "confirm_status": 200,
+      "replan_seconds": 0.8177678000065498,
+      "replan_status": 201,
+      "pending_on_replanned_route": 6,
+      "unique_assigned": 10,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_10_55"
+    },
+    {
+      "orders": 50,
+      "teams": 15,
+      "seed": 11,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 0.6787259000120685
+          },
+          {
+            "points": 14,
+            "unique_points": 3,
+            "seconds": 1.6766869999701157
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 2.676503100025002
+          },
+          {
+            "points": 11,
+            "unique_points": 2,
+            "seconds": 3.712933700007852
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.6705072000040673
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 2.6732402000343427
+          }
+        ],
+        "solver_seconds": 7.609576300019398,
+        "solver_statistics": {
+          "seed": 11,
+          "generations": 40,
+          "evaluations": 933,
+          "elapsed_ms": 7608.26,
+          "baseline_feasible": true,
+          "baseline_objective": 1.1208857916666666,
+          "objective": 0.28326746249999996,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 27.69,
+          "input_locations": 65,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 11,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 50,
+          "rutas": 6,
+          "distancia_km": 23.8473,
+          "combustible_l": 2.38473,
+          "co2_kg": 4.7694600000000005,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 6
+      },
+      "preview_seconds": 13.365561300015543,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 11,
+        "rutas": 6,
+        "co2_kg": 4.7694600000000005,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 50,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.28326746249999996,
+        "elapsed_ms": 7608.26,
+        "age_seconds": 27.69,
+        "evaluations": 933,
+        "generations": 40,
+        "distancia_km": 23.8473,
+        "combustible_l": 2.38473,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 65,
+        "parametros_motor": {
+          "seed": 11,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 1.1208857916666666,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.1351019999710843,
+      "total_seconds": 13.501199099991936,
+      "confirm_status": 200,
+      "replan_seconds": 1.117001499980688,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 50,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_50_11"
+    },
+    {
+      "orders": 50,
+      "teams": 15,
+      "seed": 22,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 13,
+            "unique_points": 3,
+            "seconds": 0.6838478000136092
+          },
+          {
+            "points": 4,
+            "unique_points": 1,
+            "seconds": 1.6753304000012577
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 2.677196600008756
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 3.681122799986042
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 1.683716400002595
+          }
+        ],
+        "solver_seconds": 5.981600500002969,
+        "solver_statistics": {
+          "seed": 22,
+          "generations": 40,
+          "evaluations": 902,
+          "elapsed_ms": 5980.51,
+          "baseline_feasible": true,
+          "baseline_objective": 1.1208857916666666,
+          "objective": 0.348316825,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 43.57,
+          "input_locations": 65,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 22,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 50,
+          "rutas": 5,
+          "distancia_km": 31.430400000000002,
+          "combustible_l": 3.14304,
+          "co2_kg": 6.286080000000001,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 5
+      },
+      "preview_seconds": 10.748353499977384,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 22,
+        "rutas": 5,
+        "co2_kg": 6.286080000000001,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 50,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.348316825,
+        "elapsed_ms": 5980.51,
+        "age_seconds": 43.57,
+        "evaluations": 902,
+        "generations": 40,
+        "distancia_km": 31.430400000000002,
+        "combustible_l": 3.14304,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 65,
+        "parametros_motor": {
+          "seed": 22,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 1.1208857916666666,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.12005550001049414,
+      "total_seconds": 10.869155000022147,
+      "confirm_status": 200,
+      "replan_seconds": 0.971145500021521,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 50,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_50_22"
+    },
+    {
+      "orders": 50,
+      "teams": 15,
+      "seed": 33,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 19,
+            "unique_points": 3,
+            "seconds": 0.7153195000137202
+          },
+          {
+            "points": 19,
+            "unique_points": 3,
+            "seconds": 1.6801380999968387
+          },
+          {
+            "points": 3,
+            "unique_points": 1,
+            "seconds": 2.697773599997163
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 3.6741721000289544
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 1.7015682999626733
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 2.693570400006138
+          }
+        ],
+        "solver_seconds": 5.260601199988741,
+        "solver_statistics": {
+          "seed": 33,
+          "generations": 40,
+          "evaluations": 919,
+          "elapsed_ms": 5259.44,
+          "baseline_feasible": true,
+          "baseline_objective": 1.1208857916666666,
+          "objective": 0.33469612499999996,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 56.62,
+          "input_locations": 65,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 33,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 50,
+          "rutas": 6,
+          "distancia_km": 29.9913,
+          "combustible_l": 2.99913,
+          "co2_kg": 5.99826,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 6
+      },
+      "preview_seconds": 11.036815200001001,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 33,
+        "rutas": 6,
+        "co2_kg": 5.99826,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 50,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.33469612499999996,
+        "elapsed_ms": 5259.44,
+        "age_seconds": 56.62,
+        "evaluations": 919,
+        "generations": 40,
+        "distancia_km": 29.9913,
+        "combustible_l": 2.99913,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 65,
+        "parametros_motor": {
+          "seed": 33,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 1.1208857916666666,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.12651189998723567,
+      "total_seconds": 11.164195500023197,
+      "confirm_status": 200,
+      "replan_seconds": 0.926893099967856,
+      "replan_status": 201,
+      "pending_on_replanned_route": 16,
+      "unique_assigned": 50,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_50_33"
+    },
+    {
+      "orders": 50,
+      "teams": 15,
+      "seed": 44,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 0.6816803999827243
+          },
+          {
+            "points": 10,
+            "unique_points": 2,
+            "seconds": 1.6918181999935769
+          },
+          {
+            "points": 4,
+            "unique_points": 1,
+            "seconds": 2.712304899992887
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 3.815999099984765
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.694319500005804
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 2.6800740000326186
+          }
+        ],
+        "solver_seconds": 5.079928499995731,
+        "solver_statistics": {
+          "seed": 44,
+          "generations": 40,
+          "evaluations": 906,
+          "elapsed_ms": 5078.81,
+          "baseline_feasible": true,
+          "baseline_objective": 1.1208857916666666,
+          "objective": 0.2824967291666666,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 69.9,
+          "input_locations": 65,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 44,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 50,
+          "rutas": 6,
+          "distancia_km": 23.7678,
+          "combustible_l": 2.37678,
+          "co2_kg": 4.75356,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 6
+      },
+      "preview_seconds": 10.838334399973974,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 44,
+        "rutas": 6,
+        "co2_kg": 4.75356,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 50,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.2824967291666666,
+        "elapsed_ms": 5078.81,
+        "age_seconds": 69.9,
+        "evaluations": 906,
+        "generations": 40,
+        "distancia_km": 23.7678,
+        "combustible_l": 2.37678,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 65,
+        "parametros_motor": {
+          "seed": 44,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 1.1208857916666666,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.12559030001284555,
+      "total_seconds": 10.964655700023286,
+      "confirm_status": 200,
+      "replan_seconds": 1.0582545999786817,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 50,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_50_44"
+    },
+    {
+      "orders": 50,
+      "teams": 15,
+      "seed": 55,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 0.6945825000293553
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.6740117000299506
+          },
+          {
+            "points": 18,
+            "unique_points": 3,
+            "seconds": 2.678367399959825
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 3.686464899976272
+          },
+          {
+            "points": 21,
+            "unique_points": 3,
+            "seconds": 1.6857093999860808
+          }
+        ],
+        "solver_seconds": 5.2459891000180505,
+        "solver_statistics": {
+          "seed": 55,
+          "generations": 40,
+          "evaluations": 916,
+          "elapsed_ms": 5244.8,
+          "baseline_feasible": true,
+          "baseline_objective": 1.1208857916666666,
+          "objective": 0.2941379208333333,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 83.12,
+          "input_locations": 65,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 55,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 50,
+          "rutas": 5,
+          "distancia_km": 25.013700000000004,
+          "combustible_l": 2.50137,
+          "co2_kg": 5.002740000000001,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 5
+      },
+      "preview_seconds": 10.015204900002573,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 55,
+        "rutas": 5,
+        "co2_kg": 5.002740000000001,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 50,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 0.2941379208333333,
+        "elapsed_ms": 5244.8,
+        "age_seconds": 83.12,
+        "evaluations": 916,
+        "generations": 40,
+        "distancia_km": 25.013700000000004,
+        "combustible_l": 2.50137,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 65,
+        "parametros_motor": {
+          "seed": 55,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 1.1208857916666666,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.1281143000232987,
+      "total_seconds": 10.143996900005732,
+      "confirm_status": 200,
+      "replan_seconds": 1.0503214999916963,
+      "replan_status": 201,
+      "pending_on_replanned_route": 18,
+      "unique_assigned": 50,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_50_55"
+    },
+    {
+      "orders": 150,
+      "teams": 15,
+      "seed": 11,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 17,
+            "unique_points": 3,
+            "seconds": 0.6797156999818981
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 1.68331270001363
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 2.689454800041858
+          },
+          {
+            "points": 3,
+            "unique_points": 1,
+            "seconds": 3.673574899963569
+          },
+          {
+            "points": 13,
+            "unique_points": 3,
+            "seconds": 1.6840220000012778
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 2.676045099971816
+          },
+          {
+            "points": 7,
+            "unique_points": 2,
+            "seconds": 3.6796379999723285
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.687445200048387
+          },
+          {
+            "points": 21,
+            "unique_points": 3,
+            "seconds": 2.6941033999901265
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 3.685737500025425
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 1.6815960999811068
+          },
+          {
+            "points": 14,
+            "unique_points": 3,
+            "seconds": 2.68038209999213
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 3.6761332000023685
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 1.6855859000352211
+          }
+        ],
+        "solver_seconds": 8.005674400017597,
+        "solver_statistics": {
+          "seed": 11,
+          "generations": 14,
+          "evaluations": 326,
+          "elapsed_ms": 8000.27,
+          "baseline_feasible": true,
+          "baseline_objective": 3.463025475,
+          "objective": 1.4782138874999997,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 95.88,
+          "input_locations": 165,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 11,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 150,
+          "rutas": 14,
+          "distancia_km": 145.1379,
+          "combustible_l": 14.51379,
+          "co2_kg": 29.02758,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 14
+      },
+      "preview_seconds": 21.809124299965333,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 11,
+        "rutas": 14,
+        "co2_kg": 29.02758,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 150,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 1.4782138874999997,
+        "elapsed_ms": 8000.27,
+        "age_seconds": 95.88,
+        "evaluations": 326,
+        "generations": 14,
+        "distancia_km": 145.1379,
+        "combustible_l": 14.51379,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 165,
+        "parametros_motor": {
+          "seed": 11,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 3.463025475,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.2531793999951333,
+      "total_seconds": 22.064908600004856,
+      "confirm_status": 200,
+      "replan_seconds": 1.2805398000054993,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 150,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_150_11"
+    },
+    {
+      "orders": 150,
+      "teams": 15,
+      "seed": 22,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 0.6979780999827199
+          },
+          {
+            "points": 18,
+            "unique_points": 3,
+            "seconds": 1.6796422000043094
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 2.7012460000114515
+          },
+          {
+            "points": 13,
+            "unique_points": 3,
+            "seconds": 3.68284699996002
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 1.6757714999839664
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 2.6758230999694206
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 3.695508500037249
+          },
+          {
+            "points": 14,
+            "unique_points": 3,
+            "seconds": 1.7141421000123955
+          },
+          {
+            "points": 4,
+            "unique_points": 1,
+            "seconds": 3.5148367999936454
+          },
+          {
+            "points": 14,
+            "unique_points": 3,
+            "seconds": 3.6786610999843106
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 1.6861699000000954
+          },
+          {
+            "points": 20,
+            "unique_points": 3,
+            "seconds": 2.6974637000239454
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 1.67931989999488
+          },
+          {
+            "points": 21,
+            "unique_points": 3,
+            "seconds": 2.691721100010909
+          }
+        ],
+        "solver_seconds": 8.022853999980725,
+        "solver_statistics": {
+          "seed": 22,
+          "generations": 14,
+          "evaluations": 298,
+          "elapsed_ms": 8017.04,
+          "baseline_feasible": true,
+          "baseline_objective": 3.463025475,
+          "objective": 1.529309858333333,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 120.67,
+          "input_locations": 165,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 22,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 150,
+          "rutas": 14,
+          "distancia_km": 151.2366,
+          "combustible_l": 15.12366,
+          "co2_kg": 30.247320000000002,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 14
+      },
+      "preview_seconds": 21.94735039997613,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 22,
+        "rutas": 14,
+        "co2_kg": 30.247320000000002,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 150,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 1.529309858333333,
+        "elapsed_ms": 8017.04,
+        "age_seconds": 120.67,
+        "evaluations": 298,
+        "generations": 14,
+        "distancia_km": 151.2366,
+        "combustible_l": 15.12366,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 165,
+        "parametros_motor": {
+          "seed": 22,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 3.463025475,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.4171481999801472,
+      "total_seconds": 22.369095999980345,
+      "confirm_status": 200,
+      "replan_seconds": 1.2218433999805711,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 150,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_150_22"
+    },
+    {
+      "orders": 150,
+      "teams": 15,
+      "seed": 33,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 0.7086565000354312
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 1.687554200005252
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 2.6997281000367366
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 3.6951508999918588
+          },
+          {
+            "points": 3,
+            "unique_points": 1,
+            "seconds": 1.6756571000441909
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 2.694729599985294
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 3.694732300005853
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 1.685062799951993
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 2.6818244999740273
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 3.7009397000074387
+          },
+          {
+            "points": 17,
+            "unique_points": 3,
+            "seconds": 1.697634099982679
+          },
+          {
+            "points": 18,
+            "unique_points": 3,
+            "seconds": 2.6898686000495218
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 3.6897744000307284
+          }
+        ],
+        "solver_seconds": 8.01369649998378,
+        "solver_statistics": {
+          "seed": 33,
+          "generations": 9,
+          "evaluations": 188,
+          "elapsed_ms": 8006.32,
+          "baseline_feasible": true,
+          "baseline_objective": 3.463025475,
+          "objective": 1.5086435708333332,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 146.96,
+          "input_locations": 165,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 33,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 150,
+          "rutas": 13,
+          "distancia_km": 148.323,
+          "combustible_l": 14.8323,
+          "co2_kg": 29.6646,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 13
+      },
+      "preview_seconds": 20.962632599985227,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 33,
+        "rutas": 13,
+        "co2_kg": 29.6646,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 150,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 1.5086435708333332,
+        "elapsed_ms": 8006.32,
+        "age_seconds": 146.96,
+        "evaluations": 188,
+        "generations": 9,
+        "distancia_km": 148.323,
+        "combustible_l": 14.8323,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 165,
+        "parametros_motor": {
+          "seed": 33,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 3.463025475,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.6372817999799736,
+      "total_seconds": 21.605235399969388,
+      "confirm_status": 200,
+      "replan_seconds": 1.2873341999948025,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 150,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_150_33"
+    },
+    {
+      "orders": 150,
+      "teams": 15,
+      "seed": 44,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 0.68164969998179
+          },
+          {
+            "points": 15,
+            "unique_points": 3,
+            "seconds": 1.677582300035283
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 2.693468000041321
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 3.7134061999968253
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 1.6883589999633841
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 2.7006018999964
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 3.696043500036467
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 1.6791830000001937
+          },
+          {
+            "points": 8,
+            "unique_points": 2,
+            "seconds": 2.6682337999809533
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 3.677158500009682
+          }
+        ],
+        "solver_seconds": 8.014863900025375,
+        "solver_statistics": {
+          "seed": 44,
+          "generations": 12,
+          "evaluations": 263,
+          "elapsed_ms": 8004.76,
+          "baseline_feasible": true,
+          "baseline_objective": 3.463025475,
+          "objective": 1.3433566166666664,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 172.04,
+          "input_locations": 165,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 44,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 150,
+          "rutas": 10,
+          "distancia_km": 128.8002,
+          "combustible_l": 12.88002,
+          "co2_kg": 25.76004,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 10
+      },
+      "preview_seconds": 17.87418180005625,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 44,
+        "rutas": 10,
+        "co2_kg": 25.76004,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 150,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 1.3433566166666664,
+        "elapsed_ms": 8004.76,
+        "age_seconds": 172.04,
+        "evaluations": 263,
+        "generations": 12,
+        "distancia_km": 128.8002,
+        "combustible_l": 12.88002,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 165,
+        "parametros_motor": {
+          "seed": 44,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 3.463025475,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.2286037000012584,
+      "total_seconds": 18.10603439999977,
+      "confirm_status": 200,
+      "replan_seconds": 0.9793170000193641,
+      "replan_status": 201,
+      "pending_on_replanned_route": 19,
+      "unique_assigned": 150,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_150_44"
+    },
+    {
+      "orders": 150,
+      "teams": 15,
+      "seed": 55,
+      "state": "VERIFIED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 3,
+            "unique_points": 1,
+            "seconds": 0.6732615000219084
+          },
+          {
+            "points": 20,
+            "unique_points": 3,
+            "seconds": 1.6912860000156797
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 2.6817834999528714
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 3.675617200031411
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 1.6796898000175133
+          },
+          {
+            "points": 10,
+            "unique_points": 3,
+            "seconds": 2.678643099963665
+          },
+          {
+            "points": 20,
+            "unique_points": 3,
+            "seconds": 3.69755989999976
+          },
+          {
+            "points": 12,
+            "unique_points": 3,
+            "seconds": 1.687662799959071
+          },
+          {
+            "points": 13,
+            "unique_points": 3,
+            "seconds": 2.6807465000310913
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 3.681452499993611
+          },
+          {
+            "points": 7,
+            "unique_points": 3,
+            "seconds": 1.674519499996677
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 2.6912690000026487
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "seconds": 3.694951600045897
+          },
+          {
+            "points": 8,
+            "unique_points": 2,
+            "seconds": 1.9091033000149764
+          }
+        ],
+        "solver_seconds": 8.008312999969348,
+        "solver_statistics": {
+          "seed": 55,
+          "generations": 15,
+          "evaluations": 321,
+          "elapsed_ms": 8003.69,
+          "baseline_feasible": true,
+          "baseline_objective": 3.463025475,
+          "objective": 1.3457741666666665,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false,
+          "provider_calls": 0,
+          "cache_hit": true,
+          "age_seconds": 192.47,
+          "input_locations": 165,
+          "unique_locations": 3,
+          "parametros_motor": {
+            "seed": 55,
+            "population": 24,
+            "generations": 40,
+            "mutation": 0.2,
+            "seconds": 8,
+            "distance_weight": 0.35,
+            "fuel_weight": 0.15,
+            "carbon_weight": 0.35,
+            "time_weight": 0.15
+          },
+          "pedidos": 150,
+          "rutas": 14,
+          "distancia_km": 129.0276,
+          "combustible_l": 12.90276,
+          "co2_kg": 25.805520000000005,
+          "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+          "trafico": {
+            "revision": 0,
+            "reglas": [],
+            "fuente": "APROXIMACION_MANUAL_ZONAL",
+            "zona_horaria": "America/Lima",
+            "trafico_en_vivo": false,
+            "area_operativa": {
+              "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+              "zona_horaria": "America/Lima",
+              "sur": -12.18,
+              "norte": -11.94,
+              "oeste": -75.32,
+              "este": -75.12,
+              "centro": {
+                "latitud": -12.0675,
+                "longitud": -75.2103
+              },
+              "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO"
+            }
+          },
+          "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+          "retorno_al_origen": true
+        },
+        "route_count": 14
+      },
+      "preview_seconds": 22.044701499980874,
+      "preview_status": 201,
+      "statistics": {
+        "seed": 55,
+        "rutas": 14,
+        "co2_kg": 25.805520000000005,
+        "fuente": "OSRM + aproximación manual por zona y horario; sin tráfico en tiempo real",
+        "pedidos": 150,
+        "trafico": {
+          "fuente": "APROXIMACION_MANUAL_ZONAL",
+          "reglas": [],
+          "revision": 0,
+          "zona_horaria": "America/Lima",
+          "area_operativa": {
+            "sur": -12.18,
+            "este": -75.12,
+            "norte": -11.94,
+            "oeste": -75.32,
+            "centro": {
+              "latitud": -12.0675,
+              "longitud": -75.2103
+            },
+            "nombre": "Huancayo y alrededores urbanos, Junín, Perú",
+            "tipo_limite": "ENVOLVENTE_OPERATIVA_URBANA_NO_LIMITE_ADMINISTRATIVO",
+            "zona_horaria": "America/Lima"
+          },
+          "trafico_en_vivo": false
+        },
+        "algorithm": "GA_VRPTW_1",
+        "cache_hit": true,
+        "objective": 1.3457741666666665,
+        "elapsed_ms": 8003.69,
+        "age_seconds": 192.47,
+        "evaluations": 321,
+        "generations": 15,
+        "distancia_km": 129.0276,
+        "combustible_l": 12.90276,
+        "restricciones": "Capacidad, ventana completa, turno, jornada, descanso y solapamientos",
+        "provider_calls": 0,
+        "input_locations": 165,
+        "parametros_motor": {
+          "seed": 55,
+          "seconds": 8,
+          "mutation": 0.2,
+          "population": 24,
+          "fuel_weight": 0.15,
+          "generations": 40,
+          "time_weight": 0.15,
+          "carbon_weight": 0.35,
+          "distance_weight": 0.35
+        },
+        "unique_locations": 3,
+        "baseline_feasible": true,
+        "retorno_al_origen": true,
+        "baseline_objective": 3.463025475,
+        "global_optimum_guaranteed": false
+      },
+      "confirm_seconds": 0.26260700001148507,
+      "total_seconds": 22.310023300000466,
+      "confirm_status": 200,
+      "replan_seconds": 1.7945064000086859,
+      "replan_status": 201,
+      "pending_on_replanned_route": 17,
+      "unique_assigned": 150,
+      "previous_delivery_preserved": true,
+      "optimization_within_45s": true,
+      "replan_below_30s": true,
+      "schema": "e2e_perf_c4cd0249ec_150_55"
+    }
+  ],
+  "scope": "ASGI endpoint, PostgreSQL, real OSRM and genetic solver plus confirmation; excludes TCP, browser/proxy/render",
+  "limitation": "Three verified public destinations repeated as synthetic demand; no claim of representative city-wide or concurrent load.",
+  "provider_throttle": "At most one public OSRM request start per second; waits included in timings",
+  "no_operational_database": true,
+  "selected_case": null,
+  "provider_failures": [],
+  "completed": "2026-11-19T02:17:05.549540+00:00"
+}

@@ -1,0 +1,351 @@
+{
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.744,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/vehicles/",
+      "status": 401,
+      "expected": 401,
+      "seconds": 0.204,
+      "passed": true
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.203,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200,
+      "seconds": 4.181,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.479,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/drivers/",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.573,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/vehicles/",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.569,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/orders/",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.593,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/routes/",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.576,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/drivers/",
+      "status": 422,
+      "expected": 422,
+      "seconds": 0.565,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/vehicles/",
+      "status": 422,
+      "expected": 422,
+      "seconds": 0.564,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/orders/",
+      "status": 422,
+      "expected": 422,
+      "seconds": 0.565,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/drivers/",
+      "status": 201,
+      "expected": 201,
+      "seconds": 1.809,
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/drivers/84eb3028-9b11-4db6-8eb0-e8b4b4cae8c7",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.367,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.744,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/auth/me",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.468,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/vehicles/",
+      "status": 403,
+      "expected": 403,
+      "seconds": 0.724,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/drivers/me",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.556,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/vehicles/",
+      "status": 201,
+      "expected": 201,
+      "seconds": 1.025,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/vehicles/",
+      "status": 409,
+      "expected": 409,
+      "seconds": 0.653,
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/vehicles/53fdda78-276f-452e-b564-bf6e9d01921f",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.095,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/orders/",
+      "status": 201,
+      "expected": 201,
+      "seconds": 1.106,
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/orders/e400637c-0e64-4696-8150-4aab271c7220",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.186,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/orders/",
+      "status": 201,
+      "expected": 201,
+      "seconds": 1.096,
+      "passed": true
+    },
+    {
+      "method": "PUT",
+      "path": "/orders/bb078664-9242-416a-927c-1ac28343fa0e",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.185,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/optimizations/preview",
+      "status": 201,
+      "expected": 201,
+      "seconds": 2.086,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/optimizations/2a9b14eb-d44f-448a-888c-c6a697d8ed87/confirm",
+      "status": 200,
+      "expected": 200,
+      "seconds": 2.086,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/optimizations/2a9b14eb-d44f-448a-888c-c6a697d8ed87/confirm",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.653,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.211,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/routes/28318c22-0c48-42ff-9f28-c42a9c310a31",
+      "status": 404,
+      "expected": 404,
+      "seconds": 0.642,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/iniciar",
+      "status": 200,
+      "expected": 200,
+      "seconds": 2.07,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/entregas/e400637c-0e64-4696-8150-4aab271c7220/confirmar",
+      "status": 200,
+      "expected": 200,
+      "seconds": 2.062,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/incidentes",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.717,
+      "passed": true,
+      "instrument_correction": "The existing API contract returns 200, not 201; original attempt preserved separately."
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.973,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.74,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.817,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/incidentes",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.639,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/operations/notifications",
+      "status": 200,
+      "expected": 200,
+      "seconds": 0.643,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/operations/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/replan",
+      "status": 201,
+      "expected": 201,
+      "seconds": 2.331,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "path": "/operations/revisions/f233a51c-87fd-41bc-b9ad-a8d29a1cd2c3/confirm",
+      "status": 200,
+      "expected": 200,
+      "seconds": 3.133,
+      "passed": true
+    },
+    {
+      "method": "GET",
+      "path": "/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a",
+      "status": 200,
+      "expected": 200,
+      "seconds": 1.326,
+      "passed": true
+    }
+  ],
+  "state": {
+    "driver_id": "84eb3028-9b11-4db6-8eb0-e8b4b4cae8c7",
+    "vehicle_id": "53fdda78-276f-452e-b564-bf6e9d01921f",
+    "order_ids": [
+      "e400637c-0e64-4696-8150-4aab271c7220",
+      "bb078664-9242-416a-927c-1ac28343fa0e"
+    ],
+    "plan_id": "2a9b14eb-d44f-448a-888c-c6a697d8ed87",
+    "route_id": "a3b77843-2c79-4c6b-a338-0c42a380d87a",
+    "first_delivery_id": "e400637c-0e64-4696-8150-4aab271c7220",
+    "first_delivered_at": "2026-11-19T14:16:10.234577+00:00",
+    "revision_id": "f233a51c-87fd-41bc-b9ad-a8d29a1cd2c3",
+    "version": 2,
+    "replan_approved": true,
+    "awaiting_ui_ack_and_delivery": true
+  },
+  "method": "HTTPS API, not UI clicks",
+  "synthetic_demo_data": true
+}

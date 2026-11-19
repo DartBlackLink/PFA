@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="134.35160000000002">
+<testsuite name="gold.spec.ts" timestamp="2026-11-19T02:47:16.879Z" hostname="chromium" tests="1" failures="0" skipped="0" time="36.485" errors="0">
+<testcase name="GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas" classname="gold.spec.ts" time="36.485">
+</testcase>
+</testsuite>
+<testsuite name="gold.spec.ts" timestamp="2026-11-19T02:47:16.879Z" hostname="firefox" tests="1" failures="0" skipped="0" time="33.471" errors="0">
+<testcase name="GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas" classname="gold.spec.ts" time="33.471">
+</testcase>
+</testsuite>
+<testsuite name="gold.spec.ts" timestamp="2026-11-19T02:47:16.879Z" hostname="webkit" tests="1" failures="0" skipped="0" time="51.378" errors="0">
+<testcase name="GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas" classname="gold.spec.ts" time="51.378">
+</testcase>
+</testsuite>
+</testsuites>

@@ -1,0 +1,14 @@
+{
+  "connected": true,
+  "client_sslmode": "require",
+  "channel_binding": "require",
+  "tls_probe": {
+    "version": "TLSv1.3",
+    "certificate_and_hostname_verified": true
+  },
+  "pooler_to_backend_ssl": false,
+  "pooler_note": "pg_stat_ssl describes the pooler-to-PostgreSQL connection, not client TLS.",
+  "tables": [],
+  "migration": null,
+  "rows_modified": 0
+}

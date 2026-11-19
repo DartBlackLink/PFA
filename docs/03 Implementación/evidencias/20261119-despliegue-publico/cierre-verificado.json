@@ -1,0 +1,16 @@
+{
+  "web_url": "https://ecologistica-huancayo-web.wasmer.app",
+  "api_url": "https://ecologistica-huancayo-api.wasmer.app/api/v1",
+  "web_status": 200,
+  "api_status": 200,
+  "javascript_sha256": "32e6d3dd1a6d0c45a54be124be021845699f29cdf7e11910261dc4d1913c647c",
+  "published_asset_matches_local_build": true,
+  "anonymous_orders_status": 401,
+  "untrusted_cors_origin_not_allowed": true,
+  "neon_persistence_verified": true,
+  "route_state": "FINALIZADA",
+  "version_received": 2,
+  "github_push": false,
+  "github_actions_executed": false,
+  "android_built": false
+}

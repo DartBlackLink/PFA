@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es-PE">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Encuesta SUS · EcoLogística Huancayo</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#202c3c;background:#f4f6f9;--card:#fff;--border:#7d899b;--primary:#256b55;--ink:#202c3c}
+*{box-sizing:border-box}body{margin:0}main{max-width:850px;margin:32px auto;padding:24px;background:var(--card);border-radius:16px;border:1px solid var(--border)}
+h1{font-size:clamp(1.5rem,4vw,2rem);margin-top:0}h2{font-size:1.2rem}p,li{line-height:1.6}fieldset{min-width:0;border:1px solid var(--border);border-radius:10px;padding:16px;margin:20px 0}legend{font-weight:650;padding:0 6px}
+.choices{display:flex;gap:8px;flex-wrap:wrap}.choice{display:flex;gap:8px;align-items:center;min-height:48px;padding:8px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer}
+input{accent-color:var(--primary)}select,button{font:inherit;min-height:48px;border:1px solid var(--border);border-radius:8px;padding:10px}select{width:100%;color:inherit;background:var(--card)}button{background:var(--primary);color:white;cursor:pointer;font-weight:650}label{line-height:1.5}small{display:block;line-height:1.5}a{color:var(--primary)}
+:focus-visible{outline:3px solid #885719;outline-offset:3px}#status{font-weight:650;min-height:1.5em}code{overflow-wrap:anywhere}.profile{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:550px){main{margin:0;padding:20px;border-radius:0}.profile{grid-template-columns:1fr}.choice{flex:1;justify-content:center;padding:10px}}
+@media(prefers-color-scheme:dark){:root{color:#f0f3f8;background:#121923;--card:#202a37;--border:#91a0b5;--primary:#b8cbe5;--ink:#f0f3f8}button{color:#1d3048}}
+@media print{main{border:0;margin:0}button,#status{display:none}.choice{border:0}}
+</style>
+<main>
+<h1>Tu experiencia con EcoLogística Huancayo</h1>
+<p>Responde después de probar la web. Evaluamos el sistema, no tus conocimientos. No hay respuestas correctas. Esta encuesta no solicita nombre, correo, DNI ni contraseña.</p>
+<small>Instrumento de trabajo: adaptación española SUS de diez ítems, versión 1.0.0, 18/11/2026. Conserva orden y polaridad; no se presenta como traducción validada. Responsable: Jordy Steve Chancasanampa Torres.</small>
+<h2>Antes de responder</h2>
+<ul><li>ADMIN: inicia sesión, registra o edita un pedido QA, corrige un dato inválido, consulta mapa e indicadores y confirma una planificación.</li>
+<li>REPARTIDOR: consulta una ruta QA propia, confirma recepción, inicia, registra entrega y reporta una incidencia simulada; recibe una actualización autorizada.</li></ul>
+<p>El facilitador debe entregar los accesos de prueba por un medio privado. No uses entregas operativas para esta evaluación.</p>
+<form id="survey">
+<div class="profile"><label>Rol probado<select id="role" required><option value="">Selecciona un rol</option><option value="ADMIN">Administrador</option><option value="REPARTIDOR">Repartidor</option></select></label>
+<label>Dispositivo utilizado<select id="device" required><option value="">Selecciona un dispositivo</option><option value="PC">Computadora</option><option value="TABLET">Tablet</option><option value="MOVIL">Teléfono, navegador web</option></select></label></div>
+<p>Marca una opción en cada afirmación: <strong>1</strong> totalmente en desacuerdo · <strong>2</strong> en desacuerdo · <strong>3</strong> neutral · <strong>4</strong> de acuerdo · <strong>5</strong> totalmente de acuerdo.</p>
+<div id="questions"></div>
+<p><label><input id="consent" type="checkbox" required> He probado las tareas de mi rol y acepto entregar mis respuestas anónimas para esta evaluación académica. Puedo dejar de responder sin consecuencias.</label></p>
+<button type="submit">Descargar mis respuestas anónimas</button>
+<p id="status" role="status" aria-live="polite"></p>
+<small>El formulario funciona en este dispositivo, sin enviar respuestas a un servidor ni cargar servicios externos. Conserva el CSV y entrégalo al facilitador por el medio acordado. El facilitador mantendrá una sola respuesta por persona; un código aleatorio no verifica identidad. No se muestra un puntaje para evitar influir en otras personas.</small>
+</form>
+<p><a href="../04%20Usabilidad%20V_1_0_0.md">Método y cálculo del estudio</a> · <a href="../../../../README.md">README principal</a></p>
+</main>
+<script>
+'use strict';
+const items=['Usaría EcoLogística con frecuencia.','Encuentro complejidad innecesaria en el sistema.','El sistema me resulta fácil de usar.','Necesitaría ayuda técnica para utilizarlo.','Sus funciones me parecen bien integradas.','Percibo demasiadas inconsistencias en su funcionamiento.','Creo que la mayoría aprendería a usarlo rápidamente.','Me resulta difícil manejar el sistema.','Me siento seguro al utilizarlo.','Debí aprender muchas cosas antes de poder usarlo.'];
+const questions=document.querySelector('#questions');
+items.forEach((text,index)=>{
+  const group=document.createElement('fieldset'),legend=document.createElement('legend');
+  legend.textContent=`${index+1}. ${text}`;group.append(legend);
+  const choices=document.createElement('div');choices.className='choices';
+  for(let value=1;value<=5;value++){
+    const label=document.createElement('label');label.className='choice';
+    const input=document.createElement('input');input.type='radio';input.name=`p${index+1}`;input.value=String(value);input.required=true;
+    label.append(input,document.createTextNode(String(value)));choices.append(label);
+  }group.append(choices);questions.append(group);
+});
+const code='SUS-'+Array.from(crypto.getRandomValues(new Uint8Array(6)),v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
+document.querySelector('#survey').addEventListener('submit',event=>{
+  event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;
+  const data=new FormData(form),head=['codigo','rol','dispositivo','fecha','consentimiento',...items.map((_,i)=>`p${i+1}`)];
+  const date=new Intl.DateTimeFormat('sv-SE',{timeZone:'America/Lima'}).format(new Date());
+  const row=[code,document.querySelector('#role').value,document.querySelector('#device').value,date,'SI',...items.map((_,i)=>data.get(`p${i+1}`))];
+  const url=URL.createObjectURL(new Blob([head.join(',')+'\n'+row.join(',')+'\n'],{type:'text/csv;charset=utf-8'}));
+  const link=document.createElement('a');link.href=url;link.download=code+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  document.querySelector('#status').textContent='Respuestas descargadas. Gracias por tu participación.';
+});
+</script>
+</html>

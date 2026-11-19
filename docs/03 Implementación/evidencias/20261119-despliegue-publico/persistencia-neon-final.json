@@ -1,0 +1,34 @@
+{
+  "route": {
+    "estado": "FINALIZADA",
+    "version": 2,
+    "version_recibida": 2
+  },
+  "deliveries": [
+    {
+      "pedido_id": "e400637c-0e64-4696-8150-4aab271c7220",
+      "estado_entrega": "ENTREGADO",
+      "entregado_en": "2026-11-19 14:16:10.234577+00:00"
+    },
+    {
+      "pedido_id": "bb078664-9242-416a-927c-1ac28343fa0e",
+      "estado_entrega": "ENTREGADO",
+      "entregado_en": "2026-11-19 14:24:04.609888+00:00"
+    }
+  ],
+  "revision": {
+    "estado": "APROBADA",
+    "recibido_en": "2026-11-19 14:23:59.572146+00:00"
+  },
+  "counts": {
+    "usuario": 2,
+    "repartidor": 1,
+    "vehiculo": 1,
+    "pedido": 2,
+    "ruta": 1,
+    "incidente": 1,
+    "revision_ruta": 1
+  },
+  "first_delivery_timestamp_unchanged": true,
+  "method": "Direct read of Neon PostgreSQL after browser confirmation, no row changes"
+}

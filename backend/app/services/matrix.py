@@ -23,6 +23,10 @@ def _table_block(base, coordinates, sources, destinations, deadline):
     indices = list(dict.fromkeys(sources + destinations))
     positions = {index: position for position, index in enumerate(indices)}
     points = ";".join(f"{coordinates[i][1]},{coordinates[i][0]}" for i in indices)
+    # OSRM requires at least two coordinates, even for a 1x1 diagonal block.
+    # Repeat the same physical point; sources/destinations still select index 0.
+    if len(indices) == 1:
+        points = points + ";" + points
     query = urlencode(
         {
             "annotations": "distance,duration",
@@ -58,22 +62,36 @@ def road_matrix(coordinates, deadline):
         raise HTTPException(
             503, "Configura un proveedor OSRM con servicio de matrices."
         )
-    key = (base, tuple(coordinates))
+    # Several orders (and team origins) may share the exact same location.
+    # Query each physical point once, then expand back to the caller's indexes.
+    # Do not round or merge nearby points: distinct entrances must stay distinct.
+    original = [tuple(point) for point in coordinates]
+    unique = list(dict.fromkeys(original))
+    positions = {point: index for index, point in enumerate(unique)}
+    indices = [positions[point] for point in original]
+
+    def expanded(values):
+        # Fresh rows also prevent a caller from modifying cached provider data.
+        return [[values[source][destination] for destination in indices] for source in indices]
+
+    key = (base, tuple(unique))
     now = monotonic()
     with _lock:
         entry = _cache.get(key)
         if entry and now - entry[0] < TTL_SECONDS:
             _cache.move_to_end(key)
             return (
-                entry[1],
-                entry[2],
+                expanded(entry[1]),
+                expanded(entry[2]),
                 {
                     "provider_calls": 0,
                     "cache_hit": True,
                     "age_seconds": round(now - entry[0], 2),
+                    "input_locations": len(original),
+                    "unique_locations": len(unique),
                 },
             )
-    size = len(coordinates)
+    size = len(unique)
     distance = [[0.0] * size for _ in range(size)]
     duration = [[0.0] * size for _ in range(size)]
     blocks = [
@@ -84,7 +102,7 @@ def road_matrix(coordinates, deadline):
         with ThreadPoolExecutor(max_workers=4) as pool:
             futures = [
                 pool.submit(
-                    _table_block, base, coordinates, sources, destinations, deadline
+                    _table_block, base, unique, sources, destinations, deadline
                 )
                 for sources in blocks
                 for destinations in blocks
@@ -110,9 +128,10 @@ def road_matrix(coordinates, deadline):
         while len(_cache) > MAX_CACHE_ENTRIES:
             _cache.popitem(last=False)
     return (
-        distance,
-        duration,
-        {"provider_calls": requests, "cache_hit": False, "age_seconds": 0},
+        expanded(distance),
+        expanded(duration),
+        {"provider_calls": requests, "cache_hit": False, "age_seconds": 0,
+         "input_locations": len(original), "unique_locations": len(unique)},
     )
 
 

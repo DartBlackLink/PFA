@@ -141,3 +141,29 @@ Thumbs.db
 !/docs/03 Implementación/evidencias/20261114-desarrollo-integral/dependency-audit.log
 !/docs/03 Implementación/evidencias/20261114-desarrollo-integral/flutter-analyze-final.log
 !/docs/03 Implementación/evidencias/20261114-desarrollo-integral/flutter-full-final.log
+
+# Evidencias seleccionadas de la verificación web 17/11/2026
+!/docs/03 Implementación/evidencias/20261117-verificacion-final/htmlcov/
+!/docs/03 Implementación/evidencias/20261117-verificacion-final/htmlcov/**
+!/docs/03 Implementación/evidencias/20261117-verificacion-final/backend-full.log
+!/docs/03 Implementación/evidencias/20261117-verificacion-final/flutter-final.log
+!/docs/03 Implementación/evidencias/20261117-verificacion-final/flutter-analyze-final.log
+!/docs/03 Implementación/evidencias/20261117-verificacion-final/build-web-final.log
+
+# Semana 14: artefactos temporales E2E y evidencia seleccionada
+/playwright-report/
+/test-results/
+/blob-report/
+/.gitignore~
+*.har
+*.trace.zip
+!/docs/03 Implementación/evidencias/20261118-semana14/htmlcov/
+!/docs/03 Implementación/evidencias/20261118-semana14/htmlcov/**
+!/docs/03 Implementación/evidencias/20261118-semana14/playwright-html/
+!/docs/03 Implementación/evidencias/20261118-semana14/playwright-html/**
+!/docs/03 Implementación/evidencias/20261118-semana14/playwright-results/
+!/docs/03 Implementación/evidencias/20261118-semana14/playwright-results/**
+!/docs/03 Implementación/evidencias/20261118-semana14/backend-full.log
+!/docs/03 Implementación/evidencias/20261118-semana14/playwright-final.log
+
+!/docs/03 Implementación/evidencias/20261118-semana14/visual-final.log

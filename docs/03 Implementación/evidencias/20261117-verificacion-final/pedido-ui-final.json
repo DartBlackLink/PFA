@@ -1,0 +1,15 @@
+{
+  "latitud": "-12.070855",
+  "longitud": "-75.208324",
+  "punto_referencia": "QA FINAL: punto de acceso validado en formulario",
+  "pedido_id": "f5013120-e5a0-4140-9f10-507717f99860",
+  "cliente_id": "e58908bb-69eb-434b-8a2f-1e52a389e277",
+  "cliente_nombre": "QA FINAL 20261117 - Cliente",
+  "direccion": "Plaza Huamanmarca, San Carlos, Huancayo, Junin, Perú",
+  "peso_kg": "2.00",
+  "ventana_inicio": "2026-11-17T13:46:00Z",
+  "ventana_fin": "2026-11-17T15:46:00Z",
+  "prioridad": "ALTA",
+  "tipo_producto": "QA UI FINAL",
+  "estado": "PENDIENTE"
+}

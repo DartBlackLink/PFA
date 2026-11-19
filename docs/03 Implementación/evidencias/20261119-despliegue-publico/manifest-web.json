@@ -1,0 +1,164 @@
+{
+  "files": [
+    {
+      "path": "favicon.png",
+      "sha256": "7ab2525f4b86b65d3e4c70358a17e5a1aaf6f437f99cbcc046dad73d59bb9015"
+    },
+    {
+      "path": "flutter.js",
+      "sha256": "2beb1ce6b159c71540aa66030af1d7964b6a92377cc78473745e02f97b74effe"
+    },
+    {
+      "path": "flutter_bootstrap.js",
+      "sha256": "11abe31399d1deb10c66ef022da97de2e39b158604f0c26da599521b7e75a328"
+    },
+    {
+      "path": "flutter_service_worker.js",
+      "sha256": "dbfbe64ae5be5b462abb97338eb9af783ed4ed57a8c73a53c2a44488a26f6416"
+    },
+    {
+      "path": "index.html",
+      "sha256": "8f3ccde02bb429b76bdee8b7f0c42af09a7ec2d76fe7b87a1547a43932e9d407"
+    },
+    {
+      "path": "main.dart.js",
+      "sha256": "32e6d3dd1a6d0c45a54be124be021845699f29cdf7e11910261dc4d1913c647c"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "e0ff30786ef8d312f46c2e54d3edb01bbf045f431b5d9c0d3309997366baa1d8"
+    },
+    {
+      "path": "version.json",
+      "sha256": "921de7de0d5adde19f87f020db44d4e5bd3859a3664213a32bac88667e5c6bd9"
+    },
+    {
+      "path": "assets/AssetManifest.bin",
+      "sha256": "d20e1f939f14bed300061dd97d2e0e4d15dd6f8f8425b1a0ca55b97becfeda7a"
+    },
+    {
+      "path": "assets/AssetManifest.bin.json",
+      "sha256": "bd48251067e0a6d2af7aa1ecb501c5b69c825ab6f8d48c8a8e1c8f27e3d1ed18"
+    },
+    {
+      "path": "assets/FontManifest.json",
+      "sha256": "cd7e03645bc44b2dd47b7cb626f51c4ecbf55a197ab77241628b47ac165fbe21"
+    },
+    {
+      "path": "assets/NOTICES",
+      "sha256": "df7d1733d842cc785847a35878308b83b64d161845e44cb78c8a9cf78012393c"
+    },
+    {
+      "path": "canvaskit/canvaskit.js",
+      "sha256": "bb559f6080c7d312ac2a912b4abec9f68ff3d3022d4a603c7796b9b31460642b"
+    },
+    {
+      "path": "canvaskit/canvaskit.js.symbols",
+      "sha256": "384f80b392972c83fd4f262527e3d06215a297d33ed59732c726721e9d9311bd"
+    },
+    {
+      "path": "canvaskit/canvaskit.wasm",
+      "sha256": "fbed517a43e82452404446683f00f2e876d835aed84410695759e67b6bb01cd3"
+    },
+    {
+      "path": "canvaskit/skwasm.js",
+      "sha256": "71d7d3e34bf71b52bdba3b588b103bba8148ba28de5754083e01b3398e7a6e1c"
+    },
+    {
+      "path": "canvaskit/skwasm.js.symbols",
+      "sha256": "9137f1a3ae744dea575043abfc6e063a047e910e6dab1ee53e496c975d1c033e"
+    },
+    {
+      "path": "canvaskit/skwasm.wasm",
+      "sha256": "e540fd5e8303b7b68ec2718cb49e9c421f8ade3075b15e02a7059a62654df9a1"
+    },
+    {
+      "path": "canvaskit/skwasm_heavy.js",
+      "sha256": "cec554b46ddcf4c0e63d799e0556d546f42d2c3f69316fb4f67ed776f6104558"
+    },
+    {
+      "path": "canvaskit/skwasm_heavy.js.symbols",
+      "sha256": "b6b79ed497e11d4cd13cc46724f9e289eacc744d2d185e31c72d595cdf62772b"
+    },
+    {
+      "path": "canvaskit/skwasm_heavy.wasm",
+      "sha256": "565f5cc1cca6ab120f11934b105f01fec4b58b480c82e0889dca93af8e6f8635"
+    },
+    {
+      "path": "canvaskit/wimp.js",
+      "sha256": "8fd8a47480c6eb0a374d159912d0b3fb15661b41f5c113ecdd39c2f01f2bee46"
+    },
+    {
+      "path": "canvaskit/wimp.js.symbols",
+      "sha256": "b4907ebd33131302a8cd99f7c55f52357bdfde04f421b605a616ba8764ae1de4"
+    },
+    {
+      "path": "canvaskit/wimp.wasm",
+      "sha256": "e924eaafd801d41e017d178f3fd5cf8a417f641fe35c9ed34a4e1d7582283e0c"
+    },
+    {
+      "path": "icons/Icon-192.png",
+      "sha256": "3dce99077602f70421c1c6b2a240bc9b83d64d86681d45f2154143310c980be3"
+    },
+    {
+      "path": "icons/Icon-512.png",
+      "sha256": "baccb205ae45f0b421be1657259b4943ac40c95094ab877f3bcbe12cd544dcbe"
+    },
+    {
+      "path": "icons/Icon-maskable-192.png",
+      "sha256": "d2c842e22a9f4ec9d996b23373a905c88d9a203b220c5c151885ad621f974b5c"
+    },
+    {
+      "path": "icons/Icon-maskable-512.png",
+      "sha256": "6aee06cdcab6b2aef74b1734c4778f4421d2da100b0ff9e52b21b55240202929"
+    },
+    {
+      "path": "canvaskit/chromium/canvaskit.js",
+      "sha256": "6018b12bd8ed37e6952eee72d59c1cf7ad707ccdb74a0a45190010f77edd9068"
+    },
+    {
+      "path": "canvaskit/chromium/canvaskit.js.symbols",
+      "sha256": "31c86fac6042dd8b756150832c1d15495d0d07742e2718f75dbdde5a5a91455e"
+    },
+    {
+      "path": "canvaskit/chromium/canvaskit.wasm",
+      "sha256": "ae8ff1d858140f7b1300ced3fa89fb8c9dce0a400a0f4f1e11f6dcfb3315fdcf"
+    },
+    {
+      "path": "canvaskit/webparagraph/canvaskit.js",
+      "sha256": "3110e3e4d9b7b5657d336f253aaca8acca5777cde9319fb69ac302d6ff5a8b23"
+    },
+    {
+      "path": "canvaskit/webparagraph/canvaskit.js.symbols",
+      "sha256": "44d6c47919106235cf32252252490cdf798d907ee874ba343ab53dc94bc2a9dc"
+    },
+    {
+      "path": "canvaskit/webparagraph/canvaskit.wasm",
+      "sha256": "0ce1b05082efdc8529550e8a01f6ff0593972d55525035010e26f5600aa9f254"
+    },
+    {
+      "path": "assets/fonts/MaterialIcons-Regular.otf",
+      "sha256": "c8d62bbf36104d533ac4695d5e33ff2dffba78df54a5fe39431d041bc04f9469"
+    },
+    {
+      "path": "assets/shaders/ink_sparkle.frag",
+      "sha256": "2dca5ab93d4ec29e963f996f3916320ba60825e9537dfb149a68008c7a16b026"
+    },
+    {
+      "path": "assets/shaders/stretch_effect.frag",
+      "sha256": "ab412f07a5b9b50b67a885b24dbe16929738ae28630407d6490c924caf0a3220"
+    },
+    {
+      "path": "assets/packages/flutter_map/lib/assets/flutter_map_logo.png",
+      "sha256": "6051ae42fb505931a833e58f9209a9f96669a4d0e4b3f06f6d82cde12a0e0401"
+    },
+    {
+      "path": "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+      "sha256": "3d90c370aa4cf00dc57ee2b902f6652147c0f81e03e483df584a9c08b1687c9d"
+    }
+  ],
+  "api_url": "https://ecologistica-huancayo-api.wasmer.app/api/v1",
+  "compiled_for_public_api": true,
+  "zip_bytes": 14429288,
+  "backend_secrets_included": false
+}

@@ -1,0 +1,114 @@
+name: Pruebas EcoLogistica
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ROUTING_BASE_URL: http://127.0.0.1:8090/route/v1/driving
+      ALLOW_LOCAL_PROVIDER_URLS: 'true'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - run: python -m pip install -r backend/requirements.lock.txt -r backend/requirements-dev.txt
+      - name: PostgreSQL isolated to the ephemeral runner
+        run: bash tools/ci/start-qa.sh
+      - name: Unit and PostgreSQL integration tests
+        run: >-
+          python -m pytest backend/tests -p no:cacheprovider
+          --cov=backend/app --cov-config=.coveragerc
+          --cov-report=xml:reports/coverage.xml --cov-report=html:reports/htmlcov
+          --junitxml=reports/backend-junit.xml -q
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: backend-tests-${{ github.sha }}
+          path: |
+            reports/coverage.xml
+            reports/htmlcov/
+            reports/backend-junit.xml
+          retention-days: 14
+      - name: Remove only this run's QA database
+        if: always() && env.QA_CONTAINER != ''
+        run: bash tools/ci/stop-qa.sh
+  flutter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - run: flutter pub get --enforce-lockfile
+      - run: flutter test --concurrency=1 --reporter expanded
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - run: python -m pip install -r backend/requirements.lock.txt
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - name: Build web for isolated QA API
+        working-directory: apps/web
+        run: |
+          flutter pub get --enforce-lockfile
+          flutter build web --release --output build/e2e --dart-define=API_BASE_URL=http://127.0.0.1:8010/api/v1
+      - run: bash tools/ci/start-qa.sh
+      - name: Three-browser E2E suite
+        env:
+          E2E_ALLOW_SCHEMA_CREATE: '1'
+        run: npm run test:e2e
+      - name: Anonymous Web Vitals without prior interaction
+        run: |
+          python -m http.server 8096 --bind 127.0.0.1 --directory apps/web/build/e2e > /tmp/ecologistica-vitals-web.log 2>&1 &
+          static_pid=$!
+          trap 'kill "$static_pid"' EXIT
+          node tools/quality/measure_vitals.mjs --url http://127.0.0.1:8096/#/login --samples 3 --output reports/web-vitals.json
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: playwright-${{ github.sha }}
+          path: |
+            reports/playwright-html/
+            reports/playwright-results/
+            reports/playwright-results.json
+            reports/playwright-junit.xml
+            reports/web-vitals.json
+          retention-days: 14
+      - name: Remove only this run's QA database
+        if: always() && env.QA_CONTAINER != ''
+        run: bash tools/ci/stop-qa.sh

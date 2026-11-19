@@ -1,0 +1,80 @@
+<testsuites id="" name="" tests="30" failures="0" skipped="0" errors="0" time="279.718723">
+<testsuite name="gold.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="chromium" tests="1" failures="0" skipped="0" time="33.831" errors="0">
+<testcase name="GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas" classname="gold.spec.ts" time="33.831">
+</testcase>
+</testsuite>
+<testsuite name="sus.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.315" errors="0">
+<testcase name="SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo" classname="sus.spec.ts" time="1.315">
+</testcase>
+</testsuite>
+<testsuite name="web.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="chromium" tests="8" failures="0" skipped="0" time="38.806" errors="0">
+<testcase name="AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales" classname="web.spec.ts" time="2.257">
+</testcase>
+<testcase name="AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar" classname="web.spec.ts" time="7.755">
+</testcase>
+<testcase name="AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login" classname="web.spec.ts" time="5.959">
+</testcase>
+<testcase name="ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN" classname="web.spec.ts" time="6.495">
+</testcase>
+<testcase name="PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos" classname="web.spec.ts" time="0.384">
+</testcase>
+<testcase name="FORM-01 · borde: pedido sin datos no se guarda desde ADMIN" classname="web.spec.ts" time="7.375">
+</testcase>
+<testcase name="UX-01 · borde: login móvil 360 px y tema accesible" classname="web.spec.ts" time="1.876">
+</testcase>
+<testcase name="NET-01 · recuperación web después de desconectar y reconectar" classname="web.spec.ts" time="6.705">
+</testcase>
+</testsuite>
+<testsuite name="gold.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="firefox" tests="1" failures="0" skipped="0" time="29.238" errors="0">
+<testcase name="GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas" classname="gold.spec.ts" time="29.238">
+</testcase>
+</testsuite>
+<testsuite name="sus.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="firefox" tests="1" failures="0" skipped="0" time="1.627" errors="0">
+<testcase name="SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo" classname="sus.spec.ts" time="1.627">
+</testcase>
+</testsuite>
+<testsuite name="web.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="firefox" tests="8" failures="0" skipped="0" time="42.499" errors="0">
+<testcase name="AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales" classname="web.spec.ts" time="2.639">
+</testcase>
+<testcase name="AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar" classname="web.spec.ts" time="7.815">
+</testcase>
+<testcase name="AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login" classname="web.spec.ts" time="6.088">
+</testcase>
+<testcase name="ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN" classname="web.spec.ts" time="6.511">
+</testcase>
+<testcase name="PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos" classname="web.spec.ts" time="0.708">
+</testcase>
+<testcase name="FORM-01 · borde: pedido sin datos no se guarda desde ADMIN" classname="web.spec.ts" time="8.387">
+</testcase>
+<testcase name="UX-01 · borde: login móvil 360 px y tema accesible" classname="web.spec.ts" time="3.235">
+</testcase>
+<testcase name="NET-01 · recuperación web después de desconectar y reconectar" classname="web.spec.ts" time="7.116">
+</testcase>
+</testsuite>
+<testsuite name="gold.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="webkit" tests="1" failures="0" skipped="0" time="46.358" errors="0">
+<testcase name="GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas" classname="gold.spec.ts" time="46.358">
+</testcase>
+</testsuite>
+<testsuite name="sus.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="webkit" tests="1" failures="0" skipped="0" time="1.381" errors="0">
+<testcase name="SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo" classname="sus.spec.ts" time="1.381">
+</testcase>
+</testsuite>
+<testsuite name="web.spec.ts" timestamp="2026-11-19T02:30:57.107Z" hostname="webkit" tests="8" failures="0" skipped="0" time="70.158" errors="0">
+<testcase name="AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales" classname="web.spec.ts" time="3.394">
+</testcase>
+<testcase name="AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar" classname="web.spec.ts" time="13.946">
+</testcase>
+<testcase name="AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login" classname="web.spec.ts" time="10.646">
+</testcase>
+<testcase name="ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN" classname="web.spec.ts" time="11.472">
+</testcase>
+<testcase name="PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos" classname="web.spec.ts" time="0.646">
+</testcase>
+<testcase name="FORM-01 · borde: pedido sin datos no se guarda desde ADMIN" classname="web.spec.ts" time="15.351">
+</testcase>
+<testcase name="UX-01 · borde: login móvil 360 px y tema accesible" classname="web.spec.ts" time="2.419">
+</testcase>
+<testcase name="NET-01 · recuperación web después de desconectar y reconectar" classname="web.spec.ts" time="12.284">
+</testcase>
+</testsuite>
+</testsuites>

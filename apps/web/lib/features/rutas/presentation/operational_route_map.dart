@@ -90,11 +90,10 @@ class _OperationalRouteMapState extends State<OperationalRouteMap>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final scheme = Theme.of(context).colorScheme;
     const affectedColor = Color(0xFFC62828);
     final routeColor = widget.optimized || widget.basePoints.isNotEmpty
         ? const Color(0xFF087D3C)
-        : scheme.primary;
+        : const Color(0xFF1565C0);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -147,6 +146,8 @@ class _OperationalRouteMapState extends State<OperationalRouteMap>
                         points: widget.points,
                         color: routeColor,
                         strokeWidth: 5,
+                        borderStrokeWidth: 2,
+                        borderColor: Colors.white,
                       ),
                     ],
                   ),

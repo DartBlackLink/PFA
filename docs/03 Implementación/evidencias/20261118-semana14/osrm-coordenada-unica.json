@@ -1,0 +1,47 @@
+{
+  "1": {
+    "status": 400,
+    "response": {
+      "message": "Number of coordinates needs to be at least two.",
+      "code": "InvalidOptions"
+    }
+  },
+  "2": {
+    "status": 200,
+    "response": {
+      "code": "Ok",
+      "distances": [
+        [
+          0
+        ]
+      ],
+      "destinations": [
+        {
+          "hint": "4MD3g____39QAAAAUwAAAAAAAABGAAAA4xpgQsk5yz8AAAAAcpxCQlAAAABTAAAAAAAAAEYAAACRmAAAJ2SE-yfcR_-nYoT7MttH_wAAbxQAAAAA",
+          "location": [
+            -75.209689,
+            -12.067801
+          ],
+          "name": "Jir\u00f3n Ancash",
+          "distance": 49.82347161
+        }
+      ],
+      "durations": [
+        [
+          0
+        ]
+      ],
+      "sources": [
+        {
+          "hint": "4MD3g____39QAAAAUwAAAAAAAABGAAAA4xpgQsk5yz8AAAAAcpxCQlAAAABTAAAAAAAAAEYAAACRmAAAJ2SE-yfcR_-nYoT7MttH_wAAbxQAAAAA",
+          "location": [
+            -75.209689,
+            -12.067801
+          ],
+          "name": "Jir\u00f3n Ancash",
+          "distance": 49.82347161
+        }
+      ]
+    }
+  }
+}

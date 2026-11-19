@@ -1,0 +1,91 @@
+name: Produccion EcoLogistica
+on:
+  workflow_run:
+    workflows: [Pruebas EcoLogistica]
+    types: [completed]
+    branches: [main]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ecologistica-production
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: >-
+      vars.PRODUCTION_DEPLOY_ENABLED == 'true' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production
+      url: ${{ vars.PUBLIC_APP_URL }}
+    env:
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha }}
+      PUBLIC_API_BASE_URL: ${{ vars.PUBLIC_API_BASE_URL }}
+      PUBLIC_APP_URL: ${{ vars.PUBLIC_APP_URL }}
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_ROOT: ${{ vars.DEPLOY_ROOT }}
+    steps:
+      - name: Require actual production configuration
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          test -n "$DEPLOY_HOST" && test -n "$DEPLOY_USER"
+          test -n "$DEPLOY_SSH_KEY" && test -n "$DEPLOY_KNOWN_HOSTS"
+          [[ "$DEPLOY_ROOT" =~ ^/srv/[a-zA-Z0-9_-]+$ ]]
+          [[ "$PUBLIC_APP_URL" == https://* && "$PUBLIC_API_BASE_URL" == https://*/api/v1 ]]
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.RELEASE_SHA }}
+          persist-credentials: false
+      - name: Require CI green on exactly the tested commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for attempt in {1..60}; do
+            result=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$RELEASE_SHA&event=push&per_page=5" --jq '.workflow_runs | sort_by(.run_number) | last | .conclusion')
+            if [[ "$result" == success ]]; then break; fi
+            if [[ "$result" != null && -n "$result" ]]; then echo 'CI no aprobó el commit'; exit 1; fi
+            sleep 10
+          done
+          test "$result" = success
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - name: Build exact tested sources with public API URL
+        working-directory: apps/web
+        run: |
+          flutter pub get --enforce-lockfile
+          flutter build web --release --output build/web-final --dart-define=API_BASE_URL="$PUBLIC_API_BASE_URL"
+      - name: Package sources and web; never private data
+        run: |
+          tar --exclude='backend/.venv' --exclude='__pycache__' --exclude='*.pyc' \
+            -czf /tmp/ecologistica-release.tar.gz backend apps/web/build/web-final \
+            apps/web/deploy deploy docker-compose.yml tools/deploy/deploy-release.sh
+      - name: Install private SSH identity and verified host keys
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+      - name: Deploy with backup and health checks
+        run: |
+          [[ "$DEPLOY_HOST" =~ ^[a-zA-Z0-9.-]+$ && "$DEPLOY_USER" =~ ^[a-zA-Z0-9_-]+$ ]]
+          scp -o StrictHostKeyChecking=yes /tmp/ecologistica-release.tar.gz "$DEPLOY_USER@$DEPLOY_HOST:/tmp/ecologistica-$RELEASE_SHA.tar.gz"
+          ssh -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+            "bash -s -- '$DEPLOY_ROOT' '$RELEASE_SHA'" < tools/deploy/deploy-release.sh
+          curl --fail --silent --show-error --max-time 20 "$PUBLIC_APP_URL/healthz"
+          curl --fail --silent --show-error --max-time 20 "$PUBLIC_API_BASE_URL/health"
+      - name: Remove runner-only private key
+        if: always()
+        run: rm -f ~/.ssh/id_ed25519

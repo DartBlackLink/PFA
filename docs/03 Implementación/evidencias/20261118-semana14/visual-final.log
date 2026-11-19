@@ -1,0 +1,28 @@
+[WebServer] INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+[WebServer] INFO  [alembic.runtime.migration] Will assume transactional DDL.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade  -> 0001_initial_schema, Initial frozen schema (eleven original tables).
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0001_initial_schema -> 0002_access_resources, Persistent login policy and driver fields; preserve historical records.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0002_access_resources -> 0003_route_geometry, Persist assignment origin and street geometry without removing records.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0003_route_geometry -> 0004_route_schedule, Persist planned route schedules without inventing dates for historical routes.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0004_route_schedule -> 0005_optimization_plan, Reproducible genetic preview and atomic confirmation, retaining existing routes.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0005_optimization_plan -> 0006_route_operation, Actual operational timestamps; retain existing planned routes unchanged.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0006_route_operation -> 0007_traffic_replanning, Durable traffic estimates, reports, route versions and notifications.
+[WebServer] INFO  [alembic.runtime.migration] Running upgrade 0007_traffic_replanning -> 0008_environmental_config, Optional, attributed environmental equivalence parameter. No invented defaults.
+[WebServer] INFO:     Started server process [3808]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+
+Running 3 tests using 1 worker
+
+(node:22464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\e2e\gold.spec.ts:4:1 › GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas (36.5s)
+(node:2148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [firefox] › tests\e2e\gold.spec.ts:4:1 › GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas (33.5s)
+(node:27708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 [webkit] › tests\e2e\gold.spec.ts:4:1 › GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas (51.4s)
+
+  3 passed (2.2m)

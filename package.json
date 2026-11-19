@@ -1,0 +1,13 @@
+{
+  "name": "ecologistica-web-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pruebas E2E de EcoLogística Huancayo; no contiene credenciales operativas",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report reports/playwright-html --host 127.0.0.1",
+    "test:e2e:list": "playwright test --list"
+  },
+  "devDependencies": { "@playwright/test": "1.65.1" }
+}

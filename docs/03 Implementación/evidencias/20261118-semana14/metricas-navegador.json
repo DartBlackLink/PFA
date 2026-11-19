@@ -1,0 +1,1733 @@
+[
+  {
+    "project": "chromium",
+    "test": "GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas",
+    "startedAt": "2026-11-19T02:30:58.154Z",
+    "finishedAt": "2026-11-19T02:31:31.572Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 76,
+      "fcpMs": 4616,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 295.45
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 218.26
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 218.21
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 218.45
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 218.45
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 218.7
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 146.64
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 148.43
+      },
+      {
+        "path": "/api/v1/optimizations/resources",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 147.44
+      },
+      {
+        "path": "/api/v1/optimizations/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 147.91
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 148.36
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 4.08
+      },
+      {
+        "path": "/api/v1/optimizations/preview",
+        "method": "POST",
+        "status": 201,
+        "observedResponseMs": 1793.23
+      },
+      {
+        "path": "/api/v1/optimizations/06650bb8-823e-43ae-8971-0791c74311e6/confirm",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 103.64
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 34.84
+      },
+      {
+        "path": "/api/v1/optimizations/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 55.89
+      },
+      {
+        "path": "/api/v1/optimizations/resources",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 56.95
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 57.24
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 57.42
+      },
+      {
+        "path": "/api/v1/routes/b2fdcda0-41bd-4bb5-905f-ac4a9d692829",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 94.04
+      },
+      {
+        "path": "/api/v1/routes/b2fdcda0-41bd-4bb5-905f-ac4a9d692829/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 191.37
+      },
+      {
+        "path": "/api/v1/operations/routes/b2fdcda0-41bd-4bb5-905f-ac4a9d692829/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 78.43
+      },
+      {
+        "path": "/api/v1/routes/b2fdcda0-41bd-4bb5-905f-ac4a9d692829",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 46.56
+      },
+      {
+        "path": "/api/v1/routes/b2fdcda0-41bd-4bb5-905f-ac4a9d692829/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 85.85
+      },
+      {
+        "path": "/api/v1/operations/routes/b2fdcda0-41bd-4bb5-905f-ac4a9d692829/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 25.1
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas",
+    "startedAt": "2026-11-19T02:32:15.331Z",
+    "finishedAt": "2026-11-19T02:32:43.274Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 2478,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 306.59
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 212.96
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 209.54
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 208.41
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 214.15
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 217.71
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 29.44
+      },
+      {
+        "path": "/api/v1/optimizations/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 31.19
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 35.84
+      },
+      {
+        "path": "/api/v1/optimizations/resources",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 32.71
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 39.5
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 20.27
+      },
+      {
+        "path": "/api/v1/optimizations/preview",
+        "method": "POST",
+        "status": 201,
+        "observedResponseMs": 828.32
+      },
+      {
+        "path": "/api/v1/optimizations/6770d045-915c-4778-bb35-8916ad2446a9/confirm",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 109.22
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 32.85
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 32.45
+      },
+      {
+        "path": "/api/v1/optimizations/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 34.09
+      },
+      {
+        "path": "/api/v1/optimizations/resources",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 35.12
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 42.06
+      },
+      {
+        "path": "/api/v1/routes/fca202f5-5a39-49c9-acad-c4fe74492fd2",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 32.83
+      },
+      {
+        "path": "/api/v1/routes/fca202f5-5a39-49c9-acad-c4fe74492fd2/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 24.59
+      },
+      {
+        "path": "/api/v1/operations/routes/fca202f5-5a39-49c9-acad-c4fe74492fd2/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 95.94
+      },
+      {
+        "path": "/api/v1/routes/fca202f5-5a39-49c9-acad-c4fe74492fd2",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 39.4
+      },
+      {
+        "path": "/api/v1/routes/fca202f5-5a39-49c9-acad-c4fe74492fd2/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 25.77
+      },
+      {
+        "path": "/api/v1/operations/routes/fca202f5-5a39-49c9-acad-c4fe74492fd2/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 30.18
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "GOLD-S4 · generar, confirmar, mapa Huancayo y entregas propias persistidas",
+    "startedAt": "2026-11-19T02:33:29.463Z",
+    "finishedAt": "2026-11-19T02:34:15.137Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 1654,
+      "lcpMs": 2082,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 354.26
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 49.51
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 55.78
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 57.47
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.28
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 60.79
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 48.07
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 49.2
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 51.42
+      },
+      {
+        "path": "/api/v1/optimizations/resources",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 52.93
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 55.27
+      },
+      {
+        "path": "/api/v1/optimizations/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 55.37
+      },
+      {
+        "path": "/api/v1/optimizations/preview",
+        "method": "POST",
+        "status": 201,
+        "observedResponseMs": 841.48
+      },
+      {
+        "path": "/api/v1/optimizations/5e283ce9-1099-4220-bebc-ffbec1cdde17/confirm",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 77.89
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 31.99
+      },
+      {
+        "path": "/api/v1/optimizations/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 33.2
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 35.75
+      },
+      {
+        "path": "/api/v1/optimizations/resources",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 36.22
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 37.34
+      },
+      {
+        "path": "/api/v1/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 40.57
+      },
+      {
+        "path": "/api/v1/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 21.1
+      },
+      {
+        "path": "/api/v1/operations/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 25.68
+      },
+      {
+        "path": "/api/v1/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 271.47
+      },
+      {
+        "path": "/api/v1/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.74
+      },
+      {
+        "path": "/api/v1/operations/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 64.74
+      },
+      {
+        "path": "/api/v1/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 100.42
+      },
+      {
+        "path": "/api/v1/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d/incidentes",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 35.93
+      },
+      {
+        "path": "/api/v1/operations/routes/839c4ec2-a080-495b-83a4-c4496ed10a2d/revisions",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 37.13
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo",
+    "startedAt": "2026-11-19T02:31:31.947Z",
+    "finishedAt": "2026-11-19T02:31:33.128Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 3.800000011920929,
+      "fcpMs": 120,
+      "lcpMs": 120,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo",
+    "startedAt": "2026-11-19T02:32:44.010Z",
+    "finishedAt": "2026-11-19T02:32:45.080Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 6,
+      "fcpMs": 80,
+      "lcpMs": 80,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "SUS-UI · formulario anónimo valida, se adapta y descarga CSV sin enviarlo",
+    "startedAt": "2026-11-19T02:34:15.857Z",
+    "finishedAt": "2026-11-19T02:34:16.984Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 6,
+      "fcpMs": 59,
+      "lcpMs": 59,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales",
+    "startedAt": "2026-11-19T02:31:33.235Z",
+    "finishedAt": "2026-11-19T02:31:35.343Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1.2999999523162842,
+      "fcpMs": 1644,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales",
+    "startedAt": "2026-11-19T02:32:45.470Z",
+    "finishedAt": "2026-11-19T02:32:47.662Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 1876,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales",
+    "startedAt": "2026-11-19T02:34:17.229Z",
+    "finishedAt": "2026-11-19T02:34:19.903Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 1342,
+      "lcpMs": 1630,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar",
+    "startedAt": "2026-11-19T02:31:35.548Z",
+    "finishedAt": "2026-11-19T02:31:43.142Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 916,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 322.53
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 323.99
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 322.73
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 322.96
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 323.37
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 324.68
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/auth/me",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 455.39
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar",
+    "startedAt": "2026-11-19T02:32:48.240Z",
+    "finishedAt": "2026-11-19T02:32:55.424Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 940,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 307.69
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 42.89
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 48.73
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 47.51
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 51.32
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 53.35
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/auth/me",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 13.37
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 37.86
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 36.27
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 38.47
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 42.63
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 44.49
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar",
+    "startedAt": "2026-11-19T02:34:20.681Z",
+    "finishedAt": "2026-11-19T02:34:33.785Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 1577,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 302.01
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 60.45
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.22
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 62.68
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 65.81
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 67.25
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 63.97
+      },
+      {
+        "path": "/api/v1/auth/me",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 201.26
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 70.27
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 88.18
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 90.5
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 92.67
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 92.53
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 45.58
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login",
+    "startedAt": "2026-11-19T02:31:43.629Z",
+    "finishedAt": "2026-11-19T02:31:49.346Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 1556,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 401,
+        "observedResponseMs": 301.87
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login",
+    "startedAt": "2026-11-19T02:32:56.169Z",
+    "finishedAt": "2026-11-19T02:33:01.768Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 6,
+      "fcpMs": 1478,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 401,
+        "observedResponseMs": 273.69
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "AUTH-03 · infeliz: credencial aleatoria incorrecta mantiene login",
+    "startedAt": "2026-11-19T02:34:34.784Z",
+    "finishedAt": "2026-11-19T02:34:44.441Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 4,
+      "fcpMs": 1767,
+      "lcpMs": 2210,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 401,
+        "observedResponseMs": 295.69
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN",
+    "startedAt": "2026-11-19T02:31:49.636Z",
+    "finishedAt": "2026-11-19T02:31:56.035Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1.800000011920929,
+      "fcpMs": 1308,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 330.44
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 189.16
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 189.24
+      },
+      {
+        "path": "/api/v1/drivers/me",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 66.14
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN",
+    "startedAt": "2026-11-19T02:33:02.252Z",
+    "finishedAt": "2026-11-19T02:33:08.387Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1,
+      "fcpMs": 1579,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 239.42
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 25.48
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 32.91
+      },
+      {
+        "path": "/api/v1/drivers/me",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 20.45
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "ROLE-01 · REPARTIDOR ve su operación y no entra a ADMIN",
+    "startedAt": "2026-11-19T02:34:45.361Z",
+    "finishedAt": "2026-11-19T02:34:56.119Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1,
+      "fcpMs": 1298,
+      "lcpMs": 1681,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 343.36
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 50.81
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 72.1
+      },
+      {
+        "path": "/api/v1/drivers/me",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 30.27
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos",
+    "startedAt": "2026-11-19T02:31:56.157Z",
+    "finishedAt": "2026-11-19T02:31:56.443Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 0,
+      "fcpMs": null,
+      "lcpMs": null,
+      "lcpSupported": false,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos",
+    "startedAt": "2026-11-19T02:33:08.819Z",
+    "finishedAt": "2026-11-19T02:33:09.142Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 0,
+      "fcpMs": null,
+      "lcpMs": null,
+      "lcpSupported": false,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "PERM-01 · servidor rechaza anónimo y REPARTIDOR en vehículos",
+    "startedAt": "2026-11-19T02:34:56.941Z",
+    "finishedAt": "2026-11-19T02:34:57.223Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": null,
+      "fcpMs": null,
+      "lcpMs": null,
+      "lcpSupported": false,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "FORM-01 · borde: pedido sin datos no se guarda desde ADMIN",
+    "startedAt": "2026-11-19T02:31:56.565Z",
+    "finishedAt": "2026-11-19T02:32:03.726Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1.5,
+      "fcpMs": 1328,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 318.54
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 208.22
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 207.72
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 208.17
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 209.72
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 208.8
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 1.77
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.7
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.39
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.81
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 62.24
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "FORM-01 · borde: pedido sin datos no se guarda desde ADMIN",
+    "startedAt": "2026-11-19T02:33:09.495Z",
+    "finishedAt": "2026-11-19T02:33:17.530Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1,
+      "fcpMs": 1731,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 250.9
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 45.43
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 44.33
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 43.99
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 50.63
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 50.6
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 46.26
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 34.5
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 30.61
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 38.37
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 38.83
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "FORM-01 · borde: pedido sin datos no se guarda desde ADMIN",
+    "startedAt": "2026-11-19T02:34:57.541Z",
+    "finishedAt": "2026-11-19T02:35:12.154Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 5,
+      "fcpMs": 2755,
+      "lcpMs": 3099,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 316
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 53.91
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 56.08
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 55.7
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 60.85
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.92
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 51.22
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 33.33
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 39.17
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 45.96
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 44.48
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "UX-01 · borde: login móvil 360 px y tema accesible",
+    "startedAt": "2026-11-19T02:32:03.980Z",
+    "finishedAt": "2026-11-19T02:32:05.763Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1.100000023841858,
+      "fcpMs": 1260,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "UX-01 · borde: login móvil 360 px y tema accesible",
+    "startedAt": "2026-11-19T02:33:17.975Z",
+    "finishedAt": "2026-11-19T02:33:19.979Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 2,
+      "fcpMs": 1368,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "UX-01 · borde: login móvil 360 px y tema accesible",
+    "startedAt": "2026-11-19T02:35:12.958Z",
+    "finishedAt": "2026-11-19T02:35:14.968Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 3,
+      "fcpMs": 1461,
+      "lcpMs": 1582,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [],
+    "pageErrors": []
+  },
+  {
+    "project": "chromium",
+    "test": "NET-01 · recuperación web después de desconectar y reconectar",
+    "startedAt": "2026-11-19T02:32:05.897Z",
+    "finishedAt": "2026-11-19T02:32:12.389Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1,
+      "fcpMs": 1388,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 281.03
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 267.54
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 264.9
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 265.44
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 265.69
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 265.64
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 36.45
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 36.92
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 37.02
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 37.13
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 32.57
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "firefox",
+    "test": "NET-01 · recuperación web después de desconectar y reconectar",
+    "startedAt": "2026-11-19T02:33:21.400Z",
+    "finishedAt": "2026-11-19T02:33:27.923Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1,
+      "fcpMs": 1537,
+      "lcpMs": null,
+      "lcpSupported": true,
+      "lcpLimitation": "No eligible LCP entry reported; Flutter canvas is not equivalent to an HTML text/image LCP candidate."
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 265.52
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 39.71
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 44.91
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 45.13
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 49.72
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 51.86
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 31.94
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 30.99
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 42.53
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 43.2
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 21.4
+      }
+    ],
+    "pageErrors": []
+  },
+  {
+    "project": "webkit",
+    "test": "NET-01 · recuperación web después de desconectar y reconectar",
+    "startedAt": "2026-11-19T02:35:15.382Z",
+    "finishedAt": "2026-11-19T02:35:27.019Z",
+    "environment": "local QA; not production uptime",
+    "metrics": {
+      "ttfbMs": 1,
+      "fcpMs": 1212,
+      "lcpMs": 1578,
+      "lcpSupported": true,
+      "lcpLimitation": null
+    },
+    "network": [
+      {
+        "path": "/api/v1/auth/login",
+        "method": "POST",
+        "status": 200,
+        "observedResponseMs": 351.88
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 47.88
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 49.19
+      },
+      {
+        "path": "/api/v1/operations/notifications",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 51.66
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 59.17
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 61.96
+      },
+      {
+        "path": "/api/v1/reports/summary",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/orders/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/drivers/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/routes/",
+        "method": "GET",
+        "failed": true
+      },
+      {
+        "path": "/api/v1/vehicles/",
+        "method": "GET",
+        "status": 200,
+        "observedResponseMs": 29.79
+      }
+    ],
+    "pageErrors": []
+  }
+]

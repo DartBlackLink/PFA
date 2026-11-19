@@ -1,0 +1,118 @@
+{
+  "started": "2026-11-19T02:22:30.381430+00:00",
+  "finished": "2026-11-19T02:22:40.525278+00:00",
+  "successful": 12,
+  "total": 12,
+  "sample_availability_percent": 100.0,
+  "scope": "Specified health endpoints during this observation window only; not production/monthly uptime or complete business-flow availability.",
+  "records": [
+    {
+      "url": "http://127.0.0.1:8080/healthz",
+      "sample": 1,
+      "at": "2026-11-19T02:22:30.381449+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 39.703
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1/health",
+      "sample": 1,
+      "at": "2026-11-19T02:22:30.421532+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 18.733
+    },
+    {
+      "url": "http://127.0.0.1:8080/healthz",
+      "sample": 2,
+      "at": "2026-11-19T02:22:32.440409+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 12.457
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1/health",
+      "sample": 2,
+      "at": "2026-11-19T02:22:32.452875+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 5.833
+    },
+    {
+      "url": "http://127.0.0.1:8080/healthz",
+      "sample": 3,
+      "at": "2026-11-19T02:22:34.458855+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 4.083
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1/health",
+      "sample": 3,
+      "at": "2026-11-19T02:22:34.462949+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 5.167
+    },
+    {
+      "url": "http://127.0.0.1:8080/healthz",
+      "sample": 4,
+      "at": "2026-11-19T02:22:36.468570+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 18.784
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1/health",
+      "sample": 4,
+      "at": "2026-11-19T02:22:36.487361+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 4.205
+    },
+    {
+      "url": "http://127.0.0.1:8080/healthz",
+      "sample": 5,
+      "at": "2026-11-19T02:22:38.491932+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 3.163
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1/health",
+      "sample": 5,
+      "at": "2026-11-19T02:22:38.495097+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 4.515
+    },
+    {
+      "url": "http://127.0.0.1:8080/healthz",
+      "sample": 6,
+      "at": "2026-11-19T02:22:40.500076+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 20.623
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/v1/health",
+      "sample": 6,
+      "at": "2026-11-19T02:22:40.520708+00:00",
+      "status": 200,
+      "contract_ok": true,
+      "ok": true,
+      "milliseconds": 4.558
+    }
+  ]
+}

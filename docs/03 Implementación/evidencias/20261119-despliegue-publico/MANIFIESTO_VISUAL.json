@@ -1,0 +1,83 @@
+{
+  "proyecto": "EcoLogística Huancayo",
+  "fecha_pruebas": "2026-11-19",
+  "fecha_revision_documental": "2026-11-19",
+  "procedencia": "Evidencias ya existentes en PFA; esta revisión no repite el flujo ni genera nuevas capturas.",
+  "inspeccion_visual_en_esta_revision": [
+    "capturas/web-admin-dashboard.png",
+    "capturas/web-repartidor-mapa.png",
+    "capturas/web-repartidor-finalizada.png"
+  ],
+  "archivos": [
+    {
+      "archivo": "capturas/web-admin-clientes.png",
+      "bytes": 91823,
+      "sha256": "50253b6c32cf37306edc388fd287cfb91dff651dd20cc8e86d8ea302e6b76c2a"
+    },
+    {
+      "archivo": "capturas/web-admin-dashboard.png",
+      "bytes": 127291,
+      "sha256": "72c550322309cdb7d3100c30a592966dcf891ce68832586bdf7af6cdae8cb793"
+    },
+    {
+      "archivo": "capturas/web-admin-flota.png",
+      "bytes": 74913,
+      "sha256": "519e8d59e44646548c7920b71d6cc33465bde07f8306ba21f76e91c875da7598"
+    },
+    {
+      "archivo": "capturas/web-admin-pedidos.png",
+      "bytes": 99068,
+      "sha256": "73835725cd2c6cbb82ad4412d099a49fac594a7762e60cd4e982476847a62897"
+    },
+    {
+      "archivo": "capturas/web-admin-repartidores.png",
+      "bytes": 79827,
+      "sha256": "7ef8368aab4cd7f1340a5193c9f0aa04d17dee70521f6893e47555c286334160"
+    },
+    {
+      "archivo": "capturas/web-admin-reportes.png",
+      "bytes": 106550,
+      "sha256": "b6b849baf1c3aef95bf6071234087787e9004221d5398990232866cef442c594"
+    },
+    {
+      "archivo": "capturas/web-admin-rutas.png",
+      "bytes": 71260,
+      "sha256": "900ea93ee6a83bf7ec28407c6306b921ed8fa686b2caff01752d0e19fd8693db"
+    },
+    {
+      "archivo": "capturas/web-repartidor-finalizada.png",
+      "bytes": 334840,
+      "sha256": "ec99a7faac20054a9f21d89992c96314d1f461d278fac29ba82a4466c32a8863"
+    },
+    {
+      "archivo": "capturas/web-repartidor-inicio.png",
+      "bytes": 57841,
+      "sha256": "ae4273055b21ab3e084326e0f111ea65365a37fc178e2f807a0ac57d0c93ba0b"
+    },
+    {
+      "archivo": "capturas/web-repartidor-mapa.png",
+      "bytes": 609694,
+      "sha256": "034f47716302530d9d1842c77d10c68a067a12b313e424d17d667eaa0f6e471a"
+    },
+    {
+      "archivo": "cierre-verificado.json",
+      "bytes": 584,
+      "sha256": "7ce0532a6dfca379f1a5799474a928ea03c39d884c064b414e96daeed428f63b"
+    },
+    {
+      "archivo": "verificacion-api-publica.json",
+      "bytes": 8208,
+      "sha256": "af6d3ff2c0dec811a51f2704a798ff357008211ee5bcc4cc2e7966f4440e1512"
+    },
+    {
+      "archivo": "verificacion-web-publica.json",
+      "bytes": 6287,
+      "sha256": "8b5c22d5adb2dee1ee44016b2e7a0544aca8cca1e76a125cf6184f8d0892f432"
+    },
+    {
+      "archivo": "persistencia-neon-final.json",
+      "bytes": 867,
+      "sha256": "26fb6ed0dc0f507140693e2c26bbcffc317b491e99ee3d7b4942e4d53c1728c2"
+    }
+  ]
+}

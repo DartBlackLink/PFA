@@ -1,0 +1,506 @@
+[
+  {
+    "case": "/vehicles/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/reports/summary: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/operations/traffic: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/?skip=-1: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/?limit=1001: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/?limit=0: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/?limit=101: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/reports/routes?skip=-1: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Alta web, edición a 300kg, baja/reactivación del vehículo persistidas",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Placa duplicada 409",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza placa=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza placa=@@",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza placa=XXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza tipo=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza tipo=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza capacidad_kg=0",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza capacidad_kg=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza capacidad_kg=NaN",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza consumo_km_l=0",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza consumo_km_l=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza factor_emision_kg_km=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza anio_fabricacion=1949",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza anio_fabricacion=2028",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza estado=OTRO",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Cliente QA creado por API",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Preferencias guardadas",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza hora_preferida_inicio=21:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza hora_preferida_inicio=20:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza hora_preferida_fin=None",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza punto_referencia=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza restriccion_acceso=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Búsqueda de cliente persistido",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Búsqueda % literal, sin comodín inesperado",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Alta API de perfil y cuenta QA, credencial aleatoria privada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "DNI/perfil duplicado 409",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza nombre=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza nombre=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza dni=123",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza dni=abcdef12",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza licencia=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza categoria_licencia=A",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza anios_experiencia=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza anios_experiencia=71",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza contacto=1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza disponible_hasta=00:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/reports/summary: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/operations/traffic: permisos ADMIN, anónimo 401 y repartidor 403",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/?skip=-1: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/?limit=1001: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/?limit=0: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/?limit=101: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/reports/routes?skip=-1: paginación inválida rechazada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Alta web, edición a 300kg, baja/reactivación del vehículo persistidas",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Placa duplicada 409",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza placa=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza placa=@@",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza placa=XXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza tipo=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza tipo=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza capacidad_kg=0",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza capacidad_kg=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza capacidad_kg=NaN",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza consumo_km_l=0",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza consumo_km_l=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza factor_emision_kg_km=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza anio_fabricacion=1949",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza anio_fabricacion=2028",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/vehicles/: rechaza estado=OTRO",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Cliente QA creado por API",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Preferencias guardadas",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza hora_preferida_inicio=21:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza hora_preferida_inicio=20:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza hora_preferida_fin=None",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza punto_referencia=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/clients/e58908bb-69eb-434b-8a2f-1e52a389e277/preferences: rechaza restriccion_acceso=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Búsqueda de cliente persistido",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Búsqueda % literal, sin comodín inesperado",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Alta API de perfil y cuenta QA, credencial aleatoria privada",
+    "status": "APROBADO"
+  },
+  {
+    "case": "DNI/perfil duplicado 409",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza nombre=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza nombre=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza dni=123",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza dni=abcdef12",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza licencia=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza categoria_licencia=A",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza anios_experiencia=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza anios_experiencia=71",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza contacto=1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza disponible_hasta=00:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza origen_latitud=-13",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza origen_longitud=-77.0428",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza correo=invalido",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza password=corta",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/drivers/: rechaza estado=OTRO",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Actualización de perfil sin cambiar contraseña",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Cuenta QA entra y consulta solo su perfil",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza direccion=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza direccion=abc",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza direccion=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza latitud=-13",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza longitud=-77.0428",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza peso_kg=0",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza peso_kg=-1",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza peso_kg=NaN",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza tipo_producto=",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza tipo_producto=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza ventana_fin=2026-11-17T13:08:16.216524+00:00",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza prioridad=OTRA",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/orders/: rechaza punto_referencia=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Cliente inactivo no admite pedido",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Dos pedidos QA persistidos con cliente_id y destinos públicos locales",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Actualización de pedido pendiente persistida",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Configuración ambiental inválida no altera valor existente",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/routes/: lectura ADMIN válida",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/operations/notifications: lectura ADMIN válida",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/reports/routes: lectura ADMIN válida",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/reports/summary: lectura ADMIN válida",
+    "status": "APROBADO"
+  },
+  {
+    "case": "/operations/traffic/references: lectura ADMIN válida",
+    "status": "APROBADO"
+  },
+  {
+    "case": "Informe inexistente 404",
+    "status": "APROBADO"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "routeId": "839c4ec2-a080-495b-83a4-c4496ed10a2d",
+  "version": 2,
+  "received": 2,
+  "state": "FINALIZADA",
+  "deliveries": [
+    {
+      "id": "4058c486-2958-45b8-8992-299f548435a8",
+      "state": "ENTREGADO",
+      "deliveredAt": "2026-11-19T02:34:08.183632+00:00"
+    },
+    {
+      "id": "959285ce-ffb2-484e-b780-ed0280f42f3d",
+      "state": "ENTREGADO",
+      "deliveredAt": "2026-11-19T02:34:14.225218+00:00"
+    }
+  ],
+  "caveat": "Planning, map and courier operation through UI; congestion/replan/approval through authenticated API. QA only."
+}

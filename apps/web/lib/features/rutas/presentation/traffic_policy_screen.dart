@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/network/api_client.dart';
+import '../../../core/config/operation_area.dart';
 import '../../auth/presentation/providers/auth_provider.dart';
 
 class TrafficPolicyScreen extends StatefulWidget {
-  const TrafficPolicyScreen({super.key});
+  const TrafficPolicyScreen({super.key, this.api});
+  final ApiClient? api;
   @override
   State<TrafficPolicyScreen> createState() => _TrafficPolicyScreenState();
 }
@@ -23,7 +25,7 @@ class _TrafficPolicyScreenState extends State<TrafficPolicyScreen> {
 
   Future<void> _load() async {
     try {
-      final api = ApiClient(context.read<AuthProvider>());
+      final api = widget.api ?? ApiClient(context.read<AuthProvider>());
       final responses = await Future.wait([
         api.request('/operations/traffic'),
         api.request('/operations/traffic/references'),
@@ -37,18 +39,21 @@ class _TrafficPolicyScreenState extends State<TrafficPolicyScreen> {
         });
       }
     } catch (e) {
-      if (mounted) setState(() => _error = '$e');
+      if (mounted) {
+        setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
+      }
     }
   }
 
   Future<void> _save(List<dynamic> rules) async {
     setState(() => _busy = true);
     try {
-      final data = await ApiClient(context.read<AuthProvider>()).request(
-        '/operations/traffic',
-        method: 'PUT',
-        body: {'revision': _policy!['revision'], 'reglas': rules},
-      );
+      final data = await (widget.api ?? ApiClient(context.read<AuthProvider>()))
+          .request(
+            '/operations/traffic',
+            method: 'PUT',
+            body: {'revision': _policy!['revision'], 'reglas': rules},
+          );
       if (mounted) {
         setState(() {
           _policy = data as Map<String, dynamic>;
@@ -56,7 +61,9 @@ class _TrafficPolicyScreenState extends State<TrafficPolicyScreen> {
         });
       }
     } catch (e) {
-      if (mounted) setState(() => _error = '$e');
+      if (mounted) {
+        setState(() => _error = e.toString().replaceFirst('Exception: ', ''));
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
@@ -159,6 +166,45 @@ class _TrafficPolicyScreenState extends State<TrafficPolicyScreen> {
                             if ((n == 5 || n == 6) &&
                                 int.tryParse(v ?? '') == null) {
                               return 'Indica minutos enteros';
+                            }
+                            if (n == 7 && (number < 1 || number > 5)) {
+                              return 'El factor debe estar entre 1 y 5';
+                            }
+                            if (n == 5 && (number < 0 || number > 1439)) {
+                              return 'El inicio debe estar entre 0 y 1439 minutos';
+                            }
+                            if (n == 6) {
+                              if (number < 1 || number > 1440) {
+                                return 'El fin debe estar entre 1 y 1440 minutos';
+                              }
+                              final start = int.tryParse(
+                                controls['inicio_min']!.text,
+                              );
+                              if (start != null && start >= number) {
+                                return 'El fin debe ser posterior al inicio';
+                              }
+                            }
+                            if (n >= 1 && n <= 4) {
+                              final latitude = n <= 2;
+                              final minimum = latitude
+                                  ? OperationArea.south
+                                  : OperationArea.west;
+                              final maximum = latitude
+                                  ? OperationArea.north
+                                  : OperationArea.east;
+                              if (number < minimum || number > maximum) {
+                                return 'La coordenada debe estar dentro de Huancayo';
+                              }
+                              final lower = double.tryParse(
+                                controls[n == 2 ? 'sur' : 'oeste']!.text,
+                              );
+                              if ((n == 2 || n == 4) &&
+                                  lower != null &&
+                                  lower >= number) {
+                                return latitude
+                                    ? 'El norte debe ser mayor que el sur'
+                                    : 'El este debe ser mayor que el oeste';
+                              }
                             }
                             return null;
                           },

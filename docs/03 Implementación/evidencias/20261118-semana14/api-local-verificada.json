@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-18",
+  "scope": "Only existing local ecologistica-api service; no public production",
+  "old_image": "sha256:de38eea75b807072ee0c1ddac09215164f6a5f69e64c9947a32c8d7480209b56",
+  "new_image": "sha256:35eb58752b63eebfb06a1183271e400ac2814f7e4b61f17ac7059dfd88b7af56",
+  "matrix_sha256": "c463852382ac7433c15e06cceccedfd01d823cb25d3ddf36e2b1fea6eaebc7fc",
+  "health_status": 200,
+  "migration": "0008_environmental_config",
+  "original_rows_unchanged": true,
+  "private_backup_verified": true,
+  "smoke_real_osrm": {
+    "directed_repeated": {
+      "provider_calls": 1,
+      "cache_hit": false,
+      "age_seconds": 0,
+      "input_locations": 3,
+      "unique_locations": 2
+    },
+    "single_location": {
+      "provider_calls": 1,
+      "cache_hit": false,
+      "age_seconds": 0,
+      "input_locations": 2,
+      "unique_locations": 1
+    }
+  }
+}

@@ -1,0 +1,67 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1855 >>
+stream
+BT /F1 11 Tf 48 790 Td 15 TL
+(ECOLOGÍSTICA HUANCAYO) Tj T*
+(Reporte de planificación y sostenibilidad) Tj T*
+(Emitido: 17/11/2026 08:45:46 UTC-05:00) Tj T*
+(Ruta: dae99906-a33e-45fd-aaf5-e7cbad6522dd | Versión: 2) Tj T*
+(Estado: FINALIZADA | Algoritmo: GA_VRPTW_1) Tj T*
+(Zona: Huancayo y alrededores urbanos autorizados, Junín, Perú) Tj T*
+() Tj T*
+(Indicadores estimados guardados) Tj T*
+(Distancia: 7.103 km) Tj T*
+(Duración de viaje: 15.050 min) Tj T*
+(Combustible: 0.592 L) Tj T*
+(Emisiones: 1.279 kg CO2) Tj T*
+() Tj T*
+(Entregas: 2 | Entregadas: 2) Tj T*
+(Ventanas previstas: 2/2 evaluadas \(ETA + atención\).) Tj T*
+(Ventanas reales: 2/2 evaluadas \(hora de entrega\).) Tj T*
+(Cero entregas evaluables significa indicador no disponible, no 100%.) Tj T*
+() Tj T*
+(Equivalencia: 0.144 galones US de gasolina quemada \(equivalencia teórica\)) Tj T*
+(Factor: 8.887 kg CO2 por unidad. Fuente: US EPA: 8887 g CO2/galón US = 8.887 kg/galón.) Tj T*
+(Equivalencia teórica de combustión, no factor medido en Huancayo ni compensación real.) Tj T*
+(Consultado 14/11/2026. https://www.epa.gov/energy/greenhouse-gas-equivalencies-) Tj T*
+(calculator-calculations-and-references) Tj T*
+(Equivalencia teórica; no acredita compensación, captura real ni créditos de carbono.) Tj T*
+() Tj T*
+(Alcance y limitaciones) Tj T*
+(Estimaciones de la última versión guardada. Después de reoptimizar, distancia, tiempo,) Tj T*
+(combustible y CO2 corresponden al tramo pendiente recalculado, no al acumulado físico de) Tj T*
+(todo el recorrido. Las entregas realizadas conservan su historial. No son mediciones) Tj T*
+(reales ni tráfico en vivo. Sin línea base comparable no se declara ahorro.) Tj T*
+(Documento generado desde PostgreSQL; conserva la versión indicada al momento de su) Tj T*
+(descarga.) Tj T*
+ET
+BT /F1 9 Tf 48 30 Td (EcoLogística Huancayo - Página 1/1) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000344 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2251
+%%EOF

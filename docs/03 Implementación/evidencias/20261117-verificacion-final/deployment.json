@@ -1,0 +1,9 @@
+{
+  "main_sha256": "28ed524183ae9569fe21613135c0306312b8680a2ea6a7bb1f5d826754d6d528",
+  "served_hash_matches": true,
+  "only_existing_web_service_updated": true,
+  "backend_postgres_unchanged": true,
+  "flutter_passed": 103,
+  "analyze": "No issues found",
+  "private_files_in_build": false
+}

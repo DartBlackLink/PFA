@@ -1,0 +1,284 @@
+{
+  "checks": [
+    {
+      "operation": "Login dashboard",
+      "result": "PASS"
+    },
+    {
+      "operation": "ADMIN screen Pedidos",
+      "result": "OPENED_WITH_SESSION",
+      "caveat": "CRUD persistence checked by separate HTTPS API run"
+    },
+    {
+      "operation": "ADMIN screen Rutas",
+      "result": "OPENED_WITH_SESSION",
+      "caveat": "CRUD persistence checked by separate HTTPS API run"
+    },
+    {
+      "operation": "ADMIN screen Repartidores",
+      "result": "OPENED_WITH_SESSION",
+      "caveat": "CRUD persistence checked by separate HTTPS API run"
+    },
+    {
+      "operation": "ADMIN screen Flota",
+      "result": "OPENED_WITH_SESSION",
+      "caveat": "CRUD persistence checked by separate HTTPS API run"
+    },
+    {
+      "operation": "ADMIN screen Reportes",
+      "result": "OPENED_WITH_SESSION",
+      "caveat": "CRUD persistence checked by separate HTTPS API run"
+    },
+    {
+      "operation": "ADMIN screen Clientes",
+      "result": "OPENED_WITH_SESSION",
+      "caveat": "CRUD persistence checked by separate HTTPS API run"
+    },
+    {
+      "operation": "Login repartidor",
+      "result": "PASS"
+    },
+    {
+      "operation": "REPARTIDOR opens assigned Huancayo route and map",
+      "result": "PASS"
+    },
+    {
+      "operation": "REPARTIDOR acknowledges approved version 2 by UI",
+      "result": "PASS",
+      "http": 200
+    },
+    {
+      "operation": "REPARTIDOR completes final delivery by UI; version 2 and earlier timestamp preserved",
+      "result": "PASS",
+      "http": 200
+    },
+    {
+      "operation": "Courier session persists after reload",
+      "result": "PASS"
+    }
+  ],
+  "network": [
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/vehicles/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/reports/summary",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/vehicles/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/vehicles/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/vehicles/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/vehicles/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/reports/summary",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/reports/routes",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/clients/",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/drivers/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/incidentes",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/revisions",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/operations/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/ack",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/incidentes",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/revisions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/routes/a3b77843-2c79-4c6b-a338-0c42a380d87a/entregas/bb078664-9242-416a-927c-1ac28343fa0e/confirmar",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/operations/notifications",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/routes/",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "method": "Real Chromium, fresh ADMIN and REPARTIDOR contexts; own public application only"
+}

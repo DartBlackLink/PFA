@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-19T02:00:11.278371+00:00",
+  "python": "3.14.7",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "dataset_sha256": "4c344a0107aac6b22971a709e62f4299e63625dc617ab93e10b31365e43fd89c",
+  "cases": [
+    {
+      "orders": 150,
+      "teams": 15,
+      "seed": 11,
+      "state": "FAILED",
+      "diagnosis": {
+        "shapes": [
+          {
+            "points": 17,
+            "unique_points": 3,
+            "seconds": 0.6839729000348598
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "seconds": 1.680127099971287
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 2.6705364999943413
+          },
+          {
+            "points": 3,
+            "unique_points": 1,
+            "seconds": 3.671761100005824
+          },
+          {
+            "points": 13,
+            "unique_points": 3,
+            "seconds": 1.6834993999800645
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 2.7340102999587543
+          },
+          {
+            "points": 7,
+            "unique_points": 2,
+            "seconds": 3.6773146000341512
+          },
+          {
+            "points": 5,
+            "unique_points": 1,
+            "seconds": 1.6668258999707177
+          },
+          {
+            "points": 21,
+            "unique_points": 3,
+            "seconds": 2.6837441000388935
+          },
+          {
+            "points": 16,
+            "unique_points": 3,
+            "error": "HTTPException",
+            "cause": null,
+            "seconds": 4.3599982745945454e-05
+          },
+          {
+            "points": 22,
+            "unique_points": 3,
+            "error": "HTTPException",
+            "cause": null,
+            "seconds": 2.719997428357601e-05
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "error": "HTTPException",
+            "cause": null,
+            "seconds": 0.00027540000155568123
+          },
+          {
+            "points": 14,
+            "unique_points": 3,
+            "error": "HTTPException",
+            "cause": null,
+            "seconds": 5.1099981646984816e-05
+          },
+          {
+            "points": 11,
+            "unique_points": 3,
+            "seconds": 3.703748000029009
+          }
+        ],
+        "solver_seconds": 8.011248700029682,
+        "solver_statistics": {
+          "seed": 11,
+          "generations": 15,
+          "evaluations": 328,
+          "elapsed_ms": 8005.76,
+          "baseline_feasible": true,
+          "baseline_objective": 3.463025475,
+          "objective": 1.4782138874999997,
+          "algorithm": "GA_VRPTW_1",
+          "global_optimum_guaranteed": false
+        },
+        "route_count": 14
+      },
+      "preview_seconds": 42.47036809998099,
+      "preview_status": 503,
+      "error": "Preview HTTP 503: Se agotó el plazo de cálculo vial; no se asignaron pedidos."
+    }
+  ],
+  "scope": "ASGI endpoint, PostgreSQL, real OSRM and genetic solver plus confirmation; excludes TCP, browser/proxy/render",
+  "limitation": "Three verified public destinations repeated as synthetic demand; no claim of representative city-wide or concurrent load.",
+  "provider_throttle": "At most one public OSRM request start per second; waits included in timings",
+  "no_operational_database": true,
+  "selected_case": "150:11",
+  "provider_failures": [],
+  "completed": "2026-11-19T02:00:54.774905+00:00"
+}

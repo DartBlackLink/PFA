@@ -49,3 +49,10 @@ EN-002: endpoint 150/15 en 16,649722 s; replan de 3 pendientes en 1,780739 s. OS
 La nueva migración 0008 agrega configuración ambiental opcional y auditada. Datos y cuentas existentes se preservaron. El hallazgo CVE-2026-126360 del lock se corrigió de 1.45.1 a 1.45.2; conserva auditoría antes/después.
 
 Consulte [evidencias y resultados](../evidencias/20261114-desarrollo-integral/RESULTADOS.md) para resultados, comandos, versión y límites; [acciones externas](../ACCIONES_EXTERNAS_Y_CIERRE_WEB.md) centraliza lo que necesita intervención posterior.
+
+[← Volver al README principal](../../../README.md)
+
+
+## Seguimiento de evidencia — 18/11/2026
+
+El corte anterior conserva sus resultados históricos. La validación posterior añade 145 backend, 30 E2E en tres motores y cinco semillas para cada tamaño 10/50/150. Se corrigieron consultas duplicadas y protocolo OSRM de una coordenada. Véanse [resultados, cobertura y límites](../evidencias/20261118-semana14/RESULTADOS.md). No se realizó un nuevo SonarQube, auditoría OWASP integral o certificación WCAG. Al corte local del 18/11 no había producción ni Actions. La [publicación manual del 19/11](../evidencias/20261119-despliegue-publico/RESULTADOS.md) incorpora URL, pruebas de roles y persistencia; no es una nueva auditoría integral o certificación. SUS humano y Actions siguen pendientes.

@@ -1,0 +1,5 @@
+# Preserve original academic evidence; PDF byte offsets must not be normalized.
+*.pdf binary
+*.log -whitespace
+"docs/03 Implementación/evidencias/20261117-verificacion-final/*.log" -text
+"docs/03 Implementación/evidencias/20261118-semana14/*.log" -text

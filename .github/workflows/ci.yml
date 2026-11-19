@@ -1,0 +1,67 @@
+name: CI EcoLogistica
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backend/requirements*.txt
+      - run: python -m pip install -r backend/requirements.lock.txt -r backend/requirements-dev.txt
+      - name: Static analysis and dependency consistency
+        run: |
+          python -m ruff check backend/app --select E9,F63,F7,F82
+          python -m compileall -q backend/app
+          python -m pip check
+          python -m bandit -q -r backend/app
+          python -m pip_audit -r backend/requirements.lock.txt
+          python -m unittest discover -s tools/sus -p 'test_*.py'
+      - name: Build backend image
+        run: docker build --tag ecologistica-ci:${{ github.sha }} backend
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - run: flutter pub get --enforce-lockfile
+      - run: flutter analyze --fatal-infos
+      - run: flutter build web --release --output build/web-ci --dart-define=API_BASE_URL=http://127.0.0.1:8010/api/v1
+      - uses: actions/upload-artifact@v7
+        with:
+          name: web-ci-${{ github.sha }}
+          path: apps/web/build/web-ci/
+          retention-days: 7
+  e2e-dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm audit --omit=optional
+      - run: npm run test:e2e:list

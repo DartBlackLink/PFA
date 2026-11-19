@@ -1,0 +1,75 @@
+........................................................................ [ 51%]
+.....................................................................    [100%]
+============================== warnings summary ===============================
+backend\.venv\Lib\site-packages\fastapi\routing.py:233: 159 warnings
+  D:\UC\App\ecologistica\backend\.venv\Lib\site-packages\fastapi\routing.py:233: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    is_coroutine = asyncio.iscoroutinefunction(dependant.call)
+
+backend\.venv\Lib\site-packages\starlette\_utils.py:39: 163 warnings
+backend/tests/test_huancayo_area.py: 19 warnings
+backend/tests/test_integration.py: 306 warnings
+backend/tests/test_optimization_api.py: 41 warnings
+backend/tests/test_order_update.py: 12 warnings
+backend/tests/test_reporting_clients.py: 63 warnings
+backend/tests/test_route_operation.py: 37 warnings
+backend/tests/test_security.py: 17 warnings
+backend/tests/test_traffic_replanning.py: 71 warnings
+  D:\UC\App\ecologistica\backend\.venv\Lib\site-packages\starlette\_utils.py:39: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(obj) or (callable(obj) and asyncio.iscoroutinefunction(obj.__call__))
+
+backend\.venv\Lib\site-packages\starlette\testclient.py:40
+  D:\UC\App\ecologistica\backend\.venv\Lib\site-packages\starlette\testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+_______________ coverage: platform win32, python 3.14.7-final-0 _______________
+
+Name                                           Stmts   Miss Branch BrPart  Cover   Missing
+------------------------------------------------------------------------------------------
+backend\app\__init__.py                            0      0      0      0   100%
+backend\app\api\__init__.py                        0      0      0      0   100%
+backend\app\api\deps.py                           31      1      8      1    95%   38
+backend\app\api\router.py                         20      0      2      0   100%
+backend\app\api\routes\__init__.py                 0      0      0      0   100%
+backend\app\api\routes\auth.py                    56      2      8      0    97%   65-66
+backend\app\api\routes\clients.py                 82      1     20      2    97%   58->62, 100
+backend\app\api\routes\drivers.py                 79     17     30      8    73%   30, 40, 57, 59-65, 68, 76->83, 81, 83->85, 89-91, 100-102, 120
+backend\app\api\routes\geocoding.py               69      8     24      6    85%   47, 55, 65, 81, 93, 97, 109, 134
+backend\app\api\routes\health.py                   5      0      0      0   100%
+backend\app\api\routes\operations.py             280     29     80     22    84%   139, 147, 186-191, 198, 211, 216, 219, 221, 223, 227, 229, 265, 273, 307, 311, 327, 348, 356, 377, 379, 413, 422, 427-428
+backend\app\api\routes\optimization.py           151      5     46      5    95%   61->63, 81->83, 96, 201-202, 361, 363
+backend\app\api\routes\orders.py                  53      7     18      3    83%   84, 90, 92-96
+backend\app\api\routes\reports.py                 68      2     12      1    96%   44, 91
+backend\app\api\routes\routes.py                 280     30    106     25    85%   82, 155, 174, 178, 181, 244-246, 254, 305-307, 329, 337, 339, 347, 355, 366, 369, 415, 433, 442, 445, 449, 454, 457, 478, 485, 488, 492
+backend\app\api\routes\vehicles.py                38      5      8      1    87%   21, 40-42, 58
+backend\app\core\__init__.py                       0      0      0      0   100%
+backend\app\core\config.py                        59      0     18      1    99%   55->39
+backend\app\core\request_limits.py                39      1     14      1    96%   54
+backend\app\core\security.py                      22      0      4      0   100%
+backend\app\db\__init__.py                         0      0      0      0   100%
+backend\app\db\session.py                         16      0      0      0   100%
+backend\app\main.py                               43      5      6      1    80%   24-38
+backend\app\models\__init__.py                     2      0      0      0   100%
+backend\app\models\entities.py                   195      0      0      0   100%
+backend\app\optimization_schemas.py               35      3      8      3    86%   35, 43, 45
+backend\app\schemas.py                           172      8     32      8    92%   48, 56, 98, 125, 178, 181, 189, 191
+backend\app\services\__init__.py                   0      0      0      0   100%
+backend\app\services\genetic.py                  218     18     84     15    89%   117, 136, 139, 172, 179, 181, 183, 194, 200, 209, 211-214, 232, 361, 373, 377
+backend\app\services\manual_planning.py           30      1     10      1    95%   14
+backend\app\services\matrix.py                   103     10     42      7    88%   47, 58, 103-104, 129, 135, 142, 151, 164, 168
+backend\app\services\operation_area.py            21      1      4      1    92%   36
+backend\app\services\optimization_context.py      84      8     30      8    86%   26, 36, 78, 80, 84, 119, 128, 149
+backend\app\services\provider_http.py             13      0      4      0   100%
+backend\app\services\report_pdf.py                46      1     10      1    96%   66
+backend\app\services\routing.py                   38      3     20      3    90%   44, 53, 55
+backend\app\services\scheduling.py                31      2     16      2    91%   25, 36
+backend\app\services\sustainability.py            30      0     10      1    98%   24->16
+backend\app\services\traffic.py                   82      3     24      2    95%   47, 71-72
+backend\app\services\traffic_references.py         1      0      0      0   100%
+------------------------------------------------------------------------------------------
+TOTAL                                           2492    171    698    129    90%
+Coverage HTML written to dir C:\Users\jordy\OneDrive\Documentos\ChatGPT\Ecologistica\revision_final_20261117\reports\htmlcov
+Coverage XML written to file C:\Users\jordy\OneDrive\Documentos\ChatGPT\Ecologistica\revision_final_20261117\reports\coverage.xml
+Required test coverage of 81.0% reached. Total coverage: 90.03%
+141 passed, 889 warnings in 79.13s (0:01:19)

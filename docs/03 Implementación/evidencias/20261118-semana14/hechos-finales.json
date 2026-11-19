@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-18",
+  "backend": {
+    "tests": 145,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "backend_coverage": {
+    "lines": [
+      2329,
+      2500
+    ],
+    "branches": [
+      553,
+      700
+    ],
+    "combined_fraction": "2882/3200",
+    "combined_percent_decimal": "90.0625"
+  },
+  "playwright": {
+    "startTime": "2026-11-19T02:30:48.928Z",
+    "duration": 279718.723,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "visual_recheck": {
+    "startTime": "2026-11-19T02:47:08.642Z",
+    "duration": 134351.6,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browsers": {
+    "chromium": {
+      "ttfbMs": {
+        "n": 3,
+        "median": 3.199999988079071,
+        "max": 43
+      },
+      "fcpMs": {
+        "n": 3,
+        "median": 1332,
+        "max": 4260
+      },
+      "lcpMs": {
+        "n": 0,
+        "median": null,
+        "max": null
+      }
+    },
+    "firefox": {
+      "ttfbMs": {
+        "n": 3,
+        "median": 8,
+        "max": 10
+      },
+      "fcpMs": {
+        "n": 3,
+        "median": 1575,
+        "max": 2834
+      },
+      "lcpMs": {
+        "n": 0,
+        "median": null,
+        "max": null
+      }
+    },
+    "webkit": {
+      "ttfbMs": {
+        "n": 3,
+        "median": 2,
+        "max": 2
+      },
+      "fcpMs": {
+        "n": 3,
+        "median": 1237,
+        "max": 1567
+      },
+      "lcpMs": {
+        "n": 3,
+        "median": 1282,
+        "max": 1630
+      }
+    }
+  },
+  "npm_vulnerabilities": 0,
+  "campaign_before": {
+    "cases": 15,
+    "failed": 1
+  },
+  "campaign_after": {
+    "cases": 15,
+    "failed": 0
+  },
+  "cold_after_seconds": 23.329653199994937,
+  "health": {
+    "started": "2026-11-19T02:22:30.381430+00:00",
+    "finished": "2026-11-19T02:22:40.525278+00:00",
+    "successful": 12,
+    "total": 12,
+    "sample_availability_percent": 100.0
+  },
+  "sus_real_participants": 0,
+  "published": false,
+  "github_actions_executed": false,
+  "production_deployed": false
+}

@@ -1,0 +1,168 @@
+{
+  "started": "2026-11-19T02:43:39.973Z",
+  "url": "http://127.0.0.1:8080/#/login",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "cpu": "AMD Ryzen 5 6600H with Radeon Graphics         ",
+    "logicalCPUs": 12,
+    "ramBytes": 7722795008
+  },
+  "method": "Fresh context per sample; no user input; wait for FCP then observe another 3000ms. Local lab, not field or monthly uptime.",
+  "records": [
+    {
+      "browser": "chromium",
+      "browserVersion": "159.0.8154.6",
+      "sample": 1,
+      "at": "2026-11-19T02:43:40.417Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 43,
+        "fcpMs": 4260,
+        "lcpMs": null,
+        "lcpSupported": true,
+        "observationEndMs": 7280,
+        "lcpLimitation": "No eligible LCP entry during this observation window; not substituted by FCP or algorithm time."
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "chromium",
+      "browserVersion": "159.0.8154.6",
+      "sample": 2,
+      "at": "2026-11-19T02:43:47.791Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 2.899999976158142,
+        "fcpMs": 1312,
+        "lcpMs": null,
+        "lcpSupported": true,
+        "observationEndMs": 4342.5,
+        "lcpLimitation": "No eligible LCP entry during this observation window; not substituted by FCP or algorithm time."
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "chromium",
+      "browserVersion": "159.0.8154.6",
+      "sample": 3,
+      "at": "2026-11-19T02:43:52.206Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 3.199999988079071,
+        "fcpMs": 1332,
+        "lcpMs": null,
+        "lcpSupported": true,
+        "observationEndMs": 4367.700000047684,
+        "lcpLimitation": "No eligible LCP entry during this observation window; not substituted by FCP or algorithm time."
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "firefox",
+      "browserVersion": "159.0",
+      "sample": 1,
+      "at": "2026-11-19T02:43:58.543Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 10,
+        "fcpMs": 2834,
+        "lcpMs": null,
+        "lcpSupported": true,
+        "observationEndMs": 5899,
+        "lcpLimitation": "No eligible LCP entry during this observation window; not substituted by FCP or algorithm time."
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "firefox",
+      "browserVersion": "159.0",
+      "sample": 2,
+      "at": "2026-11-19T02:44:04.873Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 8,
+        "fcpMs": 1575,
+        "lcpMs": null,
+        "lcpSupported": true,
+        "observationEndMs": 4623,
+        "lcpLimitation": "No eligible LCP entry during this observation window; not substituted by FCP or algorithm time."
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "firefox",
+      "browserVersion": "159.0",
+      "sample": 3,
+      "at": "2026-11-19T02:44:09.836Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 5,
+        "fcpMs": 1312,
+        "lcpMs": null,
+        "lcpSupported": true,
+        "observationEndMs": 4354,
+        "lcpLimitation": "No eligible LCP entry during this observation window; not substituted by FCP or algorithm time."
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "webkit",
+      "browserVersion": "27.2",
+      "sample": 1,
+      "at": "2026-11-19T02:44:14.989Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 2,
+        "fcpMs": 1567,
+        "lcpMs": 1630,
+        "lcpSupported": true,
+        "observationEndMs": 4644,
+        "lcpLimitation": null
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "webkit",
+      "browserVersion": "27.2",
+      "sample": 2,
+      "at": "2026-11-19T02:44:19.787Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 2,
+        "fcpMs": 1237,
+        "lcpMs": 1282,
+        "lcpSupported": true,
+        "observationEndMs": 4303,
+        "lcpLimitation": null
+      },
+      "result": "MEASURED"
+    },
+    {
+      "browser": "webkit",
+      "browserVersion": "27.2",
+      "sample": 3,
+      "at": "2026-11-19T02:44:24.235Z",
+      "userInteraction": false,
+      "status": 200,
+      "metrics": {
+        "ttfbMs": 2,
+        "fcpMs": 1207,
+        "lcpMs": 1246,
+        "lcpSupported": true,
+        "observationEndMs": 4263,
+        "lcpLimitation": null
+      },
+      "result": "MEASURED"
+    }
+  ],
+  "finished": "2026-11-19T02:44:28.557Z"
+}
