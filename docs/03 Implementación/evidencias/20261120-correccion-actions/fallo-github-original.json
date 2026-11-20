@@ -1,0 +1,21 @@
+{
+  "commit": "83d5652f532705779f2f2bbcb1f8298af9b538e1",
+  "run_url": "https://github.com/DartBlackLink/PFA/actions/runs/44625847243",
+  "job_url": "https://github.com/DartBlackLink/PFA/actions/runs/44625847243/job/135919342611",
+  "ci": "success",
+  "backend": "success",
+  "flutter": "success",
+  "e2e": {
+    "passed": 28,
+    "failed": 2,
+    "motor_de_fallos": "webkit",
+    "casos": [
+      "GOLD-S4",
+      "UX-01"
+    ],
+    "error": "locator.evaluate: Timeout 20000ms exceeded; waiting for flt-semantics-placeholder",
+    "archivo": "tests/e2e/fixtures.ts",
+    "linea": 18
+  },
+  "produccion": "skipped"
+}

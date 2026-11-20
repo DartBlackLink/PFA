@@ -68,3 +68,7 @@ Este corte sustituye la ausencia de URL/proveedor indicada al 18/11; los resulta
 ## Evidencia pública explicada — 19/11/2026
 
 El [expediente visual de Semana 14](EVIDENCIAS_PUBLICAS_SEMANA14.md) enlaza las capturas de ADMIN, mapa de Huancayo y entregas del REPARTIDOR con las respuestas HTTP y persistencia de la misma prueba. Explica el estado previo al acuse y el estado final recibido; no atribuye a una captura de navegación una prueba completa de CRUD. Se reutilizan evidencias originales del 19/11, sin repetir operaciones ni incluir credenciales. SUS y Actions mantienen su estado pendiente de resultados propios.
+
+## Ejecución remota y corrección — 20/11/2026
+
+Tras publicar el commit 83d5652, GitHub Actions ejecutó CI con éxito y aprobó los jobs backend y Flutter. La suite E2E remota registró 28/30 aprobadas: GOLD-S4 y UX-01 fallaron en WebKit al esperar el activador transitorio de accesibilidad. Se corrigió la sincronización del auxiliar y su copia tras recarga. Quince regresiones aisladas aprobaron en los tres motores; se mantiene intacta la suite de negocio para volver a comprobarla en GitHub. El [expediente de corrección](../evidencias/20261120-correccion-actions/RESULTADOS.md) distingue fallo original, causa, prueba anterior/corregida y verificación remota pendiente al corte. Los resultados locales del 18/11 se conservan con su entorno, sin sustituir el resultado remoto fallido.

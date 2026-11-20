@@ -1,3 +1,4 @@
+import { enableFlutterSemantics } from './flutter-semantics';
 import { test, expect, apiURL, login, semantics, token, account, typeInFlutter } from './fixtures';
 
 test('AUTH-01 · infeliz: formulario vacío rechaza sin enviar credenciales', async ({ page }) => {
@@ -16,8 +17,7 @@ test('AUTH-02 · feliz: ADMIN, indicadores y sesión después de recargar', asyn
   await expect(page.getByText('Resumen', { exact: true }).first()).toBeVisible();
   await expect(page.getByText(/Huancayo/).first()).toBeVisible();
   await page.reload();
-  const enable = page.locator('flt-semantics-placeholder');
-  if (await enable.count()) await enable.evaluate((el: HTMLElement) => el.click());
+  await enableFlutterSemantics(page, page.getByText('Pedidos', { exact: true }).first());
   await expect(page).toHaveURL(/#\/dashboard/);
   await expect(page.getByText('Pedidos', { exact: true }).first()).toBeVisible();
 });

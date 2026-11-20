@@ -44,3 +44,7 @@ El GOLD combina acciones UI con preparación y comprobación API: generación/co
 Para repetir únicamente los tres GOLD esperando teselas OSM: definir `E2E_REPORT_SET=visual` antes de `npm run test:e2e`. Produce archivos `reports/playwright-visual-*`, separados de la ejecución principal. No modifica el número de casos de la suite principal.
 
 Para medir el login en tres contextos nuevos de cada navegador, sin escribir ni hacer clic: `node tools/quality/measure_vitals.mjs --url http://127.0.0.1:8080/#/login --samples 3 --output reports/web-vitals.json`. Primero levantar la web local. Registra equipo, versiones, muestras y disponibilidad de LCP; una ausencia no se sustituye por FCP. No son métricas de usuarios de producción.
+
+## Activación de accesibilidad estable — 20/11/2026
+
+`tests/e2e/flutter-semantics.ts` evita esperar un activador que Flutter puede retirar durante la carga. Espera el control accesible concreto; se usa también tras recargar el dashboard. `npm run test:e2e:semantics` ejecuta cinco regresiones por motor sin API/base/cuentas, antes de la suite real de negocio. Estas pruebas controladas no sustituyen el GOLD. Véase la [evidencia](../../docs/03%20Implementaci%C3%B3n/evidencias/20261120-correccion-actions/RESULTADOS.md).

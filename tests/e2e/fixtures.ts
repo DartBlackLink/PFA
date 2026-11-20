@@ -1,5 +1,6 @@
 import { test as base, expect, Page, APIRequestContext } from '@playwright/test';
 import fs from 'node:fs';
+import { enableFlutterSemantics } from './flutter-semantics';
 
 export const apiURL = process.env.E2E_API_URL!;
 export function account(project: string) {
@@ -13,10 +14,7 @@ export async function token(request: APIRequestContext, email = 'admin.e2e@examp
   return (await response.json()).access_token as string;
 }
 export async function semantics(page: Page) {
-  const enable = page.locator('flt-semantics-placeholder');
-  await page.waitForFunction(() => !!document.querySelector('flutter-view'), null, { timeout: 60000 });
-  if (await enable.count()) await enable.evaluate((node: HTMLElement) => node.click());
-  await expect(page.getByRole('textbox').first()).toBeVisible();
+  await enableFlutterSemantics(page);
 }
 export async function login(page: Page, project?: string) {
   await page.goto('/#/login');

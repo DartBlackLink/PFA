@@ -1,0 +1,30 @@
+{
+  "fecha": "2026-11-20",
+  "tipo": "Regresión de navegador del handshake de accesibilidad; no prueba de todo Flutter ni de negocio",
+  "playwright": "1.65.1",
+  "stats": {
+    "startTime": "2026-11-20T16:41:07.388Z",
+    "duration": 18299.699,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "motores": [
+    "chromium",
+    "firefox",
+    "webkit"
+  ],
+  "tests_por_motor": 5,
+  "antes": {
+    "helper": "Anterior, copiado sin cambiar desde el commit 83d5652",
+    "caso": "Placeholder montado después de flutter-view",
+    "motor": "webkit",
+    "resultado": "FAIL esperado: textbox ausente porque el activador tardío no fue pulsado"
+  },
+  "despues": {
+    "resultado": "15 PASS, sin reintentos/omitidas",
+    "helper_sha256": "911d61cd1e14d9b38cf006262b639197537b87ed65b1b338963d7d79f369d05c"
+  },
+  "datos_operativos_modificados": false
+}
